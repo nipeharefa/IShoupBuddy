@@ -177,7 +177,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        Appstract\Opcache\OpcacheServiceProvider::class,
+        // Appstract\Opcache\OpcacheServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
 
     ],
 
