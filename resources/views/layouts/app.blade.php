@@ -11,7 +11,6 @@
     <title>@yield('title', 'Laravel')</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
