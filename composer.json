@@ -9,6 +9,7 @@
         "appstract/laravel-opcache": "^1.0",
         "laravel/framework": "5.4.*",
         "laravel/passport": "^2.0",
+        "laravel/scout": "^3.0",
         "laravel/tinker": "~1.0"
     },
     "require-dev": {
