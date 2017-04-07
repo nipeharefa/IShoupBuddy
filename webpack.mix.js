@@ -16,6 +16,7 @@ mix.js('resources/assets/js/guest/pages/login.js', 'js/guest/login.js')
 	.extract(['vue', 'axios'])
 
 mix.sass('resources/assets/sass/guest/login.scss', 'css/guest')
+mix.sass('resources/assets/sass/guest/register.scss', 'css/guest')
 
 mix.browserSync({
     proxy: 'skripsi.home.dev'

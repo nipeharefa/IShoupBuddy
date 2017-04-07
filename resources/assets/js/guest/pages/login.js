@@ -6,10 +6,6 @@ Vue.use(VueAxios)
 import App from 'guest/components/login/Login.vue'
 
 new Vue({
-
-	mounted() {
-		
-	},
 	render(h) {
 		return (
 			<div class="all">

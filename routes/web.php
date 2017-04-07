@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 
 Route::get('login', 'Auth\LoginController@showLoginForm');
+Route::get('register', 'Auth\RegisterController@showRegistrationForm');
 
 Route::group(['prefix' => 'auth'], function() {
     Route::post('login', 'Auth\LoginController@loginViaAjax');
