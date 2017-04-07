@@ -12,7 +12,14 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/guest/pages/login.js', 'js/guest/login.js')
-mix.sass('resources/assets/sass/guest/login.scss', 'css/guest/login.css');
+	.js('resources/assets/js/guest/pages/register.js', 'js/guest/register.js')
+	.extract(['vue', 'axios'])
+
+mix.sass('resources/assets/sass/guest/login.scss', 'css/guest')
+
+mix.browserSync({
+    proxy: 'skripsi.home.dev'
+});
 
 // Full API
 // mix.js(src, output);
@@ -35,10 +42,10 @@ mix.sass('resources/assets/sass/guest/login.scss', 'css/guest/login.css');
 // mix.autoload({}); <-- Will be passed to Webpack's ProvidePlugin.
 // mix.webpackConfig({}); <-- Override webpack.config.js, without editing the file directly.
 // mix.then(function () {}) <-- Will be triggered each time Webpack finishes building.
-mix.options({
-  extractVueStyles: true, // Extract .vue component styling to file, rather than inline.
-  processCssUrls: true, // Process/optimize relative stylesheet url()'s. Set to false, if you don't want them touched.
-  purifyCss: false, // Remove unused CSS selectors.
-  uglify: {}, // Uglify-specific options. https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
-  postCss: [] // Post-CSS options: https://github.com/postcss/postcss/blob/master/docs/plugins.md
-});
+// mix.options({
+//   extractVueStyles: true, // Extract .vue component styling to file, rather than inline.
+//   processCssUrls: true, // Process/optimize relative stylesheet url()'s. Set to false, if you don't want them touched.
+//   purifyCss: false, // Remove unused CSS selectors.
+//   uglify: {}, // Uglify-specific options. https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
+//   postCss: [] // Post-CSS options: https://github.com/postcss/postcss/blob/master/docs/plugins.md
+// });

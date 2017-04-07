@@ -222,7 +222,8 @@ module.exports.resolve = {
     alias: {
         'vue$': 'vue/dist/vue.common.js',
         guest: path.resolve(__dirname, 'resources/assets/js/guest'),
-        otherComponents: path.resolve(__dirname, 'resources/assets/js/components')
+        otherComponents: path.resolve(__dirname, 'resources/assets/js/components'),
+        lib: path.resolve(__dirname, 'resources/assets/js/lib')
     }
 };
 

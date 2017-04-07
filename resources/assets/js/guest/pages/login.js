@@ -1,9 +1,20 @@
 import Vue from 'vue'
-import axios from 'axios'
+import VueAxios from 'lib/axios-plugin'
 
+Vue.use(VueAxios)
 
-import App from '../components/login/Login.vue'
+import App from 'guest/components/login/Login.vue'
 
 new Vue({
-   render: h => h(App)
-}).$mount('#app');
+
+	mounted() {
+		
+	},
+	render(h) {
+		return (
+			<div class="all">
+				<App />
+			</div>
+		)
+	}
+}).$mount('#app')

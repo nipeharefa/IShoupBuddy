@@ -3,7 +3,7 @@
 @section('css')
 	
 	<link rel="stylesheet" href="{{ mix('css/guest/login.css') }}">
-	
+
 @endsection
 
 @section('content')
@@ -15,6 +15,9 @@
 
 
 @section('js')
+	
+	<script src="{{ mix('js/guest/manifest.js') }}"></script>
+	<script src="{{ mix('js/guest/vendor.js') }}"></script>
 	<script src="{{ mix('js/guest/login.js') }}" type="text/javascript"></script>
 
 @endsection

@@ -1,1 +1,24 @@
 @import "node_modules/bulma/bulma";
+// @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+
+
+.control-button-forgot-password {
+	
+	display: flex;
+	align-items:center;
+	button.button-forgot-password {
+		font-size: 0.7rem;
+		text-decoration: none;
+	}
+}
+
+.to-register {
+	justify-content:center;
+	display: flex;
+	margin-top: 1.2rem;
+	flex-direction: column;
+	p, a {
+		text-align: center;
+	}
+}

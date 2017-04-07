@@ -18,4 +18,8 @@ Route::get('/', function () {
 
 Route::get('login', 'Auth\LoginController@showLoginForm');
 
+Route::group(['prefix' => 'auth'], function() {
+    Route::post('login', 'Auth\LoginController@loginViaAjax');
+});
+
 Route::get('/home', 'HomeController@index');
