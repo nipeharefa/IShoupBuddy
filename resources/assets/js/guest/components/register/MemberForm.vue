@@ -15,7 +15,19 @@
 
 			<div class="field">
 				<p class="control">
+					<input type="text"  class="input" placeholder="Nomor Handphone">
+				</p>
+			</div>
+
+			<div class="field">
+				<p class="control">
 					<input type="password" name="" id="" class="input" placeholder="Password">
+				</p>
+			</div>
+
+			<div class="field">
+				<p>
+					<button class="button is-primary">Daftar</button>
 				</p>
 			</div>
 
