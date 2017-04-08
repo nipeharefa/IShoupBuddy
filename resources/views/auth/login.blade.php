@@ -16,7 +16,7 @@
 
 @section('js')
 	
-	<script src="{{ mix('js/guest/manifest.js') }}"></script>
+	<script src="{{ mix('manifest.js') }}"></script>
 	<script src="{{ mix('js/guest/vendor.js') }}"></script>
 	<script src="{{ mix('js/guest/login.js') }}" type="text/javascript"></script>
 

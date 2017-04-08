@@ -14,6 +14,13 @@ let mix = require('laravel-mix');
 mix.js('resources/assets/js/guest/pages/login.js', 'js/guest/login.js')
 	.js('resources/assets/js/guest/pages/register.js', 'js/guest/register.js')
 	.extract(['vue', 'axios'])
+	.version()
+
+
+mix.js('resources/assets/js/member/pages/me.js', 'js/member/me.js')
+	.extract(['vue', 'axios'])
+	.version()
+	
 
 mix.sass('resources/assets/sass/guest/login.scss', 'css/guest')
 mix.sass('resources/assets/sass/guest/register.scss', 'css/guest')

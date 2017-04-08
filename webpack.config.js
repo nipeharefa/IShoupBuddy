@@ -222,6 +222,7 @@ module.exports.resolve = {
     alias: {
         'vue$': 'vue/dist/vue.common.js',
         guest: path.resolve(__dirname, 'resources/assets/js/guest'),
+        member: path.resolve(__dirname, 'resources/assets/js/member'),
         otherComponents: path.resolve(__dirname, 'resources/assets/js/components'),
         lib: path.resolve(__dirname, 'resources/assets/js/lib')
     }
@@ -361,7 +362,8 @@ if (Mix.copy) {
 if (Mix.entry().hasExtractions()) {
     plugins.push(
         new webpack.optimize.CommonsChunkPlugin({
-            names: Mix.entry().getExtractions(),
+            // names: Mix.entry().getExtractions(),
+            names: ['vendor', 'manifest'], // Specify the common bundle's name.
             minChunks: Infinity
         })
     );

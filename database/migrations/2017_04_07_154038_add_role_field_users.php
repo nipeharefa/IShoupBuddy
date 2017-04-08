@@ -15,6 +15,8 @@ class AddRoleFieldUsers extends Migration
     {
         Schema::table('users', function($table) {
             $table->tinyInteger('role')->default(1)->after('saldo');
+            $table->boolean('confirmed')->default(1)
+                ->after('role');
         });
     }
 
@@ -26,7 +28,7 @@ class AddRoleFieldUsers extends Migration
     public function down()
     {
         Schema::table('users', function($table) {
-            $table->dropColumn('role');
+            $table->dropColumn(['role', 'confirmed']);
         });
     }
 }
