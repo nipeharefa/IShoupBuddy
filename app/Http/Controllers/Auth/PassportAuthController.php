@@ -29,6 +29,13 @@ class PassportAuthController extends Controller
         $this->oauth = new AccessTokenController($server, $tokens, $jwt);
     }
 
+
+    /**
+     * URL for login onlu API
+     * @param  ServerRequestInterface $request [description]
+     * @param  Request                $req     [description]
+     * @return [type]                          [description]
+     */
     public function login(ServerRequestInterface $request, Request $req) {
         
     	return $this->oauth->issueToken($request);

@@ -12,6 +12,7 @@ use App\Helpers\Contracts\DefaultAPIResponse;
 class UserController extends Controller implements DefaultAPIResponse
 {
     use ApiResponse;
+    
     /**
      * Get User Acccount Settings
      * @return \Illuminate\Http\Response
