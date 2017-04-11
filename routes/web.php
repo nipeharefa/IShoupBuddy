@@ -32,6 +32,7 @@ Route::group(['prefix' => 'oauth', 'namespace' => 'Auth'], function() {
     
     Route::post('login', 'PassportAuthController@login');
     Route::post('register', 'PassportAuthController@register');
+    
 });
 
 
