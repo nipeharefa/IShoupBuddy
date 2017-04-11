@@ -120,6 +120,15 @@ class UserController extends Controller implements DefaultAPIResponse
 
             return $this->onSuccess($response);
         }
+
+
+        $response = [
+            "status"     => "ERROR",
+            "user"       => null,
+            "message"    => "Gagal memperbaharui data pengguna"
+        ];
+
+        return $this->onFailure($response, 400);
     }
 
     /**
