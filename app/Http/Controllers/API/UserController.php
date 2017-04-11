@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Helpers\Traits\ApiResponse;
+use App\Helpers\Contracts\DefaultAPIResponse;
 
-class UserController extends Controller
+class UserController extends Controller implements DefaultAPIResponse
 {
+    use ApiResponse;
     /**
      * Get User Acccount Settings
      * @return \Illuminate\Http\Response
@@ -127,13 +130,5 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function onSuccess($data = [], $httpCode = 200) {
-        return response()->json($data, $httpCode);
-    }
-
-    public function onFailure($data = [], $httpCode = 400) {
-        return response()->json($data, $httpCode);
     }
 }
