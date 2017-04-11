@@ -64,6 +64,8 @@ class PassportAuthController extends Controller
             "password"      => $request->password
        ];
 
+
+       # Set Request to OauthServer
        $request->offsetSet('grant_type', 'password');
        $request->offsetSet('username', $request->email);
        $request->offsetSet('password', $request->password);
@@ -71,8 +73,7 @@ class PassportAuthController extends Controller
        $request->offsetSet('client_secret', env('CLIENT_SECRET', 2));
 
 
-       // remove keys email
-       // 
+       // remove keys email, name, phone
        $request->offsetUnset('email');
        $request->offsetUnset('phone');
        $request->offsetUnset('name');
