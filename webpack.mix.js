@@ -26,7 +26,7 @@ mix.sass('resources/assets/sass/guest/register.scss', 'css/guest')
 mix.sass('resources/assets/sass/guest/home.scss', 'css/guest')
 
 
-if (mix.inProduction) {
+if (mix.config.inProduction) {
 	mix.version()
 }
 mix.browserSync({
