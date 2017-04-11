@@ -10,15 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-use League\OAuth2\Server\AuthorizationServer;
-use Laravel\Passport\TokenRepository;
-use Lcobucci\JWT\Parser as JwtParser;
-use Zend\Diactoros\Response as Psr7Response;
-use Psr\Http\Message\ServerRequestInterface;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
 
 Route::get('login', 'Auth\LoginController@showLoginForm');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm');
