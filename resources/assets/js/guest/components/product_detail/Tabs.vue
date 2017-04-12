@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="box-tabs">
 		<div class="tabs">
 			<ul>
 			    <li :class="{'is-active': activeTabs == 1}" >
