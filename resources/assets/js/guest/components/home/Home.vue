@@ -36,7 +36,7 @@
 				<div class="columns">
 					<div class="column">
 						<div class="caption-head">
-							<h1 class="is-4">Produk Lainnya</h1>
+							<h1 class="is-4">Produk Lainnya </h1>
 						</div>
 					</div>
 				</div>
@@ -45,7 +45,9 @@
 				<div class="columns">
 					<div class="column wrapping">
 						<div class="nusa" v-for="item in 16">
-							<product-card></product-card>
+							<a href="/product/1" class="alinkto">
+								<product-card></product-card>
+							</a>
 						</div>
 					</div>
 				</div>
@@ -79,12 +81,10 @@
 				      slidesPerView: 1,
 				      spaceBetween: 10
 				    },
-				    // when window width is <= 480px
 				    480: {
 				      slidesPerView: 1,
 				      spaceBetween: 10
 				    },
-				    // when window width is <= 640px
 				    640: {
 				      slidesPerView: 3,
 				      spaceBetween: 10

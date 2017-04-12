@@ -1,0 +1,46 @@
+@import "node_modules/bulma/bulma";
+@import "../core/_breadcrumb.sass";
+
+body {
+	background: rgb(241,241,241);
+}
+
+.box-tabs {
+	margin-top: 2.5rem;
+}
+.box-add-to-cart {
+	
+	margin-top: 1rem;
+	button {
+		width: 100%;
+	}
+}
+.discount-box {
+	margin-top: 1.2rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	.percent-discount {
+
+		p {
+			font-weight: bold;
+		}
+	}
+	.harga {
+		display: flex;
+		flex-direction: column;
+		p.normal-price {
+			text-decoration: line-through;
+			color: rgb(77,77,77);
+		}
+
+		p.after-discount {
+
+			// padding-right: 1rem;
+			padding-bottom: 0;
+			margin-bottom: 0;
+			font-weight: bold;
+		}
+	}
+}

@@ -14,6 +14,7 @@ let mix = require('laravel-mix');
 mix.js('resources/assets/js/guest/pages/login.js', 'js/guest/login.js')
 	.js('resources/assets/js/guest/pages/register.js', 'js/guest/register.js')
 	.js('resources/assets/js/guest/pages/home.js', 'js/guest/home.js')
+	.js('resources/assets/js/guest/pages/product_detail.js', 'js/guest/product_detail.js')
 	.extract(['vue', 'axios'])
 
 
@@ -24,6 +25,7 @@ mix.js('resources/assets/js/member/pages/me.js', 'js/member/me.js')
 mix.sass('resources/assets/sass/guest/login.scss', 'css/guest')
 mix.sass('resources/assets/sass/guest/register.scss', 'css/guest')
 mix.sass('resources/assets/sass/guest/home.scss', 'css/guest')
+mix.sass('resources/assets/sass/guest/product_detail.scss', 'css/guest')
 
 
 if (mix.config.inProduction) {

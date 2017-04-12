@@ -37,3 +37,6 @@ Route::group(['prefix' => 'me', 'middleware' => 'auth'], function() {
 });
 
 Route::get('/home', 'HomeController@index');
+
+Route::resource('product', 'ProductController',
+	['only' => ['show']]);

@@ -24,6 +24,8 @@
   },
   "dependencies": {
     "bulma": "^0.4.0",
-    "laravel-mix": "^0.10.0"
+    "chart.js": "^2.5.0",
+    "laravel-mix": "^0.10.0",
+    "vue-chartjs": "^2.6.0"
   }
 }
