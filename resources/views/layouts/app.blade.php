@@ -19,6 +19,11 @@
         ]) !!};
     </script>
     
+    @if (env('APP_ENV') == "production")
+
+    @else
+        <link rel="stylesheet" href="{{ asset('local/fontawesome/css/font-awesome.min.css') }}">
+    @endif 
     @yield('css')
 
 </head>

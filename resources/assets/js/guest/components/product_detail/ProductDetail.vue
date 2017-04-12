@@ -30,9 +30,15 @@
 				<div class="columns is-flex-mobile">
 					<div class="column">
 						<div>
-							<figure class="image is-4by3">
-					      		<img src="https://source.unsplash.com/category/nature/800x450" alt="Image">
-					    	</figure>
+							<div class="main-thumbnail">
+								
+								<figure class="image is-4by3">
+						      		<img src="https://source.unsplash.com/category/nature/800x450" alt="Image">
+						    	</figure>
+						    	<span class="icon">
+							        <i class="fa fa-heart-o"></i>
+							     </span>
+							</div>
 					    	<div>
 					    		<b>
 					    			<p>Indomie Super Goreng Bali, Indoenesia Gratis 1</p>

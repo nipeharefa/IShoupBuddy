@@ -50,6 +50,18 @@ body {
 	width: 100% !important;
 }
 
+.main-thumbnail {
+	position: relative;
+
+	span.icon {
+		position: absolute;
+		bottom: 2px;
+		left: 5px;
+		i {
+			color: black;
+		}
+	}
+}
 canvas#line-chart {
 	display: flex !important;
 	width: 100% !important;
