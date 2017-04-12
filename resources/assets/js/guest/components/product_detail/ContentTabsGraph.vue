@@ -13,10 +13,3 @@
 		}
 	}
 </script>
-
-
-<style>
-  .small {
-    max-width: 98%;
-  }
-</style>

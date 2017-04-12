@@ -44,3 +44,13 @@ body {
 		}
 	}
 }
+
+.bar-chart {
+	display: flex !important;
+	width: 100% !important;
+}
+
+canvas#line-chart {
+	display: flex !important;
+	width: 100% !important;
+}
