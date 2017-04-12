@@ -35,14 +35,16 @@
 								<figure class="image is-4by3">
 						      		<img src="https://source.unsplash.com/category/nature/800x450" alt="Image">
 						    	</figure>
-						    	<span class="icon">
-							        <i class="fa fa-heart-o"></i>
-							     </span>
 							</div>
 					    	<div>
 					    		<b>
-					    			<p>Indomie Super Goreng Bali, Indoenesia Gratis 1</p>
+					    			<p>Indomie Super Goreng Bali, Indoenesia Gratis 1 Stnd 10</p>
 					    		</b>
+					    	</div>
+					    	
+					    	<div class="rating">
+					    		<star-rating :rating="4" :star-size="20" :read-only="true"></star-rating>
+					    		<p>(10 Ulasan)</p>
 					    	</div>
 
 					    	<div class="discount-box">
@@ -58,9 +60,18 @@
 						    	</div>
 					    	</div>
 						</div>
+						
 
-						<div class="box-add-to-cart">
-							<button class="button is-primary">Tambahkan ke Keranjang Belanja</button>
+						<div class="button-control-detail">
+							<div class="love-and-share">
+								<i class="fa fa-heart-o"></i>
+								<i class="fa fa-share"></i>
+							</div>
+							<div class="box-add-to-cart">
+								<button class="button is-danger">
+									<i class="fa fa-shopping-cart"></i>
+								</button>
+							</div>
 						</div>
 
 						<div class="box-tabs">
@@ -85,11 +96,14 @@
 	import NavbarApps from 'otherComponents/Navbar.vue'
 	import Tabs from './Tabs.vue'
 
+	import StarRating from 'vue-star-rating'
+
 	export default {
 		components: {
 			FooterApps,
 			NavbarApps,
-			Tabs
+			Tabs,
+			StarRating
 		}
 	}
 </script>

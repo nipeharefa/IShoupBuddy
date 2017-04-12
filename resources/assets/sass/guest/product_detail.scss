@@ -8,11 +8,34 @@ body {
 .box-tabs {
 	margin-top: 2.5rem;
 }
-.box-add-to-cart {
-	
+
+.button-control-detail {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
 	margin-top: 1rem;
-	button {
-		width: 100%;
+	.love-and-share {
+
+		i {
+			
+			&:first-child {
+				margin-right: 12px;
+			}
+		}
+	}
+	.box-add-to-cart {
+
+		button {
+			
+		}
+	}
+}
+.rating {
+	display: flex;
+	flex-direction: row;
+	p {
+		font-size: 0.9rem;
 	}
 }
 .discount-box {
@@ -65,4 +88,7 @@ body {
 canvas#line-chart {
 	display: flex !important;
 	width: 100% !important;
+}
+.rating-text {
+	visibility: hidden;
 }
