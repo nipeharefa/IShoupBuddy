@@ -15,11 +15,14 @@ mix.js('resources/assets/js/guest/pages/login.js', 'js/guest/login.js')
 	.js('resources/assets/js/guest/pages/register.js', 'js/guest/register.js')
 	.js('resources/assets/js/guest/pages/home.js', 'js/guest/home.js')
 	.js('resources/assets/js/guest/pages/product_detail.js', 'js/guest/product_detail.js')
-	.extract(['vue', 'axios'])
+	.js('resources/assets/js/guest/pages/forgot_password.js', 'js/guest/forgot_password.js')
+
+mix.extract(['vue', 'axios', 'vue-star-rating', 'otherComponents/Footer.vue'])
 
 
 mix.js('resources/assets/js/member/pages/me.js', 'js/member/me.js')
-	.extract(['vue', 'axios'])
+
+mix.extract(['vue', 'axios'])
 	
 
 mix.sass('resources/assets/sass/guest/login.scss', 'css/guest')
