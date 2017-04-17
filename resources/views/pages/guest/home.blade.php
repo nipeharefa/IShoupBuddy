@@ -34,6 +34,6 @@
 
 	<script src="{{ mix('js/vendor.js') }}"></script>	
 	
-	<script src="{{ mix('js/home.js') }}" type="text/javascript"></script>	
+	<script src="{{ mix('js/home.js') }}" type="text/javascript" async></script>	
 
 @endsection

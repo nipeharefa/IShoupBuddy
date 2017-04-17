@@ -62,7 +62,6 @@ module.exports.entry = Mix.entry().get();
 
 module.exports.output = Mix.output();
 module.exports.output.publicPath = '/';
-module.exports.output.chunkFilename = '[name]_[chunkhash].js';
 
 /*
  |--------------------------------------------------------------------------
