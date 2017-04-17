@@ -10,4 +10,10 @@ class MeController extends Controller
 
     	return view('pages.me.index');
     }
+
+    public function edit() {
+
+    	return view('pages.me.edit');
+    	
+    }
 }

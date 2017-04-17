@@ -33,6 +33,7 @@ Route::group(['prefix' => 'me'], function() {
     
     Route::resource('/', 'MeController',
     	['only' => 'index', 'show']);
+    Route::get('edit', 'MeController@edit');
 
 });
 

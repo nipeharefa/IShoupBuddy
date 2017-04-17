@@ -1,2 +1,69 @@
 @import "node_modules/bulma/bulma";
 @import "../core/_breadcrumb.sass";
+
+
+.nav-model-classic {
+	display: flex;
+	flex-direction: column;
+	z-index: 1;
+	position: fixed;
+	width: 100%;
+	background: #FFF;
+	.wrapper-new-nav {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		.logo {
+			margin-right: 1rem;
+		}
+		padding: 1.5rem;
+	}
+	.content-naik {
+		transition: all 100ms ease-in-out;
+		display: flex;
+		z-index: 1;
+		.bungkus-nasi {
+			display: flex;
+			width: 100%;
+			flex-direction: column;
+			ul {
+				display: flex;
+				flex-direction: column;
+				width: 100%;
+				li {
+					padding: 1rem;
+				}
+				li.separate {
+					padding: 0;
+				}
+			}
+
+		}
+
+	}
+}
+
+.default-caret {
+	transition: 300ms ease all;
+}
+.caret-is-active {
+	transform: rotate(180deg);
+}
+.be-body-bro {
+	padding-top: 6rem;
+}
+.profile-wrapper {
+	display: flex;
+	// justify-content: space-between;
+	.image-photo {
+		img {
+			border-radius: 50%;
+		}
+		display: flex;
+		margin-right: 1rem;
+	}
+}
+.profil-phone-box, .profil-address-box  {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}

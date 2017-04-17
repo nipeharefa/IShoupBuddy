@@ -29,14 +29,16 @@
 					<div>
 						<div class="columns">
 							<div class="column">
-								<div class="center">
+								<div class="center socialbox">
 									<p class="footer-text-info">Temukan kami di </p>
+									<i class="fa fa-facebook"></i>
+									<i class="fa fa-twitter"></i>
 								</div>
 								<div class="center">
 									<p class="footer-text-info">Lebih mudah review dan belanja di Aplikasi ShoupBuddy </p>
 								</div>
 								<div class="field">
-									<p class="control">
+									<p class="control control-input-phone">
 										<input type="text" placeholder="Nomor Handphone" class="input">
 									</p>
 									<p class="controls">
@@ -74,5 +76,19 @@
 	}
 	.btn-send-link {
 		width: 100%;
+	}
+	.control-input-phone {
+		margin-bottom: 1rem;
+	}
+	.socialbox {
+		display: flex;
+		flex-direction: row;
+
+		p {
+			margin-right: 8px;
+		}
+		i {
+			margin-right: 0.5rem;
+		}
 	}
 </style>
