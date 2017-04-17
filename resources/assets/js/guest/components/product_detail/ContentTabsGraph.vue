@@ -6,7 +6,8 @@
 
 
 <script>
-	const ChartChild = () => import('./ChartChild')
+	// const ChartChild = () => import('./ChartChild')
+	import ChartChild from './ChartChild'
 	export default {
 		components: {
 			ChartChild
