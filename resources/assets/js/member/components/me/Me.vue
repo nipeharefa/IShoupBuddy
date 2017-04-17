@@ -58,7 +58,7 @@
                   <small>Jalan Diponegoro No. 777 Kecamatan Medan Kota, Medan - Indonesia</small>
                 </div>
                 <div>
-                  <button class="button is-primary">Edit Profil</button>
+                  <a href="/me/edit" class="button is-primary">Edit Profil</a>
                 </div>
               </div>
               <div></div>
