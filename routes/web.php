@@ -29,7 +29,7 @@ Route::group(['prefix' => 'oauth', 'namespace' => 'Auth'], function() {
 });
 
 
-Route::group(['prefix' => 'me', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'me'], function() {
     
     Route::resource('/', 'MeController',
     	['only' => 'index', 'show']);

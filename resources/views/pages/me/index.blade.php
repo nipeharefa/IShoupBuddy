@@ -13,7 +13,7 @@
 
 @section('js')
 
-	<script src="{{ mix('manifest.js') }}"></script>
-	<script src="{{ mix('js/member/vendor.js') }}"></script>
-	<script type="text/javascript" src="{{ mix('js/member/me.js') }}"></script>
+	<script src="{{ mix('/js/manifest.js') }}"></script>
+	<script src="{{ mix('js/vendor.js') }}"></script>
+	<script type="text/javascript" src="{{ mix('js/me.js') }}"></script>
 @endsection
