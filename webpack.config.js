@@ -61,8 +61,8 @@ module.exports.entry = Mix.entry().get();
  */
 
 module.exports.output = Mix.output();
-
-
+module.exports.output.publicPath = '/';
+module.exports.output.chunkFilename = '[name]_[chunkhash].js';
 
 /*
  |--------------------------------------------------------------------------
@@ -362,9 +362,9 @@ if (Mix.copy) {
 if (Mix.entry().hasExtractions()) {
     plugins.push(
         new webpack.optimize.CommonsChunkPlugin({
-            // names: Mix.entry().getExtractions(),
-            names: ['vendor', 'manifest'], // Specify the common bundle's name.
-            minChunks: Infinity
+            names: Mix.entry().getExtractions(),
+            // names: ['vendor', 'manifest'], // Specify the common bundle's name.
+            minChunks: Infinity,
         })
     );
 }

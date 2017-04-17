@@ -24,7 +24,7 @@
 
 @section('js')
 
-	<script src="{{ mix('manifest.js') }}"></script>
+	<script src="{{ mix('js/manifest.js') }}"></script>
 
 	@if (env('APP_ENV') == "production")
 		
@@ -33,8 +33,8 @@
 		<script src="{{ asset('local/swiper/swiper.min.js') }}"></script>
 	@endif	
 
-	<script src="{{ mix('js/guest/vendor.js') }}" type="text/javascript"></script>	
+	<script src="{{ mix('js/vendor.js') }}" type="text/javascript"></script>	
 	
-	<script src="{{ mix('js/guest/product_detail.js') }}" type="text/javascript"></script>
+	<script src="{{ mix('js/product_detail.js') }}" type="text/javascript"></script>
 
 @endsection

@@ -16,7 +16,7 @@ Route::get('/', 'HomeController@index');
 Route::get('login', 'Auth\LoginController@showLoginForm');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm');
 
-Route::group(['prefix' => 'auth'], function() {
+Route::group(['prefix' => 'auth', 'middleware' => 'api'], function() {
     Route::post('login', 'Auth\LoginController@loginViaAjax');
     Route::post('register', 'Auth\RegisterController@registerViaAjax');
 });

@@ -6,6 +6,11 @@
 @endsection
 
 
+@section('css')
+
+	<link rel="stylesheet" href="{{ mix('css/member/me.css') }}">
+@endsection
+
 @section('js')
 
 	<script src="{{ mix('manifest.js') }}"></script>

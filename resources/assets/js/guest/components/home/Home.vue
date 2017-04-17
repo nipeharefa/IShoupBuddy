@@ -64,9 +64,12 @@
 
 <script>
 
-	import NavbarApps from 'otherComponents/Navbar'
+	const FooterApps = () => import('otherComponents/Footer.vue')
+	const NavbarApps = () => import('otherComponents/Navbar.vue')
+
 	import ProductCard from 'otherComponents/ProductCard.vue'
-	import FooterApps from 'otherComponents/Footer.vue'
+	
+	
 
 	export default {
 		mounted() {

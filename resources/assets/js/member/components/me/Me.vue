@@ -1,5 +1,13 @@
 <template>
 	<div>
+		<section class="section">
+			<div class="container">
+				<div class="columns is-one-quarter">
+					<sidebar></sidebar>
+					<!-- Oke Bos -->
+				</div>
+			</div>
+		</section>
 		<footer-apps></footer-apps>
 	</div>
 </template>
@@ -10,8 +18,11 @@
 	}
 </style>
 <script>
-	// 
+
+	import Sidebar from './Sidebar.vue'
 	import FooterApps from 'otherComponents/Footer.vue'
+
+
 
 	export default {
 		mounted() {
@@ -27,7 +38,8 @@
 		},
     
 		components: {
-			FooterApps
+			FooterApps,
+			Sidebar
 		}
 
 	}

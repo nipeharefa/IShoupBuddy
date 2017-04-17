@@ -28,9 +28,10 @@
 
 
 <script>
-	import ContentTabsDetail from './ContentTabsDetail.vue'
-	import ContentTabsReview from './ContentTabsReview.vue'
-	import ContentTabsGraph from './ContentTabsGraph.vue'
+	const ContentTabsDetail = () =>  import('./ContentTabsDetail.vue')
+	const ContentTabsReview = () =>  import('./ContentTabsReview.vue')
+	const ContentTabsGraph = () => import('./ContentTabsGraph.vue')
+
 
 	export default {
 

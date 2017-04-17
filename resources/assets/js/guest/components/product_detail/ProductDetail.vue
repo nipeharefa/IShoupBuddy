@@ -84,14 +84,16 @@
 
 <script>
 
-	import FooterApps from 'otherComponents/Footer.vue'
-	import NavbarApps from 'otherComponents/Navbar.vue'
-	import Tabs from './Tabs.vue'
-	import Ratings from './Ratings.vue'
-	import MainThumbnail from './MainThumbnail.vue'
-	import DiscountBox from './DiscountBox.vue'
-	import ButtonControlTouch from './ButtonControlTouch'
-	import FavoriteButton from './FavoriteButton.vue'
+	const FooterApps = () => import('otherComponents/Footer.vue')
+	const NavbarApps = () => import('otherComponents/Navbar.vue')
+	// import FooterApps from 'otherComponents/Footer.vue'
+	// import NavbarApps from 'otherComponents/Navbar.vue'
+	const Tabs = () => import('./Tabs.vue')
+	const Ratings = () =>  import('./Ratings.vue')
+	const MainThumbnail = () => import('./MainThumbnail.vue')
+	const DiscountBox  = () =>  import('./DiscountBox.vue')
+	const ButtonControlTouch = () => import('./ButtonControlTouch')
+	const FavoriteButton  = () => import('./FavoriteButton.vue')
 
 	export default {
 		components: {

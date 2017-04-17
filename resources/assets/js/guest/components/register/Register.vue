@@ -30,10 +30,10 @@
 
 
 <script>
-	import FooterApps from 'otherComponents/Footer.vue'
-	import NavbarApps from 'otherComponents/Navbar.vue'
 
-	import TabsForm from './TabsForm.vue'
+	const FooterApps = () => import('otherComponents/Footer.vue')
+	const NavbarApps = () => import('otherComponents/Navbar.vue')
+	const TabsForm  = () => import('./TabsForm.vue')
 
 	export default {
 

@@ -11,30 +11,29 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/guest/pages/login.js', 'js/guest/login.js')
-	.js('resources/assets/js/guest/pages/register.js', 'js/guest/register.js')
-	.js('resources/assets/js/guest/pages/home.js', 'js/guest/home.js')
-	.js('resources/assets/js/guest/pages/product_detail.js', 'js/guest/product_detail.js')
-	.js('resources/assets/js/guest/pages/forgot_password.js', 'js/guest/forgot_password.js')
+mix.js('resources/assets/js/guest/pages/login.js', 'js/login_default.js')
+	.js('resources/assets/js/guest/pages/register.js', 'js/register.js')
+	.js('resources/assets/js/guest/pages/home.js', 'js/home.js')
+	.js('resources/assets/js/guest/pages/product_detail.js', 'js/product_detail.js')
+	.js('resources/assets/js/guest/pages/forgot_password.js', 'js/forgot_password.js')
 
-mix.extract(['vue', 'axios', 'vue-star-rating', 'otherComponents/Footer.vue'])
+mix.js('resources/assets/js/member/pages/me.js', 'js/me.js')
 
-
-mix.js('resources/assets/js/member/pages/me.js', 'js/member/me.js')
-
-mix.extract(['vue', 'axios'])
-	
+mix.extract(['vue', 'axios'])	
 
 mix.sass('resources/assets/sass/guest/login.scss', 'css/guest')
 mix.sass('resources/assets/sass/guest/register.scss', 'css/guest')
 mix.sass('resources/assets/sass/guest/home.scss', 'css/guest')
 mix.sass('resources/assets/sass/guest/product_detail.scss', 'css/guest')
+mix.sass('resources/assets/sass/member/me.scss', 'css/member')
 
+mix.disableNotifications()
 
 if (mix.config.inProduction) {
 	mix.version()
 }
 mix.browserSync({
+	open: false,
     proxy: 'skripsi.home.dev'
 });
 
@@ -66,3 +65,4 @@ mix.browserSync({
 //   uglify: {}, // Uglify-specific options. https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
 //   postCss: [] // Post-CSS options: https://github.com/postcss/postcss/blob/master/docs/plugins.md
 // });
+// 

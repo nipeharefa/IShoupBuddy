@@ -1,12 +1,12 @@
 <template>
-	<div class="small">
+	<div class="small chart-container">
 		<chart-child></chart-child>
 	</div>
 </template>
 
 
 <script>
-	import ChartChild from './ChartChild'
+	const ChartChild = () => import('./ChartChild')
 	export default {
 		components: {
 			ChartChild

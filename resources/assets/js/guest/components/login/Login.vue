@@ -26,15 +26,17 @@
 
 <script>
 
-  import LoginForm from 'guest/components/login/LoginForm.vue'
-  import FooterApps from 'otherComponents/Footer.vue'
-  import NavbarApps from 'otherComponents/Navbar.vue'
+  
+  // const LoginForm = import('./LoginForm.vue')
+  // import FooterApps from 'otherComponents/Footer.vue'
+  // import NavbarApps from 'otherComponents/Navbar.vue'
+
   export default {
 
     components: {
-      LoginForm,
-      FooterApps,
-      NavbarApps
+      LoginForm: () => import('./LoginForm.vue'),
+      FooterApps: () => import('otherComponents/Footer.vue'),
+      NavbarApps: () => import('otherComponents/Navbar.vue')
     }
   }
 </script>
