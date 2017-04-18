@@ -24,16 +24,18 @@
       role="menu">
 
         <ul class="menu-list">
-          <li><a>Dashboard</a></li>
-          <li><a>Transaksi</a></li>
-          <li><a>Review</a></li>
-          <li><a>Favorit</a>
-          <li><a>Dompet</a>
+          <li>
+            <a href="/me">Dashboard</a>
+          </li>
+          <li>
+            <a href="/me/change_password">Tukar Password</a>
+          </li>
+          <li><a>Barang Favorit</a>
+          <li><a>Daftar Transaksi</a>
           </li>
           <li>
             <hr>
           </li>
-          <li><a>Edit Profil</a></li>
           <li><a>Logout</a></li>
         </ul>
 

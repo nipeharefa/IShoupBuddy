@@ -22,18 +22,19 @@ Route::group(['prefix' => 'auth', 'middleware' => 'api'], function() {
 });
 
 Route::group(['prefix' => 'oauth', 'namespace' => 'Auth'], function() {
-    
+
     Route::post('login', 'PassportAuthController@login');
     Route::post('register', 'PassportAuthController@register');
-    
+
 });
 
 
 Route::group(['prefix' => 'me'], function() {
-    
+
     Route::resource('/', 'MeController',
     	['only' => 'index', 'show']);
     Route::get('edit', 'MeController@edit');
+    Route::get('change_password', 'MeController@change_password');
 
 });
 

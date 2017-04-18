@@ -16,6 +16,7 @@ mix.sass('resources/assets/sass/guest/register.scss', 'css/guest')
 mix.sass('resources/assets/sass/guest/home.scss', 'css/guest')
 mix.sass('resources/assets/sass/guest/product_detail.scss', 'css/guest')
 mix.sass('resources/assets/sass/member/me.scss', 'css/member/me.css')
+mix.sass('resources/assets/sass/member/change_password.scss', 'css/member/change_password.css')
 //
 mix.sass('resources/assets/sass/member/edit_profile.scss', 'css/member/edit_profile.css')
 
@@ -27,6 +28,7 @@ mix.js('resources/assets/js/guest/pages/forgot_password.js', 'js/forgot_password
 
 mix.js('resources/assets/js/member/pages/me.js', 'js/me.js')
 mix.js('resources/assets/js/member/pages/edit_profile.js', 'js/edit_profile.js')
+mix.js('resources/assets/js/member/pages/change_password.js', 'js/change_password.js')
 
 mix.extract(['vue', 'axios'])
 

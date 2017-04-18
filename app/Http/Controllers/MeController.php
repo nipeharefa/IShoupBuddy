@@ -14,6 +14,11 @@ class MeController extends Controller
     public function edit() {
 
     	return view('pages.me.edit');
-    	
+
+    }
+
+    public function change_password() {
+
+        return view('pages.me.change_password');
     }
 }
