@@ -1,0 +1,22 @@
+{
+    "plugins": [
+        "vue", "html"
+    ],
+
+    "env": {
+        "browser": true,
+        "node": true
+    },
+
+    "globals": {
+        "jQuery": true
+    },
+
+    "eslint.options": {
+        "extensions": [".js", ".vue"]
+    },
+
+    "extends": [
+        "vue"
+    ]
+}

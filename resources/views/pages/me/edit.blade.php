@@ -8,12 +8,12 @@
 
 @section('css')
 
-	<link rel="stylesheet" href="{{ mix('css/member/edit.css') }}">
+	<link rel="stylesheet" href="{{ mix('css/member/edit_profile.css') }}">
 @endsection
 
 @section('js')
 
 	<script src="{{ mix('/js/manifest.js') }}"></script>
 	<script src="{{ mix('js/vendor.js') }}"></script>
-	<script type="text/javascript" src="{{ mix('js/edit.js') }}"></script>
+	<script type="text/javascript" src="{{ mix('js/edit_profile.js') }}"></script>
 @endsection

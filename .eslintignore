@@ -1,0 +1,6 @@
+gulpfile.js
+webpack.config.js
+webpack.mix.js
+node_modules/
+public/
+resources/assets/js/lib/

@@ -18,6 +18,7 @@ mix.js('resources/assets/js/guest/pages/login.js', 'js/login_default.js')
 	.js('resources/assets/js/guest/pages/forgot_password.js', 'js/forgot_password.js')
 
 mix.js('resources/assets/js/member/pages/me.js', 'js/me.js')
+	.js('resources/assets/js/member/pages/edit_profile.js', 'js/edit_profile.js')
 
 mix.extract(['vue', 'axios'])	
 
@@ -26,6 +27,7 @@ mix.sass('resources/assets/sass/guest/register.scss', 'css/guest')
 mix.sass('resources/assets/sass/guest/home.scss', 'css/guest')
 mix.sass('resources/assets/sass/guest/product_detail.scss', 'css/guest')
 mix.sass('resources/assets/sass/member/me.scss', 'css/member')
+	.sass('resources/assets/sass/member/edit_profile.scss', 'css/member')
 
 mix.disableNotifications()
 

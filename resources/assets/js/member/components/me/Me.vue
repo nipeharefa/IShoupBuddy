@@ -1,7 +1,7 @@
 <template>
 	<div>
     <div>
-      <nav class="nav-model-classic">
+      <nav class="nav-model-classic" :class="{'nav-mobile-is-active': onActive }">
       <div class="wrapper-new-nav">
         <div class="logo">
          <a href="http://placehold.it">
@@ -20,6 +20,7 @@
                 <li><a>Transaksi</a></li>
                 <li><a>Review</a></li>
                 <li><a>Favorit</a>
+                <li><a>Dompet</a>
                 </li>
                 <li>
                   <hr>
