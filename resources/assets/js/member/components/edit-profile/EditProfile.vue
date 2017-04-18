@@ -12,6 +12,9 @@
         </div>
       </div>
     </section>
+    <div>
+      <footer-apps></footer-apps>
+    </div>
   </div>
 </template>
 
@@ -19,11 +22,14 @@
 <script>
   const FormEditProfile = () => import('./FormEditProfile')
   const NavbarAppsMember = () => import('otherComponents/Navbar-Member.vue')
+  const FooterApps = () => import('otherComponents/Footer.vue')
+
   export default {
     mounted () {},
     components: {
       FormEditProfile,
-      NavbarAppsMember
+      NavbarAppsMember,
+      FooterApps
     }
   }
 </script>
