@@ -1,0 +1,78 @@
+.nav-model-classic {
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  position: fixed;
+  width: 100%;
+  background: #FFF;
+
+  &.is-active {
+    height: 100% !important;
+  }
+
+  .wrapper-new-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 1.5rem;
+    z-index: 4;
+
+    .logo {
+      margin-right: 1rem;
+    }
+
+    .icon-wrapper {
+
+      .default-caret {
+        transition: 300ms ease all;
+      }
+
+      .caret-is-active {
+        transform: rotate(180deg);
+      }
+
+    }
+  }
+
+  .container-menu-touch {
+
+    transition: 400ms ease all;
+    // top: 60px;
+    // transform: translateY(2rem);
+    top: -1000px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+
+    .menu-touch {
+      display: flex;
+      // z-index: 1;
+      overflow-y: scroll !important;
+      width: 100%;
+
+      .menu-list {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        li {
+          padding: 0.5rem 1rem 0.5rem 1rem;
+        }
+        li {
+          hr {
+            padding: 0 1rem 0 1rem !important;
+            margin:0 !important;
+          }
+        }
+      }
+    }
+
+    &.is-active {
+      top: 3rem;
+      position: absolute;
+      transform: translateY(2rem);
+    }
+
+  }
+}

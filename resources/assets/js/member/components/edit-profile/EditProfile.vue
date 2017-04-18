@@ -1,3 +1,29 @@
 <template>
-	<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi error veniam corrupti neque incidunt porro rem suscipit, beatae, necessitatibus omnis odit doloribus, dolore distinctio hic fugiat molestias praesentium possimus? Dolores!</div>
+	<div>
+    <navbar-apps-member></navbar-apps-member>
+    <section class="section">
+      <div class="container">
+        <div class="columns">
+          <div class="column">
+            <div>
+              <form-edit-profile></form-edit-profile>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 </template>
+
+
+<script>
+  const FormEditProfile = () => import('./FormEditProfile')
+  const NavbarAppsMember = () => import('otherComponents/Navbar-Member.vue')
+  export default {
+    mounted () {},
+    components: {
+      FormEditProfile,
+      NavbarAppsMember
+    }
+  }
+</script>

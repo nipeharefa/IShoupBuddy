@@ -1,2 +1,12 @@
 @import "node_modules/bulma/bulma";
 @import "../core/_breadcrumb.sass";
+@import "./partials/_navbar.scss";
+
+.change-image {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  img {
+    margin-right: 1rem;
+  }
+}

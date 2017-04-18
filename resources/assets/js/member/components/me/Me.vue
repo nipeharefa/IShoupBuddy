@@ -1,38 +1,6 @@
 <template>
 	<div>
-    <div>
-      <nav class="nav-model-classic" :class="{'nav-mobile-is-active': onActive }">
-      <div class="wrapper-new-nav">
-        <div class="logo">
-         <a href="http://placehold.it">
-          <img src="http://placehold.it/32x32" alt="logo">
-         </a> 
-        </div>
-        <div class="icon-wrapper" @click="putar">
-          <i class="fa fa-sort-down default-caret" :class="{'caret-is-active': onActive }"></i>
-        </div>
-      </div>
-      <transition name="slide-fade">
-        <div class="content-naik" v-if="onActive" role="menu">
-          <div class="bungkus-nasi">
-            <ul class="menu-list">
-                <li><a>Dashboard</a></li>
-                <li><a>Transaksi</a></li>
-                <li><a>Review</a></li>
-                <li><a>Favorit</a>
-                <li><a>Dompet</a>
-                </li>
-                <li>
-                  <hr>
-                </li>
-                <li><a>Edit Profil</a></li>
-                <li><a>Logout</a></li>
-            </ul>
-          </div>
-        </div>
-      </transition>
-    </nav>
-    </div>
+    <navbar-apps-member></navbar-apps-member>
     <section class="section">
       <div class="container">
         <div class="columns be-body-bro">
@@ -59,7 +27,7 @@
                   <small>Jalan Diponegoro No. 777 Kecamatan Medan Kota, Medan - Indonesia</small>
                 </div>
                 <div>
-                  <a href="/me/edit" class="button is-primary">Edit Profil</a>
+                  <a href="/me/edit" class="button is-primary is-small">Edit Profil</a>
                 </div>
               </div>
               <div></div>
@@ -78,8 +46,7 @@
 
 	import Sidebar from './Sidebar.vue'
 	const FooterApps = () => import('otherComponents/Footer.vue')
-
-
+  const NavbarAppsMember = () => import('otherComponents/Navbar-Member.vue')
 
 	export default {
     data() {
@@ -89,7 +56,8 @@
     },
 		components: {
 			FooterApps,
-			Sidebar
+			Sidebar,
+      NavbarAppsMember
 		},
 		methods: {
 			putar() {
