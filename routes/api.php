@@ -18,14 +18,26 @@ use Illuminate\Http\Request;
 // });
 
 Route::group(['namespace' => 'API'], function() {
-    
+
     Route::resource('user', 'UserController',
     	['only' => ['show']]);
-    
+
 	Route::group(['middleware' => 'auth:api'], function () {
-	    
+
 	    Route::resource('user', 'UserController',
 	    	['only' => ['index', 'update']]);
 
 	});
+
+    Route::group(['prefix' => 'me', 'middleware' => 'auth:api'], function() {
+
+        Route::group(['namespace' => 'Me'], function() {
+
+            Route::resource('transactions', 'TransactionController',
+                ['only' => ['index', 'show']]);
+
+            Route::resource('product_favorite', 'ProductFavoriteController',
+                ['only' => 'index', 'show', 'destroy']);
+        });
+    });
 });
