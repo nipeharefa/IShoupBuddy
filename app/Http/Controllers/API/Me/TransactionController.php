@@ -7,6 +7,13 @@ use App\Http\Controllers\Controller;
 
 class TransactionController extends Controller
 {
+    private $user;
+
+    function __construct(Request $request)
+    {
+        $this->user = $request->user();
+
+    }
     /**
      * Display a listing of the resource.
      *
