@@ -38,7 +38,7 @@ Route::group(['prefix' => 'me'], function() {
 
     Route::group(['namespace' => 'Me'], function() {
         Route::resource('transactions', 'TransactionController',
-            ['only' => ['index']]);
+            ['only' => ['index', 'show']]);
         Route::resource('product_favorite', 'ProductFavoriteController',
             ['only' => ['index', 'show']]);
     });

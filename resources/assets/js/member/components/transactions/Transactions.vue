@@ -8,7 +8,9 @@
                 <div class="container">
                     <div class="columns">
                         <div class="column">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis laudantium nam alias, aspernatur odit esse, labore optio consequatur earum consequuntur eum. Sit, fugiat, nobis! Consequatur facilis omnis dicta, eos itaque!</p>
+                            <div>
+                                <table-transaction></table-transaction>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -24,10 +26,12 @@
 <script>
   const NavbarAppsMember = () => import('otherComponents/Navbar-Member.vue')
   const FooterApps = () => import('otherComponents/Footer.vue')
+  const TableTransaction = () => import('./TableTransaction.vue')
 
   export default {
     components: {
         NavbarAppsMember,
+        TableTransaction,
         FooterApps
     }
   }

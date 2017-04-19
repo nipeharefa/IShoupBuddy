@@ -16,6 +16,7 @@
     flex-direction: row;
     align-items: center;
     padding: 1.5rem;
+    background: #FFF !important;
     z-index: 4;
 
     .logo {
@@ -25,7 +26,7 @@
     .icon-wrapper {
 
       .default-caret {
-        transition: 300ms ease all;
+        transition: 250ms ease all;
       }
 
       .caret-is-active {
@@ -73,6 +74,7 @@
       top: 3rem;
       position: absolute;
       transform: translateY(2rem);
+      z-index: 3;
     }
 
   }

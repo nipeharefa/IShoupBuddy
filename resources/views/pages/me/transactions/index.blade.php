@@ -10,6 +10,8 @@
 
 
 @section('css')
+
+    <link rel="stylesheet" href="{{ asset('local/bulma/bulma.min.css') }}">
     <link rel="stylesheet" href="{{ mix('css/member/transactions.css') }}">
 
 @endsection
