@@ -6,6 +6,11 @@
   margin-top: 1rem;
   .shipping-status {
     margin-top: 1.2rem;
+    @include desktop() {
+      display: flex;
+      flex-direction: row !important;
+      justify-content: space-between;
+    }
     div {
       display: flex;
       flex-direction: column;

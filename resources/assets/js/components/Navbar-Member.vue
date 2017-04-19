@@ -49,11 +49,11 @@
 
             <div class="nav-left">
               <a class="nav-item">
-                <img src="img/logo/logo-store-64.png" alt="Bulma logo">
+                <img src="/img/logo/logo-store-64.png" alt="Bulma logo">
               </a>
             </div>
             <div class="nav-right nav-menu">
-              <a class="nav-item is-tab">
+              <a class="nav-item is-tab" href="/me">
                 <figure class="image is-16x16" style="margin-right: 8px;">
                   <img src="http://bulma.io/images/jgthms.png">
                 </figure>

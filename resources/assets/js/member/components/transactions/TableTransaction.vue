@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="table">
+    <table class="table">
       <thead>
         <tr>
           <th><abbr title="Position">ID Transaksi</abbr></th>
@@ -21,6 +21,6 @@
           </td>
         </tr>
       </tbody>
-    </div>
+    </table>
   </div>
 </template>

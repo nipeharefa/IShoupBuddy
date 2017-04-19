@@ -5,9 +5,10 @@
       <hr>
     </div>
     <div>
-      <div class="table">
+      <table class="table">
         <thead>
           <tr>
+            <th></th>
             <th><abbr title="Position">Nama Produk</abbr></th>
             <th><abbr title="Position">Qty</abbr></th>
             <th><abbr title="Position">Harga Satuan</abbr></th>
@@ -16,13 +17,14 @@
         </thead>
         <tbody>
           <tr v-for="item in 5">
+            <td>{{ item }}</td>
             <td>Sayur Putih Pertamax</td>
             <td>10</td>
             <td>10.000</td>
             <td>100.000</td>
           </tr>
         </tbody>
-      </div>
+      </table>
       <small>Total Belanja</small><h1><b>Rp. 1.000.000</b></h1>
     </div>
     <div>

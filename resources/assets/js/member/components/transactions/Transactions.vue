@@ -7,6 +7,9 @@
             <div class="pull-from-fixed">
                 <div class="container">
                     <div class="columns">
+                        <div class="column is-one-quarter is-hidden-touch">
+                          <sidebar></sidebar>
+                        </div>
                         <div class="column">
                             <div>
                                 <table-transaction></table-transaction>
@@ -26,13 +29,15 @@
 <script>
   const NavbarAppsMember = () => import('otherComponents/Navbar-Member.vue')
   const FooterApps = () => import('otherComponents/Footer.vue')
+  const Sidebar = () => import('otherComponents/Sidebar-Member')
   const TableTransaction = () => import('./TableTransaction.vue')
 
   export default {
     components: {
         NavbarAppsMember,
         TableTransaction,
-        FooterApps
+        FooterApps,
+        Sidebar
     }
   }
 </script>

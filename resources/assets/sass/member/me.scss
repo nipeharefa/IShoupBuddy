@@ -7,7 +7,9 @@
   @include touch() {
     padding-top: 6rem;
   }
-  @extend .pull-from-fixed-5
+  @include desktop() {
+    padding-top: 5rem !important;
+  }
 }
 .profile-wrapper {
   display: flex;

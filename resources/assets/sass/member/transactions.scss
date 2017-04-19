@@ -5,6 +5,15 @@
 
 div.table {
   thead {
-    display: flex;
+    @include touch() {
+      display: flex;
+    }
+  }
+  tbody {
+    tr {
+      @include desktop() {
+
+      }
+    }
   }
 }
