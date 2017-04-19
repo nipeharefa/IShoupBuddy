@@ -4,11 +4,25 @@
       <navbar-apps-member></navbar-apps-member>
     </div>
     <section class="section">
-      <div class="container">
-        <div class="columns">
-          <div class="column"></div>
+
+      <div class="pull-from-fixed-5">
+
+        <div class="container">
+
+          <div class="columns">
+
+            <div class="column">
+
+              <detail-transaction></detail-transaction>
+
+            </div>
+
+          </div>
+
         </div>
+
       </div>
+
     </section>
     <div id="foo">
         <footer-apps></footer-apps>
@@ -20,9 +34,12 @@
 <script>
   const NavbarAppsMember = () => import('otherComponents/Navbar-Member.vue')
   const FooterApps = () => import('otherComponents/Footer.vue')
+  const DetailTransaction = () => import('./DetailTransaction.vue')
+
   export default {
     components: {
       NavbarAppsMember,
+      DetailTransaction,
       FooterApps
     }
   }
