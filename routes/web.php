@@ -36,6 +36,13 @@ Route::group(['prefix' => 'me'], function() {
     Route::get('edit', 'MeController@edit');
     Route::get('change_password', 'MeController@change_password');
 
+    Route::group(['namespace' => 'Me'], function() {
+        Route::resource('transactions', 'TransactionController',
+            ['only' => ['index']]);
+        Route::resource('product_favorite', 'ProductFavoriteController',
+            ['only' => ['index', 'show']]);
+    });
+
 });
 
 Route::get('/home', 'HomeController@index');
