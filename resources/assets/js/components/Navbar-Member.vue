@@ -5,8 +5,8 @@
 
       <div class="logo">
 
-       <a href="http://placehold.it">
-        <img src="http://placehold.it/32x32" alt="logo">
+       <a href="#">
+        <img src="/img/logo/logo-store-64.png" alt="logo" class="logo-inline">
        </a>
 
       </div>
@@ -65,5 +65,10 @@
 
 
 <style lang="scss">
-
+  .logo-inline {
+    width: 32px;
+    height: 32px;
+  }
 </style>
+
+<!-- <div>Icons made by <a href="http://www.flaticon.com/authors/madebyoliver" title="Madebyoliver">Madebyoliver</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div> -->
