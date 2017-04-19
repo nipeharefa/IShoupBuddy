@@ -11,7 +11,7 @@
 
 @section('css')
 
-    {{-- <link rel="stylesheet" href="{{ mix('css/member/me.css') }}"> --}}
+    <link rel="stylesheet" href="{{ mix('css/member/show_transaction.css') }}">
 
 @endsection
 
@@ -19,5 +19,5 @@
 
     <script src="{{ mix('/js/manifest.js') }}"></script>
     <script src="{{ mix('js/vendor.js') }}"></script>
-    {{-- <script type="text/javascript" src="{{ mix('js/me.js') }}"></script> --}}
+    <script type="text/javascript" src="{{ mix('js/member_show_transaction.js') }}"></script>
 @endsection
