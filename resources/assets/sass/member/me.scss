@@ -4,7 +4,10 @@
 
 
 .be-body-bro {
-  padding-top: 6rem;
+  @include touch() {
+    padding-top: 6rem;
+  }
+  @extend .pull-from-fixed-5
 }
 .profile-wrapper {
   display: flex;

@@ -1,14 +1,12 @@
 <template>
   <nav class="nav-model-classic" :class="{'is-active': onActive }">
 
-    <div class="wrapper-new-nav">
+    <div class="wrapper-new-nav is-hidden-desktop">
 
       <div class="logo">
-
-       <a href="#">
-        <img src="/img/logo/logo-store-64.png" alt="logo" class="logo-inline">
-       </a>
-
+        <a href="#">
+          <img src="/img/logo/logo-store-64.png" alt="logo" class="logo-inline">
+        </a>
       </div>
 
       <div class="icon-wrapper" @click="putar">
@@ -17,11 +15,11 @@
 
     </div>
 
-    <div class="container-menu-touch"
+    <div class="container-menu-touch is-hidden-desktop"
        :class="{'is-active': onActive }">
 
-     <div class="menu-touch"
-      role="menu">
+      <div class="menu-touch"
+        role="menu">
 
         <ul class="menu-list">
           <li>
@@ -40,9 +38,33 @@
           </li>
           <li><a>Logout</a></li>
         </ul>
-
       </div>
 
+    </div>
+
+    <div class="container is-hidden-touch">
+      <div class="columns">
+        <div class="column">
+          <nav class="nav">
+
+            <div class="nav-left">
+              <a class="nav-item">
+                <img src="img/logo/logo-store-64.png" alt="Bulma logo">
+              </a>
+            </div>
+            <div class="nav-right nav-menu">
+              <a class="nav-item is-tab">
+                <figure class="image is-16x16" style="margin-right: 8px;">
+                  <img src="http://bulma.io/images/jgthms.png">
+                </figure>
+                John Doe
+              </a>
+              <a class="nav-item is-tab">Log out</a>
+            </div>
+
+          </nav>
+        </div>
+      </div>
     </div>
 
   </nav>
