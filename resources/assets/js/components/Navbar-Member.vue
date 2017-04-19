@@ -30,8 +30,10 @@
           <li>
             <a href="/me/change_password">Tukar Password</a>
           </li>
-          <li><a>Barang Favorit</a>
-          <li><a>Daftar Transaksi</a>
+          <li>
+            <a href="/me/product_favorite">Barang Favorit</a>
+          <li>
+            <a href="/me/transactions">Daftar Transaksi</a>
           </li>
           <li>
             <hr>

@@ -5,6 +5,7 @@
   position: fixed;
   width: 100%;
   background: #FFF;
+  box-shadow: 0 2px 2px -2px rgba(0,0,0,.15);
 
   &.is-active {
     height: 100% !important;
