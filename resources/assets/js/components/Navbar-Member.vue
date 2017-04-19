@@ -20,7 +20,7 @@
     <div class="container-menu-touch"
        :class="{'is-active': onActive }">
 
-     <div class="menu-touch" v-if="onActive"
+     <div class="menu-touch"
       role="menu">
 
         <ul class="menu-list">
