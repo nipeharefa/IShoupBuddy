@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title')
+Dashboard Member
+@endsection
 
 @section('content')
 	<div id="app"></div>
@@ -15,5 +18,5 @@
 
 	<script src="{{ mix('/js/manifest.js') }}"></script>
 	<script src="{{ mix('js/vendor.js') }}"></script>
-	<script type="text/javascript" src="{{ mix('js/me.js') }}"></script>
+	<script type="text/javascript" src="{{ mix('js/me.js') }}" async></script>
 @endsection
