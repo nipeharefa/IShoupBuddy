@@ -25,7 +25,9 @@
           </tr>
         </tbody>
       </table>
-      <small>Total Belanja</small><h1><b>Rp. 1.000.000</b></h1>
+      <div class="total-belanja">
+        <small>Total Belanja</small><h1><b>Rp. 1.000.000</b></h1>
+      </div>
     </div>
     <div>
       <shipping-information></shipping-information>
