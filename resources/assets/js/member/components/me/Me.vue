@@ -21,7 +21,8 @@
 
 <script>
 
-	import Sidebar from './Sidebar.vue'
+	// import Sidebar from './Sidebar.vue'
+  const Sidebar = () => import('otherComponents/Sidebar-Member.vue')
 	const FooterApps = () => import('otherComponents/Footer.vue')
   const NavbarAppsMember = () => import('otherComponents/Navbar-Member.vue')
   const SummaryProfile = () => import('./SummaryProfile.vue')

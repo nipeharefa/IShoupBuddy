@@ -1,6 +1,18 @@
-div.pull-from-fixed {
+.pull-from-fixed {
   margin-top: 3rem !important
 }
 div.pull-from-fixed-5 {
   margin-top: 5rem !important
+}
+
+
+// Aside Menu list
+
+aside {
+
+  .menu-list {
+    li {
+      padding: 0.5rem 0 0.5rem 0;
+    }
+  }
 }

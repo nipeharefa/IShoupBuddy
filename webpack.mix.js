@@ -15,12 +15,14 @@ mix.sass('resources/assets/sass/guest/login.scss', 'css/guest')
 mix.sass('resources/assets/sass/guest/register.scss', 'css/guest')
 mix.sass('resources/assets/sass/guest/home.scss', 'css/guest')
 mix.sass('resources/assets/sass/guest/product_detail.scss', 'css/guest')
+
+
 mix.sass('resources/assets/sass/member/me.scss', 'css/member/me.css')
 mix.sass('resources/assets/sass/member/change_password.scss', 'css/member/change_password.css')
 mix.sass('resources/assets/sass/member/transactions.scss', 'css/member/transactions.css')
 mix.sass('resources/assets/sass/member/transactions/show_transaction.scss', 'css/member/show_transaction.css')
-//
 mix.sass('resources/assets/sass/member/edit_profile.scss', 'css/member/edit_profile.css')
+mix.sass('resources/assets/sass/member/product_favorite.scss', 'css/member/product_favorite.css')
 
 mix.js('resources/assets/js/guest/pages/login.js', 'js/login_default.js')
 mix.js('resources/assets/js/guest/pages/register.js', 'js/register.js')
@@ -28,11 +30,13 @@ mix.js('resources/assets/js/guest/pages/home.js', 'js/home.js')
 mix.js('resources/assets/js/guest/pages/product_detail.js', 'js/product_detail.js')
 mix.js('resources/assets/js/guest/pages/forgot_password.js', 'js/forgot_password.js')
 
+// Member
 mix.js('resources/assets/js/member/pages/me.js', 'js/me.js')
 mix.js('resources/assets/js/member/pages/edit_profile.js', 'js/edit_profile.js')
 mix.js('resources/assets/js/member/pages/change_password.js', 'js/change_password.js')
 mix.js('resources/assets/js/member/pages/transactions/transactions.js', 'js/member_transactions.js')
 mix.js('resources/assets/js/member/pages/transactions/show_transaction.js', 'js/member_show_transaction.js')
+mix.js('resources/assets/js/member/pages/product_favorite.js', 'js/product_favorite.js')
 
 mix.extract(['vue', 'axios'])
 

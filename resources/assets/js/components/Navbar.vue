@@ -17,7 +17,7 @@
           </span>
 
           <div class="nav-right nav-menu" :class="{'is-active': openedNav }">
-              <a class="nav-item is-tab" href="/register"></a>
+              <a class="nav-item is-tab" href="/register">Register</a>
               <a class="nav-item is-tab" href="/login">Login</a>
           </div>
 

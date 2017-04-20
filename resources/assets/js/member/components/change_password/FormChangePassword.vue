@@ -3,21 +3,21 @@
     <div class="field">
       <label class="label">Password Lama</label>
       <p class="control">
-        <input class="input" type="password" placeholder="">
+        <input class="input" type="password" placeholder="" name="current_password">
       </p>
     </div>
 
     <div class="field">
       <label class="label">Password Baru</label>
       <p class="control">
-        <input class="input" type="password" placeholder="">
+        <input class="input" type="password" placeholder="" name="password">
       </p>
     </div>
 
     <div class="field">
       <label class="label">Konfirmasi Password Baru</label>
       <p class="control">
-        <input class="input" type="password" placeholder="">
+        <input class="input" type="password" placeholder="" name="password_confirmation">
       </p>
     </div>
 
@@ -26,7 +26,7 @@
     </div>
 
     <div class="field has-text-centered">
-      <a href="" class="link is-link is-danger">Batal</a>
+      <a href="/me" class="link is-link is-danger">Batal</a>
     </div>
 
 

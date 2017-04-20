@@ -9,13 +9,19 @@
         </li>
 
         <li>
+          <a href="/me/change_password">Tukar Password</a>
+        </li>
+
+        <li>
           <a href="/me/transactions">Transaksi</a>
         </li>
+
 
         <li>
           <a href="/me/product_favorite">Produk Favorit</a>
         </li>
 
 		</ul>
+
 	</aside>
 </template>
