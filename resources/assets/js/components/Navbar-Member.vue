@@ -48,7 +48,7 @@
           <nav class="nav">
 
             <div class="nav-left">
-              <a class="nav-item">
+              <a class="nav-item" href="/">
                 <img src="/img/logo/logo-store-64.png" alt="Bulma logo">
               </a>
             </div>
