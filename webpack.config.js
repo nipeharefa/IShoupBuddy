@@ -223,7 +223,8 @@ module.exports.resolve = {
         guest: path.resolve(__dirname, 'resources/assets/js/guest'),
         member: path.resolve(__dirname, 'resources/assets/js/member'),
         otherComponents: path.resolve(__dirname, 'resources/assets/js/components'),
-        lib: path.resolve(__dirname, 'resources/assets/js/lib')
+        lib: path.resolve(__dirname, 'resources/assets/js/lib'),
+        designHelper: path.resolve(__dirname, 'resources/assets/sass/core/helpers')
     }
 };
 

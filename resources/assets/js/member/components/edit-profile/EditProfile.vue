@@ -5,7 +5,7 @@
       <div class="container">
         <div class="columns">
           <div class="column">
-            <div>
+            <div class="pull-from-fixed">
               <form-edit-profile></form-edit-profile>
             </div>
           </div>

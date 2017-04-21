@@ -2,3 +2,21 @@
 @import "../core/_breadcrumb.sass";
 @import "./partials/_navbar.scss";
 @import "../core/_helper.scss";
+@import "~designHelper/ProductCard.scss";
+
+
+.modeview {
+  display: flex;
+  justify-content: flex-end;
+
+  i {
+    margin-left: 1rem;
+  }
+}
+.wrapping {
+
+  margin-top: 0.8rem !important;
+  @include desktop() {
+    margin-top: 1rem !important;
+  }
+}

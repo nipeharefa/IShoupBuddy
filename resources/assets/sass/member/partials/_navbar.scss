@@ -17,23 +17,47 @@
     flex-direction: row;
     align-items: center;
     padding: 1.5rem;
-    background: #FFF !important;
+    background: #00d1b2 !important;
     z-index: 4;
+    justify-content: space-between;
 
-    .logo {
-      margin-right: 1rem;
-    }
+    .left-hamburger {
 
-    .icon-wrapper {
+      display: flex;
 
-      .default-caret {
+      .logo {
+        margin-right: 1rem;
+      }
+
+      .icon-wrapper {
         transition: 250ms ease all;
-      }
+        &.is-active {
+          margin-top: 10px !important;
+          transition: 250ms ease all;
+        }
 
-      .caret-is-active {
-        transform: rotate(180deg);
-      }
+        i {
+          color: #FFF !important;
+        }
+        .default-caret {
+          transition: 250ms ease all;
+        }
 
+        .caret-is-active {
+          transform: rotate(180deg);
+        }
+
+      }
+    }
+    .search-box {
+      display: flex;
+    }
+    .icon-right-wrapper {
+      display: flex;
+      i {
+        color: #fff !important;
+        padding-left: 1rem;
+      }
     }
   }
 

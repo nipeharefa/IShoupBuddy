@@ -3,7 +3,7 @@
     <table class="table">
       <thead>
         <tr>
-          <th><abbr title="Position">ID Transaksi</abbr></th>
+          <th><abbr title="Position">ID</abbr></th>
           <th><abbr title="Position">Nama Produk</abbr></th>
           <th><abbr title="Position">Nominal</abbr></th>
           <th><abbr title="Position">Status</abbr></th>
@@ -17,7 +17,9 @@
           <td>Sayur Putih Pertamax</td>
           <td>100.000</td>
           <td>
-            <span class="tag is-success">Berhasili</span>
+            <span class="tag is-success">
+              <i class="fa fa-check-circle"></i>
+            </span>
           </td>
         </tr>
       </tbody>

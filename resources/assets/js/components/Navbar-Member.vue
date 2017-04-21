@@ -3,20 +3,32 @@
 
     <div class="wrapper-new-nav is-hidden-desktop">
 
-      <div class="logo">
-        <a href="#">
-          <img src="/img/logo/logo-store-64.png" alt="logo" class="logo-inline">
-        </a>
+      <div class="left-hamburger">
+
+        <div class="logo">
+          <a href="#">
+            <img src="/img/logo/logo-store-64.png" alt="logo" class="logo-inline">
+          </a>
+        </div>
+
+        <div class="icon-wrapper" @click="putar" :class="{'is-active': onActive }">
+          <i class="fa fa-sort-down default-caret" :class="{'caret-is-active': onActive }"></i>
+        </div>
+
       </div>
 
-      <div class="icon-wrapper" @click="putar">
-        <i class="fa fa-sort-down default-caret" :class="{'caret-is-active': onActive }"></i>
+      <div class="icon-right-wrapper">
+        <a href="/me">
+          <i class="fa fa-user" aria-hidden="true"></i>
+        </a>
+        <a href="/cart">
+          <i class="fa fa-shopping-cart fa-6" aria-hidden="true"></i>
+        </a>
       </div>
 
     </div>
 
-    <div class="container-menu-touch is-hidden-desktop"
-       :class="{'is-active': onActive }">
+    <div class="container-menu-touch is-hidden-desktop" :class="{'is-active': onActive }">
 
       <div class="menu-touch"
         role="menu">

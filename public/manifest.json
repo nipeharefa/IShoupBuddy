@@ -1,0 +1,16 @@
+{
+    "name": "IShoupBuddy",
+    "short_name": "IShoupBuddy",
+    "icons": [
+        {
+            "src": "https://shoupbud.xyz/img/logo/logo-store-64.png",
+            "sizes": "64x64",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/?utm_source=manifest",
+    "orientation": "portrait",
+    "display": "standalone",
+    "theme_color": "#00d1b2",
+    "background_color": "#ffffff"
+}
