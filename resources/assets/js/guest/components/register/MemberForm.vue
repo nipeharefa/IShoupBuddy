@@ -11,9 +11,6 @@
 
 			<div class="field">
 				<p class="control">
-					<!-- <input type="email" name="email" id="email" class="input" placeholder="Email Address"
-          v-model="register.email" v-validate="'required|email'" :class="{'is-danger': errors.has('member.email') }"> -->
-
           <input v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }" type="email" name="email" class="input" placeholder="Email Address"
 					v-model="register.email">
 				</p>
@@ -22,9 +19,9 @@
 
 			<div class="field">
 				<p class="control">
-					<input type="text"  class="input" placeholder="Nomor Handphone"
-					v-model="register.phone">
+					<input type="text"  v-validate="'required'" :class="{'is-danger': errors.has('phone') }"  class="input" placeholder="Nomor Handphone" v-model="register.phone" name="phone">
 				</p>
+        <p class="help is-danger" v-show="errors.has('phone')">{{ errors.first('phone') }}</p>
 			</div>
 
 			<div class="field">
@@ -62,21 +59,21 @@ export default {
   },
   methods: {
     doRegister () {
-      this.$validator.validateAll('form-1').then(result => {
-        if (result) {
-          // eslint-disable-next-line
-          alert('Form Submitted!');
-        }
+      this.$validator.validateAll().then(result => {
+        this._register()
+      }).catch(err => {
+        console.log(err)
       })
-      // const data = this.register
-      // const self = this
-      // this.$http.post('/auth/register', data)
-      //   .then(x => {
-      //     console.log(x.data)
-      //   }).catch(x => {
-      //     console.log(x)
-      //     self.onError = true
-      //   })
+    },
+    _register () {
+      const data = this.register
+      const self = this
+      this.$http.post('/auth/register', data)
+        .then(response => {
+          window.location.assign(response.data.link)
+        }).catch(x => {
+          self.onError = true
+        })
     },
     hideErrorNotification () {
       this.onError = false
