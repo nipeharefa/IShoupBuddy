@@ -34,6 +34,7 @@
     "chart.js": "^2.5.0",
     "install": "^0.8.8",
     "laravel-mix": "^0.10.0",
+    "vee-validate": "^2.0.0-beta.25",
     "vue-chartjs": "^2.6.0",
     "vue-lazyload": "^1.0.3",
     "vue-star-rating": "^1.2.2"

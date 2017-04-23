@@ -22,6 +22,15 @@ Route::group(['namespace' => 'API'], function() {
     Route::resource('user', 'UserController',
     	['only' => ['show']]);
 
+    Route::resource('category', 'CategoryController',
+        ['only' => ['index']]);
+
+    Route::resource('product', 'ProductController',
+        ['only' => ['index', 'show']]);
+
+    Route::resource('vendor', 'VendorController',
+        ['only' => ['index', 'show']]);
+
 	Route::group(['middleware' => 'auth:api'], function () {
 
 	    Route::resource('user', 'UserController',
