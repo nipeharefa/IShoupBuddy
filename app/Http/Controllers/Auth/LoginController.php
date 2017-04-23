@@ -43,10 +43,25 @@ class LoginController extends Controller
         $this->validateLogin($request);
 
         if ($this->attemptLogin($request)) {
-            
+
             return response()->json([], 200);
         }
 
         return $this->sendFailedLoginResponse($request);
+    }
+
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->flush();
+
+        $request->session()->regenerate();
+
+
+        if ($request->expectsJson()) {
+            return response()->json([], 204);
+        }
+        return redirect('/');
     }
 }

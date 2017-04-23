@@ -11,16 +11,17 @@
 		<div class="field">
 			<label class="label">Password</label>
 			<p class="control">
-  				<input type="password" class="input"  placeholder="Password" v-model="login.password" />
+  				<input type="password" class="input"  placeholder="Password" v-model="login.password"
+            @keyup.enter="doLogin"/>
   			</p>
 		</div>
-		
+
 		<div class="field is-grouped">
-		  
+
 		  <p class="control">
 		    <button class="button is-primary" @click="doLogin">Login</button>
 		  </p>
-		  
+
 		  <p class="control control-button-forgot-password">
 		    <button class="button is-link button-forgot-password">Lupa Password ?</button>
 		  </p>
@@ -35,30 +36,29 @@
 
 
 <script>
-	export default {
-		data() {
-
-			return {
-				login: {
-					email :'',
-					password: ''
-				},
-				onError: false
-			}
-		},
-		methods: {
-			closeNotification() {
-				this.onError = false
-			},
-			doLogin() {
-				const data = this.login
-				const self = this
-				this.$http.post('/auth/login', data).then(x => {
-					console.log(x)
-				}).catch(x => {
-					self.onError = true
-				})
-			}
-		}
-	}
+  export default {
+    data () {
+      return {
+        login: {
+          email: '',
+          password: ''
+        },
+        onError: false
+      }
+    },
+    methods: {
+      closeNotification () {
+        this.onError = false
+      },
+      doLogin () {
+        const data = this.login
+        const self = this
+        this.$http.post('/auth/login', data).then(x => {
+          window.location.assign('/')
+        }).catch(x => {
+          self.onError = true
+        })
+      }
+    }
+  }
 </script>

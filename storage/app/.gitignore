@@ -1,3 +1,4 @@
 *
 !public/
 !.gitignore
+!init-products.json

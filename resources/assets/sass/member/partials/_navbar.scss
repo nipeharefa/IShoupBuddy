@@ -1,7 +1,7 @@
 .nav-model-classic {
   display: flex;
   flex-direction: column;
-  z-index: 1;
+  z-index: 15 !important; //
   position: fixed;
   width: 100%;
   background: #FFF;

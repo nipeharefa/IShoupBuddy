@@ -22,10 +22,17 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Auth::check() 
-            ? view('pages.member.home')
-            : view('pages.guest.home');
+        if (Auth::check()) {
+
+            $user = $request->user();
+
+
+            return view('pages.me.home.index')
+                ->with('user', $user);
+
+        }
+        return view('pages.guest.home');
     }
 }

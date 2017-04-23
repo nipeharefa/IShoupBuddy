@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Product;
+use App\Helpers\Transformers\ProductTransformer;
 
 class ProductController extends Controller
 {
@@ -14,7 +16,15 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $product = Product::orderByDesc('created_at')->get();
+
+        $data = [
+            "status"    =>  "OK",
+            "products"  =>  ProductTransformer::transform($product),
+            "message"   =>  NULL
+        ];
+
+        return response()->json($data, 200);
     }
 
     /**

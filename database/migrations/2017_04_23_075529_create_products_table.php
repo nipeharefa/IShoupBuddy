@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('barcode');
             $table->string('name');
             $table->string('slug');
-            $table->string('pic_url');
+            $table->string('picture_url');
             $table->text('description');
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories');
