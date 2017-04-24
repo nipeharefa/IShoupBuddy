@@ -14,9 +14,9 @@ class ProductTransformer extends AbstractTransformer {
             "category"      =>  $product->Category,
             "barcode"       =>  (double)$product->barcode,
             "picture_url"   =>  [
-                "small" => url('/'),
-                "medium" => url('/'),
-                "large" => url('/'),
+                "small" => url('/image/small/', $product->picture_url),
+                "medium" => url('/image/medium/', $product->picture_url),
+                "large" => url('/image/large/', $product->picture_url),
             ],
             "description"   =>  ""
         ];

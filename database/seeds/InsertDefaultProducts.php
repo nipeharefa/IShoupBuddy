@@ -18,14 +18,15 @@ class InsertDefaultProducts extends Seeder
         $dat = Storage::get('init-products.json');
         $data = json_decode($dat, true);
 
+
         $beforeProduct = collect($data)->map(function($item) use($category) {
 
             return [
                 "name"  =>  $item["name"],
                 "category_id"   =>  $category->id,
                 "barcode"       =>  $item['barcode'],
-                "slug"          => str_slug($item['name']),
-                "picture_url"   =>  "products.jpg",
+                "slug"          =>  str_slug($item['name']),
+                "picture_url"   =>  $item['picture_url'],
                 "description"   =>  "-"
             ];
         });
@@ -35,5 +36,7 @@ class InsertDefaultProducts extends Seeder
 
             Product::create($value);
         }
+
+        $this->command->info('Success');
     }
 }
