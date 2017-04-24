@@ -25,7 +25,7 @@ class PassportAuthController extends Controller
     							TokenRepository $tokens,
                                 JwtParser $jwt)
     {
-        
+
         $this->oauth = new AccessTokenController($server, $tokens, $jwt);
     }
 
@@ -37,16 +37,16 @@ class PassportAuthController extends Controller
      * @return [type]                          [description]
      */
     public function login(ServerRequestInterface $request, Request $req) {
-        
+
     	return $this->oauth->issueToken($request);
-    	
+
     }
 
     public function register(Request $request) {
-        
+
 
         # Register user here
-        
+
         $validator = Validator::make($request->all(), [
             'name'      => 'required|max:255',
             'email'     => 'required|email|max:255|unique:users',
@@ -58,7 +58,7 @@ class PassportAuthController extends Controller
         $validator->validate();
 
         # Insert to Database
-        
+
 
 
        $user = $this->create($request->all());
@@ -87,7 +87,7 @@ class PassportAuthController extends Controller
 
 
         $proxy = Request::create(
-            'oauth/login',
+            'api/oauth/login',
             'POST'
         );
 

@@ -22,13 +22,6 @@ Route::group(['prefix' => 'auth'], function() {
     Route::delete('logout', 'Auth\LoginController@logout');
 });
 
-Route::group(['prefix' => 'oauth', 'namespace' => 'Auth'], function() {
-
-    Route::post('login', 'PassportAuthController@login');
-    Route::post('register', 'PassportAuthController@register');
-
-});
-
 
 Route::group(['prefix' => 'me'], function() {
 
