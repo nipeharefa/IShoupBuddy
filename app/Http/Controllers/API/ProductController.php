@@ -18,6 +18,12 @@ class ProductController extends Controller
     {
         $product = Product::orderByDesc('created_at');
 
+        if ($request->keyword != null) {
+
+            $product->where('name', 'LIKE',
+                "%{$request->keyword}%");
+        }
+
         if ($request->category_id != null) {
 
             $product->where('category_id',$request->category_id);
