@@ -14,13 +14,18 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $product = Product::orderByDesc('created_at')->get();
+        $product = Product::orderByDesc('created_at');
+
+        if ($request->category_id != null) {
+
+            $product->where('category_id',$request->category_id);
+        }
 
         $data = [
             "status"    =>  "OK",
-            "products"  =>  ProductTransformer::transform($product),
+            "products"  =>  ProductTransformer::transform($product->get()),
             "message"   =>  NULL
         ];
 
