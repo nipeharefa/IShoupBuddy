@@ -18,8 +18,8 @@
             <div class="swiper-container">
                <div class="swiper-wrapper">
 
-                    <div class="swiper-slide nusa" v-for="item in 6">
-                  <product-card></product-card>
+                    <div class="swiper-slide nusa" v-for="item in promo">
+                  <product-card :product="item"></product-card>
                 </div>
 
                 </div>
@@ -93,6 +93,7 @@
       })
       this.initActiveUser(window._sharedData.user)
       this.getProducts()
+      this.getPromo()
     },
     components: {
       Navbar,
@@ -102,7 +103,8 @@
     methods: {
       ...mapActions([
         'initActiveUser',
-        'initProducts'
+        'initProducts',
+        'initPromo'
       ]),
       getProducts() {
         this.$http.get('api/product').then(response => {
@@ -110,11 +112,18 @@
         }).catch(err => {
           this.initProducts([])
         })
+      },
+      getPromo() {
+        this.$http.get('api/promo').then(response => {
+          const promo = response.data.promo
+          this.initPromo(promo)
+        })
       }
     },
     computed: {
       ...mapGetters([
-        'products'
+        'products',
+        'promo'
       ])
     }
   }

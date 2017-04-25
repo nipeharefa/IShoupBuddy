@@ -226,7 +226,8 @@ module.exports.resolve = {
         adminProduct: path.resolve(__dirname, 'resources/assets/js/admin/components/product'),
         otherComponents: path.resolve(__dirname, 'resources/assets/js/components'),
         lib: path.resolve(__dirname, 'resources/assets/js/lib'),
-        designHelper: path.resolve(__dirname, 'resources/assets/sass/core/helpers')
+        designHelper: path.resolve(__dirname, 'resources/assets/sass/core/helpers'),
+        'globalVuexConstant$': path.resolve(__dirname, 'resources/assets/js/constant.js'),
     }
 };
 

@@ -5,5 +5,8 @@ export default {
   },
   INIT_PRODUCTS (state, products) {
     state.products = products
+  },
+  INIT_PROMO (state, promo) {
+    state.promo = promo
   }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Product;
+use App\Helpers\Transformers\ProductTransformer;
 
 class PromoController extends Controller
 {
@@ -14,7 +16,15 @@ class PromoController extends Controller
      */
     public function index()
     {
-        //
+        $product = Product::orderByDesc('created_at')->limit(4);
+
+         $data = [
+            "status"    =>  "OK",
+            "promo"  =>  ProductTransformer::transform($product->get()),
+            "message"   =>  NULL
+        ];
+
+        return response()->json($data, 200);
     }
 
     /**

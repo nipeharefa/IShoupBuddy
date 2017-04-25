@@ -11,7 +11,6 @@ Vue.use(Vuex)
 const strict = process.env.NODE_ENV !== 'production'
 
 const state = {
-  activeUser: {},
   promo: [],
   products: []
 }

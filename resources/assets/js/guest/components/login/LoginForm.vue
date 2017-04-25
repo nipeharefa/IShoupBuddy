@@ -14,7 +14,7 @@
 		<div class="field">
 			<label class="label">Password</label>
 			<p class="control">
-  				<input  v-validate="'required|email'" type="password" class="input"  placeholder="Password" v-model="login.password" @keyup.enter="doLogin" name="password" :class="{'is-danger': errors.has('password') }" />
+  				<input  v-validate="'required'" type="password" class="input"  placeholder="Password" v-model="login.password" @keyup.enter="doLogin" name="password" :class="{'is-danger': errors.has('password') }" />
   		</p>
       <p class="help is-danger" v-show="errors.has('password')">This password is invalid</p>
 		</div>

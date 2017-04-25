@@ -6,7 +6,7 @@
 
 		<section class="section">
 			<div class="container">
-				
+
 				<div class="columns">
 					<div class="column">
 						<div class="caption-head">
@@ -19,10 +19,10 @@
 						<div class="swiper-container">
 							 <div class="swiper-wrapper">
 
-						        <div class="swiper-slide nusa" v-for="item in 6">
-									<product-card></product-card>
+						    <div class="swiper-slide nusa" v-for="item in promo">
+									<product-card :product="item"></product-card>
 								</div>
-						        
+
 						    </div>
 						    <div class="swiper-button-prev"></div>
 						    <div class="swiper-button-next"></div>
@@ -44,9 +44,9 @@
 
 				<div class="columns">
 					<div class="column wrapping">
-						<div class="nusa" v-for="item in 16">
+						<div class="nusa" v-for="item in products">
 							<a href="/product/1" class="alinkto">
-								<product-card></product-card>
+								<product-card :product="item"></product-card>
 							</a>
 						</div>
 					</div>
@@ -68,8 +68,8 @@
 	const NavbarApps = () => import('otherComponents/Navbar.vue')
 
 	import ProductCard from 'otherComponents/ProductCard.vue'
-	
-	
+
+	import { mapActions, mapGetters } from 'vuex'
 
 	export default {
 		mounted() {
@@ -93,12 +93,41 @@
 				      spaceBetween: 10
 				    }
     			}
-			})        
+			})
+
+      this.getPromo()
+      this.getProducts()
 		},
 		components: {
 			FooterApps,
 			ProductCard,
 			NavbarApps
-		}
+		},
+    computed: {
+      ...mapGetters([
+        'products',
+        'promo'
+      ])
+    },
+    methods: {
+      ...mapActions([
+        'initPromo',
+        'initProducts'
+      ]),
+      getPromo() {
+        this.$http.get('api/promo').then(response => {
+          const promo = response.data.promo
+
+          this.initPromo(promo)
+        })
+      },
+      getProducts() {
+        this.$http.get('api/product').then(response => {
+          const products = response.data.products
+
+          this.initProducts(products)
+        })
+      }
+    }
 	}
 </script>
