@@ -4,6 +4,10 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Product;
+use Illuminate\Database\QueryException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Validator;
 
 class WishlistController extends Controller
 {
@@ -15,6 +19,15 @@ class WishlistController extends Controller
     public function index(Request $request)
     {
 
+        $user = $request->user();
+
+        $data = [
+            "status"    =>  "OK",
+            "wishlist"  =>  $user->Wishlist,
+            "message"   =>  null
+        ];
+
+        return response()->json($data, 200);
     }
 
     /**
@@ -35,7 +48,51 @@ class WishlistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = $request->user();
+
+        $validator = Validator::make($request->toArray(), [
+            'product_id'    =>  'required'
+        ]);
+
+        $validator->validate();
+
+        try {
+
+            Product::findOrFail($request->product_id);
+
+            $wish = $user->Wishlist()->updateOrCreate(['product_id' => $request->product_id]);
+
+            $response  = [
+                "status"    =>  "OK",
+                "wishlist"  =>  $wish,
+                "message"   =>  NULL
+            ];
+
+            return response()->json($response,200);
+
+        } catch (QueryException $e) {
+
+            $err = [
+                "status"    =>  "ERROR",
+                "wishlist"  =>  NULL,
+                "message"   =>  "Terjadi kesalahan saat menyimpan data wishlist."
+            ];
+
+            return response()->json($err, 500);
+
+        } catch (ModelNotFoundException $e) {
+
+            $err = [
+                "status"    =>  "ERROR",
+                "wishlist"  =>  null,
+                "message"   =>  "Data product tidak ditemukan"
+            ];
+
+            return response()->json($err, 400);
+
+        }
+
+
     }
 
     /**
@@ -78,8 +135,18 @@ class WishlistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        $user = $request->user();
+
+        $deleted = $user->Wishlist()->delete($id);
+
+        $response = [
+            "status"    =>  "OK",
+            "wish"      =>  null,
+            "message"      =>  "Berhasil dihapus",
+        ];
+
+        return response()->json($response, 204);
     }
 }
