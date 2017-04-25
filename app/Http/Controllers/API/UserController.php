@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Validator;
+use Hash;
 
 class UserController extends Controller implements DefaultAPIResponse
 {
@@ -155,5 +156,35 @@ class UserController extends Controller implements DefaultAPIResponse
     public function destroy($id)
     {
         //
+    }
+
+    public function changePassword(Request $request) {
+
+        $user = $request->user();
+
+        $validator = Validator::make($request->all,[
+            'current_password'  => 'required',
+            'password'          => 'required|confirmed'
+        ]);
+
+
+        if (Hash::check($request->current_password, $user->password)) {
+            $user->fill([
+                'password' => Hash::make($request->password)
+            ])->save();
+
+            $response = [
+                "status"    =>  "OK",
+                "message"   =>  "Password berhasil dipeerbaharui"
+            ];
+        }
+
+        $err = [
+            "status"    =>  "ERROR",
+            "message"   =>  "Current password error"
+        ];
+
+        return response()->json($err, 400);
+
     }
 }
