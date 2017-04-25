@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::post('image', 'ImageController@store');
+
 Route::group(['prefix' => 'oauth', 'namespace' => 'Auth'], function() {
     Route::post('login', 'PassportAuthController@login');
     Route::post('register', 'PassportAuthController@register');
@@ -27,6 +29,7 @@ Route::group(['namespace' => 'API'], function() {
         ['only' => ['index']]);
 
     Route::get('product/barcode/{barcode}', 'ProductController@barcode');
+
     Route::resource('product', 'ProductController',
         ['only' => ['index', 'show']]);
 
@@ -41,12 +44,17 @@ Route::group(['namespace' => 'API'], function() {
         Route::resource('wishlist', 'WishlistController',
 	    	['except' => ['create', 'edit', 'show']]);
 
+        Route::resource('product', 'ProductController',
+        ['only' => ['store']]);
+
 	});
 
     Route::group(['prefix' => 'me', 'middleware' => 'auth:api'], function() {
 
-        Route::group(['namespace' => 'Me'], function() {
+        Route::resource('/', 'MeController',
+                ['only' => ['index']]);
 
+        Route::group(['namespace' => 'Me'], function() {
             Route::resource('transactions', 'TransactionController',
                 ['only' => ['index', 'show']]);
 

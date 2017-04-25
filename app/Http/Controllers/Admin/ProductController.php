@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Auth;
-use App\Models\Product;
+use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
@@ -15,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return 1;
+        return view('pages.admin.product.index');
     }
 
     /**
@@ -25,7 +24,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.product.create');
     }
 
     /**
@@ -36,8 +35,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('fullAccess');
-        return "ok";
+        //
     }
 
     /**
@@ -48,9 +46,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $view = Auth::check() ? "pages.member.product_detail" : "pages.guest.product_detail";
-
-        return view($view);
+        //
     }
 
     /**

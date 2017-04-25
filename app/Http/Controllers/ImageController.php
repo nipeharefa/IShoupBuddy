@@ -9,6 +9,20 @@ use Illuminate\Http\Response as IlluminateResponse;
 
 class ImageController extends Controller
 {
+    public function store(Request $request) {
+
+        $filename = str_random(20);
+
+        $path = $request->image->storeAs('original', "{$filename}.jpg", 'public');
+
+        $data = [
+            "status"    =>  "OK",
+            "image"     =>  "{$filename}.jpg",
+            "message"   =>  null
+        ];
+
+        return $data;
+    }
 
     public function renderImage($ratio, $filename, Request $request) {
 

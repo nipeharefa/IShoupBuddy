@@ -4,11 +4,8 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Product;
-use App\Helpers\Transformers\ProductTransformer;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class ProductController extends Controller
+class MeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,26 +14,7 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $product = Product::orderByDesc('created_at');
-
-        if ($request->keyword != null) {
-
-            $product->where('name', 'LIKE',
-                "%{$request->keyword}%");
-        }
-
-        if ($request->category_id != null) {
-
-            $product->where('category_id',$request->category_id);
-        }
-
-        $data = [
-            "status"    =>  "OK",
-            "products"  =>  ProductTransformer::transform($product->get()),
-            "message"   =>  NULL
-        ];
-
-        return response()->json($data, 200);
+        return $request->user();
     }
 
     /**
@@ -57,7 +35,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('update', Product::class);
+        //
     }
 
     /**
@@ -103,31 +81,5 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function barcode($barcode) {
-
-        try {
-
-            $product = Product::whereBarcode($barcode)->firstOrFail();
-
-            $response = [
-                "status"    =>  "OK",
-                "product"   =>  ProductTransformer::transform($product),
-                "message"   =>  null
-            ];
-
-            return response()->json($response, 200);
-
-        } catch (ModelNotFoundException $e) {
-
-            $err = [
-                "status"    =>  "OK",
-                "product"   =>  null,
-                "message"   =>  "Produk tidak ditemukan"
-            ];
-
-            return response()->json($err, 404);
-        }
     }
 }

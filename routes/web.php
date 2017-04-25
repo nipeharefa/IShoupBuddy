@@ -44,4 +44,9 @@ Route::get('/home', 'HomeController@index');
 Route::resource('product', 'ProductController',
 	['only' => ['show']]);
 
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
+
+    Route::resource('product', 'ProductController',
+        ['only' => ['index', 'create']]);
+});
 Route::get('image/{ratio}/{filename}', 'ImageController@renderImage');

@@ -26,6 +26,18 @@ mix.sass('resources/assets/sass/member/transactions/show_transaction.scss', 'css
 mix.sass('resources/assets/sass/member/edit_profile.scss', 'css/member/edit_profile.css')
 mix.sass('resources/assets/sass/member/product_favorite.scss', 'css/member/product_favorite.css')
 
+/**
+ * Admin SCSS and JS
+ */
+mix.sass('resources/assets/sass/admin/product/index.scss', 'css/admin/product/index.css')
+mix.js('resources/assets/js/admin/pages/product/product-index.js', 'js/a-index-product.js')
+mix.js('resources/assets/js/admin/pages/product/product-create.js', 'js/a-add-product.js')
+mix.js('resources/assets/js/admin/pages/user/user-index.js', 'js/a-index-user.js')
+mix.js('resources/assets/js/admin/pages/vendor/vendor-index.js', 'js/a-vendor-user.js')
+
+/**
+ * Guest
+ */
 mix.js('resources/assets/js/guest/pages/login.js', 'js/login_default.js')
 mix.js('resources/assets/js/guest/pages/register.js', 'js/register.js')
 mix.js('resources/assets/js/guest/pages/home.js', 'js/home.js')
@@ -33,6 +45,7 @@ mix.js('resources/assets/js/guest/pages/product_detail.js', 'js/product_detail.j
 mix.js('resources/assets/js/guest/pages/forgot_password.js', 'js/forgot_password.js')
 
 // Member
+
 mix.js('resources/assets/js/member/pages/home.js', 'js/mhome.js')
 
 mix.js('resources/assets/js/member/pages/me.js', 'js/me.js')
