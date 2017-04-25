@@ -6,14 +6,17 @@
 		</div>
 		<div class="field">
   			<label class="label">Email</label>
-  			<input type="text" class="input" placeholder="Email Address" v-model="login.email"  />
+  			<input  v-validate="'required|email'" type="text" class="input" placeholder="Email Address"
+        v-model="login.email"  name="email" :class="{'is-danger': errors.has('email') }"/>
+
+        <p class="help is-danger" v-show="errors.has('email')">This email is invalid</p>
 		</div>
 		<div class="field">
 			<label class="label">Password</label>
 			<p class="control">
-  				<input type="password" class="input"  placeholder="Password" v-model="login.password"
-            @keyup.enter="doLogin"/>
-  			</p>
+  				<input  v-validate="'required|email'" type="password" class="input"  placeholder="Password" v-model="login.password" @keyup.enter="doLogin" name="password" :class="{'is-danger': errors.has('password') }" />
+  		</p>
+      <p class="help is-danger" v-show="errors.has('password')">This password is invalid</p>
 		</div>
 
 		<div class="field is-grouped">
@@ -51,6 +54,13 @@
         this.onError = false
       },
       doLogin () {
+        this.$validator.validateAll().then(result => {
+          this._doLogin()
+        }).catch(err => {
+          return err
+        })
+      },
+      _doLogin () {
         const data = this.login
         const self = this
         this.$http.post('/auth/login', data).then(x => {
