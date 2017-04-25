@@ -26,6 +26,7 @@ Route::group(['namespace' => 'API'], function() {
     Route::resource('category', 'CategoryController',
         ['only' => ['index']]);
 
+    Route::get('product/barcode/{barcode}', 'ProductController@barcode');
     Route::resource('product', 'ProductController',
         ['only' => ['index', 'show']]);
 

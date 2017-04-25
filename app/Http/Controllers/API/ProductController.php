@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Helpers\Transformers\ProductTransformer;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProductController extends Controller
 {
@@ -102,5 +103,31 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function barcode($barcode) {
+
+        try {
+
+            $product = Product::whereBarcode($barcode)->firstOrFail();
+
+            $response = [
+                "status"    =>  "OK",
+                "product"   =>  ProductTransformer::transform($product),
+                "message"   =>  null
+            ];
+
+            return response()->json($response, 200);
+
+        } catch (ModelNotFoundException $e) {
+
+            $err = [
+                "status"    =>  "OK",
+                "product"   =>  null,
+                "message"   =>  "Produk tidak ditemukan"
+            ];
+
+            return response()->json($err, 404);
+        }
     }
 }
