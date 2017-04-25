@@ -3,8 +3,11 @@
 namespace App\Exceptions;
 
 use Exception;
+use Log;
+use \Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\Debug\Exception\FlattenException;
 
 class Handler extends ExceptionHandler
 {
@@ -44,6 +47,20 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        // Default response of 400
+        $status = 400;
+        if ($exception instanceOf AuthorizationException ) {
+
+            // dd($exception);
+            if ($request->expectsJson()) {
+
+                $data  = [
+                    "message" => $exception->getMessage()
+                ];
+                return response()->json($data,403);
+            }
+        }
+
         return parent::render($request, $exception);
     }
 

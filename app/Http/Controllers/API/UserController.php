@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\API;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Helpers\Traits\ApiResponse;
 use App\Helpers\Contracts\DefaultAPIResponse;
+use App\Models\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
+use Validator;
 
 class UserController extends Controller implements DefaultAPIResponse
 {
     use ApiResponse;
-    
+
     /**
      * Get User Acccount Settings
      * @return \Illuminate\Http\Response
@@ -58,9 +59,9 @@ class UserController extends Controller implements DefaultAPIResponse
      */
     public function show($id)
     {
-        
+
         try {
-            
+
             $user = User::findOrFail($id);
 
             $response = [
@@ -72,7 +73,7 @@ class UserController extends Controller implements DefaultAPIResponse
             return $this->onSuccess($response);
 
         } catch (ModelNotFoundException $e) {
-            
+
              $response = [
                 "status"    => "ERROR",
                 "user"      => null,
@@ -106,14 +107,28 @@ class UserController extends Controller implements DefaultAPIResponse
     {
         $user = $request->user();
 
+        $a = User::find($id);
 
-        $update = $user->update($request->all());
+        $validator = Validator::make($request->all(), [
+                'name'      =>  'required',
+                'gender'    =>  'required|boolean'
+            ]);
+
+        $validator->validate();
+
+        $dataUpdate = [
+            "name"      =>  $request->name,
+            "gender"    =>  $request->gender
+        ];
+
+
+        $update = $user->update($dataUpdate);
 
 
         if ($update) {
-            
+
             $response = [
-                "status"     => "ok",
+                "status"     => "OK",
                 "user"       => $user,
                 "message"    => "Akun telah di update"
             ];
