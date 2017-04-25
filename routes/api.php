@@ -35,7 +35,10 @@ Route::group(['namespace' => 'API'], function() {
 	Route::group(['middleware' => 'auth:api'], function () {
 
 	    Route::resource('user', 'UserController',
-	    	['only' => ['index', 'update']]);
+            ['only' => ['index', 'update']]);
+
+        Route::resource('wishlist', 'WishlistController',
+	    	['except' => ['create', 'edit', 'show']]);
 
 	});
 
