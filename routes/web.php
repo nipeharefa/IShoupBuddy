@@ -16,10 +16,11 @@ Route::get('/', 'HomeController@index');
 Route::get('login', 'Auth\LoginController@showLoginForm');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm');
 
-Route::group(['prefix' => 'auth'], function() {
-    Route::post('login', 'Auth\LoginController@loginViaAjax');
-    Route::post('register', 'Auth\RegisterController@registerViaAjax');
-    Route::delete('logout', 'Auth\LoginController@logout');
+Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function() {
+    Route::post('login', 'LoginController@loginViaAjax');
+    Route::post('register', 'RegisterController@registerViaAjax');
+    Route::delete('logout', 'LoginController@logout');
+    Route::post('vendor/register', 'RegisterVendorController@register');
 });
 
 
@@ -39,7 +40,7 @@ Route::group(['prefix' => 'me'], function() {
 
 });
 
-Route::get('/home', 'HomeController@index');
+Route::get('home', 'HomeController@index');
 
 Route::resource('product', 'ProductController',
 	['only' => ['show']]);
@@ -49,4 +50,5 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
     Route::resource('product', 'ProductController',
         ['only' => ['index', 'create']]);
 });
+
 Route::get('image/{ratio}/{filename}', 'ImageController@renderImage');

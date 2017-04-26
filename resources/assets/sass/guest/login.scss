@@ -1,10 +1,8 @@
 @import "node_modules/bulma/bulma";
-// @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
-
-
+@import "./_partials/navbar";
 
 .control-button-forgot-password {
-	
+
 	display: flex;
 	align-items:center;
 	button.button-forgot-password {

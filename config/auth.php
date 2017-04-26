@@ -41,6 +41,11 @@ return [
             'provider' => 'users',
         ],
 
+        'vendor' => [
+            'driver' => 'session',
+            'provider' => 'vendors',
+        ],
+
         'api' => [
             'driver' => 'passport',
             'provider' => 'users',
@@ -68,6 +73,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'vendors' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Vendor::class,
         ],
 
         // 'users' => [

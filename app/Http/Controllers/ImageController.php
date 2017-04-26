@@ -38,14 +38,17 @@ class ImageController extends Controller
             $size = false;
 
             switch ($ratio) {
-                case 'small':
-                    $size = 200;
+                case 'thumb':
+                    $size = 150;
                     break;
-                case 'medium':
+                case 'small':
                     $size = 400;
                     break;
-                case 'large':
+                case 'medium':
                     $size = 600;
+                    break;
+                case 'large':
+                    $size = 800;
                     break;
                 default:
                     # original size

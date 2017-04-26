@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Helpers\Transformers\ProductTransformer;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Validator;
 
 class ProductController extends Controller
 {
@@ -57,7 +58,24 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('update', Product::class);
+        // $this->authorize('update', Product::class);
+
+        $validator = Validator::make($request->all(), [
+            'barcode'       =>  'required|unique:products,barcode',
+            'name'          =>  'required',
+            'picture_url'   =>  'required',
+            'description'   =>  'required',
+            'category_id'   =>  'required'
+        ]);
+
+        $validator->validate();
+
+        $data = $request->toArray();
+        $data['slug'] = str_slug($request->name);
+        $product = Product::create($data);
+
+        return $product;
+
     }
 
     /**

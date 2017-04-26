@@ -1,28 +1,43 @@
 @import "node_modules/bulma/bulma";
+@import "./_partials/navbar";
 
 
 .caption-head {
 	display: flex;
-
+  border-bottom: 1px solid #E0E0E0;
+  padding-bottom: 1rem;
+  justify-content: center;
 }
-
 .wrapping {
 
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: row;
-	
+
 	.nusa {
-				
+
+    &.swiper-slide {
+      @include touch() {
+        width: calc(100% / 1) !important;
+      };
+      @include widescreen() {
+        width: calc(100% / 4) !important;
+      };
+
+      @include desktop() {
+        width: calc(100% / 4) !important;
+      };
+    }
+
 		@include touch() {
 			width: calc(100% / 1) !important;
 		};
 		@include widescreen() {
-			width: calc(100% / 3) !important;
+			width: calc(100% / 4) !important;
 		};
 
 		@include desktop() {
-			width: calc(100% / 4) !important;
+			width: calc(100% / 6) !important;
 		};
 
 		width: calc(100% / 1);

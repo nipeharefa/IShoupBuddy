@@ -131,6 +131,13 @@
         console.log(fileName)
       },
       saveProduct() {
+        const data = this.product
+        this.$http.post('api/product', data).then(response => {
+          console.log(response.data)
+          window.location.asssign('/admin/product')
+        }).catch(err => {
+          console.log(err)
+        })
         console.log("Ready to Post")
       }
     }

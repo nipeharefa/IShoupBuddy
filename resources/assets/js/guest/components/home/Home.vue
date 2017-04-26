@@ -19,7 +19,7 @@
 						<div class="swiper-container">
 							 <div class="swiper-wrapper">
 
-						    <div class="swiper-slide nusa" v-for="item in promo">
+						    <div class="nusa swiper-slide" v-for="item in promo">
 									<product-card :product="item"></product-card>
 								</div>
 
@@ -73,31 +73,20 @@
 
 	export default {
 		mounted() {
-
-			var mySwiper = new Swiper ('.swiper-container', {
-				nextButton: '.swiper-button-next',
-    			prevButton: '.swiper-button-prev',
-    			slidesPerView: 4,
-    			spaceBetween: 10,
-    			breakpoints: {
-    				320: {
-				      slidesPerView: 1,
-				      spaceBetween: 10
-				    },
-				    480: {
-				      slidesPerView: 1,
-				      spaceBetween: 10
-				    },
-				    640: {
-				      slidesPerView: 3,
-				      spaceBetween: 10
-				    }
-    			}
-			})
-
       this.getPromo()
       this.getProducts()
+      this.setupSwiper()
 		},
+    updated() {
+      if (this.swiper) {
+        this.swiper.update()
+      }
+    },
+    data () {
+      return {
+        swiper: false
+      }
+    },
 		components: {
 			FooterApps,
 			ProductCard,
@@ -126,6 +115,28 @@
           const products = response.data.products
 
           this.initProducts(products)
+        })
+      },
+      setupSwiper() {
+        this.swiper = new Swiper ('.swiper-container', {
+          nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            slidesPerView: 4,
+            spaceBetween: 10,
+            breakpoints: {
+              320: {
+                slidesPerView: 1,
+                spaceBetween: 10
+              },
+              480: {
+                slidesPerView: 1,
+                spaceBetween: 10
+              },
+              640: {
+                slidesPerView: 3,
+                spaceBetween: 10
+              }
+            }
         })
       }
     }
