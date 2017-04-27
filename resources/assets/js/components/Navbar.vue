@@ -13,10 +13,10 @@
           <a class="nav-item">
             <div class="field has-addons">
               <p class="control akumaubelanja">
-                <input class="input" type="text" placeholder="Aku mau cari.." role="search">
+                <input class="input" type="text" placeholder="Aku mau cari.." role="search" @keyup.enter="doSearch" v-model="keyword">
               </p>
               <p class="control">
-                <a class="button">
+                <a class="button" @click="doSearch">
                   <i class="fa fa-search"></i>
                 </a>
               </p>
@@ -51,10 +51,14 @@
   export default {
     data () {
       return {
-        openedNav: false
+        openedNav: false,
+        keyword: ''
       }
     },
     methods: {
+      doSearch () {
+        window.location.assign(`/search?q=${this.keyword}`)
+      },
       openNav () {
         this.openedNav = !this.openedNav
       }

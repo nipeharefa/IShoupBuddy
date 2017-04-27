@@ -1,2 +1,11 @@
 @import "node_modules/bulma/bulma";
 @import "./_partials/navbar";
+@import "~designHelper/ProductCard.scss";
+
+
+.search_result_head_total {
+  margin-top: 2rem;
+}
+.search_result_row {
+  margin-top: 2rem;
+}

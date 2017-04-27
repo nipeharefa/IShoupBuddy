@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
-use App\Models\Vendor;
+use App\Models\User;
 
 class RegisterVendorController extends Controller
 {
@@ -17,14 +17,22 @@ class RegisterVendorController extends Controller
 
     public function register (Request $request) {
 
-        $validator = $this->validator($request->toArray());
+        // $validator = $this->validator($request->toArray());
 
-        if ($validator->fails()) {
-            return 1;
-        }
+        // if ($validator->fails()) {
+        //     return 1;
+        // }
 
         $data = $request->toArray();
-        return $this->create($data);
+        $user = $this->create($data);
+
+        $response = [
+            "status"    =>  "OK",
+            "user"      =>  $user,
+            "message"   =>  null
+        ];
+
+        return response()->json($response, 201);
     }
 
     protected function validator(array $data) {
@@ -44,12 +52,13 @@ class RegisterVendorController extends Controller
 
     protected function create(array $data)
     {
-        return Vendor::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'phone' => $data['phone'],
-            'confirmed' =>  false
+        return User::create([
+            'name'      =>  $data['name'],
+            'email'     =>  $data['email'],
+            'password'  =>  bcrypt($data['password']),
+            'phone'     =>  $data['phone'],
+            'confirmed' =>  false,
+            'role'      =>  2
         ]);
     }
 }

@@ -6,6 +6,19 @@
 
   .nusa {
 
+    &.swiper-slide {
+      @include touch() {
+        width: calc(100% / 1) !important;
+      };
+      @include widescreen() {
+        width: calc(100% / 4) !important;
+      };
+
+      @include desktop() {
+        width: calc(100% / 4) !important;
+      };
+    }
+
     @include touch() {
       width: calc(100% / 1) !important;
     };
@@ -14,7 +27,7 @@
     };
 
     @include desktop() {
-      width: calc(100% / 4) !important;
+      width: calc(100% / 6) !important;
     };
 
     width: calc(100% / 1);

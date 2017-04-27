@@ -27,7 +27,7 @@ class SearchController extends Controller
 
         }
         return view('pages.guest.search_result')
-            ->widh('keyword', $q);
+            ->with('keyword', $q);
     }
 
     /**

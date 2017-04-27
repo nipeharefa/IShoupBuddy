@@ -13,6 +13,7 @@
 
 Route::get('/', 'HomeController@index');
 
+Route::get('search', 'SearchController@index');
 Route::get('login', 'Auth\LoginController@showLoginForm');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm');
 
@@ -49,6 +50,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 
     Route::resource('product', 'ProductController',
         ['only' => ['index', 'create']]);
-});
+    });
 
 Route::get('image/{ratio}/{filename}', 'ImageController@renderImage');

@@ -39,12 +39,15 @@
 			</div>
 
 		</div>
+    <modal-vendor :active="modal"></modal-vendor>
 	</div>
 </template>
 
 
 
 <script>
+  const ModalVendor = () => import('./ModalVendorConfirmation.vue')
+
   export default {
     data () {
       return {
@@ -52,9 +55,11 @@
           name: '',
           email: '',
           password: '',
-          phone: ''
+          phone: '',
+          isVendor: true
         },
-        onError: false
+        onError: false,
+        modal: true
       }
     },
     methods: {
@@ -70,6 +75,9 @@
           console.log(response.data)
         }).catch(x => x)
       }
+    },
+    components: {
+      ModalVendor
     }
   }
 </script>

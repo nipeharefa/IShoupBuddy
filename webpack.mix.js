@@ -11,14 +11,8 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.sass('resources/assets/sass/guest/login.scss', 'css/guest')
-mix.sass('resources/assets/sass/guest/register.scss', 'css/guest')
-mix.sass('resources/assets/sass/guest/home.scss', 'css/guest')
-mix.sass('resources/assets/sass/guest/product_detail.scss', 'css/guest')
-
 
 mix.sass('resources/assets/sass/member/home.scss', 'css/member/home.css')
-
 mix.sass('resources/assets/sass/member/me.scss', 'css/member/me.css')
 mix.sass('resources/assets/sass/member/change_password.scss', 'css/member/change_password.css')
 mix.sass('resources/assets/sass/member/transactions.scss', 'css/member/transactions.css')
@@ -43,6 +37,14 @@ mix.js('resources/assets/js/guest/pages/register.js', 'js/register.js')
 mix.js('resources/assets/js/guest/pages/home.js', 'js/home.js')
 mix.js('resources/assets/js/guest/pages/product_detail.js', 'js/product_detail.js')
 mix.js('resources/assets/js/guest/pages/forgot_password.js', 'js/forgot_password.js')
+mix.js('resources/assets/js/guest/pages/search_result.js', 'js/search_result.js')
+
+
+mix.sass('resources/assets/sass/guest/login.scss', 'css/guest')
+mix.sass('resources/assets/sass/guest/register.scss', 'css/guest')
+mix.sass('resources/assets/sass/guest/home.scss', 'css/guest')
+mix.sass('resources/assets/sass/guest/product_detail.scss', 'css/guest')
+mix.sass('resources/assets/sass/guest/search_result.scss', 'css/guest')
 
 // Member
 
