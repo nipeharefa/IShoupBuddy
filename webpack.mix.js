@@ -57,6 +57,12 @@ mix.js('resources/assets/js/member/pages/transactions/transactions.js', 'js/memb
 mix.js('resources/assets/js/member/pages/transactions/show_transaction.js', 'js/member_show_transaction.js')
 mix.js('resources/assets/js/member/pages/product_favorite.js', 'js/product_favorite.js')
 
+
+// Vendor
+mix.sass('resources/assets/sass/vendor/auth/login.scss', 'css/vendor')
+mix.js('resources/assets/js/vendor/pages/auth/login.js', 'js/vendor_login.js')
+
+
 mix.extract(['vue', 'axios'])
 
 mix.disableNotifications()

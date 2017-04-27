@@ -223,6 +223,7 @@ module.exports.resolve = {
         guest: path.resolve(__dirname, 'resources/assets/js/guest'),
         member: path.resolve(__dirname, 'resources/assets/js/member'),
         admin: path.resolve(__dirname, 'resources/assets/js/admin'),
+        vendor: path.resolve(__dirname, 'resources/assets/js/vendor'),
         adminProduct: path.resolve(__dirname, 'resources/assets/js/admin/components/product'),
         otherComponents: path.resolve(__dirname, 'resources/assets/js/components'),
         lib: path.resolve(__dirname, 'resources/assets/js/lib'),

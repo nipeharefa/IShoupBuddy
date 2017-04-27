@@ -17,13 +17,16 @@ Route::get('search', 'SearchController@index');
 Route::get('login', 'Auth\LoginController@showLoginForm');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm');
 
+Route::get('vendor/login', 'Auth\LoginVendorController@showLoginForm');
+
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function() {
     Route::post('login', 'LoginController@loginViaAjax');
     Route::post('register', 'RegisterController@registerViaAjax');
     Route::delete('logout', 'LoginController@logout');
+
+    Route::post('vendor/login', 'LoginVendorController@login');
     Route::post('vendor/register', 'RegisterVendorController@register');
 });
-
 
 Route::group(['prefix' => 'me'], function() {
 
