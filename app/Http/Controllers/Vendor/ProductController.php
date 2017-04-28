@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Vendor;
 
-use App\Models\Vendor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class VendorController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,13 +14,7 @@ class VendorController extends Controller
      */
     public function index()
     {
-        $data = [
-            "status"    =>  "OK",
-            "vendors"   =>  Vendor::get(),
-            'message'   =>  null
-        ];
-
-        return response()->json($data, 200);
+        return view('pages.vendor.product.index');
     }
 
     /**
@@ -31,7 +24,7 @@ class VendorController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.vendor.product.create');
     }
 
     /**
@@ -48,10 +41,10 @@ class VendorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Vendor  $vendor
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Vendor $vendor)
+    public function show($id)
     {
         //
     }
@@ -59,10 +52,10 @@ class VendorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Vendor  $vendor
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Vendor $vendor)
+    public function edit($id)
     {
         //
     }
@@ -71,10 +64,10 @@ class VendorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Vendor  $vendor
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Vendor $vendor)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -82,27 +75,11 @@ class VendorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Vendor  $vendor
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Vendor $vendor)
+    public function destroy($id)
     {
         //
-    }
-
-    public function activate(Request $request) {
-
-        $vendor = Vendor::find($request->product_id);
-
-        $vendor->confirmed = true;
-        $vendor->save();
-
-        $response = [
-            "status"    =>  "OK",
-            "vendor"    =>  $vendor,
-            "message"   =>  null
-        ];
-
-        return response()->json($response, 200);
     }
 }

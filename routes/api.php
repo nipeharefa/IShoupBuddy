@@ -40,6 +40,8 @@ Route::group(['namespace' => 'API'], function() {
     Route::resource('vendor', 'VendorController',
         ['only' => ['index', 'show']]);
 
+    Route::post('vendor/activate', 'VendorController@activate');
+
 	Route::group(['middleware' => 'auth:api'], function () {
 
 	    Route::resource('user', 'UserController',

@@ -24,6 +24,8 @@ mix.sass('resources/assets/sass/member/product_favorite.scss', 'css/member/produ
  * Admin SCSS and JS
  */
 mix.sass('resources/assets/sass/admin/product/index.scss', 'css/admin/product/index.css')
+mix.sass('resources/assets/sass/admin/vendor/index.scss', 'css/admin/vendor/index.css')
+
 mix.js('resources/assets/js/admin/pages/product/product-index.js', 'js/a-index-product.js')
 mix.js('resources/assets/js/admin/pages/product/product-create.js', 'js/a-add-product.js')
 mix.js('resources/assets/js/admin/pages/user/user-index.js', 'js/a-index-user.js')
@@ -60,10 +62,15 @@ mix.js('resources/assets/js/member/pages/product_favorite.js', 'js/product_favor
 
 // Vendor
 mix.sass('resources/assets/sass/vendor/auth/login.scss', 'css/vendor')
+mix.sass('resources/assets/sass/vendor/product/create.scss', 'css/vendor/product')
+mix.sass('resources/assets/sass/vendor/product/index.scss', 'css/vendor/product')
+
 mix.js('resources/assets/js/vendor/pages/auth/login.js', 'js/vendor_login.js')
+mix.js('resources/assets/js/vendor/pages/product/create.js', 'js/vendor_product_create.js')
+mix.js('resources/assets/js/vendor/pages/product/index.js', 'js/vendor_product_index.js')
 
 
-mix.extract(['vue', 'axios'])
+mix.extract(['vue', 'axios', 'vee-validate'])
 
 mix.disableNotifications()
 

@@ -34,4 +34,9 @@ class User extends Authenticatable
 
         return $this->hasMany(Wishlist::class);
     }
+
+    public function isAdmin() :boolean {
+
+        return $this->role == 2;
+    }
 }

@@ -225,6 +225,7 @@ module.exports.resolve = {
         admin: path.resolve(__dirname, 'resources/assets/js/admin'),
         vendor: path.resolve(__dirname, 'resources/assets/js/vendor'),
         adminProduct: path.resolve(__dirname, 'resources/assets/js/admin/components/product'),
+        adminComponents: path.resolve(__dirname, 'resources/assets/js/admin/components'),
         otherComponents: path.resolve(__dirname, 'resources/assets/js/components'),
         lib: path.resolve(__dirname, 'resources/assets/js/lib'),
         designHelper: path.resolve(__dirname, 'resources/assets/sass/core/helpers'),

@@ -13,13 +13,18 @@ class ProductTransformer extends AbstractTransformer {
             "name"          =>  $product->name,
             "category"      =>  $product->Category,
             "barcode"       =>  (double)$product->barcode,
-            "picture_url"   =>  [
-                "small" => url('/image/small', $product->picture_url),
-                "medium" => url('/image/medium', $product->picture_url),
-                "large" => url('/image/large', $product->picture_url),
+            "picture_url"   =>
+            [
+                "small"     =>  url('/image/small', $product->picture_url),
+                "medium"    =>  url('/image/medium', $product->picture_url),
+                "large"     =>  url('/image/large', $product->picture_url),
             ],
-            "description"   =>  ""
+            "description"   =>  "",
+            "vendors"       =>  ProductVendorTransformer::transform($product->ProductVendor),
+            "total_review"  =>  0,
+            "total_vendor"  =>  $product->ProductVendor()->count()
         ];
+
         return $arr;
     }
 }

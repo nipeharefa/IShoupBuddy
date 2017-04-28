@@ -5,8 +5,10 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Vendor;
 use App\Helpers\Transformers\ProductTransformer;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Validator;
 
 class ProductController extends Controller
@@ -60,8 +62,10 @@ class ProductController extends Controller
     {
         // $this->authorize('update', Product::class);
 
+        $user = $request->user();
+
         $validator = Validator::make($request->all(), [
-            'barcode'       =>  'required|unique:products,barcode',
+            'barcode'       =>  'required',
             'name'          =>  'required',
             'picture_url'   =>  'required',
             'description'   =>  'required',
@@ -72,10 +76,57 @@ class ProductController extends Controller
 
         $data = $request->toArray();
         $data['slug'] = str_slug($request->name);
-        $product = Product::create($data);
 
-        return $product;
+        try {
 
+            $product = Product::create($data);
+
+            if ($user->role == 2) {
+
+
+                $product_vendor = $this->createProductVendor($data, $product->id, $user->id);
+
+                $response = [
+                    "status"    =>  "OK",
+                    "product"   =>  $product,
+                    "message"   =>  null
+                ];
+            }
+
+            return $product;
+
+        } catch (QueryException $e) {
+
+            $product = Product::whereBarcode($request->barcode)->first();
+            if ($user->role == 2) {
+
+                return $this->createProductVendor($data, $product->id, $user->id);
+            }
+
+            $err = [
+                "status"    =>  "OK",
+                "product"   =>  null,
+                "message"   =>  "Duplicate Error"
+            ];
+
+            return response()->json($err, 400);
+
+        }
+
+    }
+
+    protected function createProductVendor(array $data, $product_id,  $user) {
+
+        $vendor = Vendor::find($user);
+
+        $arr = [
+            'product_id'    =>  $product_id,
+            'harga'         =>  $data['price'],
+            'status'        =>  true
+        ];
+
+
+        return $vendor->ProductVendor()->updateOrCreate(["product_id" => $product_id, "vendor_id" => $vendor->id], $arr);
     }
 
     /**

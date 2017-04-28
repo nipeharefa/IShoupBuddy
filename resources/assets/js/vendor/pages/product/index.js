@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import VueAxios from 'lib/axios-plugin'
+import VeeValidate from 'vee-validate'
+
 Vue.use(VueAxios)
+Vue.use(VeeValidate)
 
-import App from 'adminComponents/vendor/index/VendorIndex.vue'
-
+import App from 'vendor/components/product/index'
 new Vue({
   render (h) {
     return (

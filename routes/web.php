@@ -53,6 +53,17 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 
     Route::resource('product', 'ProductController',
         ['only' => ['index', 'create']]);
-    });
+
+    Route::resource('vendor', 'VendorController',
+        ['only' => ['index']]);
+
+
+});
+
+Route::group(['prefix' => 'vendor', 'namespace' => 'Vendor'], function() {
+
+    Route::resource('product', 'ProductController');
+
+});
 
 Route::get('image/{ratio}/{filename}', 'ImageController@renderImage');
