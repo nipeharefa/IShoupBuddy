@@ -14,9 +14,16 @@ class PromoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $product = Product::orderByDesc('created_at')->limit(4);
+
+
+        if (!$request->query('without_filter')) {
+            $product->whereHas('productvendor', function($pv){
+                return $pv;
+            });
+        }
 
          $data = [
             "status"    =>  "OK",
