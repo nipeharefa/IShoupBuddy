@@ -4,6 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\ProductVendor;
 use Illuminate\Http\Request;
+use App\Models\Vendor;
+use App\Http\Controllers\Controller;
+use App\Helpers\Transformers\ProductVendorTransformer;
 
 class ProductVendorController extends Controller
 {
@@ -12,9 +15,17 @@ class ProductVendorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $vendor = Vendor::find($request->user()->id);
+
+        $data  = [
+            "status"    =>  "OK",
+            "message"   =>  null,
+            "products"  =>  ProductVendorTransformer::transform($vendor->ProductVendor)
+        ];
+
+        return response()->json($data, 200);
     }
 
     /**

@@ -51,7 +51,10 @@ Route::group(['namespace' => 'API'], function() {
 	    	['except' => ['create', 'edit', 'show']]);
 
         Route::resource('product', 'ProductController',
-        ['only' => ['store']]);
+            ['only' => ['store']]);
+
+        Route::resource('product-vendor', 'ProductVendorController',
+            ['only' =>  ['index']]);
 
 	});
 

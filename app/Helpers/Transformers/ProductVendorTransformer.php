@@ -9,9 +9,11 @@ class ProductVendorTransformer extends AbstractTransformer {
 
         $arr = [
             "id"            =>  $productV->id,
+            "name"          =>  $productV->Product->name,
             "price"         =>  $productV->harga,
             "price_string"  =>  $productV->harga,
-            "vendor"        =>  $productV->Vendor
+            "barcode"       =>  $productV->Product->barcode,
+            "vendor"        =>  VendorTransformer::transform($productV->Vendor)
         ];
 
         return $arr;

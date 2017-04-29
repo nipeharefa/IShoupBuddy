@@ -135,9 +135,35 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        //
+        if ($request->barcode) {
+            # code...
+        }
+
+        try {
+
+            $product = Product::findOrFail($id);
+
+
+            $response = [
+                "status"    =>  "OK",
+                "product"   =>  ProductTransformer::transform($product),
+                "message"   =>  null
+            ];
+
+            return response()->json($response, 200);
+
+        } catch (ModelNotFoundException $e) {
+
+            $err = [
+                "status"    =>  "ERROR",
+                "product"   =>  [],
+                "message"   =>  "Produk tidak ditemukan"
+            ];
+
+            return response()->json($err, 404);
+        }
     }
 
     /**

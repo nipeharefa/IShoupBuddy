@@ -6,6 +6,8 @@ use App\Models\Vendor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Helpers\Transformers\VendorTransformer;
+
 class VendorController extends Controller
 {
     /**
@@ -17,7 +19,7 @@ class VendorController extends Controller
     {
         $data = [
             "status"    =>  "OK",
-            "vendors"   =>  Vendor::get(),
+            "vendors"   =>  VendorTransformer::transform(Vendor::get()),
             'message'   =>  null
         ];
 

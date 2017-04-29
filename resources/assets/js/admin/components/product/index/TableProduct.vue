@@ -14,7 +14,8 @@
         <td>{{ item.barcode }}</td>
         <td>0 / 0</td>
         <td>
-          <a href="">Edit</a>
+          <a class="is-link">Edit</a>
+          <a class="is-link">Delete</a>
         </td>
       </tr>
     </tbody>
@@ -25,6 +26,7 @@
 <script>
   import { mapGetters } from 'vuex'
   export default {
+    props: ['role'],
     computed: {
       ...mapGetters([
         'products'

@@ -22,7 +22,9 @@ class ProductTransformer extends AbstractTransformer {
             "description"   =>  "",
             "vendors"       =>  ProductVendorTransformer::transform($product->ProductVendor),
             "total_review"  =>  0,
-            "total_vendor"  =>  $product->ProductVendor()->count()
+            "total_vendor"  =>  $product->ProductVendor()->count(),
+            "total_rating"  =>  0,
+            "minimum_price" =>  $product->ProductVendor()->min('harga')
         ];
 
         return $arr;
