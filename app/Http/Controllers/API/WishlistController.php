@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Helpers\Transformers\WishlistTransformer;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Validator;
@@ -23,7 +24,7 @@ class WishlistController extends Controller
 
         $data = [
             "status"    =>  "OK",
-            "wishlist"  =>  $user->Wishlist,
+            "wishlist"  =>  WishlistTransformer::transform($user->Wishlist),
             "message"   =>  null
         ];
 
