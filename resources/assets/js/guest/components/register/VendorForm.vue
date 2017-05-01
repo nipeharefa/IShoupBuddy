@@ -59,7 +59,7 @@
           isVendor: true
         },
         onError: false,
-        modal: true
+        modal: false
       }
     },
     methods: {

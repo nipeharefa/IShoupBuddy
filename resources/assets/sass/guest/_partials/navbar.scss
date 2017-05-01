@@ -6,6 +6,99 @@
   }
 
   a.nav-item {
-    color: #FFF !important;
+    @include desktop() {
+      color: #FFF !important;
+    }
   }
+  .register-button {
+    display: flex;
+    @include desktop() {
+    }
+  }
+  .guest-icon-navbar-right {
+    display: flex;
+    align-items: center;
+
+    i {
+      margin-right: 0.8rem;
+      color: #fff;
+    }
+  }
+}
+
+.sidenav-guest {
+  z-index: 20;
+  position: fixed;
+  top:0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+
+  .wrapper-sidenav {
+    background: #FFF;
+    width: calc(80%);
+    height: 100%;
+
+    ul {
+      padding: 1rem !important;
+
+      li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+        a {
+
+          color: inherit !important;
+
+          display: flex;
+          i {
+            width: 16px !important;
+            font-size: 1rem;
+            margin-right: 1.2rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.rightnav-guest-search {
+  z-index: 200;
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+
+  .search-mobile-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: #fff;
+    height: 53px;
+    justify-content: space-between;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.16);
+
+    i {
+      padding: 1rem;
+    }
+    input {
+      border: 0;
+      height: 100%;
+      width: 100%;
+      display: flex;
+
+      &:hover {
+        border: 0;
+      }
+    }
+  }
+}
+
+
+.fade-enter-active, .fade-leave-active {
+  // transition: opacity .5s;
+  // transition: opacity .5s linear .5s;
+  // transition-delay: 0s;
 }

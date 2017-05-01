@@ -105,6 +105,7 @@ class ProductController extends Controller
         } catch (QueryException $e) {
 
             $product = Product::whereBarcode($request->barcode)->first();
+
             if ($user->role == 2) {
 
                 return $this->createProductVendor($data, $product->id, $user->id);
