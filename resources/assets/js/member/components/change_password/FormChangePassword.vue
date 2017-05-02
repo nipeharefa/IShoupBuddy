@@ -22,7 +22,7 @@
     </div>
 
      <div class="field has-text-centered">
-      <button class="button is-primary is-fullwidth">Tukar Password</button>
+      <button class="button is-primary is-fullwidth" @click="_changePassword">Tukar Password</button>
     </div>
 
     <div class="field has-text-centered">
@@ -32,3 +32,28 @@
 
   </div>
 </template>
+
+<script>
+    export default {
+        data () {
+           return {
+                password: {
+                    current_password: '',
+                    password: '',
+                    password_confirmation: ''
+                }
+            }
+        },
+        methods: {
+            validate () {
+                // validate
+            },
+            _changePassword () {
+               const data = this.password
+               this.$http.post('api/user/change_password', data).then(response => {
+                 console.log(response.data)
+               })
+            }
+        }
+    }
+</script>

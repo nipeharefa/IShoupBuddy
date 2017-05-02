@@ -158,15 +158,17 @@ class UserController extends Controller implements DefaultAPIResponse
         //
     }
 
-    public function changePassword(Request $request) {
+    public function change_password(Request $request) {
 
         $user = $request->user();
 
-        $validator = Validator::make($request->all,[
-            'current_password'  => 'required',
-            'password'          => 'required|confirmed'
+
+        $validator = Validator::make($request->toArray(),[
+            'current_password'      => 'required',
+            'password'              => 'required|confirmed'
         ]);
 
+        $validator->validate();
 
         if (Hash::check($request->current_password, $user->password)) {
             $user->fill([
@@ -177,6 +179,8 @@ class UserController extends Controller implements DefaultAPIResponse
                 "status"    =>  "OK",
                 "message"   =>  "Password berhasil dipeerbaharui"
             ];
+
+            return response()->json($response, 200);
         }
 
         $err = [
