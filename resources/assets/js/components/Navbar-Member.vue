@@ -18,6 +18,9 @@
       </div>
 
       <div class="icon-right-wrapper">
+        <a href="">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </a>
         <a href="/me">
           <i class="fa fa-user" aria-hidden="true"></i>
         </a>
@@ -28,30 +31,9 @@
 
     </div>
 
-    <div class="container-menu-touch is-hidden-desktop" :class="{'is-active': onActive }">
-
-      <div class="menu-touch"
-        role="menu">
-
-        <ul class="menu-list">
-          <li>
-            <a href="/me">Dashboard</a>
-          </li>
-          <li>
-            <a href="/me/change_password">Tukar Password</a>
-          </li>
-          <li>
-            <a href="/me/product_favorite">Barang Favorit</a>
-          <li>
-            <a href="/me/transactions">Daftar Transaksi</a>
-          </li>
-          <li>
-            <hr>
-          </li>
-          <li><a>Logout</a></li>
-        </ul>
-      </div>
-
+    <div class="container-menu-touch is-hidden-desktop" v-if="onActive">
+      <drawer-member></drawer-member>
+      <div @click="putar" style="width: 20%"></div>
     </div>
 
     <div class="container is-hidden-touch">
@@ -83,11 +65,17 @@
 </template>
 
 <script>
+
+  const DrawerMember = () => import('./Navbars/_partials/DrawerMember.vue')
+
   export default {
     data () {
       return {
         onActive: false
       }
+    },
+    components: {
+      DrawerMember
     },
     methods: {
       putar () {
