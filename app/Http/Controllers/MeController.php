@@ -11,9 +11,11 @@ class MeController extends Controller
     	return view('pages.me.index');
     }
 
-    public function edit() {
+    public function edit(Request $request) {
 
-    	return view('pages.me.edit');
+        $user = $request->user();
+    	return view('pages.me.edit')
+            ->with('user', $user);
 
     }
 

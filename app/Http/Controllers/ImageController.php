@@ -18,10 +18,18 @@ class ImageController extends Controller
         $data = [
             "status"    =>  "OK",
             "image"     =>  "{$filename}.jpg",
+            "links"     =>  [
+
+                "small" =>  url('image/small', "{$filename}.jpg"),
+                "medium" =>  url('image/medium', "{$filename}.jpg"),
+                "large" =>  url('image/large', "{$filename}.jpg")
+            ],
             "message"   =>  null
         ];
 
-        return $data;
+        # Send to Queue Delete
+
+        return response()->json($data, 201);
     }
 
     public function renderImage($ratio, $filename, Request $request) {

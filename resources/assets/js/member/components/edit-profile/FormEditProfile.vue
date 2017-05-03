@@ -12,8 +12,9 @@
     <div class="field">
       <label class="label">Name</label>
       <p class="control">
-        <input class="input" type="text" placeholder="Alex Fergusen" v-model="user.name">
+        <input class="input" type="text" placeholder="Alex Fergusen" v-model="user.name" v-validate="'required'" name="user_name" :class="{'is-danger': errors.has('user_name') }" >
       </p>
+      <p class="help is-danger" v-show="errors.has('user_name')">{{ errors.first('user_name') }}</p>
     </div>
 
     <div class="field">
@@ -40,7 +41,7 @@
     </div>
 
     <div class="field has-text-centered">
-      <button @click="_updateProfile" class="button is-primary is-fullwidth">Update Profile</button>
+      <button @click="updateProfile" class="button is-primary is-fullwidth">Update Profile</button>
     </div>
 
     <div class="field has-text-centered">
@@ -60,7 +61,8 @@ export default {
           email:'',
           picture_url: '',
           address: '',
-          phone: ''
+          phone: '',
+          gender: 0
         }
       }
     },
@@ -74,9 +76,18 @@ export default {
       generateLinkPicture () {
         return `/${this.user.picture_url}`
       },
+      updateProfile () {
+        this.$validator.validateAll().then(result => {
+          this._updateProfile()
+        }).catch(err => {
+          console.log(err)
+        })
+      },
       _updateProfile () {
         const data = this.user
-        console.log(data)
+        this.$http.put('api/user/1', data).then(response => {
+          console.log(response.data)
+        }).catch(err => err)
       }
     },
     computed: {

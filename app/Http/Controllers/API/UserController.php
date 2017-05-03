@@ -111,15 +111,19 @@ class UserController extends Controller implements DefaultAPIResponse
         $a = User::find($id);
 
         $validator = Validator::make($request->all(), [
-                'name'      =>  'required',
-                'gender'    =>  'required|boolean'
+                'name'          =>  'required',
+                'gender'        =>  'required|boolean',
+                'picture_url'   =>  'required',
+                'address'       =>  'required'
             ]);
 
         $validator->validate();
 
         $dataUpdate = [
-            "name"      =>  $request->name,
-            "gender"    =>  $request->gender
+            "name"          =>  $request->name,
+            "picture_url"   =>  $request->picture_url,
+            "gender"        =>  $request->gender,
+            "address"       =>  $request->address
         ];
 
 
