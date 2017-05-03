@@ -36,8 +36,13 @@ class User extends Authenticatable
         return $this->hasMany(Wishlist::class);
     }
 
-    public function isAdmin() :boolean {
+    public function isAdmin() :Boolean {
 
         return $this->role == 2;
+    }
+
+    public function Cart() {
+
+        return $this->hasMany(Cart::class, 'identify_id');
     }
 }

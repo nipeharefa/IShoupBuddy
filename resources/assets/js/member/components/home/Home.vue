@@ -6,6 +6,7 @@
     <section class="section">
       <div class="container">
         <list-promo></list-promo>
+        <list-product></list-product>
       </div>
     </section>
     <div>
@@ -18,6 +19,7 @@
   const Navbar = () => import('global/components/Navbars/MemberNavbar.vue')
   const FooterApps = () => import('otherComponents/Footer.vue')
   const ListPromo = () => import('global/components/Home/SlidePromo.vue')
+  const ListProduct = () => import('global/components/Home/ListProduct.vue')
 
   import { mapActions, mapGetters } from 'vuex'
 
@@ -29,7 +31,8 @@
     components: {
       Navbar,
       FooterApps,
-      ListPromo
+      ListPromo,
+      ListProduct
     },
     computed: {
       ...mapGetters([

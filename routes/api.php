@@ -31,7 +31,6 @@ Route::group(['namespace' => 'API'], function() {
     Route::resource('category', 'CategoryController',
         ['only' => ['index']]);
 
-
     Route::resource('promo', 'PromoController',
         ['only' => ['index']]);
 
@@ -46,6 +45,9 @@ Route::group(['namespace' => 'API'], function() {
     Route::post('vendor/activate', 'VendorController@activate');
 
 	Route::group(['middleware' => 'auth:api'], function () {
+
+        Route::resource('cart', 'CartController',
+            ['only' =>  ['index', 'store']]);
 
 	    Route::resource('user', 'UserController',
             ['only' => ['index', 'update']]);
