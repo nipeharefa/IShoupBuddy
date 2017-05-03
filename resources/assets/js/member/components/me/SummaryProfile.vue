@@ -3,22 +3,22 @@
     <div>
       <div class="profile-wrapper">
         <div class="image-photo">
-          <img src="http://placehold.it/64x64" alt="profile Logo">
+          <img :src="activeUser.picture_links.small" alt="profile Logo">
         </div>
         <div>
-          <p>Nipe Setiawan Harefa</p>
-          <small>nipeharefa@gmail.com</small>
+          <p>{{ activeUser.name }}</p>
+          <small>{{ activeUser.email }}</small>
         </div>
       </div>
       <div class="profil-phone-box">
         <h1>Phone : </h1>
         <small>
-        +6282275121178
+        {{ activeUser.phone }}
         </small>
       </div>
       <div class="profil-address-box">
         <h1>Alamat : </h1>
-        <small>Jalan Diponegoro No. 777 Kecamatan Medan Kota, Medan - Indonesia</small>
+        <small>{{ activeUser.address }}</small>
       </div>
       <div>
         <a href="/me/edit" class="button is-primary is-small">Edit Profil</a>
@@ -28,3 +28,15 @@
   </div>
   </div>
 </template>
+
+
+<script>
+  import { mapGetters } from 'vuex'
+  export default {
+    computed: {
+      ...mapGetters([
+        'activeUser'
+      ])
+    }
+  }
+</script>

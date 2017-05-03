@@ -37,4 +37,9 @@ class AbstractTransformer
     {
 
     }
+
+    protected function getProduction() {
+
+        return env('APP_ENV') == "production";
+    }
 }

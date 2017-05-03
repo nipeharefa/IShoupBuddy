@@ -16,6 +16,13 @@ Dashboard Member
 
 @section('js')
 
+
+    <script>
+        window._sharedData = {
+            user: {!! $user !!}
+        }
+    </script>
+
 	<script src="{{ mix('/js/manifest.js') }}"></script>
 	<script src="{{ mix('js/vendor.js') }}"></script>
 	<script type="text/javascript" src="{{ mix('js/me.js') }}" async></script>

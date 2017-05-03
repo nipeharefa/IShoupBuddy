@@ -21,7 +21,7 @@
 
 <script>
   const FormEditProfile = () => import('./FormEditProfile')
-  const NavbarAppsMember = () => import('otherComponents/Navbar-Member.vue')
+  const NavbarAppsMember = () => import('global/components/Navbars/MemberNavbar.vue')
   const FooterApps = () => import('otherComponents/Footer.vue')
 
   export default {

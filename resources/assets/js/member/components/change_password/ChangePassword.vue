@@ -23,7 +23,7 @@
 
 
 <script>
-  const NavbarAppsMember = () => import('otherComponents/Navbar-Member.vue')
+  const NavbarAppsMember = () => import('global/components/Navbars/MemberNavbar.vue')
   const FooterApps = () => import('otherComponents/Footer.vue')
   const FormChangePassword = () => import('./FormChangePassword')
   const Sidebar = () => import('otherComponents/Sidebar-Member.vue')

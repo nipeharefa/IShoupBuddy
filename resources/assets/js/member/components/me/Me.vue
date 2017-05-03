@@ -24,7 +24,7 @@
 	// import Sidebar from './Sidebar.vue'
   const Sidebar = () => import('otherComponents/Sidebar-Member.vue')
 	const FooterApps = () => import('otherComponents/Footer.vue')
-  const NavbarAppsMember = () => import('otherComponents/Navbar-Member.vue')
+  const NavbarAppsMember = () => import('global/components/Navbars/MemberNavbar.vue')
   const SummaryProfile = () => import('./SummaryProfile.vue')
 
 	export default {

@@ -1,0 +1,7 @@
+import { INIT_ACTIVE_USER, SET_ISACTIVE, SET_SEARCH_ACTIVE } from 'mutationsStore'
+
+export default {
+  INIT_ACTIVE_USER,
+  SET_SEARCH_ACTIVE,
+  SET_ISACTIVE
+}

@@ -13,7 +13,13 @@
 
 @section('js')
 
+    <script type="text/javascript">
+        window._sharedData = {
+            user: {!! $user !!}
+        }
+    </script>
 	<script src="{{ mix('/js/manifest.js') }}"></script>
 	<script src="{{ mix('js/vendor.js') }}"></script>
 	<script type="text/javascript" src="{{ mix('js/edit_profile.js') }}"></script>
+
 @endsection

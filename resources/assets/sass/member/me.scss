@@ -19,6 +19,10 @@
     }
     display: flex;
     margin-right: 1rem;
+    @include touch() {
+      max-height: 4rem;
+      max-width: 4rem;
+    }
   }
 }
 .profil-phone-box, .profil-address-box  {

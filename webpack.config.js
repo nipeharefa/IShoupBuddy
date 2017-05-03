@@ -221,6 +221,7 @@ module.exports.resolve = {
     alias: {
         'vue$': 'vue/dist/vue.common.js',
         guest: path.resolve(__dirname, 'resources/assets/js/guest'),
+        global: path.resolve(__dirname, 'resources/assets/js/global'),
         member: path.resolve(__dirname, 'resources/assets/js/member'),
         admin: path.resolve(__dirname, 'resources/assets/js/admin'),
         vendor: path.resolve(__dirname, 'resources/assets/js/vendor'),
@@ -230,6 +231,11 @@ module.exports.resolve = {
         lib: path.resolve(__dirname, 'resources/assets/js/lib'),
         designHelper: path.resolve(__dirname, 'resources/assets/sass/core/helpers'),
         'globalVuexConstant$': path.resolve(__dirname, 'resources/assets/js/constant.js'),
+        // Globaal Components, Store
+        'mutationsStore$': path.resolve(__dirname, 'resources/assets/js/global/store/mutations.js'),
+        'actionsStore$': path.resolve(__dirname, 'resources/assets/js/global/store/actions.js'),
+        'gettersStore$': path.resolve(__dirname, 'resources/assets/js/global/store/getters.js'),
+        'statesStore$': path.resolve(__dirname, 'resources/assets/js/global/store/states.js')
     }
 };
 
