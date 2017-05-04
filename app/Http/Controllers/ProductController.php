@@ -48,9 +48,23 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $view = Auth::check() ? "pages.member.product_detail" : "pages.guest.product_detail";
+        if (Auth::check()) {
 
-        return view($view);
+            $view = view('pages.product.show')
+                ->with('js', mix('js/mproduct-detail.js'))
+                ->with('css', mix('css/member/product-detail.css'))
+                ->with('user', $id);
+        } else {
+
+            $view = view("pages.product.show")
+                ->with('js', mix('js/product_detail.js'))
+                ->with('css', mix('css/guest/product_detail.css'));
+        }
+
+        $view->with('title', 'Product Title');
+        $view->with('id', $id);
+
+        return $view;
     }
 
     /**

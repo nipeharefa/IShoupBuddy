@@ -339,7 +339,6 @@ if (Mix.browserSync) {
                 port: 3000,
                 proxy: 'app.dev',
                 files: [
-                    'app/**/*.php',
                     'resources/views/**/*.php',
                     'public/js/**/*.js',
                     'public/css/**/*.css'

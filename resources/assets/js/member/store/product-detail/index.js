@@ -6,18 +6,17 @@ import * as actions from './actions'
 import * as getters from './getters'
 import mutations from './mutations'
 
-import { isActive, searchActive, activeUser } from 'statesStore'
+import { isActive, searchActive } from 'statesStore'
 
 Vue.use(Vuex)
 
 const strict = process.env.NODE_ENV !== 'production'
 
 const state = {
-  promo: [],
-  products: [],
+  activeUser: {},
+  product: null,
   isActive,
-  searchActive,
-  activeUser
+  searchActive
 }
 
 const store = new Vuex.Store({

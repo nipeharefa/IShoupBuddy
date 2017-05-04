@@ -1,11 +1,12 @@
 import { SET_ISACTIVE, SET_SEARCH_ACTIVE } from 'mutationsStore'
+
 export default {
 
-  INIT_PROMO (state, promo) {
-    state.promo = promo
+  INIT_ACTIVE_USER (state, user) {
+    state.activeUser = user
   },
-  INIT_PRODUCTS (state, products) {
-    state.products = products
+  INIT_PRODUCT (state, product) {
+    state.product = product
   },
   SET_ISACTIVE,
   SET_SEARCH_ACTIVE

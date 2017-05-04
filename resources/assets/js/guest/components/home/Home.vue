@@ -5,55 +5,11 @@
 		</div>
 
 		<section class="section">
-			<div class="container">
-
-				<div class="columns">
-					<div class="column">
-						<div class="caption-head">
-							<h1 class="is-4">Promo Terbaru</h1>
-						</div>
-					</div>
-				</div>
-				<div class="columns">
-					<div class="column wrapping">
-						<div class="swiper-container">
-							 <div class="swiper-wrapper">
-
-						    <div class="nusa swiper-slide" v-for="item in promo">
-									<product-card :product="item"></product-card>
-								</div>
-
-						    </div>
-						    <div class="swiper-button-prev"></div>
-						    <div class="swiper-button-next"></div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-
-			<div class="container">
-				<div class="columns">
-					<div class="column">
-						<div class="caption-head">
-							<h1 class="is-4">Produk Lainnya </h1>
-						</div>
-					</div>
-				</div>
-
-
-				<div class="columns">
-					<div class="column wrapping">
-						<div class="nusa" v-for="item in products">
-							<a href="/product/1" class="alinkto">
-								<product-card :product="item"></product-card>
-							</a>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</section>
+      <div class="container">
+        <list-promo></list-promo>
+        <list-product></list-product>
+      </div>
+    </section>
 
 		<div>
 			<footer-apps></footer-apps>
@@ -65,9 +21,11 @@
 <script>
 
 	const FooterApps = () => import('otherComponents/Footer.vue')
-	const NavbarApps = () => import('otherComponents/Navbar.vue')
+  // const NavbarApps = () => import('otherComponents/Navbar.vue')
+	const NavbarApps = () => import('global/components/Navbars/GuestNavbar')
 
-	import ProductCard from 'otherComponents/ProductCard.vue'
+  const ListPromo = () => import('global/components/Home/SlidePromo.vue')
+  const ListProduct = () => import('global/components/Home/ListProduct.vue')
 
 	import { mapActions, mapGetters } from 'vuex'
 
@@ -75,13 +33,7 @@
 		mounted() {
       this.getPromo()
       this.getProducts()
-      this.setupSwiper()
 		},
-    updated() {
-      if (this.swiper) {
-        this.swiper.update()
-      }
-    },
     data () {
       return {
         swiper: false
@@ -89,8 +41,9 @@
     },
 		components: {
 			FooterApps,
-			ProductCard,
-			NavbarApps
+			NavbarApps,
+      ListPromo,
+      ListProduct
 		},
     computed: {
       ...mapGetters([
@@ -106,7 +59,6 @@
       getPromo() {
         this.$http.get('api/promo').then(response => {
           const promo = response.data.promo
-
           this.initPromo(promo)
         })
       },
@@ -115,28 +67,6 @@
           const products = response.data.products
 
           this.initProducts(products)
-        })
-      },
-      setupSwiper() {
-        this.swiper = new Swiper ('.swiper-container', {
-          nextButton: '.swiper-button-next',
-            prevButton: '.swiper-button-prev',
-            slidesPerView: 4,
-            spaceBetween: 10,
-            breakpoints: {
-              320: {
-                slidesPerView: 1,
-                spaceBetween: 10
-              },
-              480: {
-                slidesPerView: 1,
-                spaceBetween: 10
-              },
-              640: {
-                slidesPerView: 3,
-                spaceBetween: 10
-              }
-            }
         })
       }
     }

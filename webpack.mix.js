@@ -11,15 +11,6 @@ let mix = require('laravel-mix');
  |
  */
 
-
-mix.sass('resources/assets/sass/member/home.scss', 'css/member/home.css')
-mix.sass('resources/assets/sass/member/me.scss', 'css/member/me.css')
-mix.sass('resources/assets/sass/member/change_password.scss', 'css/member/change_password.css')
-mix.sass('resources/assets/sass/member/transactions.scss', 'css/member/transactions.css')
-mix.sass('resources/assets/sass/member/transactions/show_transaction.scss', 'css/member/show_transaction.css')
-mix.sass('resources/assets/sass/member/edit_profile.scss', 'css/member/edit_profile.css')
-mix.sass('resources/assets/sass/member/product_favorite.scss', 'css/member/product_favorite.css')
-
 /**
  * Admin SCSS and JS
  */
@@ -48,9 +39,24 @@ mix.sass('resources/assets/sass/guest/home.scss', 'css/guest')
 mix.sass('resources/assets/sass/guest/product_detail.scss', 'css/guest')
 mix.sass('resources/assets/sass/guest/search_result.scss', 'css/guest')
 
-// Member
+/**
+ * Member Scope
+ */
 
+// SASS
+
+mix.sass('resources/assets/sass/member/home.scss', 'css/member/home.css')
+mix.sass('resources/assets/sass/member/product/product-detail.scss', 'css/member/product-detail.css')
+mix.sass('resources/assets/sass/member/me.scss', 'css/member/me.css')
+mix.sass('resources/assets/sass/member/change_password.scss', 'css/member/change_password.css')
+mix.sass('resources/assets/sass/member/transactions.scss', 'css/member/transactions.css')
+mix.sass('resources/assets/sass/member/transactions/show_transaction.scss', 'css/member/show_transaction.css')
+mix.sass('resources/assets/sass/member/edit_profile.scss', 'css/member/edit_profile.css')
+mix.sass('resources/assets/sass/member/product_favorite.scss', 'css/member/product_favorite.css')
+
+// JS
 mix.js('resources/assets/js/member/pages/home.js', 'js/mhome.js')
+mix.js('resources/assets/js/member/pages/product-detail.js', 'js/mproduct-detail.js')
 
 mix.js('resources/assets/js/member/pages/me.js', 'js/me.js')
 mix.js('resources/assets/js/member/pages/edit_profile.js', 'js/edit_profile.js')
@@ -79,7 +85,7 @@ if (mix.config.inProduction) {
 }
 mix.browserSync({
 	open: false,
-    proxy: 'skripsi.home.dev'
+  proxy: 'skripsi.home.dev'
 });
 
 // Full API

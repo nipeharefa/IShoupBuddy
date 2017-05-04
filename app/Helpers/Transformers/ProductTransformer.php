@@ -3,6 +3,7 @@
 
 namespace App\Helpers\Transformers;
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class ProductTransformer extends AbstractTransformer {
 
@@ -27,8 +28,15 @@ class ProductTransformer extends AbstractTransformer {
             "total_review"  =>  0,
             "total_vendor"  =>  $product->ProductVendor()->count(),
             "total_rating"  =>  0,
-            "minimum_price" =>  $product->ProductVendor()->min('harga')
+            "minimum_price" =>  $product->ProductVendor()->min('harga'),
+            "liked"         =>  false
         ];
+
+
+        if (Auth::guard('api')->check()) {
+
+            $arr['liked']   =   true;
+        }
 
         return $arr;
     }

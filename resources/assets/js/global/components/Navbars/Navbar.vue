@@ -1,6 +1,6 @@
 <template>
-  <nav class="nav-model-classic" :class="{'is-active': isActive }">
-    <div class="wrapper-new-nav is-hidden-desktop">
+  <nav  :class="[navClass,{'is-active': isActive }]">
+    <div :class="navClassC">
       <hamburger></hamburger>
       <logo></logo>
       <slot name="right-icon"></slot>
@@ -20,6 +20,14 @@
   const Logo = () => import('./partials/Logo.vue')
 
   export default {
+    props: {
+      navClass: {
+        default: 'nav-model-classic'
+      },
+      navClassC: {
+        default: 'wrapper-new-nav is-hidden-desktop'
+      }
+    },
     components: {
       Hamburger,
       Logo
