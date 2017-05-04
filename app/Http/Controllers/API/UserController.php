@@ -49,7 +49,58 @@ class UserController extends Controller implements DefaultAPIResponse
      */
     public function store(Request $request)
     {
-        //
+        $user = $request->user();
+
+
+        $validator = Validator::make($request->all(), [
+                'name'          =>  'required',
+                'gender'        =>  'required|boolean',
+                'picture_url'   =>  'required',
+                'address'       =>  'required'
+            ]);
+
+        $validator->validate();
+
+        $dataUpdate = [
+            "name"          =>  $request->name,
+            "picture_url"   =>  $request->picture_url,
+            "gender"        =>  $request->gender,
+            "address"       =>  $request->address
+        ];
+
+
+        if ($request->file('picture_url') && $request->file('picture_url')->isValid()) {
+
+            $filename = str_random(20) . ".jpg";
+
+            $path = $request->picture_url->storeAs('original', $filename, 'public');
+
+            $dataUpdate['picture_url'] = $filename;
+        }
+
+
+        $update = $user->update($dataUpdate);
+
+
+        if ($update) {
+
+            $response = [
+                "status"     => "OK",
+                "user"       => $user,
+                "message"    => "Akun telah di update"
+            ];
+
+            return $this->onSuccess($response);
+        }
+
+
+        $response = [
+            "status"     => "ERROR",
+            "user"       => null,
+            "message"    => "Gagal memperbaharui data pengguna"
+        ];
+
+        return $this->onFailure($response, 400);
     }
 
     /**
@@ -106,49 +157,7 @@ class UserController extends Controller implements DefaultAPIResponse
      */
     public function update(Request $request, $id)
     {
-        $user = $request->user();
 
-        $a = User::find($id);
-
-        $validator = Validator::make($request->all(), [
-                'name'          =>  'required',
-                'gender'        =>  'required|boolean',
-                'picture_url'   =>  'required',
-                'address'       =>  'required'
-            ]);
-
-        $validator->validate();
-
-        $dataUpdate = [
-            "name"          =>  $request->name,
-            "picture_url"   =>  $request->picture_url,
-            "gender"        =>  $request->gender,
-            "address"       =>  $request->address
-        ];
-
-
-        $update = $user->update($dataUpdate);
-
-
-        if ($update) {
-
-            $response = [
-                "status"     => "OK",
-                "user"       => $user,
-                "message"    => "Akun telah di update"
-            ];
-
-            return $this->onSuccess($response);
-        }
-
-
-        $response = [
-            "status"     => "ERROR",
-            "user"       => null,
-            "message"    => "Gagal memperbaharui data pengguna"
-        ];
-
-        return $this->onFailure($response, 400);
     }
 
     /**

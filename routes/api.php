@@ -50,7 +50,7 @@ Route::group(['namespace' => 'API'], function() {
             ['only' =>  ['index', 'store']]);
 
 	    Route::resource('user', 'UserController',
-            ['only' => ['index', 'update']]);
+            ['only' => ['index', 'store']]);
 
         Route::resource('wishlist', 'WishlistController',
 	    	['except' => ['create', 'edit', 'show']]);
