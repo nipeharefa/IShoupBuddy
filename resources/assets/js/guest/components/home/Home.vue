@@ -21,9 +21,7 @@
 <script>
 
 	const FooterApps = () => import('otherComponents/Footer.vue')
-  // const NavbarApps = () => import('otherComponents/Navbar.vue')
 	const NavbarApps = () => import('global/components/Navbars/GuestNavbar')
-
   const ListPromo = () => import('global/components/Home/SlidePromo.vue')
   const ListProduct = () => import('global/components/Home/ListProduct.vue')
 

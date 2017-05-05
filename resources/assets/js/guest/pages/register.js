@@ -5,8 +5,10 @@ Vue.use(VueAxios)
 Vue.use(VeeValidate)
 
 import App from 'guest/components/register/Register.vue'
+import store from 'guest/store/home/'
 
 new Vue({
+  store,
   render (h) {
     return (
 			<div class=''>

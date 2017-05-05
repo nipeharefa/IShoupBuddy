@@ -26,7 +26,7 @@
 
 <script>
   const FooterApps = () => import('otherComponents/Footer.vue')
-  const NavbarApps = () => import('otherComponents/Navbar.vue')
+  const NavbarApps = () => import('global/components/Navbars/GuestNavbar')
   const TotalResults = () => import('./HeadTotalResults.vue')
   const Results = () => import('./Results.vue')
 

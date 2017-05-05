@@ -5,7 +5,7 @@
 		<div>
 			<navbar-apps></navbar-apps>
 		</div>
-		
+
 		<section class="section">
 			<div class="container">
 
@@ -57,16 +57,16 @@
 					    			<p>Indomie Super Goreng Bali, Indoenesia Gratis 1 Stand 10</p>
 					    		</b>
 					    	</div>
-							
+
 							<ratings></ratings>
 
 							<discount-box></discount-box>
 
-						</div>	
+						</div>
 
 						<button-control-touch></button-control-touch>
 
-						
+
 						<tabs></tabs>
 
 					</div>
@@ -85,7 +85,7 @@
 <script>
 
 	const FooterApps = () => import('otherComponents/Footer.vue')
-	const NavbarApps = () => import('otherComponents/Navbar.vue')
+	const NavbarApps = () => import('global/components/Navbars/GuestNavbar')
 	// import FooterApps from 'otherComponents/Footer.vue'
 	// import NavbarApps from 'otherComponents/Navbar.vue'
 	const Tabs = () => import('./Tabs.vue')

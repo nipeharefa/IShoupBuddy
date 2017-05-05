@@ -50,28 +50,18 @@
           </ul>
       </menu-slot>
 
-      <!-- <menu-slot :hasChild="false">
-          <div slot="content">
-            <a href="/me/change_password">Tukar Password</a>
+      <menu-slot :hasChild="false">
+          <div slot="content" class="is-fullwidth">
+            <hr>
           </div>
-      </menu-slot> -->
-      <!-- <li>
-        <a href="/me/change_password">Tukar Password</a>
-      </li>
-      <li>
-        <i class="fa fa-heart"></i>
-        <a href="/me/product_favorite">Barang Favorit</a>
-      <li>
-        <i class="fa fa-money"></i>
-        <a href="/me/transactions">Daftar Transaksi</a>
-      </li>
-      <li>
-        <hr>
-      </li>
-      <li>
-        <i class="fa fa-sign-out"></i>
-        <a>Logout</a>
-      </li> -->
+      </menu-slot>
+
+      <menu-slot :hasChild="false">
+          <div slot="content" @click="logout" class="is-fullwidth">
+            <i class="fa fa-sign-out"></i>
+            <a>Logout</a>
+          </div>
+      </menu-slot>
     </ul>
   </div>
 </template>
@@ -82,6 +72,15 @@
   export default {
     components: {
       MenuSlot
+    },
+    methods: {
+      logout () {
+        this.$http.delete('auth/logout').then(response => {
+          window.location.assign('/')
+        }).catch(err => {
+          console.log(err)
+        })
+      }
     }
   }
 </script>

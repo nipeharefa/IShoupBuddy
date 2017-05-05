@@ -1,11 +1,10 @@
 <template>
 	<div class="masuk">
-     
-     <div>
-       
-       <navbar-apps></navbar-apps>
 
-     </div> 
+     <div>
+      <navbar-apps></navbar-apps>
+     </div>
+
       <section class="section">
         <div class="container">
           <div class="columns">
@@ -26,17 +25,12 @@
 
 <script>
 
-  
-  // const LoginForm = import('./LoginForm.vue')
-  // import FooterApps from 'otherComponents/Footer.vue'
-  // import NavbarApps from 'otherComponents/Navbar.vue'
-
   export default {
 
     components: {
       LoginForm: () => import('./LoginForm.vue'),
       FooterApps: () => import('otherComponents/Footer.vue'),
-      NavbarApps: () => import('otherComponents/Navbar.vue')
+      NavbarApps: () => import('global/components/Navbars/GuestNavbar')
     }
   }
 </script>

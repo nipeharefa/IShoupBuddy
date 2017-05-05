@@ -20,6 +20,7 @@
           <discount-box></discount-box>
         </div>
         <button-control-touch></button-control-touch>
+        <tabs></tabs>
       </div>
     </div>
     </section>
@@ -33,6 +34,7 @@
   const DetailProduct = () => import('global/components/Product/DetailProduct.vue')
   const DiscountBox = () => import('global/components/Others/DiscountBox.vue')
   const ButtonControlTouch = () => import('global/components/Others/ButtonControlTouch')
+  const Tabs = () => import('global/components/Others/Tabs.vue')
 
   import { mapGetters } from 'vuex'
 
@@ -43,7 +45,8 @@
       DetailProduct,
       Ratings,
       DiscountBox,
-      ButtonControlTouch
+      ButtonControlTouch,
+      Tabs
     },
     computed: {
       ...mapGetters([

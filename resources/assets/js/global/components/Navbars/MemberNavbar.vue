@@ -9,6 +9,9 @@
       <a href="/me">
         <i class="fa fa-user" aria-hidden="true"></i>
       </a>
+      <a href="#">
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+      </a>
     </div>
     <div slot="mobile-left-drawer" class="container-menu-touch is-hidden-desktop" v-if="isActive">
       <drawer-member></drawer-member>
@@ -21,7 +24,6 @@
 <script>
   const DrawerMember = () => import('./partials/DrawerMember.vue')
   const RightSearch = () => import('./partials/RightSearch.vue')
-
   const Navbar = () => import('./Navbar.vue')
 
   import { mapGetters, mapActions } from 'vuex'

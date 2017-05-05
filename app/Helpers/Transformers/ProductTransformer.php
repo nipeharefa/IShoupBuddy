@@ -29,7 +29,9 @@ class ProductTransformer extends AbstractTransformer {
             "total_vendor"  =>  $product->ProductVendor()->count(),
             "total_rating"  =>  0,
             "minimum_price" =>  $product->ProductVendor()->min('harga'),
-            "liked"         =>  false
+            "minumumPrice"  =>  $product->ProductVendor()->min('harga'),
+            "liked"         =>  false,
+            "recentReview"  =>  []
         ];
 
 

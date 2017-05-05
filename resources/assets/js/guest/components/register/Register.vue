@@ -2,12 +2,12 @@
 	<div>
 
 		<div>
-       
+
        		<navbar-apps></navbar-apps>
 
-	     </div> 
+	     </div>
 		<section class="section">
-			
+
 			<div class="container">
 				<div class="column is-5 is-offset-one-quarter">
               		<tabs-form></tabs-form>
@@ -17,7 +17,7 @@
               			<a href="/login">Login</a>
               		</div>
             	</div>
-			</div>	
+			</div>
 		</section>
 
 		<!-- Footer -->
@@ -32,7 +32,7 @@
 <script>
 
 	const FooterApps = () => import('otherComponents/Footer.vue')
-	const NavbarApps = () => import('otherComponents/Navbar.vue')
+	const NavbarApps = () => import('global/components/Navbars/GuestNavbar')
 	const TabsForm  = () => import('./TabsForm.vue')
 
 	export default {
