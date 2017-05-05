@@ -17,7 +17,7 @@
 
 <script>
   const FooterApps = () => import('otherComponents/Footer.vue')
-  const NavbarApps = () => import('otherComponents/Navbar.vue')
+  const NavbarApps = () => import('global/components/Navbars/MemberNavbar.vue')
   const LoginForm = () => import('./LoginForm.vue')
 
   export default {

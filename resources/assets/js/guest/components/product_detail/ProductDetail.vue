@@ -1,110 +1,54 @@
-
 <template>
-	<div>
+  <detailProduct>
+    <navbar slot="navbar"></navbar>
+    <footer-apps slot="footer"></footer-apps>
 
-		<div>
-			<navbar-apps></navbar-apps>
-		</div>
-
-		<section class="section">
-			<div class="container">
-
-				<div class="columns is-hidden-touch">
-					<div class="column is-one-third">
-						<main-thumbnail></main-thumbnail>
-					</div>
-					<div class="column">
-						<favorite-button></favorite-button>
-						<h1 class="title is-5 dekstop-detail">CSS Bulma everhing is gone be ok</h1>
-						<ratings></ratings>
-						<discount-box></discount-box>
-
-						<div class="column is-one-third desktop-controls-2 is-paddingless">
-							<div class="input-cart">
-								<button class="button">
-									<i class="fa fa-plus"></i>
-								</button>
-								<input type="text" class="input" placeholder="Jumlah">
-								<button class="button">
-									<i class="fa fa-minus"></i>
-								</button>
-							</div>
-							<div class="container-controls-2">
-								<button class="button is-danger">
-									<i class="fa fa-shopping-cart"></i>
-								</button>
-								<button class="button is-primary">
-									Compare Product
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="columns is-hidden-touch">
-					<div class="column">
-						<tabs></tabs>
-					</div>
-				</div>
-
-				<div class="columns is-hidden-desktop">
-					<div class="column ">
-						<div>
-							<main-thumbnail></main-thumbnail>
-
-					    	<div>
-					    		<b>
-					    			<p>Indomie Super Goreng Bali, Indoenesia Gratis 1 Stand 10</p>
-					    		</b>
-					    	</div>
-
-							<ratings></ratings>
-
-							<discount-box></discount-box>
-
-						</div>
-
-						<button-control-touch></button-control-touch>
-
-
-						<tabs></tabs>
-
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<div>
-			<footer-apps></footer-apps>
-		</div>
-	</div>
+    <div slot="slot-touch" class="columns is-hidden-desktop" v-if="product">
+      <div class="column">
+        <div>
+          <div class="main-thumbnail">
+            <figure class="image is-4by3">
+              <img :src="product.picture_url['small']" alt="Image" >
+            </figure>
+          </div>
+          <div>
+            <b>
+              <p>{{ product.name }}</p>
+            </b>
+          </div>
+          <ratings></ratings>
+          <discount-box></discount-box>
+          <tabs></tabs>
+        </div>
+      </div>
+    </div>
+  </detailProduct>
 </template>
-
-
 
 <script>
 
-	const FooterApps = () => import('otherComponents/Footer.vue')
-	const NavbarApps = () => import('global/components/Navbars/GuestNavbar')
-	// import FooterApps from 'otherComponents/Footer.vue'
-	// import NavbarApps from 'otherComponents/Navbar.vue'
-	const Tabs = () => import('./Tabs.vue')
-	const Ratings = () =>  import('./Ratings.vue')
-	const MainThumbnail = () => import('./MainThumbnail.vue')
-	const DiscountBox  = () =>  import('./DiscountBox.vue')
-	const ButtonControlTouch = () => import('./ButtonControlTouch')
-	const FavoriteButton  = () => import('./FavoriteButton.vue')
+  const DetailProduct = () => import('global/components/Product/DetailProduct.vue')
+  const Navbar = () => import('global/components/Navbars/GuestNavbar.vue')
+  const FooterApps = () => import('otherComponents/Footer.vue')
+  const DiscountBox = () => import('global/components/Others/DiscountBox.vue')
+  const Ratings = () => import('global/components/Others/Ratings.vue')
+  const Tabs = () => import('global/components/Others/Tabs.vue')
 
-	export default {
-		components: {
-			FooterApps,
-			NavbarApps,
-			Tabs,
-			Ratings,
-			MainThumbnail,
-			DiscountBox,
-			ButtonControlTouch,
-			FavoriteButton
-		}
-	}
+  import { mapGetters } from 'vuex'
+
+  export default {
+    components: {
+      DetailProduct,
+      FooterApps,
+      Navbar,
+      DiscountBox,
+      Ratings,
+      Tabs
+    },
+    computed: {
+      ...mapGetters([
+        'product'
+      ])
+    }
+  }
 </script>
