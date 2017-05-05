@@ -6,11 +6,7 @@
     <div slot="slot-touch" class="columns is-hidden-desktop" v-if="product">
       <div class="column">
         <div>
-          <div class="main-thumbnail">
-            <figure class="image is-4by3">
-              <img :src="product.picture_url['small']" alt="Image" >
-            </figure>
-          </div>
+          <imageCover></imageCover>
           <div>
             <b>
               <p>{{ product.name }}</p>
@@ -35,6 +31,7 @@
   const DiscountBox = () => import('global/components/Others/DiscountBox.vue')
   const ButtonControlTouch = () => import('global/components/Others/ButtonControlTouch')
   const Tabs = () => import('global/components/Others/Tabs.vue')
+  const ImageCover = () => import('global/components/Others/ImageInProductDetail.vue')
 
   import { mapGetters } from 'vuex'
 
@@ -46,7 +43,8 @@
       Ratings,
       DiscountBox,
       ButtonControlTouch,
-      Tabs
+      Tabs,
+      ImageCover
     },
     computed: {
       ...mapGetters([

@@ -28,7 +28,6 @@ class HomeController extends Controller
 
             $user = $request->user();
 
-
             return view('pages.me.home.index')
                 ->with('user', $user);
 
