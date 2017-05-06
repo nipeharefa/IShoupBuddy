@@ -44,6 +44,8 @@ Route::group(['namespace' => 'API'], function() {
 
     Route::post('vendor/activate', 'VendorController@activate');
 
+    Route::resource('review', 'ReviewController');
+
 	Route::group(['middleware' => 'auth:api'], function () {
 
         Route::resource('cart', 'CartController',
