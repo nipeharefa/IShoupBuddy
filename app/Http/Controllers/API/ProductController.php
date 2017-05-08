@@ -40,6 +40,13 @@ class ProductController extends Controller
             $product->where('category_id',$request->category_id);
         }
 
+        if ($request->vendor_id != null) {
+            $id = $request->vendor_id;
+            $product->whereHas('productvendor', function($pv) use ($id) {
+                return $pv->where('vendor_id', $id);
+            });
+        }
+
         $data = [
             "status"    =>  "OK",
             "products"  =>  ProductTransformer::transform($product->get()),
