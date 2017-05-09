@@ -72,6 +72,7 @@ mix.sass('resources/assets/sass/vendor/product/create.scss', 'css/vendor/product
 mix.sass('resources/assets/sass/vendor/product/index.scss', 'css/vendor/product')
 
 mix.js('resources/assets/js/vendor/pages/auth/login.js', 'js/vendor_login.js')
+mix.js('resources/assets/js/vendor/pages/home/home.js', 'js/vhome.js')
 mix.js('resources/assets/js/vendor/pages/product/create.js', 'js/vendor_product_create.js')
 mix.js('resources/assets/js/vendor/pages/product/index.js', 'js/vendor_product_index.js')
 

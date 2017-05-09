@@ -37,7 +37,14 @@ class ProductTransformer extends AbstractTransformer {
 
         if (Auth::guard('api')->check()) {
 
+            $user = Auth::guard('api')->user();
             $arr['liked']   =   true;
+
+            if ($user->role == 2) {
+                $arr['inTrash']             =   true;
+                $arr['product_vendor_id']   =   $product->ProductVendor()
+                                                ->where('vendor_id', $user->id)->first()->id ?? null;
+            }
         }
 
         return $arr;

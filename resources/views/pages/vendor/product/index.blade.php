@@ -10,6 +10,13 @@
 
 @section('css')
 
+    <script type="text/javascript">
+
+        window._sharedData = {
+            user: {!! $user ?? "null" !!}
+        }
+    </script>
+
     @if (env('APP_ENV') == "production")
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.min.css">
     @else

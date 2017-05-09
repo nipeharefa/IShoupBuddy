@@ -20,7 +20,8 @@ class ActiveUserTransformer extends AbstractTransformer {
             "address"       =>  $user->address,
             "phone"         =>  $user->phone,
             "saldo"         =>  $user->saldo,
-            "saldo_string"  =>  $user->saldo
+            "saldo_string"  =>  $user->saldo,
+            "role"          =>  $user->role
         ];
 
 

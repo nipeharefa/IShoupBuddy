@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Helpers\Sentimen\Stemmer;
+use App\Helpers\Sentimen\Sentimen;
 
 class ReviewController extends Controller
 {
@@ -15,11 +16,15 @@ class ReviewController extends Controller
      */
     public function index()
     {
+        $sentimen = new Sentimen;
+
         $stemmerFactory = new Stemmer;
         $stemmer  = $stemmerFactory->createStemmer();
         $sentence = 'Perekonomian Indonesia sedang dalam pertumbuhan yang membanggakan';
         $output   = $stemmer->stem($sentence);
-        return $output;
+
+        dd($sentimen->score($output));
+        // return $output;
     }
 
     /**

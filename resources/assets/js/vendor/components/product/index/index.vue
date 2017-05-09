@@ -1,49 +1,107 @@
 <template>
   <div>
+    <div>
+      <navbarApps></navbarApps>
+    </div>
     <section class="section">
       <div class="container">
         <div class="columns">
-          <div class="column is-one-quarter">
-            <vendor-sidebar></vendor-sidebar>
+          <div class="column is-one-quarter is-hidden-touch">
+            <sidebar></sidebar>
           </div>
           <div class="column">
-            <a class="is-link" href="create">Tambah Produk</a>
-            <table-product :role="'vendor'"
-              :deleteUrl="'api/product-vendor'"></table-product>
+
+            <div class="tabs">
+              <ul class="tabs-register">
+                <li @click="changeTabs(0)" :class="{'is-active': activeTabs === 0}">
+                  <a >My Produk</a>
+                </li>
+                <li @click="changeTabs(1)" :class="{'is-active': activeTabs === 1}">
+                  <a >Semua Produk</a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="tabs-content">
+                <tableProduct v-if="activeTabs === 0"
+                  :products="myProduct"
+                  :isVendor="true"
+                  :addedProduct="addedProduct"></tableProduct>
+                <tableProduct v-if="activeTabs === 1" :products="products"
+                  :addMyProductAction="true"
+                  :addedProduct="addedProduct"></tableProduct>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
     <div>
-      <footer-apps></footer-apps>
+      <footerApps></footerApps>
     </div>
   </div>
 </template>
 
+
 <script>
+  import { mapGetters, mapActions } from 'vuex'
 
-  const FooterApps = () => import('otherComponents/Footer.vue')
-  const VendorSidebar = () => import('otherComponents/Sidebars/VendorSidebar.vue')
-  const TableProduct = () => import('adminComponents/product/index/TableProduct.vue')
+  import _findIndex from 'lodash/findIndex'
 
-  import { mapActions } from 'vuex'
+  const TableProduct = () => import('global/components/Product/TableProduct.vue')
+  const Sidebar = () => import('global/components/Sidebars/VendorSidebar.vue')
+  const FooterApps = () => import('global/components/Footers/Footer.vue')
+  const NavbarApps = () => import('global/components/Navbars/VendorNavbar.vue')
+
   export default {
-    mounted() {
-      this.getProducts();
+    mounted () {
+      this.getProducts()
+      this.getMyProduct()
+    },
+    computed: {
+      ...mapGetters([
+        'products'
+      ])
+    },
+    data () {
+      return {
+        activeTabs: 0,
+        myProduct: []
+      }
     },
     components: {
+      TableProduct,
+      Sidebar,
       FooterApps,
-      VendorSidebar,
-      TableProduct
+      NavbarApps
     },
     methods: {
       ...mapActions([
         'initProducts'
       ]),
+      getMyProduct () {
+        this.$http.get('api/product?vendor_id=44').then(response => {
+          this.myProduct = response.data.products
+        }).catch(err => err)
+      },
       getProducts () {
-        this.$http.get('api/product-vendor').then(response => {
+        this.$http.get('api/product?without_filter=true').then(response => {
           this.initProducts(response.data.products)
-        }).catch(err => err);
+        }).catch(err => err)
+      },
+      changeTabs (i) {
+        this.activeTabs = i
+        return;
+      },
+      addedProduct (item) {
+        const index = _findIndex(this.myProduct, {id: item.id})
+        if (index >= 0) {
+          this.myProduct[index] = item
+          return;
+        }
+        this.myProduct.push(item)
+        return;
       }
     }
   }

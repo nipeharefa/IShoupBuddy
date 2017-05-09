@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div>
+      <navbarApps></navbarApps>
+    </div>
     <section class="section">
       <div class="container">
         <div class="columns">
@@ -17,11 +20,10 @@
 
 <script>
   const FooterApps = () => import('otherComponents/Footer.vue')
-  const NavbarApps = () => import('global/components/Navbars/MemberNavbar.vue')
+  const NavbarApps = () => import('global/components/Navbars/GuestNavbar.vue')
   const LoginForm = () => import('./LoginForm.vue')
 
   export default {
-    mounted () {},
     components: {
       NavbarApps,
       FooterApps,

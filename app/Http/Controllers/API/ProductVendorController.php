@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
-use App\ProductVendor;
+use App\Models\ProductVendor;
 use Illuminate\Http\Request;
 use App\Models\Vendor;
+use App\Models\Product;
 use App\Http\Controllers\Controller;
 use App\Helpers\Transformers\ProductVendorTransformer;
+use App\Helpers\Transformers\ProductTransformer;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProductVendorController extends Controller
 {
@@ -46,7 +49,30 @@ class ProductVendorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = [
+            "product_id"    =>  $request->productID,
+            "harga"         =>  $request->price,
+            "status"        =>  $request->status ?? 1
+        ];
+
+
+        $vendor = Vendor::find($request->user()->id);
+
+
+        $firstParam = [
+            "product_id"    =>  $request->productID
+        ];
+        $res = $vendor->ProductVendor()->updateOrCreate($firstParam, $data);
+
+        $productInstance = Product::find($request->productID);
+
+        $response = [
+            "status"    =>  "created",
+            "product"   =>  ProductTransformer::transform($productInstance),
+            "message"   =>  null
+        ];
+
+        return response()->json($response, 201);
     }
 
     /**
@@ -89,8 +115,29 @@ class ProductVendorController extends Controller
      * @param  \App\ProductVendor  $productVendor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductVendor $productVendor)
+    public function destroy($productVendor, Request $request)
     {
-        //
+        try {
+
+            $productVendor = ProductVendor::findOrFail($productVendor);
+
+            $productVendor->delete();
+
+
+        } catch (ModelNotFoundException $e) {
+
+        }
+    }
+
+    public function restore($productVendor) {
+        try {
+
+            $productVendor = ProductVendor::findOrFail($productVendor);
+
+            $productVendor->restore();
+
+        } catch (ModelNotFoundException $e) {
+
+        }
     }
 }

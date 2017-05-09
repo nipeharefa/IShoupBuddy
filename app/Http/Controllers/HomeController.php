@@ -24,14 +24,33 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        if (Auth::check()) {
+        $user = $request->user() ?? null;
 
-            $user = $request->user();
+        $js     = mix('js/home.js');
+        $css    = mix('css/guest/home.css');
 
-            return view('pages.me.home.index')
-                ->with('user', $user);
+        $view = view('pages.home.index');
 
+        if ($user) {
+            switch ($user->role) {
+                case 0:
+                    # admin
+                    $js = mix('js/ahome.js');
+                    break;
+                case 1:
+                    # Member
+                    $js     = mix('js/mhome.js');
+                    $css    = mix('css/member/home.css');
+                    break;
+                default:
+                    # Vendor
+                    $js = mix('js/vhome.js');
+                    break;
+            }
         }
-        return view('pages.guest.home');
+
+        return $view->with('user', $user)
+                    ->with('js', $js)
+                    ->with('css', $css);
     }
 }

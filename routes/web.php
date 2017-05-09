@@ -56,8 +56,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 
     Route::resource('vendor', 'VendorController',
         ['only' => ['index']]);
-
-
 });
 
 Route::group(['prefix' => 'vendor', 'namespace' => 'Vendor'], function() {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Vendor;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Helpers\Transformers\ActiveUserTransformer;
 
 class ProductController extends Controller
 {
@@ -12,9 +13,13 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('pages.vendor.product.index');
+        $user = ActiveUserTransformer::transform($request->user());
+
+
+        return view('pages.vendor.product.index')
+            ->with('user', json_encode($user));
     }
 
     /**

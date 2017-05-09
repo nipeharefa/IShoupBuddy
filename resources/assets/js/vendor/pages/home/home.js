@@ -1,13 +1,10 @@
 import Vue from 'vue'
 import VueAxios from 'lib/axios-plugin'
-import VeeValidate from 'vee-validate'
-
 Vue.use(VueAxios)
-Vue.use(VeeValidate)
+import store from 'member/store/home/'
 
-import App from 'vendor/components/auth/login/Login.vue'
-
-import store from 'guest/store/home/'
+import App from 'vendor/components/home/Home.vue'
+import { mapActions } from 'vuex'
 
 new Vue({
   store,
