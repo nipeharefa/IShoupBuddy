@@ -46,10 +46,11 @@ class ProductController extends Controller
                 return $pv->where('vendor_id', $id);
             });
         }
+        $options = [];
 
         $data = [
             "status"    =>  "OK",
-            "products"  =>  ProductTransformer::transform($product->get()),
+            "products"  =>  ProductTransformer::transform($product->get(), $options),
             "message"   =>  NULL
         ];
 

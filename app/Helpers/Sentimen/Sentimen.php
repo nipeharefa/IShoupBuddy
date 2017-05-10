@@ -113,7 +113,7 @@ class Sentimen
         }
 
         foreach ($this->classes as $class) {
-            $scores[$class] = $scores[$class] / $total_score;
+            $scores[$class] = round($scores[$class] / $total_score, 3);
         }
 
         $end = Carbon::now();

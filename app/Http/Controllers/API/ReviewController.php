@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Helpers\Sentimen\Stemmer;
 use App\Helpers\Sentimen\Sentimen;
+use Validator;
 
 class ReviewController extends Controller
 {
@@ -20,7 +21,7 @@ class ReviewController extends Controller
 
         $stemmerFactory = new Stemmer;
         $stemmer  = $stemmerFactory->createStemmer();
-        $sentence = 'Perekonomian Indonesia sedang dalam pertumbuhan yang membanggakan';
+        $sentence = 'Tidak ';
         $output   = $stemmer->stem($sentence);
 
         dd($sentimen->score($output));
@@ -45,7 +46,14 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all, [
+            'product_id'    =>  'required',
+            'vendor_id'     =>  'required'
+            'rating'        =>  'required',
+            'body'          =>  'required'
+        ]);
+
+        $validator->validate();
     }
 
     /**

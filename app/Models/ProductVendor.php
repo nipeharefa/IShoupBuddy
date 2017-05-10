@@ -20,4 +20,9 @@ class ProductVendor extends Model
     public function Vendor() {
         return $this->belongsTo(Vendor::class, 'vendor_id');
     }
+
+    public function Statistic() {
+
+        return $this->hasMany(PriceStatistic::class);
+    }
 }
