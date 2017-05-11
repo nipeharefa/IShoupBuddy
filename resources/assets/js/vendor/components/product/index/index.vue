@@ -81,7 +81,7 @@
         'initProducts'
       ]),
       getMyProduct () {
-        this.$http.get('api/product?vendor_id=44').then(response => {
+        this.$http.get('api/product?vendor_id=44&without_filter=true').then(response => {
           this.myProduct = response.data.products
         }).catch(err => err)
       },

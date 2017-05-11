@@ -47,6 +47,8 @@ class ProductController extends Controller
             $product->whereHas('productvendortrashed', function($pv) use ($id) {
                 return $pv->where('vendor_id', $id);
             });
+
+
         }
         $options = [];
 
