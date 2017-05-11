@@ -46,9 +46,9 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all, [
+        $validator = Validator::make($request->all(), [
             'product_id'    =>  'required',
-            'vendor_id'     =>  'required'
+            'vendor_id'     =>  'required',
             'rating'        =>  'required',
             'body'          =>  'required'
         ]);
