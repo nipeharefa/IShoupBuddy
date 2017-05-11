@@ -132,12 +132,24 @@ class ProductVendorController extends Controller
     public function restore($productVendor) {
         try {
 
-            $productVendor = ProductVendor::findOrFail($productVendor);
+            $productVendor = ProductVendor::withTrashed()->findOrFail($productVendor);
 
-            $productVendor->restore();
+            $result = $productVendor->restore();
+
+            $response = [
+                "status"    =>  "OK",
+                "product"   =>  $result,
+                "message"   =>  null
+            ];
+            return response()->json($response, 200);
 
         } catch (ModelNotFoundException $e) {
-
+            $response = [
+                "status"    =>  "OK",
+                "product"   =>  $e->getMessage(),
+                "message"   =>  null
+            ];
+            return response()->json($response, 400);
         }
     }
 }

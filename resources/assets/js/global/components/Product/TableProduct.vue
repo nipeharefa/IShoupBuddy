@@ -23,7 +23,7 @@
                 <i class="fa fa-pencil"></i>
               </a>
               <a>
-                <i class="fa fa-eye" @click="deleteProductVendor(item)"></i>
+                <i class="fa fa-eye" :class="{'fa-eye-slash': item.inTrash }" @click="deleteProductVendor(item)"></i>
               </a>
             </div>
           </td>
@@ -115,9 +115,18 @@
       },
       deleteProductVendor (item) {
         const data = item
-        this.$http.delete(`api/product-vendor/${data.product_vendor_id}`).then(response => {
-          const product = response.data.product
-        }).catch(err => err)
+
+        if (data.inTrash) {
+          this.$http.post(`api/product-vendor/restore/${data.product_vendor_id}`).then(response => {
+            const product = response.data.product
+          }).catch(err => err)
+        } else {
+          this.$http.delete(`api/product-vendor/${data.product_vendor_id}`).then(response => {
+            const product = response.data.product
+          }).catch(err => err)
+        }
+
+        return
       }
     }
   }

@@ -19,4 +19,8 @@ class Product extends Model
 
         return $this->hasMany(ProductVendor::class);
     }
+    public function ProductVendorTrashed() {
+
+        return $this->ProductVendor()->withTrashed();
+    }
 }

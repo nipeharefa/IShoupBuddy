@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Vendor;
+use App\Models\ProductVendor;
 use App\Helpers\Transformers\ProductTransformer;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Validator;
+use Log;
 
 class ProductController extends Controller
 {
@@ -42,7 +44,7 @@ class ProductController extends Controller
 
         if ($request->vendor_id != null) {
             $id = $request->vendor_id;
-            $product->whereHas('productvendor', function($pv) use ($id) {
+            $product->whereHas('productvendortrashed', function($pv) use ($id) {
                 return $pv->where('vendor_id', $id);
             });
         }

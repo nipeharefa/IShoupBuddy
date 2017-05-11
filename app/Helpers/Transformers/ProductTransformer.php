@@ -4,6 +4,7 @@
 namespace App\Helpers\Transformers;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Log;
 
 class ProductTransformer extends AbstractTransformer {
 
@@ -41,9 +42,11 @@ class ProductTransformer extends AbstractTransformer {
             $arr['liked']   =   true;
 
             if ($user->role == 2) {
-                $arr['inTrash']             =   true;
-                $arr['product_vendor_id']   =   $product->ProductVendor()
-                                                ->where('vendor_id', $user->id)->first()->id ?? null;
+                $productVendor = $product->ProductVendor()->withTrashed()
+                    ->where('vendor_id', $user->id)->first();
+                Log::info($product);
+                $arr['inTrash']             =   $productVendor ? $productVendor->trashed() : false;
+                $arr['product_vendor_id']   =   $productVendor->id ?? null;
             }
         }
 
