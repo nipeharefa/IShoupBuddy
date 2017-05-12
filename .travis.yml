@@ -4,9 +4,11 @@ php:
   - 7.1
 
 before_script:
+  - cp .env.travis .env
   - composer self-update
   - composer install --no-interaction
   - composer du
+  - php artisan key:generate
 
 script:
   - vendor/bin/phpunit
