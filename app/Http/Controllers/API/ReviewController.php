@@ -6,10 +6,17 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Helpers\Sentimen\Stemmer;
 use App\Helpers\Sentimen\Sentimen;
+use App\Helpers\Traits\Sentimen as SentimenTrait;
+use App\Helpers\Transformers\ReviewTransformer;
+use App\Models\ProductVendor;
+use DB;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Exception;
 use Validator;
 
 class ReviewController extends Controller
 {
+    use SentimenTrait;
     /**
      * Display a listing of the resource.
      *
@@ -54,6 +61,57 @@ class ReviewController extends Controller
         ]);
 
         $validator->validate();
+
+        $user = $request->user();
+        try {
+
+
+            $product_vendor = ProductVendor::whereVendorId($request->vendor_id)
+                ->firstOrFail();
+
+            $product_vendor_id = $product_vendor->id;
+
+
+            DB::beginTransaction();
+
+            $data =  [
+                "rating"            =>  $request->rating,
+                "body"              =>  $request->body,
+                "product_vendor_id" =>  $product_vendor_id
+            ];
+
+            $result = $user->Review()->create($data);
+
+
+            $response = [
+                "status"    =>  "OK",
+                "review"    =>  ReviewTransformer::transform($result),
+                "message"   =>  null,
+            ];
+
+            return $response;
+            DB::commit();
+
+        } catch (Exception $e) {
+
+            DB::rollback();
+
+            $errMessage = $e->getMessage();
+
+            if ($e instanceOf ModelNotFoundException) {
+
+                $errMessage = "Terjadi kesalahan, mohon periksa product_id dan vendor_id";
+            }
+
+            $errResponse = [
+                "status"    =>  "ERROR",
+                "review"    =>  null,
+                "message"   =>  $errMessage
+            ];
+            return response()->json($errResponse, 400);
+        }
+
+        return $this->score($request->body);
     }
 
     /**

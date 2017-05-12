@@ -45,4 +45,9 @@ class User extends Authenticatable
 
         return $this->hasMany(Cart::class, 'identify_id');
     }
+
+    public function Review() {
+
+        return $this->hasMany(Review::class);
+    }
 }

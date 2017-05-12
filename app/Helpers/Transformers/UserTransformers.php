@@ -4,7 +4,7 @@ namespace App\Helpers\Transformers;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserTransformer extends AbstractTransformer {
+class UserTransformers extends AbstractTransformer {
 
     public function transformModel(Model $user){
 

@@ -74,11 +74,11 @@ class Sentimen
 
     public function score($sentence) {
 
+        $start = Carbon::now();
         $tokens = $this->_getTokens($sentence);
         $total_score = 0;
         $scores = array();
 
-        $start = Carbon::now();
 
         //Loop through all of the different classes set in the $classes variable
         foreach ($this->classes as $class) {
