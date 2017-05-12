@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Auth;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ExampleTest extends TestCase
+class LoginTest extends TestCase
 {
     use DatabaseMigrations;
     /**
@@ -15,10 +15,10 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
-    public function testBasicTest()
-    {
-        $response = $this->get('/');
 
+    public function testExample()
+    {
+        $response = $this->get('/login');
         $response->assertStatus(200);
     }
 }
