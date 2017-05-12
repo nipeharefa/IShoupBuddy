@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Helpers\Transformers\VendorTransformer;
 
 class VendorController extends Controller
@@ -53,9 +53,31 @@ class VendorController extends Controller
      * @param  \App\Models\Vendor  $vendor
      * @return \Illuminate\Http\Response
      */
-    public function show(Vendor $vendor)
+    public function show($vendor)
     {
-        //
+        try {
+
+            $result = Vendor::findOrFail($vendor);
+            $response = [
+                "status"    =>  "OK",
+                "vendor"    =>  VendorTransformer::transform($result),
+                "message"   =>  null
+            ];
+
+            return response()->json($response, 200);
+
+        } catch (ModelNotFoundException $e) {
+
+
+            $response = [
+                "status"    =>  "OK",
+                "vendor"    =>  null,
+                "message"   =>  "Vendor tidak ditemukan"
+            ];
+
+            return response()->json($response, 404);
+
+        }
     }
 
     /**

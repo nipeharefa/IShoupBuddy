@@ -9,6 +9,7 @@ use App\Helpers\Sentimen\Sentimen;
 use App\Helpers\Traits\Sentimen as SentimenTrait;
 use App\Helpers\Transformers\ReviewTransformer;
 use App\Models\ProductVendor;
+use App\Models\Review;
 use DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Exception;
@@ -24,15 +25,17 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        $sentimen = new Sentimen;
+        $review = Review::orderByDesc('created_at');
 
-        $stemmerFactory = new Stemmer;
-        $stemmer  = $stemmerFactory->createStemmer();
-        $sentence = 'Tidak ';
-        $output   = $stemmer->stem($sentence);
 
-        dd($sentimen->score($output));
-        // return $output;
+
+        $response = [
+            "status"    =>  "OK",
+            "message"   =>  null,
+            "reviews"   =>  ReviewTransformer::transform($review->get())
+        ];
+
+        return $response;
     }
 
     /**
@@ -88,9 +91,8 @@ class ReviewController extends Controller
                 "review"    =>  ReviewTransformer::transform($result),
                 "message"   =>  null,
             ];
-
-            return $response;
             DB::commit();
+            return $response;
 
         } catch (Exception $e) {
 
