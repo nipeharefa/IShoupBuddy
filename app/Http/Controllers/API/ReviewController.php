@@ -14,6 +14,8 @@ use DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Exception;
 use Validator;
+use Illuminate\Contracts\Validation\Validator as ValidatorContracts;
+
 
 class ReviewController extends Controller
 {
@@ -23,11 +25,14 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $review = Review::orderByDesc('created_at');
 
+        if ($request->user_id) {
 
+            $review->whereUserId($request->user_id);
+        }
 
         $response = [
             "status"    =>  "OK",
