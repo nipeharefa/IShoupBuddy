@@ -19,8 +19,8 @@ before_script:
   - composer install --no-interaction
   - composer du
   - php artisan key:generate
-  - npm install
-  - npm run prod
+  - yarn
+  - yarn run prod
 
 cache:
   yarn: true
