@@ -55,7 +55,10 @@ class ReviewController extends Controller
             }
 
             if ($request->vendor_id) {
-                # code...
+                $id = $request->vendor_id;
+                $review->whereHas('productvendor', function($query) use ($id){
+                    return $query->whereVendortId($id);
+                });
             }
 
             $review = $review->get();
