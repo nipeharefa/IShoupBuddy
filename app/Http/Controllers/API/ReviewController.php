@@ -119,12 +119,10 @@ class ReviewController extends Controller
         $user = $request->user();
         try {
 
-
             $product_vendor = ProductVendor::whereVendorId($request->vendor_id)
                 ->firstOrFail();
 
             $product_vendor_id = $product_vendor->id;
-
 
             DB::beginTransaction();
 
@@ -198,7 +196,48 @@ class ReviewController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $this->validator($request->all());
+
+        $user = $request->user();
+
+        try {
+
+            $review = $user->Review()->findOrFail($id);
+
+            $product_vendor = ProductVendor::whereVendorId($request->vendor_id)
+                ->firstOrFail();
+
+            $product_vendor_id = $product_vendor->id;
+
+            DB::beginTransaction();
+            $data =  [
+                "rating"            =>  $request->rating,
+                "body"              =>  $request->body,
+                "product_vendor_id" =>  $product_vendor_id
+            ];
+
+            $review->update($data);
+
+            $response = [
+                "status"    =>  "OK",
+                "review"    =>  ReviewTransformer::transform($review),
+                "message"   =>  null,
+            ];
+            DB::commit();
+            return $response;
+
+        } catch (Exception $e) {
+            DB::rollback();
+
+            $err = [
+                "status"    =>  "ERROR",
+                "message"   =>  $e->getMessage(),
+                "review"    =>  null
+            ];
+
+            return response()->json($err, 400);
+        }
     }
 
     /**
@@ -210,5 +249,17 @@ class ReviewController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    protected function validator(array $data) {
+
+        $validator = Validator::make($data, [
+            'product_id'    =>  'required',
+            'vendor_id'     =>  'required',
+            'rating'        =>  'required',
+            'body'          =>  'required'
+        ]);
+
+        return $validator->validate();
     }
 }

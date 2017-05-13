@@ -28,13 +28,7 @@ class ReviewTransformer extends AbstractTransformer {
     private function getScore($sentence) {
 
         $arr = $this->score($sentence);
-
         $collection = collect($arr)->only(['pos', 'neg', 'neu'])->toArray();
-
-        $result = [
-            "detail"    =>  $collection,
-            "category"   =>  key($collection)
-        ];
-        return $result;
+        return $collection;
     }
 }

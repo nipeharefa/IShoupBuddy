@@ -68,7 +68,7 @@ Route::group(['namespace' => 'API'], function() {
             ['only' =>  ['index', 'store', 'destroy']]);
 
         Route::resource('review', 'ReviewController',
-            ['only' =>  ['store']]);
+            ['only' =>  ['store', 'update']]);
 
         Route::post('product-vendor/restore/{id}', 'ProductVendorController@restore');
 
