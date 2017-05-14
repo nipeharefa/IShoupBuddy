@@ -56,7 +56,9 @@ class UserController extends Controller implements DefaultAPIResponse
                 'name'          =>  'required',
                 'gender'        =>  'required|boolean',
                 'picture_url'   =>  'required',
-                'address'       =>  'required'
+                'address'       =>  'required',
+                "langitude"     =>  "nullable",
+                "langitude"     =>  "nullable",
             ]);
 
         $validator->validate();
@@ -65,7 +67,9 @@ class UserController extends Controller implements DefaultAPIResponse
             "name"          =>  $request->name,
             "picture_url"   =>  $request->picture_url,
             "gender"        =>  $request->gender,
-            "address"       =>  $request->address
+            "address"       =>  $request->address,
+            "langitude"     =>  $request->langitude ?? null,
+            "longitude"     =>  $request->longitude ?? null
         ];
 
 
@@ -77,6 +81,10 @@ class UserController extends Controller implements DefaultAPIResponse
 
             $dataUpdate['picture_url'] = $filename;
         }
+
+        $dataUpdate = collect($dataUpdate)->filter(function($item){
+            return ($item != null || $item != '');
+        })->toArray();
 
 
         $update = $user->update($dataUpdate);

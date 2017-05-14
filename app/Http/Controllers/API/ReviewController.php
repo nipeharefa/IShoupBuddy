@@ -60,7 +60,6 @@ class ReviewController extends Controller
                     return $query->whereVendortId($id);
                 });
             }
-
             $review = $review->get();
             $total_reviews = $review->count();
 

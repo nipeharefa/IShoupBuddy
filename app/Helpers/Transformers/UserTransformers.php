@@ -16,4 +16,8 @@ class UserTransformers extends AbstractTransformer {
 
         return $arr;
     }
+
+    protected function generateUserPictureLinks($url) {
+
+    }
 }

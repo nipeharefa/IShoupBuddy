@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Helpers\Transformers\ActiveUserTransformer;
 
 class MeController extends Controller
 {
@@ -14,7 +15,9 @@ class MeController extends Controller
      */
     public function index(Request $request)
     {
-        return $request->user();
+        $user = $request->user();
+
+        return ActiveUserTransformer::transform($user);
     }
 
     /**
