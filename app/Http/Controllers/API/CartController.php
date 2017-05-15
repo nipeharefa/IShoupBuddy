@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
 use App\Helpers\Transformers\CartTransformer;
+use App\Models\ProductVendor;
+use Exception;
 
 class CartController extends Controller
 {
@@ -51,15 +53,46 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-                'product_id'    =>  'required'
-            ]);
-
-        $validator->validate();
+        Validator::make($request->all(), [
+                'product_id'    =>  'required',
+                'vendor_id'     =>  'required',
+                'quantity'      =>  'nullable|numeric'
+            ])->validate();
 
         $user = $request->user();
+        try {
 
-        return $user->Cart()->create(['product_vendor_id' => $request->product_id]);
+            $product_vendor = ProductVendor::whereProductId($request->product_id)
+                ->whereVendorId($request->vendor_id)->firstOrFail();
+
+            $data = [
+                "product_vendor_id"   =>  $product_vendor->id,
+                "quantity"  =>  $request->quantity ?? 1
+            ];
+
+            $cart = $user->Cart()->create($data);
+
+
+            $response = [
+                "status"    =>  "OK",
+                "cart"      =>  CartTransformer::transform($cart),
+                "message"   =>  "Cart added"
+            ];
+
+            return response()->json($response, 201);
+
+        } catch (Exception $e) {
+
+            $err = [
+                "status"    =>  "ERROR",
+                "cart"      =>  null,
+                "message"  =>   "Cek input"
+            ];
+
+            return response()->json($err, 400);
+        }
+
+        // return $user->Cart()->create(['product_vendor_id' => $request->product_id]);
     }
 
     /**

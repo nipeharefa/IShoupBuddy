@@ -12,7 +12,8 @@ class CartTransformer extends AbstractTransformer {
         $arr = [
             "id"            =>  $cart->id,
             "items"         =>  ProductVendorTransformer::transform($cart->ProductVendor),
-            "total"         =>  $cart->quantity * $cart->ProductVendor->harga
+            "total"         =>  $cart->quantity * $cart->ProductVendor->harga,
+            "quantity"      =>  $cart->quantity
         ];
 
         return $arr;
