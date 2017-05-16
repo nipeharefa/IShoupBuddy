@@ -12,14 +12,6 @@ class Review extends Model
 
     protected $fillable = ['rating', 'body', 'product_vendor_id'];
 
-    // public function posts()
-    // {
-    //     return $this->hasManyThrough(
-    //         'App\Post', 'App\User',
-    //         'country_id', 'user_id', 'id'
-    //     );
-    // }
-
     public function ProductVendor()
     {
         return $this->belongsTo(ProductVendor::class);

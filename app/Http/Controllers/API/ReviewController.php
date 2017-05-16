@@ -11,6 +11,7 @@ use App\Helpers\Traits\Sentimen as SentimenTrait;
 use App\Helpers\Transformers\ReviewTransformer;
 use App\Models\ProductVendor;
 use App\Models\Review;
+use Auth;
 use DB;
 use Illuminate\Contracts\Validation\Validator as ValidatorContracts;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -31,9 +32,13 @@ class ReviewController extends Controller
 
         $trustedParameters = ['user_id', 'vendor_id', 'product_id'];
 
+        $user = Auth::guard('api')->user();
+
         try {
 
             $checkParameter = collect($request->only($trustedParameters))->filter()->count();
+
+            $youReview = new Review;
 
             if (!$checkParameter) {
                 throw new GetReviewException("Error Processing Request", 1);
@@ -43,6 +48,25 @@ class ReviewController extends Controller
             if ($request->user_id) {
 
                 $review->whereUserId($request->user_id);
+            } else {
+
+                if ($user && $request->user_id != $user->id) {
+
+                    $review->whereUserId('!=', $user->id);
+
+                    $id = $user->id;
+                    $product_id = $request->product_id ?? null;
+
+                    $youReview = Review::whereUserId($id);
+
+                    if ($product_id) {
+                        $youReview->whereHas('productvendor', function($item) use ($product_id) {
+                            return $item->where('product_id', $product_id);
+                        });
+                    }
+
+                    $youReview = $youReview->get();
+                }
             }
 
 
@@ -60,15 +84,28 @@ class ReviewController extends Controller
                     return $query->whereVendortId($id);
                 });
             }
+
             $review = $review->get();
             $total_reviews = $review->count();
+
+            $reviewTransform = collect(ReviewTransformer::transform($review));
+
+            switch ($request->groupBy) {
+                case 'product':
+                    // dd($reviewTransform->groupBy('product.id'));
+                    $reviewTransform = $reviewTransform->groupBy('product.id');
+                    break;
+                default:
+                    # code...
+                    break;
+            }
 
             $response = [
                 "status"        =>  "OK",
                 "message"       =>  null,
-                "reviews"       =>  ReviewTransformer::transform($review),
+                "reviews"       =>  $reviewTransform,
                 "total_reviews" =>  $total_reviews,
-                "youReview"     =>  new \stdClass()
+                "youReview"     =>  ReviewTransformer::transform($youReview)
             ];
 
             return response()->json($response, 200);
@@ -85,6 +122,7 @@ class ReviewController extends Controller
 
                 return response()->json($err, 400);
             }
+            return $e->getMessage();
         }
     }
 
