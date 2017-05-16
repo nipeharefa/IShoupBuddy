@@ -12,11 +12,7 @@ class ProductVendorTransformer extends AbstractTransformer {
         $arr = [
             "id"                =>  $productV->id,
             "name"              =>  $productV->Product->name,
-            "picture_url"       =>  [
-                "small"             =>  url('images/small', $productV->Product->picture_url, $secure),
-                "medium"            =>  url('images/medium', $productV->Product->picture_url, $secure),
-                "large"             =>  url('images/large', $productV->Product->picture_url, $secure)
-            ],
+            "picture_url"       =>  $this->generateUserPictureLinks($productV->Product->picture_url),
             "price"             =>  $productV->harga,
             "price_string"      =>  $productV->harga,
             "barcode"           =>  $productV->Product->barcode,

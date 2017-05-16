@@ -48,6 +48,21 @@ class AbstractTransformer
         return [];
     }
 
+    protected function generateUserPictureLinks($filename) {
+
+        $secure = $this->getProduction();
+
+        if ($filename) {
+            return [
+                "small"     =>  url('/image/small', $filename, $secure),
+                "medium"    =>  url('/image/medium', $filename, $secure),
+                "large"     =>  url('/image/large', $filename, $secure)
+            ];
+        }
+
+        return null;
+    }
+
     /**
      * Convert ballace to IDR Format
      * Original Code: https://github.com/yogirzlsinatrya/terbilang/blob/master/src/Yogirzlsinatrya/Terbilang/Terbilang.php
