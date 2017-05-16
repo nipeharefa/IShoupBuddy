@@ -53,7 +53,7 @@ Route::group(['namespace' => 'API'], function() {
 	Route::group(['middleware' => 'auth:api'], function () {
 
         Route::resource('cart', 'CartController',
-            ['only' =>  ['index', 'store']]);
+            ['only' =>  ['index', 'store', 'update', 'destroy']]);
 
 	    Route::resource('user', 'UserController',
             ['only' => ['index', 'store']]);

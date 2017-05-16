@@ -8,6 +8,7 @@ use Validator;
 use App\Helpers\Transformers\CartTransformer;
 use App\Models\ProductVendor;
 use Exception;
+use DB;
 
 class CartController extends Controller
 {
@@ -62,6 +63,8 @@ class CartController extends Controller
         $user = $request->user();
         try {
 
+            DB::beginTransaction();
+
             $product_vendor = ProductVendor::whereProductId($request->product_id)
                 ->whereVendorId($request->vendor_id)->firstOrFail();
 
@@ -72,6 +75,7 @@ class CartController extends Controller
 
             $cart = $user->Cart()->create($data);
 
+            DB::commit();
 
             $response = [
                 "status"    =>  "OK",
@@ -82,6 +86,8 @@ class CartController extends Controller
             return response()->json($response, 201);
 
         } catch (Exception $e) {
+
+            DB::rollback();
 
             $err = [
                 "status"    =>  "ERROR",
@@ -126,7 +132,44 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $user = $request->user();
+
+        try {
+            DB::beginTransaction();
+
+            Validator::make($request->all(), [
+                'quantity'      =>  'nullable|numeric'
+            ])->validate();
+
+
+            $data = collect($request->only('quantity'))->filter()->toArray();
+
+            $cart = $user->Cart()->findOrFail($id);
+            $cart->update($data);
+
+            DB::commit();
+
+            $response = [
+                "status"    =>  "OK",
+                "cart"      =>  CartTransformer::transform($cart),
+                "messaage"  =>  "updated"
+            ];
+
+            return response()->json($response);
+
+        } catch (Exception $e) {
+
+            DB::rollback();
+
+            $err = [
+                "status"    =>  "ERROR",
+                "message"   =>  $e->getMessage(),
+                "cart"      =>  null
+            ];
+
+            return response()->json($err, 400);
+        }
     }
 
     /**
@@ -135,8 +178,33 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        $user = $request->user();
+
+        try {
+
+            DB::beginTransaction();
+
+            $user->Cart()->findOrFail($id)->delete();
+
+            $response = [
+                "status"    =>  "OK",
+                "message"   =>  "Deleted"
+            ];
+            DB::commit();
+
+            return response()->json($response, 204);
+
+        } catch (Exception $e) {
+            DB::rollback();
+
+            $response = [
+                "status"    =>  "ERROR",
+                "message"   =>  "Something wrong"
+            ];
+
+            return response()->json($response, 400);
+        }
     }
 }
