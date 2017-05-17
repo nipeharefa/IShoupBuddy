@@ -65,7 +65,7 @@ class ReviewController extends Controller
                         });
                     }
 
-                    $youReview = $youReview->get();
+                    $youReview = $youReview->first();
                 }
             }
 
@@ -169,7 +169,7 @@ class ReviewController extends Controller
                 "product_vendor_id" =>  $product_vendor_id
             ];
 
-            $result = $user->Review()->create($data);
+            $result = $user->Review()->updateOrCreate(['product_vendor_id' => $product_vendor_id], $data);
 
 
             $response = [

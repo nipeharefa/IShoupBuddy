@@ -19,7 +19,8 @@ class ReviewTransformer extends AbstractTransformer {
             "sentimen"  =>  $this->getScore($review->body),
             "user"      =>  UserTransformers::transform($review->User),
             "product"   =>  ProductTransformer::transform($review->Product),
-            "vendor"    =>  VendorTransformer::transform($review->Vendor)
+            "vendor"    =>  VendorTransformer::transform($review->Vendor),
+            "date"      =>  $review->created_at->toW3cString()
         ];
 
         return $arr;
