@@ -283,9 +283,37 @@ class ReviewController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        $user = $request->user();
+
+        try {
+
+            DB::beginTransaction();
+
+            $user->Review()->findOrFail($id)->delete();
+
+            DB::commit();
+
+            $response = [
+                "status"    =>  "OK",
+                "message"   =>  "deleted"
+            ];
+
+            return response()->json($response, 204);
+
+        } catch (Exception $e) {
+
+            DB::rollback();
+
+            $err = [
+                "status"   =>  "ERROR",
+                "message"   =>  "Something Wrong"
+            ];
+
+            return response()->json($err, 400);
+        }
+
     }
 
     protected function validator(array $data) {

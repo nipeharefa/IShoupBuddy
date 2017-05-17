@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Models\User;
+use App\Models\Vendor;
 
 class MemberTest extends TestCase
 {
@@ -19,6 +20,7 @@ class MemberTest extends TestCase
     public function testExample()
     {
         $user = factory(User::class)->create();
+        factory(Vendor::class)->create();
 
         $a = $this->actingAs($user, 'api');
         $response = $this->get("api/me");
