@@ -27,7 +27,7 @@ class CartController extends Controller
             "carts"     =>  [
                 "items" =>  CartTransformer::transform($user->Cart),
                 "total" =>  $user->Cart->sum(function ($product) {
-                    return $product->quantity * $product->ProductVendor->harga;
+                    return $product->harga;
                 }),
                 "total_strings" =>  ""
             ]
