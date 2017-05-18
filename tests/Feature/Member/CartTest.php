@@ -52,7 +52,5 @@ class CartTest extends TestCase
         ];
 
         $response = $this->json('POST', '/api/cart', $data);
-
-        dd($response);
     }
 }
