@@ -52,7 +52,7 @@ class ReviewController extends Controller
 
                 if ($user && $request->user_id != $user->id) {
 
-                    $review->whereUserId('!=', $user->id);
+                    $review->where('user_id', '!=', $user->id);
 
                     $id = $user->id;
                     $product_id = $request->product_id ?? null;
