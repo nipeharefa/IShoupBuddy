@@ -70,7 +70,8 @@ class CartController extends Controller
 
             $data = [
                 "product_vendor_id"   =>  $product_vendor->id,
-                "quantity"  =>  $request->quantity ?? 1
+                "quantity"  =>  $request->quantity ?? 1,
+                "harga"     =>  $request->quantity * $product_vendor->harga
             ];
 
             $cart = $user->Cart()->create($data);
@@ -92,7 +93,7 @@ class CartController extends Controller
             $err = [
                 "status"    =>  "ERROR",
                 "cart"      =>  null,
-                "message"  =>   "Cek input"
+                "message"  =>   $e->getMessage()
             ];
 
             return response()->json($err, 400);
