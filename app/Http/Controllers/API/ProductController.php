@@ -165,7 +165,6 @@ class ProductController extends Controller
 
             $product = Product::findOrFail($id);
 
-
             $response = [
                 "status"    =>  "OK",
                 "product"   =>  ProductTransformer::transform($product),

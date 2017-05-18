@@ -23,4 +23,9 @@ class Product extends Model
 
         return $this->ProductVendor()->withTrashed();
     }
+
+    public function Review() {
+
+        return $this->hasManyThrough(Review::class, ProductVendor::class);
+    }
 }
