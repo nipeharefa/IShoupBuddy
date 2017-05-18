@@ -100,11 +100,18 @@ class ReviewController extends Controller
                     break;
             }
 
+            $summaryAvg = [
+                "pos"   => collect($reviewTransform)->avg('sentimen.pos'),
+                "neg"   =>  collect($reviewTransform)->avg('sentimen.neg'),
+                "neu"   =>  collect($reviewTransform)->avg('sentimen.neu')
+            ];
+
             $response = [
                 "status"        =>  "OK",
                 "message"       =>  null,
                 "reviews"       =>  $reviewTransform,
                 "total_reviews" =>  $total_reviews,
+                "summary"       =>  array_search(max($summaryAvg),$summaryAvg),
                 "youReview"     =>  $youReview ? ReviewTransformer::transform($youReview) : new \stdClass
             ];
 
