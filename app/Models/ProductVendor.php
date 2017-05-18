@@ -25,4 +25,8 @@ class ProductVendor extends Model
 
         return $this->hasMany(PriceStatistic::class);
     }
+
+    public function Reviews() {
+        return $this->hasMany(Review::class);
+    }
 }

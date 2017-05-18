@@ -16,7 +16,7 @@ use App\Models\Review;
 
 class ReviewTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, DatabaseTransactions;
     /**
      * A basic test example.
      *

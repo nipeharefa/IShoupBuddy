@@ -38,7 +38,7 @@ class ReviewController extends Controller
 
             $checkParameter = collect($request->only($trustedParameters))->filter()->count();
 
-            $youReview = new Review;
+            $youReview = null;
 
             if (!$checkParameter) {
                 throw new GetReviewException("Error Processing Request", 1);
@@ -105,7 +105,7 @@ class ReviewController extends Controller
                 "message"       =>  null,
                 "reviews"       =>  $reviewTransform,
                 "total_reviews" =>  $total_reviews,
-                "youReview"     =>  ReviewTransformer::transform($youReview)
+                "youReview"     =>  $youReview ? ReviewTransformer::transform($youReview) : new \stdClass
             ];
 
             return response()->json($response, 200);
@@ -248,6 +248,7 @@ class ReviewController extends Controller
             $product_vendor_id = $product_vendor->id;
 
             DB::beginTransaction();
+
             $data =  [
                 "rating"            =>  $request->rating,
                 "body"              =>  $request->body,
@@ -261,7 +262,9 @@ class ReviewController extends Controller
                 "review"    =>  ReviewTransformer::transform($review),
                 "message"   =>  null,
             ];
+
             DB::commit();
+
             return $response;
 
         } catch (Exception $e) {
