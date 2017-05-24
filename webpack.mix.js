@@ -14,9 +14,12 @@ mix.js('resources/assets/js/guest/pages/register.js', 'js/register.js')
 mix.js('resources/assets/js/guest/pages/search_result.js', 'js/search_result.js')
 
 
-// Member
+// Member JS
 
 mix.js('resources/assets/js/member/pages/home.js', 'js/mhome.js')
+mix.js('resources/assets/js/member/pages/product-detail.js', 'js/mproduct-detail.js')
+
+// Member SASS
 mix.sass('resources/assets/sass/pages/member/home.scss', 'css/member/home.css')
 
 mix.extract(['vue', 'axios', 'vee-validate'])
