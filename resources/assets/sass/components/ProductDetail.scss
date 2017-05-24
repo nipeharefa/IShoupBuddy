@@ -1,0 +1,91 @@
+.left-information {
+  display: flex;
+  width: inherit;
+
+  .container-information {
+    display: flex;
+    width: 100%;
+  }
+  flex-direction: column;
+}
+.product-default-section {
+  @include desktop() {
+    background-color: $white-ter !important;
+  }
+}
+.product-detail-container {
+  @include desktop() {
+    background-color: $white !important;
+  }
+
+  .product-name {
+    font-weight: $weight-bold;
+  }
+
+  div.rating {
+    p {
+      font-size: $size-7;
+    }
+  }
+
+  hr {
+    background-color: $white-ter;
+  }
+
+  .product-price {
+    font-size: $size-5;
+    font-weight: $weight-bold;
+    color: $grey-dark;
+  }
+  .btn-cart {
+    i {
+      color: $white;
+    }
+  }
+
+  .stepper {
+    display: flex;
+    flex-direction: row;
+    button {
+      font-weight: $weight-semibold;
+      color: $grey;
+      border: 0;
+      background-color: $grey-lighter;
+    }
+    input {
+      display: flex;
+      width: 6rem !important;
+    }
+  }
+
+  table.table {
+    margin-top: 1rem;
+    thead {
+      background-color: $white-bis;
+    }
+    td {
+      border-width: 0 0 1px;
+      border-color: $white-ter;
+      font-size: $size-7;
+
+      &.vendor-name {
+        font-weight: $weight-semibold;
+      }
+
+      .to-cart {
+        // background-color: darken($red, 20%);
+        padding: 5px 5px;
+        color: $red;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+span.review-body {
+  font-size: 0.8rem;
+}
+p.no-review {
+  font-weight: $weight-light;
+  color: $grey-light;
+}

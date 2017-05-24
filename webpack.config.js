@@ -230,7 +230,10 @@ module.exports.resolve = {
         otherComponents: path.resolve(__dirname, 'resources/assets/js/components'),
         lib: path.resolve(__dirname, 'resources/assets/js/lib'),
         designHelper: path.resolve(__dirname, 'resources/assets/sass/core/helpers'),
+        sassBase: path.resolve(__dirname, 'resources/assets/sass/base'),
+        sassComponents: path.resolve(__dirname, 'resources/assets/sass/components'),
         'globalVuexConstant$': path.resolve(__dirname, 'resources/assets/js/constant.js'),
+
         // Globaal Components, Store
         'mutationsStore$': path.resolve(__dirname, 'resources/assets/js/global/store/mutations.js'),
         'actionsStore$': path.resolve(__dirname, 'resources/assets/js/global/store/actions.js'),

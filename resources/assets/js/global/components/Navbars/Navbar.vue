@@ -1,18 +1,29 @@
 <template>
-  <nav  :class="[navClass,{'is-active': isActive }]">
-    <div :class="navClassC">
-      <hamburger></hamburger>
-      <logo></logo>
-      <searchBox></searchBox>
-      <slot name="right-icon"></slot>
-      <slot name="desktop-nav"></slot>
-      <rightMenuItem></rightMenuItem>
+  <div>
+    <div class="mosqito" v-if="!activeUser">
+      <div class="container">
+        <ul>
+          <li><a href="">Download Aplikasi</a></li>
+          <li><a href="/login">Login</a></li>
+          <li><a href="/register">Daftar</a></li>
+        </ul>
+      </div>
     </div>
+    <nav  :class="[navClass,{'is-active': isActive }]">
+      <div :class="navClassC">
+        <hamburger></hamburger>
+        <logo></logo>
+        <searchBox></searchBox>
+        <slot name="right-icon"></slot>
+        <slot name="desktop-nav"></slot>
+        <rightMenuItem></rightMenuItem>
+      </div>
 
-    <slot name="search"></slot>
-    <slot name="mobile-left-drawer"></slot>
+      <slot name="search"></slot>
+      <slot name="mobile-left-drawer"></slot>
 
-  </nav>
+    </nav>
+  </div>
 </template>
 
 
@@ -41,7 +52,8 @@
     },
     computed: {
       ...mapGetters([
-        'isActive'
+        'isActive',
+        'activeUser'
       ])
     }
   }

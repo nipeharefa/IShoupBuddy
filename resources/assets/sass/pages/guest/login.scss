@@ -19,4 +19,11 @@
 	p, a {
 		text-align: center;
 	}
+  p {
+    font-weight: $weight-light;
+  }
+  a {
+    font-size: $size-7 !important;
+    font-weight: $weight-semibold;
+  }
 }

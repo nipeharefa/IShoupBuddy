@@ -3,7 +3,7 @@
     <navbar slot="navbar"></navbar>
     <footer-apps slot="footer"></footer-apps>
 
-    <div slot="slot-touch" class="columns is-hidden-desktop" v-if="product">
+    <div slot="slot-touch" class="columns is-hidden-desktop product-detail-container" v-if="product">
       <div class="column">
         <div>
           <imageCover></imageCover>
@@ -17,6 +17,63 @@
           <tabs></tabs>
         </div>
       </div>
+    </div>
+    <div slot="slot-desktop" class="columns is-hidden-touch product-detail-container" v-if="product">
+      <div class="column is-three-quarters left-information">
+        <div class="container-information">
+          <div class="column is-4">
+            <div>
+              <imageCover></imageCover>
+            </div>
+          </div>
+
+          <div class="column">
+            <div>
+              <span class="product-name">{{ product.name }}</span>
+              <ratings></ratings>
+              <hr>
+            </div>
+            <div>
+              <span class="product-price">{{ product.minimum_price_string }}</span>
+            </div>
+            <div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <td>Nama Vendor</td>
+                    <td>Nama Produk</td>
+                    <td>Harga</td>
+                    <td></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="item in product.vendors">
+                    <td class="vendor-name">{{ item.vendor.name }}</td>
+                    <td>{{ item.vendor.name }}</td>
+                    <td>{{ item.price_string }}</td>
+                    <td>
+                      <span class="to-cart" title="Tambahkan ke keranjang belanja">
+                        <i class="fa fa-shopping-cart"></i>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+        <div>
+          <tabs></tabs>
+        </div>
+
+      </div>
+
+      <div class="column">
+        <p>penjual</p>
+      </div>
+
     </div>
   </detailProduct>
 </template>

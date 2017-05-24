@@ -1,0 +1,42 @@
+.product-card {
+
+  &:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  }
+}
+
+div.product-media {
+  max-height: 13.75rem;
+  display: flex;
+
+  figure {
+    display: flex;
+    @include tablet() {
+      width: 100% !important;
+
+      object-fit: fill;
+      img {
+      }
+    }
+  }
+}
+
+div.product-description {
+  padding: 12px 10px 8px;
+
+  div.product-name {
+
+    min-height: 2.5rem;
+    h3 {
+      font-size: $size-7;
+      font-weight: $weight-semibold;
+    }
+  }
+  div.harga {
+
+    span {
+      font-size: $size-7;
+      font-weight: $weight-semibold;
+    }
+  }
+}

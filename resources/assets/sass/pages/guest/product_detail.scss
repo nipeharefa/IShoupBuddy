@@ -1,6 +1,7 @@
 @import "node_modules/bulma/bulma";
-@import "../core/_breadcrumb.sass";
+@import "~sassBase/_breadcrumb.sass";
 @import "./_partials/navbar";
+@import "~sassComponents/ProductDetail";
 
 body {
 	background: #f5f5f5 !important
@@ -143,8 +144,9 @@ canvas#line-chart {
 	width: 100% !important;
 
 	@include desktop() {
-		width: 80% !important;
-		height: 80% !important;
+		// width: 80% !important;
+		// height: 80% !important;
+    height: 20rem !important;
 	}
 }
 .rating-text {

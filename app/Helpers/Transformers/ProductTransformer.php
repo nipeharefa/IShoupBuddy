@@ -31,10 +31,15 @@ class ProductTransformer extends AbstractTransformer {
             "total_rating"  =>  $product->Review()->count(),
             "avg_rating"    =>  $product->Review()->avg('rating'),
             "minimum_price" =>  $product->ProductVendor()->min('harga'),
+            "minimum_price_string" =>  $this->formatRupiah($product->ProductVendor()->min('harga')),
             "minumumPrice"  =>  $product->ProductVendor()->min('harga'),
             "liked"         =>  false,
             "recentReview"  =>  []
         ];
+
+        if ($this->isRelationshipLoaded($product, 'Review')) {
+            $arr['review'] = $product->Review == null ? ReviewTransformer::transform($product->Review) : null;
+        }
 
 
         if (Auth::guard('api')->check()) {

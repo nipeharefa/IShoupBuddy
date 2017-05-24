@@ -1,0 +1,40 @@
+.nusa {
+
+  &.swiper-slide {
+    @include touch() {
+      width: calc(100% / 1) !important;
+    };
+    @include widescreen() {
+      width: calc(100% / 4) !important;
+    };
+
+    @include desktop() {
+      width: calc(100% / 5) !important;
+    };
+  }
+
+  @include touch() {
+    width: calc(100% / 2) !important;
+    padding: 0 5px !important;
+  };
+
+  @include widescreen() {
+    width: calc(100% / 4) !important;
+  };
+
+  @include desktop() {
+    width: calc(100% / 5) !important;
+  };
+
+  width: calc(100% / 1);
+
+  .card {
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+
+    @include touch() {
+      margin-right: 0rem;
+    }
+    margin-right: 1rem;
+  }
+}

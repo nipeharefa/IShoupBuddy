@@ -27,6 +27,7 @@
     created () {
       this.getProducts()
       this.getPromo()
+      this.initActiveUser(window._sharedData.user)
     },
     components: {
       Navbar,

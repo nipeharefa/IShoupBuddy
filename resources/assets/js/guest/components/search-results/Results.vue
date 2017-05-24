@@ -1,7 +1,7 @@
 <template>
   <div class="wrapping">
     <div class="nusa" v-for="item in products">
-      <a href="/product/1" class="alinkto">
+      <a :href="`/product/${item.id}`" class="alinkto">
         <product-card :product="item"></product-card>
       </a>
     </div>
@@ -10,7 +10,7 @@
 
 
 <script>
-  import ProductCard from 'otherComponents/ProductCard.vue'
+  const ProductCard = () => import('global/components/Others/ProductCard.vue')
   export default {
     props: [
       'products'

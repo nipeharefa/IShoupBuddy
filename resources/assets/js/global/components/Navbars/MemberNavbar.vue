@@ -1,8 +1,8 @@
 <template>
-  <navbar>
+  <navbar :navClass="'nav nav-model-classic'" :navClassC="'container wrapper-new-nav'">
     <hamburger></hamburger>
     <logo></logo>
-    <div slot="right-icon" class="icon-right-wrapper">
+    <div slot="right-icon" class="icon-right-wrapper is-hidden-desktop">
       <a @click="setSearchActive(true)">
         <i class="fa fa-search"></i>
       </a>

@@ -3,10 +3,13 @@
       <a class="nav-item is-tab" href="/cart">
         <i class="fa fa-shopping-cart"></i>
       </a>
-      <a class="nav-item is-tab" href="/login" v-if="guest">Login</a>
+      <a class="nav-item" href="/me">
+        <i class="fa fa-user" aria-hidden="true"></i>
+      </a>
+      <!-- <a class="nav-item is-tab" href="/login" v-if="guest">Login</a>
       <a class="nav-item is-tab" href="/register" v-if="guest">
         <span class="register-button">Register</span>
-      </a>
+      </a> -->
   </div>
 </template>
 

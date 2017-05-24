@@ -15,6 +15,10 @@ use Log;
 
 class ProductController extends Controller
 {
+    function __construct(Product $product)
+    {
+        $this->product = $product;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -47,9 +51,17 @@ class ProductController extends Controller
             $product->whereHas('productvendortrashed', function($pv) use ($id) {
                 return $pv->where('vendor_id', $id);
             });
-
-
         }
+
+        if ($request->query('with')) {
+
+            $with = explode(",", $request->query('with'));
+
+            return $product->with(['review'])->get();
+
+            return 1;
+        }
+
         $options = [];
 
         $data = [
@@ -155,19 +167,43 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id, Request $request)
+    public function show(Product $product, Request $request)
     {
         if ($request->barcode) {
             # code...
         }
 
+        // $product = Product::with('Review')->find($product)->first();
+
         try {
 
-            $product = Product::findOrFail($id);
+            if ($request->query('with')) {
+
+                $with = explode(",", $request->query('with'));
+
+                foreach ($with as $key => $value) {
+
+                    switch ($value) {
+                        case 'review':
+                            $this->product = $this->product->with('Review');
+                            break;
+
+                        default:
+                            # code...
+                            break;
+                    }
+                }
+
+                // // $this->product->with('Review')->find($product)->first();
+                // $p = $this->product->find($product)->first();
+                // dd($p->relationLoaded('Review'));
+            }
+
+            $pro = $this->product->find($product)->first();
 
             $response = [
                 "status"    =>  "OK",
-                "product"   =>  ProductTransformer::transform($product),
+                "product"   =>  ProductTransformer::transform($pro),
                 "message"   =>  null
             ];
 

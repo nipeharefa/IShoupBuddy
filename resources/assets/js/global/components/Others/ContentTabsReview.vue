@@ -1,6 +1,9 @@
 <template>
   <div>
-  	<article class="media" v-for="review in product.recentReview">
+    <article v-if="!product.review">
+      <p class="no-review has-text-centered">Belum ada Review</p>
+    </article>
+  	<article class="media" v-for="review in product.review">
     <figure class="media-left">
       <p class="image is-64x64">
         <img src="https://source.unsplash.com/category/nature/64x64">
@@ -9,21 +12,18 @@
     <div class="media-content">
       <div class="content">
         <p>
-          <strong>John Smith</strong> <small>@johnsmith</small> <small>3m</small>
+          <strong>
+            {{ review.user.name }}
+          </strong> <small></small>
+          <small>{{ timeFromNow(review.date) }}</small>
           <br>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+          <span class="review-body">{{ review.body }}</span>
         </p>
       </div>
       <nav class="level is-mobile">
         <div class="level-left">
           <a class="level-item">
-            <span class="icon is-small"><i class="fa fa-reply"></i></span>
-          </a>
-          <a class="level-item">
-            <span class="icon is-small"><i class="fa fa-retweet"></i></span>
-          </a>
-          <a class="level-item">
-            <span class="icon is-small"><i class="fa fa-heart"></i></span>
+            <span class="icon is-small"><i class="fa fa-flag"></i></span>
           </a>
         </div>
       </nav>
@@ -35,12 +35,20 @@
 <script>
   import { mapGetters } from 'vuex'
 
+  import moment from 'moment'
+  moment.locale('id')
+
   export default {
 
     computed: {
       ...mapGetters([
         'product'
       ])
+    },
+    methods: {
+      timeFromNow (time) {
+        return moment(time).fromNow()
+      }
     }
   }
 </script>

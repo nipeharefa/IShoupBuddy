@@ -15,7 +15,7 @@ new Vue({
     ]),
     getProductDetail () {
       const id = window._sharedData.product_id
-      this.$http.get(`api/product/${id}`).then(response => {
+      this.$http.get(`api/product/${id}?with=review`).then(response => {
         this.initProduct(response.data.product)
       }).catch(err => err)
     }

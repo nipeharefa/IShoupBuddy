@@ -1,23 +1,25 @@
 <template>
-	<div class="card">
-	  <div class="card-image">
-	    <figure class="image is-4by3">
-	      <img :src="product.picture_url.small" :alt="product.name">
-	    </figure>
-	  </div>
-	  <div class="card-content">
-
-	    <div class="content">
-	      <small>{{ product.name }}</small>
-	    </div>
+  <div class="card product-card">
+    <div class="product-media">
+      <figure>
+        <img :src="product.picture_url.small" :alt="product.name">
+      </figure>
+    </div>
+    <div class="product-description">
+      <div class="product-name">
+        <h3>{{ product.name }}</h3>
+      </div>
       <div class="harga">
-        Rp. 10.000
+        <span>Rp. {{ product.minimum_price }}</span>
       </div>
       <div>
-          <star-rating :rating="4" :star-size="15" :read-only="true" :showRating="false" :activeColor="'#f7d120'"></star-rating>
+          <star-rating :rating="product.avg_rating"
+            :star-size="15" :read-only="true"
+            :showRating="false"
+            :activeColor="'#f7d120'" />
       </div>
-	  </div>
-	</div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -29,14 +31,3 @@
     }
   }
 </script>
-
-
-<style lang="scss" scoped>
-  .card-content {
-    small {
-      line-height: 1.8;
-      height: 3.6rem;
-      display: inline-block;
-    }
-  }
-</style>

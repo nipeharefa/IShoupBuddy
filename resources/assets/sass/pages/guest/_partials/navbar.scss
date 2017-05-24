@@ -1,6 +1,54 @@
-.nav {
-  background: #00d1b2 !important;
+.mosqito {
+  display: flex;
+  background-color: darken($primary, 4%);
 
+  .container {
+
+    display: flex;
+
+    ul {
+
+      justify-content: flex-end;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+
+      li {
+        font-size: $size-7;
+        padding: 0 1rem;
+        a {
+          color: #fff;
+          font-family: $family-sans-serif;
+        }
+      }
+
+    }
+
+  }
+
+}
+
+.nav {
+
+  background: $primary;
+
+  @include desktop() {
+    height: 4.5rem !important;
+
+    .nav-left {
+      display: flex;
+      justify-content: center;
+    }
+
+    .nav-right {
+      display: flex;
+      justify-content: left;
+
+      i.fa-shopping-cart {
+        font-size: 2.1rem !important;
+      }
+    }
+  }
   .akumaubelanja {
     width: 30rem !important;
   }
@@ -96,11 +144,4 @@
       }
     }
   }
-}
-
-
-.fade-enter-active, .fade-leave-active {
-  // transition: opacity .5s;
-  // transition: opacity .5s linear .5s;
-  // transition-delay: 0s;
 }

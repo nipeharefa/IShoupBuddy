@@ -14,7 +14,7 @@ class ProductVendorTransformer extends AbstractTransformer {
             "name"              =>  $productV->Product->name,
             "picture_url"       =>  $this->generateUserPictureLinks($productV->Product->picture_url),
             "price"             =>  $productV->harga,
-            "price_string"      =>  $productV->harga,
+            "price_string"      =>  $this->formatRupiah($productV->harga),
             "barcode"           =>  $productV->Product->barcode,
             "vendor"            =>  VendorTransformer::transform($productV->Vendor)
         ];

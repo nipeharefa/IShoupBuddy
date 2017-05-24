@@ -1,12 +1,16 @@
 .nav-model-classic {
-  display: flex;
-  flex-direction: column;
-  z-index: 15 !important; //
-  position: fixed;
-  width: 100%;
-  background: #FFF;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+
+  @include touch() {
+    display: flex;
+    flex-direction: column;
+    z-index: 15 !important; //
+    position: fixed;
+    width: 100%;
+    background: #FFF;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+
+  }
 
   &.is-active {
     height: 3.5rem;
@@ -15,52 +19,56 @@
     }
   }
 
-  .wrapper-new-nav {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 1.5rem 1.5rem 1.5rem 0.5rem;
-    background: #00d1b2 !important;
-    z-index: 4;
-    justify-content: space-between;
-    height: 50px;
+  @include touch() {
 
-    .left-hamburger {
+    .wrapper-new-nav {
 
       display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 1.5rem 1.5rem 1.5rem 0.5rem;
+      background: #00d1b2 !important;
+      z-index: 4;
+      justify-content: space-between;
+      height: 50px;
 
-      .logo {
-        margin-right: 1rem;
-      }
+      .left-hamburger {
 
-      .icon-wrapper {
-        transition: 250ms ease all;
-        &.is-active {
-          margin-top: 10px !important;
-          transition: 250ms ease all;
+        display: flex;
+
+        .logo {
+          margin-right: 1rem;
         }
 
+        .icon-wrapper {
+          transition: 250ms ease all;
+          &.is-active {
+            margin-top: 10px !important;
+            transition: 250ms ease all;
+          }
+
+          i {
+            color: #FFF !important;
+          }
+          .default-caret {
+            transition: 250ms ease all;
+          }
+
+          .caret-is-active {
+            transform: rotate(180deg);
+          }
+
+        }
+      }
+      .search-box {
+        display: flex;
+      }
+      .icon-right-wrapper {
+        display: flex;
         i {
-          color: #FFF !important;
+          color: #fff !important;
+          padding-left: 1rem;
         }
-        .default-caret {
-          transition: 250ms ease all;
-        }
-
-        .caret-is-active {
-          transform: rotate(180deg);
-        }
-
-      }
-    }
-    .search-box {
-      display: flex;
-    }
-    .icon-right-wrapper {
-      display: flex;
-      i {
-        color: #fff !important;
-        padding-left: 1rem;
       }
     }
   }

@@ -28,4 +28,9 @@ class Product extends Model
 
         return $this->hasManyThrough(Review::class, ProductVendor::class);
     }
+
+    public function Statistic() {
+
+        return $this->hasManyThrough(PriceStatistic::class, ProductVendor::class);
+    }
 }

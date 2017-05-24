@@ -1,6 +1,13 @@
 @import "node_modules/bulma/bulma";
+@import "~sassBase/_variables.scss";
 @import "./_partials/navbar";
+@import "~sassComponents/ProductCard";
 
+h3.product-list-caption {
+  color: darken($primary, 15%);
+  font-weight: $weight-bold;
+  margin-bottom: 1rem;
+}
 
 .caption-head {
 	display: flex;
@@ -29,19 +36,21 @@
       };
 
       @include desktop() {
-        width: calc(100% / 4) !important;
+        width: calc(100% / 5) !important;
       };
     }
 
 		@include touch() {
-			width: calc(100% / 1) !important;
+			width: calc(100% / 2) !important;
+      padding: 0 5px !important;
 		};
+
 		@include widescreen() {
 			width: calc(100% / 4) !important;
 		};
 
 		@include desktop() {
-			width: calc(100% / 6) !important;
+			width: calc(100% / 5) !important;
 		};
 
 		width: calc(100% / 1);

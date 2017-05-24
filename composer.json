@@ -18,7 +18,8 @@
         "laravel/scout": "^3.0",
         "laravel/tinker": "~1.0",
         "predis/predis": "^1.1",
-        "sastrawi/sastrawi": "^1.2"
+        "sastrawi/sastrawi": "^1.2",
+        "themsaid/laravel-model-transformers": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
