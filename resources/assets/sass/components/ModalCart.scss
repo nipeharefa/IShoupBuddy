@@ -1,0 +1,10 @@
+.modal-cart {
+  display: flex;
+}
+
+
+.modal-product-to-cart {
+
+  @extend .modal-cart;
+
+}
