@@ -1,6 +1,7 @@
 @import "node_modules/bulma/bulma";
 @import "~sassComponents/NavbarDesktopDefault";
 @import "../partials/_navbar";
+@import "~sassComponents/ProductDetail";
 
 body {
   background: #f5f5f5 !important
@@ -138,15 +139,7 @@ body {
     font-weight: bold;
   }
 }
-canvas#line-chart {
-  display: flex !important;
-  width: 100% !important;
 
-  @include desktop() {
-    width: 80% !important;
-    height: 80% !important;
-  }
-}
 .rating-text {
   visibility: hidden;
 }

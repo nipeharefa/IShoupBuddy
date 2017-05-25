@@ -89,3 +89,13 @@ p.no-review {
   font-weight: $weight-light;
   color: $grey-light;
 }
+
+// Canvas Style
+canvas#line-chart {
+  display: flex !important;
+  width: 100% !important;
+
+  @include desktop() {
+    height: 20rem !important;
+  }
+}
