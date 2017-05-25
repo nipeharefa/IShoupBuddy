@@ -29,6 +29,25 @@
         </div>
       </div>
     </div>
+
+    <div class="panel-links">
+      <div class="link-item">
+        <i class="fa fa-key" aria-hidden="true"></i>
+        <span>Ganti Password</span>
+      </div>
+      <div class="link-item">
+        <i class="fa fa-heart" aria-hidden="true"></i>
+        <span>Produk Favorit</span>
+      </div>
+      <div class="link-item">
+        <i class="fa fa-exchange" aria-hidden="true"></i>
+        <span>Transaksi</span>
+      </div>
+      <div class="link-item">
+        <i class="fa fa-star" aria-hidden="true"></i>
+        <span>Review</span>
+      </div>
+    </div>
     <div class="panel-container">
           <div class="panel-info">
             <div class="panel-header">

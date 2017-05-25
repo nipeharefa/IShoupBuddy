@@ -92,3 +92,27 @@ div.user-detail-profile {
     }
   }
 }
+
+.panel-links {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding-right: 0 !important;
+  width: 100%;
+
+  .link-item {
+    display: flex;
+    width: calc( 100% / 2);
+    flex-direction: column;
+    text-align: center;
+    background-color: $primary;
+    padding: 1rem 0;
+
+    span {
+      font-size: $size-7;
+      color: $white-bis !important;
+    }
+  }
+}
