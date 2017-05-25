@@ -26,6 +26,7 @@ mix.js('resources/assets/js/member/pages/edit_profile.js', 'js/edit_profile.js')
 mix.sass('resources/assets/sass/pages/member/home.scss', 'css/member/home.css')
 mix.sass('resources/assets/sass/pages/member/me.scss', 'css/member/me.css')
 mix.sass('resources/assets/sass/pages/member/edit_profile.scss', 'css/member/edit_profile.css')
+mix.sass('resources/assets/sass/pages/member/product/product-detail.scss', 'css/member/product-detail.css')
 
 mix.extract(['vue', 'axios', 'vee-validate'])
 
