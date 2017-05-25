@@ -9,6 +9,7 @@ use App\Helpers\Transformers\ActiveUserTransformer;
 class MeController extends Controller
 {
     public function index(Request $request) {
+
         $user = ActiveUserTransformer::transform($request->user());
     	return view('pages.me.index')
             ->with('user', json_encode($user));

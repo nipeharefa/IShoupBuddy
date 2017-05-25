@@ -3,7 +3,7 @@
     <navbar-apps-member></navbar-apps-member>
     <section class="section">
       <div class="container">
-        <div class="columns">
+        <div class="columns be-body-bro">
           <div class="column">
             <div class="pull-from-fixed">
               <form-edit-profile></form-edit-profile>

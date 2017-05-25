@@ -14,7 +14,7 @@
 Route::get('/', 'HomeController@index');
 
 Route::get('search', 'SearchController@index');
-Route::get('login', 'Auth\LoginController@showLoginForm');
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm');
 
 Route::get('vendor/login', 'Auth\LoginVendorController@showLoginForm');
@@ -28,7 +28,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function() {
     Route::post('vendor/register', 'RegisterVendorController@register');
 });
 
-Route::group(['prefix' => 'me'], function() {
+Route::group(['prefix' => 'me', 'middleware' => ['auth']], function() {
 
     Route::resource('/', 'MeController',
     	['only' => 'index', 'show']);

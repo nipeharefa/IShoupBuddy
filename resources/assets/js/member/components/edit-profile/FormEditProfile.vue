@@ -4,11 +4,15 @@
 
     <div class="field">
       <div class="change-image">
-        <img :src="profile_image">
-        <label for="uploadphoto" class="is-link">
+        <div class="image is-64x64 is-square image-photo">
+          <img :src="profile_image" alt="profile Logo">
+        </div>
+        <div class="wrapper-change-photo">
+          <label for="uploadphoto" class="button is-link">
           Ganti Foto
-        </label>
-        <input type="file" @change="upload" id="uploadphoto" style="display: none" accept="image/*">
+          </label>
+          <input type="file" @change="upload" id="uploadphoto" style="display: none" accept="image/*">
+        </div>
       </div>
     </div>
     <div class="field">
@@ -47,7 +51,7 @@
     </div>
 
     <div class="field has-text-centered">
-      <a href="" class="link is-link is-danger">Batal</a>
+      <a href="/me" class="link is-link is-danger">Batal</a>
     </div>
   </div>
 
@@ -97,7 +101,8 @@ export default {
     },
     _updateProfile () {
       const data = this.user
-      this.$http.put('api/user/1', data).then(response => {
+      const id = this.activeUser.id
+      this.$http.post(`api/user`, data).then(response => {
         console.log(response.data)
       }).catch(err => err)
     }

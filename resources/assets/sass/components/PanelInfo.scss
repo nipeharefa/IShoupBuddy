@@ -1,0 +1,35 @@
+div.panel-info {
+  display: flex;
+  border: 1px solid $border;
+  border-radius: $radius;
+  flex-direction: column;
+  div.panel-header {
+    display: flex;
+    padding: 1rem 1rem;
+    background-color: $white-bis;
+    width: 100%;
+    font-weight: $weight-bold;
+  }
+
+  div.panel-content {
+    padding: 1rem 1rem;
+
+    ul.list {
+
+      li {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-size: 0.875rem;
+        margin: 0.2rem 0;
+        border-bottom: 1px solid $white-bis;
+        padding: 0.2rem 0;
+        a {
+        }
+      }
+      li:last-of-type {
+        border-bottom: none;
+      }
+    }
+  }
+}

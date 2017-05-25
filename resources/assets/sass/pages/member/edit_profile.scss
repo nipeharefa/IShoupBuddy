@@ -1,8 +1,17 @@
 @import "node_modules/bulma/bulma";
-@import "../core/_breadcrumb.sass";
-@import "./partials/_navbar.scss";
-@import "../core/_helper.scss";
+@import "~sassComponents/NavbarDesktopDefault";
+@import "./partials/_navbar";
+// @import "../core/_breadcrumb.sass";
+// @import "./partials/_navbar.scss";
 
+.be-body-bro {
+  @include touch() {
+    padding-top: 2rem;
+  }
+  @include desktop() {
+    padding-top: 5rem !important;
+  }
+}
 .change-image {
   display: flex;
   flex-direction: row;
@@ -15,4 +24,21 @@
 
 .cancel-box {
   justify-content: center;
+}
+
+.field {
+  label {
+    font-size: $size-7 !important;
+  }
+}
+
+.image-photo {
+  min-width: 64px;
+  img {
+    border-radius: 50%;
+  }
+}
+.wrapper-change-photo {
+  margin-left: 1rem;
+  background-color: $white-bis;
 }
