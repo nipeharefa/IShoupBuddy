@@ -81,8 +81,9 @@ div.user-detail-profile {
     width: calc(98% / 2) !important;
     @include touch() {
       width: 100% !important;
-      &:first-of-type {
-        margin-bottom: 1rem;
+      margin-bottom: 1rem;
+      &:last-of-type {
+
       }
     }
     display: flex;

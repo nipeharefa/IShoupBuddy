@@ -49,23 +49,45 @@
       </div>
     </div>
     <div class="panel-container">
-          <div class="panel-info">
-            <div class="panel-header">
-              <span>Transaksi</span>
-            </div>
-            <div class="panel-content">
-              <ul class="list">
-                <li>
-                  Sukses
-                  <a href="">1</a>
-                </li>
-                <li>
-                  Gagal
-                  <a href="">0</a>
-                </li>
-              </ul>
-            </div>
-          </div>
+      <div class="panel-info">
+        <div class="panel-header">
+          <span>Shoup Kantong</span>
+        </div>
+        <div class="panel-content">
+          <ul class="list">
+            <li>
+              Total Saldo
+              <a href="">Rp. 100.000</a>
+            </li>
+            <li>
+              History
+              <a href="">0</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel-info">
+        <div class="panel-header">
+          <span>Transaksi</span>
+        </div>
+        <div class="panel-content">
+          <ul class="list">
+            <li>
+              Sukses
+              <a href="">1</a>
+            </li>
+            <li>
+              Pending
+              <a href="">1</a>
+            </li>
+            <li>
+              Gagal
+              <a href="">0</a>
+            </li>
+          </ul>
+        </div>
+      </div>
 
           <div class="panel-info">
             <div class="panel-header">
