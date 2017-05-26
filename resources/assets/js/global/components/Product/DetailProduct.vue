@@ -12,6 +12,9 @@
     <div>
       <slot name="footer"></slot>
     </div>
+    <div>
+      <slot name="otherComponents"></slot>
+    </div>
   </div>
 </template>
 

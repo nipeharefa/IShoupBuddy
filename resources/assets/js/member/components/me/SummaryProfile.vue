@@ -30,7 +30,7 @@
       </div>
     </div>
 
-    <div class="panel-links">
+    <div class="panel-links is-hidden-desktop">
       <div class="link-item">
         <i class="fa fa-key" aria-hidden="true"></i>
         <span>Ganti Password</span>

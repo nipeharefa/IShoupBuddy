@@ -3,6 +3,7 @@ let glob = require('glob');
 let webpack = require('webpack');
 let Mix = require('laravel-mix').config;
 let webpackPlugins = require('laravel-mix').plugins;
+let SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 
 /*
  |--------------------------------------------------------------------------
@@ -425,6 +426,17 @@ plugins.push(
         stats => global.events.fire('build', stats)
     )
 );
+
+// plugins.push(
+//   new SWPrecacheWebpackPlugin({
+//     cacheId: 'my-vue-app',
+//     filename: 'service-worker.js',
+//     staticFileGlobs: ['dist/**/*.{js,html,css}'],
+//     minify: true,
+//     stripPrefix: 'dist/'
+//   })
+// )
+
 
 if (! Mix.entry().hasScripts()) {
     plugins.push(new webpackPlugins.MockEntryPlugin(Mix.output().path));

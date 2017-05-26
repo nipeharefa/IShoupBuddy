@@ -7,7 +7,7 @@
 
 
 <script>
-const StarRating = () => import('vue-star-rating')
+import StarRating from 'vue-star-rating'
 export default {
   props: {
     ratings: {

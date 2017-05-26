@@ -3,6 +3,11 @@
     <navbar slot="navbar"></navbar>
     <footer-apps slot="footer"></footer-apps>
 
+    <div slot="otherComponents">
+      <modalAddToCart :show.sync="showModals"
+        @update:show="ganti" :product="product" :product_vendor="product_vendor"/>
+    </div>
+
     <div slot="slot-touch" class="columns is-hidden-desktop" v-if="product">
       <div class="column">
         <div>
@@ -53,7 +58,7 @@
                     <td>{{ item.vendor.name }}</td>
                     <td>{{ item.price_string }}</td>
                     <td>
-                      <span class="to-cart" title="Tambahkan ke keranjang belanja" @click="showModalToCart">
+                      <span class="to-cart" title="Tambahkan ke keranjang belanja" @click="showModalToCart(item)">
                         <i class="fa fa-shopping-cart"></i>
                       </span>
                     </td>
@@ -90,6 +95,8 @@
   const ButtonControlTouch = () => import('global/components/Others/ButtonControlTouch')
   const Tabs = () => import('global/components/Others/Tabs.vue')
   const ImageCover = () => import('global/components/Others/ImageInProductDetail.vue')
+  const ModalAddToCart = () => import('global/components/Cart/ModalAddProductToCart.vue')
+  const ModalsBaru = () => import('global/components/Cart/ModalAddProductToCart.vue')
 
   import { mapGetters } from 'vuex'
 
@@ -97,21 +104,33 @@
     components: {
       FooterApps,
       Navbar,
+      ModalsBaru,
       DetailProduct,
       Ratings,
       DiscountBox,
       ButtonControlTouch,
       Tabs,
-      ImageCover
+      ImageCover,
+      ModalAddToCart
     },
     computed: {
       ...mapGetters([
         'product'
       ])
     },
+    data ()  {
+      return {
+        showModals: false,
+        product_vendor: {}
+      }
+    },
     methods: {
-      showModalToCart () {
-        console.log('clicked')
+      showModalToCart (item) {
+        this.showModals = true
+        this.product_vendor = item
+      },
+      ganti (param1) {
+        console.log(param1)
       }
     }
   }
