@@ -53,7 +53,7 @@
                     <td>{{ item.vendor.name }}</td>
                     <td>{{ item.price_string }}</td>
                     <td>
-                      <span class="to-cart" title="Tambahkan ke keranjang belanja">
+                      <span class="to-cart" title="Tambahkan ke keranjang belanja" @click="showModalToCart">
                         <i class="fa fa-shopping-cart"></i>
                       </span>
                     </td>
@@ -108,6 +108,11 @@
       ...mapGetters([
         'product'
       ])
+    },
+    methods: {
+      showModalToCart () {
+        console.log('clicked')
+      }
     }
   }
 </script>
