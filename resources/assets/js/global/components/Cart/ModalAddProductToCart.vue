@@ -27,7 +27,7 @@
                   </a>
                 </p>
                 <p class="control">
-                  <input class="input" type="text" placeholder="1" v-model="quantity">
+                  <input class="input" type="text" placeholder="1" v-model="quas">
                 </p>
                 <p class="control" @click="add(true)">
                   <a class="button">
@@ -72,16 +72,29 @@
       },
       add (param1) {
         if (param1) {
-          this.quantity = this.quantity + 1
+          this.quas = this.quas + 1
           return
         }
-        this.quantity = this.quantity - 1
+        this.quas = this.quas - 1
         return
       }
     },
     computed: {
+      quas: {
+        get () {
+          return this.quantity
+        },
+        set (newValue) {
+          if (parseInt(newValue) < 1) {
+            this.quantity = 1
+            return
+          }
+          this.quantity = newValue
+          return
+        }
+      },
       total () {
-        return this.quantity * this.product_vendor.price
+        return this.quas * this.product_vendor.price
       }
     },
     data () {
