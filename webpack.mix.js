@@ -1,11 +1,15 @@
 let mix = require('laravel-mix')
 
 
+// Guest JS
+
 mix.sass('resources/assets/sass/pages/guest/home.scss', 'css/guest')
 mix.sass('resources/assets/sass/pages/guest/product_detail.scss', 'css/guest')
 mix.sass('resources/assets/sass/pages/guest/login.scss', 'css/guest')
 mix.sass('resources/assets/sass/pages/guest/register.scss', 'css/guest')
 mix.sass('resources/assets/sass/pages/guest/search_result.scss', 'css/guest')
+
+// Guest SASS
 
 mix.js('resources/assets/js/guest/pages/home.js', 'js/home.js')
 mix.js('resources/assets/js/guest/pages/product_detail.js', 'js/product_detail.js')

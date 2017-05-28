@@ -1,62 +1,53 @@
 <template>
   <div class="modal modal-product-to-cart" :class="{'is-active': show}">
     <div class="modal-background"></div>
-    <div class="modal-content">
-      <div class="add-product-cart" v-if="product">
-        <div class="image product-image-cart">
-          <figure class="image">
-            <img :src="product.picture_url['small']" :alt="product.name" >
-          </figure>
-        </div>
-        <div class="cart-product__description">
-          <div class="cart-product__name">
-            <span>{{ product.name }}</span>
+    <div class="modal-card">
+    <header class="modal-card-head">
+      <!-- <p class="modal-card-title">Modal title</p> -->
+      <button class="delete" @click="hideModals"></button>
+    </header>
+      <section class="modal-card-body">
+        <div class="c_info">
+
+          <div class="c_info_vendor">
+           <p>Nama Vendor</p>
+           <p>DKI Jakarta</p>
           </div>
-
-          <div class="cart-price">
-            <div class="product-satuan">
-              <span>{{ product.minimum_price_string }}</span>
+          <div class="c_info_product">
+            <div class="c_product_image">
+              <p>image</p>
             </div>
-
-            <div class="product-input__quantity">
-
-              <div class="field has-addons">
-                <p class="control" @click="add(false)">
-                  <a class="button">
-                    -
-                  </a>
-                </p>
-                <p class="control">
-                  <input class="input" type="text" placeholder="1" v-model="quas">
-                </p>
-                <p class="control" @click="add(true)">
-                  <a class="button">
-                    +
-                  </a>
-                </p>
+            <div class="c_product_price">
+              <div class="c_product__name">
+                <span>{{ product.name }}</span>
+              </div>
+              <div class="c_product__quantity">
+                <span class="product__price">{{ product_vendor.price_string }}</span>
+                <div class="field has-addons has-addons-centered quantity__control">
+                  <p class="control" @click="add(false)">
+                    <a class="button is-info">-</a>
+                  </p>
+                  <p class="control">
+                    <input class="input" type="text" placeholder="1" v-model="quas">
+                  </p>
+                  <p class="control" @click="add(true)">
+                    <a class="button is-info">+</a>
+                  </p>
+                </div>
+                <span class="total">
+                  Rp. {{ total }}
+                </span>
               </div>
             </div>
-
-            <div class="product-price__total">
-              <span>{{ total }}</span>
-            </div>
-
           </div>
+
         </div>
-      </div>
-      <div class="modal-cart-footer">
-        <div class="cart-table-order">
-          <span>Total</span>
-          <span>{{ total }}</span>
-        </div>
-      </div>
-      <div class="modal-cart-action">
-        <button class="button is-danger">
-          Tambahkan ke Troli Belanja
-        </button>
-      </div>
+      </section>
+      <footer class="modal-card-foot">
+        <a class="button is-danger">Tambahakan ke Keranjang Belanja</a>
+        <!-- <a class="button">Cancel</a> -->
+      </footer>
     </div>
-    <button class="modal-close" @click="hideModals"></button>
   </div>
 </template>
 

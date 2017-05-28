@@ -2,6 +2,7 @@
 @import "~sassComponents/NavbarDesktopDefault";
 @import "../partials/_navbar";
 @import "~sassComponents/ProductDetail";
+@import "~sassComponents/ModalCart";
 
 body {
   background: #f5f5f5 !important
@@ -142,79 +143,4 @@ body {
 
 .rating-text {
   visibility: hidden;
-}
-
-.modal-product-to-cart {
-
-  .modal-background {
-    background-color: $white-bis;
-  }
-  .modal-close {
-    &:after, &:before {
-      background-color: black;
-    }
-  }
-}
-
-.add-product-cart {
-  display: flex;
-  flex-direction: row;
-
-  .product-image-cart {
-    display: flex;
-    width: 30%;
-    padding: 0 0.5rem;
-  }
-  .cart-product__description {
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-    .cart-product__name {
-      font-size: 0.8rem;
-      color: $grey-dark;
-      font-weight: $weight-semibold;
-    }
-    .cart-price {
-      display: flex;
-      margin-top: 1rem;
-      justify-content: space-between;
-      align-items: center;
-      .product-satuan {
-        span {
-          font-size: $size-7;
-        }
-      }
-      .product-input__quantity {
-        display: flex;
-        input {
-          width: 3rem;
-        }
-        a {
-          padding: 0 5px !important;
-        }
-      }
-    }
-  }
-}
-
-.modal-cart-footer, .modal-cart-action {
-  display: flex;
-  justify-content: flex-end;
-}
-.modal-cart-footer {
-  .cart-table-order {
-    display: flex;
-    flex-direction: row;
-    min-width: 35%;
-    justify-content: space-between;
-
-    span {
-      font-weight: $weight-bold;
-    }
-  }
-}
-.modal-cart-action {
-  display: flex;
-  margin-top: 1rem;
-  align-items: center;
 }

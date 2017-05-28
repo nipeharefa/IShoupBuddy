@@ -5,7 +5,7 @@
 
     <div slot="otherComponents">
       <modalAddToCart :show.sync="showModals"
-        @update:show="ganti" :product="product" :product_vendor="product_vendor"/>
+        @update:show="ganti" :product="product" :product_vendor="product_vendor" v-if="product"/>
     </div>
 
     <div slot="slot-touch" class="columns is-hidden-desktop" v-if="product">

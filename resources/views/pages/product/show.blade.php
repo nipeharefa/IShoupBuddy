@@ -2,6 +2,7 @@
 
 @section('content')
     <div id="app"></div>
+    <meta name="_dota2" content="Dazzle">
 @stop
 
 @section('title')
@@ -13,7 +14,7 @@
 @section('css')
 
     @if (isset($css))
-        <link rel="stylesheet" href="{{ $css }}" data-s="blade">
+        <link rel="stylesheet" href="{{ $css }}" data-s="blade" data-fightme="true">
     @endif
 
 @stop
