@@ -5,6 +5,7 @@ let mix = require('laravel-mix')
 
 mix.sass('resources/assets/sass/pages/admin/auth/login.scss', 'css/admin/auth/login.css')
 mix.sass('resources/assets/sass/pages/admin/product/index.scss', 'css/admin/product/index.css')
+mix.sass('resources/assets/sass/pages/admin/product/create.scss', 'css/admin/product/create.css')
 
 
 // Admin JS

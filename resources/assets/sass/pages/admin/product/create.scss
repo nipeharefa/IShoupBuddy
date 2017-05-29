@@ -1,0 +1,26 @@
+@import "node_modules/bulma/bulma";
+
+
+.f_add_product {
+  width: 100%;
+  display: flex;
+}
+.upload_label {
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+  text-decoration: underline;
+  cursor: pointer;
+  span {
+    font-size: $size-7;
+  }
+  .uploadFile {
+    display: none;
+  }
+}
+
+.field {
+  label {
+    font-size: $size-7;
+  }
+}

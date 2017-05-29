@@ -4,7 +4,8 @@
       <tr>
         <th>Nama Produk</th>
         <th>Barcode</th>
-        <th>Rating / Ulasan</th>
+        <th>Rating</th>
+        <th>Total Vendor</th>
         <th></th>
       </tr>
     </thead>
@@ -12,10 +13,11 @@
       <tr v-for="item in products">
         <td>{{ item.name }}</td>
         <td>{{ item.barcode }}</td>
-        <td>0 / 0</td>
+        <td>{{ item.total_review }} / {{ item.avg_rating || 0 }}</td>
+        <td>{{ item.total_vendor }}</td>
         <td>
           <a class="is-link">Edit</a>
-          <a class="is-link">Delete</a>
+          <a class="is-link is-danger">Hide</a>
         </td>
       </tr>
     </tbody>

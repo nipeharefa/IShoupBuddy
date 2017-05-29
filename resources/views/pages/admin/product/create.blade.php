@@ -5,7 +5,7 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="{{ mix('css/admin/product/index.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/admin/product/create.css') }}">
 @stop
 
 @section('js')

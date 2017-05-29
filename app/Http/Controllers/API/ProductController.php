@@ -4,10 +4,13 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProduct;
 use App\Models\Product;
 use App\Models\Vendor;
 use App\Models\ProductVendor;
 use App\Helpers\Transformers\ProductTransformer;
+use DB;
+use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Validator;
@@ -89,56 +92,43 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProduct $request)
     {
         // $this->authorize('update', Product::class);
 
         $user = $request->user();
-
-        $validator = Validator::make($request->all(), [
-            'barcode'       =>  'required',
-            'name'          =>  'required',
-            'picture_url'   =>  'required',
-            'description'   =>  'required',
-            'category_id'   =>  'required'
-        ]);
-
-        $validator->validate();
-
         $data = $request->toArray();
+
         $data['slug'] = str_slug($request->name);
 
         try {
 
+            DB::beginTransaction();
+
+            if (Product::whereBarcode($request->barcode)->count()) {
+
+                $err = [
+                    "status"    =>  "OK",
+                    "product"   =>  null,
+                    "message"   =>  "Duplicate"
+                ];
+
+                return response()->json($err, 409);
+            }
             $product = Product::create($data);
 
-            if ($user->role == 2) {
-
-
-                $product_vendor = $this->createProductVendor($data, $product->id, $user->id);
-
-                $response = [
-                    "status"    =>  "OK",
-                    "product"   =>  $product,
-                    "message"   =>  null
-                ];
-            }
+            DB::commit();
 
             return $product;
 
         } catch (QueryException $e) {
 
-            $product = Product::whereBarcode($request->barcode)->first();
-
-            if ($user->role == 2) {
-
-                return $this->createProductVendor($data, $product->id, $user->id);
-            }
+            DB::rollback();
 
             $err = [
                 "status"    =>  "OK",
                 "product"   =>  null,
-                "message"   =>  "Duplicate Error"
+                "message"   =>  $e->getMessage()
             ];
 
             return response()->json($err, 400);
