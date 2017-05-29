@@ -27,7 +27,7 @@ class StoreProduct extends FormRequest
             "picture_url"   =>  "required",
             "name"          =>  "required",
             "description"   =>  "required",
-            "barcode"       =>  "required",
+            "barcode"       =>  "required|numeric",
             "category_id"   =>  "required"
         ];
     }
