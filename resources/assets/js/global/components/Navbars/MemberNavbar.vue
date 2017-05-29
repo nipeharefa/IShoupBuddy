@@ -18,6 +18,7 @@
       <div @click="setIsActive(false)" style="width: 20%"></div>
     </div>
     <right-search slot="search"></right-search>
+    <right-menu-item slot="rightmenu"></right-menu-item>
   </navbar>
 </template>
 
@@ -25,6 +26,7 @@
   const DrawerMember = () => import('./partials/DrawerMember.vue')
   const RightSearch = () => import('./partials/RightSearch.vue')
   const Navbar = () => import('./Navbar.vue')
+  const RightMenuItem = () => import('./partials/RightMenuMember.vue')
 
   import { mapGetters, mapActions } from 'vuex'
 
@@ -32,7 +34,8 @@
     components: {
       Navbar,
       DrawerMember,
-      RightSearch
+      RightSearch,
+      RightMenuItem
     },
     computed: {
       ...mapGetters([
