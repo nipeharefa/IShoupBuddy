@@ -11,6 +11,7 @@ mix.sass('resources/assets/sass/pages/admin/product/index.scss', 'css/admin/prod
 
 mix.js('resources/assets/js/admin/pages/auth/login.js', 'js/a-auth-login.js')
 mix.js('resources/assets/js/admin/pages/product/product-index.js', 'js/a-index-product.js')
+mix.js('resources/assets/js/admin/pages/product/product-create.js', 'js/a-add-product.js')
 
 // Guest JS
 
