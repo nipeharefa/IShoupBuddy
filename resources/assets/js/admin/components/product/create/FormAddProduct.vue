@@ -115,7 +115,7 @@
         const data = this.product
         this.$http.post('api/product', data).then(response => {
           console.log(response.data)
-          window.location.asssign('/admin/product')
+          window.location.assign('/admin/product')
         }).catch(err => {
           this.setOnError(true)
           console.log(err)
