@@ -74,7 +74,10 @@ class CartController extends Controller
                 "harga"     =>  $request->quantity * $product_vendor->harga
             ];
 
-            $cart = $user->Cart()->create($data);
+            $cart = $user->Cart()->updateOrCreate([
+                    'product_vendor_id' =>  $product_vendor->id,
+                    "identify_id"       =>  $user->id
+                ], $data);
 
             DB::commit();
 

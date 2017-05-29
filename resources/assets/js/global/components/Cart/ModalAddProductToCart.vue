@@ -15,7 +15,9 @@
           </div>
           <div class="c_info_product">
             <div class="c_product_image">
-              <p>image</p>
+              <figure class="image is-128x128">
+                <img :src="product.picture_url.medium">
+              </figure>
             </div>
             <div class="c_product_price">
               <div class="c_product__name">
@@ -44,7 +46,7 @@
         </div>
       </section>
       <footer class="modal-card-foot">
-        <a class="button is-danger">Tambahakan ke Keranjang Belanja</a>
+        <a class="button is-danger" @click="addToCart">Tambahakan ke Keranjang Belanja</a>
         <!-- <a class="button">Cancel</a> -->
       </footer>
     </div>
@@ -58,6 +60,17 @@
     mounted () {},
     props: ['product', 'show', 'product_vendor'],
     methods: {
+      addToCart () {
+        const data = {
+          'product_id': this.product.id,
+          'vendor_id': this.product_vendor.vendor.id,
+          'quantity': this.quantity
+        }
+        console.log(data)
+        this.$http.post('api/cart', data).then(response => {
+          console.log(response.data)
+        }).catch(err => err)
+      },
       hideModals () {
         this.$emit('update:show', false)
       },
