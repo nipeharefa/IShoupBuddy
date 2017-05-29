@@ -1,6 +1,15 @@
 let mix = require('laravel-mix')
 
 
+// Admin Sass
+
+mix.sass('resources/assets/sass/pages/admin/auth/login.scss', 'css/admin/auth/login.css')
+
+
+// Admin JS
+
+mix.js('resources/assets/js/admin/pages/auth/login.js', 'js/a-auth-login.js')
+
 // Guest JS
 
 mix.sass('resources/assets/sass/pages/guest/home.scss', 'css/guest')
