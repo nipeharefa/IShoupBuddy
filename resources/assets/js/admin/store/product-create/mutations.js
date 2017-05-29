@@ -1,5 +1,5 @@
 export default {
-  INIT_PRODUCTS (state, error) {
+  SET_ON_ERROR (state, error) {
     state.onError = error
   }
 }

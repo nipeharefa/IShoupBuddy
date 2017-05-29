@@ -4,6 +4,14 @@
 .f_add_product {
   width: 100%;
   display: flex;
+
+  @include touch() {
+    flex-direction: column;
+
+    .is-half {
+      margin-top: 0.5rem;
+    }
+  }
 }
 .upload_label {
   display: flex;

@@ -118,6 +118,7 @@
           window.location.asssign('/admin/product')
         }).catch(err => {
           this.setOnError(true)
+          console.log(err)
         })
         console.log('Ready to Post')
       }
