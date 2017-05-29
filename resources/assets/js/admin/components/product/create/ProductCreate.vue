@@ -39,6 +39,7 @@
   const FormAddProduct = () => import('adminProduct/create/FormAddProduct.vue')
 
   import { mapGetters, mapActions } from 'vuex'
+
   export default {
     components: {
       FooterApps,

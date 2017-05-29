@@ -56,6 +56,8 @@
 
 
 <script>
+  import { mapGetters, mapActions } from 'vuex'
+
   export default {
     data () {
       return {
@@ -66,11 +68,18 @@
           'category_id': '',
           barcode: ''
         },
-        onProcess: false,
-        onError: false
+        onProcess: false
       }
     },
+    computed: {
+      ...mapGetters([
+        'onError'
+      ])
+    },
     methods: {
+      ...mapActions([
+        'setOnError'
+      ]),
       generateLinkImage (filename) {
         if (filename) {
           return window.location.origin + '/image/small/' + filename
@@ -108,7 +117,7 @@
           console.log(response.data)
           window.location.asssign('/admin/product')
         }).catch(err => {
-          console.log(err)
+          this.setOnError(true)
         })
         console.log('Ready to Post')
       }
