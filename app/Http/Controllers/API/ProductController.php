@@ -10,6 +10,7 @@ use App\Models\Vendor;
 use App\Models\ProductVendor;
 use App\Helpers\Transformers\ProductTransformer;
 use DB;
+use Auth;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
@@ -296,5 +297,23 @@ class ProductController extends Controller
 
             return response()->json($err, 404);
         }
+    }
+
+    protected function guard() {
+
+        return Auth::guard('api');
+
+    }
+
+    protected function isAdmin() {
+
+        $guard = $this->guard()->user();
+
+        if ($guard && $guard->role == 0) {
+
+            return $guard;
+        }
+
+        return false;
     }
 }
