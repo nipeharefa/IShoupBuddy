@@ -52,7 +52,7 @@ Route::resource('product', 'ProductController',
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 
     Route::resource('product', 'ProductController',
-        ['only' => ['index', 'create']]);
+        ['only' => ['index', 'create', 'edit']]);
 
     Route::resource('vendor', 'VendorController',
         ['only' => ['index']]);
