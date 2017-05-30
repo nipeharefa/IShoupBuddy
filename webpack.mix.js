@@ -6,6 +6,7 @@ let mix = require('laravel-mix')
 mix.sass('resources/assets/sass/pages/admin/auth/login.scss', 'css/admin/auth/login.css')
 mix.sass('resources/assets/sass/pages/admin/product/index.scss', 'css/admin/product/index.css')
 mix.sass('resources/assets/sass/pages/admin/product/create.scss', 'css/admin/product/create.css')
+mix.sass('resources/assets/sass/pages/admin/product/edit.scss', 'css/admin/product/edit.css')
 
 
 // Admin JS
@@ -13,6 +14,7 @@ mix.sass('resources/assets/sass/pages/admin/product/create.scss', 'css/admin/pro
 mix.js('resources/assets/js/admin/pages/auth/login.js', 'js/a-auth-login.js')
 mix.js('resources/assets/js/admin/pages/product/product-index.js', 'js/a-index-product.js')
 mix.js('resources/assets/js/admin/pages/product/product-create.js', 'js/a-add-product.js')
+mix.js('resources/assets/js/admin/pages/product/product-edit.js', 'js/a-edit-product.js')
 
 // Guest JS
 
