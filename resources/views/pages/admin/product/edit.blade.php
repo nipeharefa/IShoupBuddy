@@ -9,9 +9,16 @@
 @stop
 
 @section('js')
-    <script src="{{ mix('js/manifest.js') }}"></script>
 
-    <script src="{{ mix('js/vendor.js') }}"></script>
+    <script type="text/javascript">
+        window.__sharedData = {
+            "product_id": {{ $id }}
+        }
+    </script>
+
+    <script src="{{ mix('js/manifest.js') }}" type="text/javascript"></script>
+
+    <script src="{{ mix('js/vendor.js') }}" type="text/javascript"></script>
 
 
     <script src="{{ mix('js/a-edit-product.js') }}"></script>

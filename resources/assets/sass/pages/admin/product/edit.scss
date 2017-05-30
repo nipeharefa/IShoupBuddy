@@ -1,1 +1,41 @@
 @import "node_modules/bulma/bulma";
+@import "node_modules/notie/src/notie.scss";
+
+section.footer_section {
+  padding: 0 !important;
+}
+
+.f_edit_product {
+  width: 100%;
+  display: flex;
+  @include touch() {
+    flex-direction: column;
+
+    .is-half {
+      margin-top: 0.5rem;
+    }
+  }
+  .upload_label {
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+    text-decoration: underline;
+    cursor: pointer;
+    span {
+      font-size: $size-7;
+    }
+    .uploadFile {
+      display: none;
+    }
+  }
+
+  .field {
+    label {
+      font-size: $size-7;
+    }
+  }
+}
+
+.notie-container {
+  font-size: 1rem !important;
+}

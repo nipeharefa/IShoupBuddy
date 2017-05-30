@@ -54,7 +54,3 @@ mix.disableNotifications()
 if (mix.config.inProduction) {
   mix.version()
 }
-mix.browserSync({
-  open: false,
-  proxy: 'skripsi.home.dev'
-});

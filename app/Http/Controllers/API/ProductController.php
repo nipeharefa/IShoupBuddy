@@ -229,9 +229,36 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $data = collect($request->all())->filter()->toArray();
+
+        try {
+            DB::beginTransaction();
+
+            $product->update($data);
+            $response = [
+                "status"    =>  "OK",
+                "product"   =>  ProductTransformer::transform($product),
+                "message"   =>  null
+            ];
+
+            DB::commit();
+
+            return response()->json($response, 200);
+
+        } catch (Exception $e) {
+
+            DB::rollback();
+
+            $err = [
+                "status"    =>  "ERROR",
+                "product"   =>  null,
+                "message"   =>  $e->getMessage()
+            ];
+            return response()->json($err, 400);
+
+        }
     }
 
     /**

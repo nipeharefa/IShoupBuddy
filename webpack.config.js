@@ -378,7 +378,7 @@ if (Mix.entry().hasExtractions()) {
         new webpack.optimize.CommonsChunkPlugin({
             names: Mix.entry().getExtractions(),
             // names: ['vendor', 'manifest'], // Specify the common bundle's name.
-            minChunks: Infinity,
+            minChunks: Infinity
         })
     );
 }

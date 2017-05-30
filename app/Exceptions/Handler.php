@@ -61,6 +61,20 @@ class Handler extends ExceptionHandler
             }
         }
 
+        if ($exception instanceof ModelNotFoundException ) {
+
+            $reflector = new \ReflectionClass($exception->getModel());
+
+            if ($request->expectsJson()) {
+                $err = [
+                    "status"    =>  "ERROR",
+                    "user"      =>  null,
+                    "message"   => $reflector->getShortName() . " not found"
+                ];
+                return response()->json($err, 404);
+            }
+        }
+
         return parent::render($request, $exception);
     }
 
