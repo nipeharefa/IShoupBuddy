@@ -6,7 +6,7 @@
         <th>Email</th>
         <th>No. Hanphone</th>
         <th>Alamat</th>
-        <th>Terdaftar tanggal</th>
+        <th>Total Product</th>
         <th>Status</th>
         <th></th>
       </tr>
@@ -17,10 +17,11 @@
         <td>{{ item.email }}</td>
         <td>{{ item.phone }}</td>
         <td></td>
-        <td>{{ item.created_at }}</td>
-        <td>{{ item.confirmed == 1 ? "Aktif" : "Belum Aktif" }}</td>
+        <td>{{ item.total_product }}</td>
+        <td>{{ item.confirmed ? "Aktif" : "Belum Aktif" }}</td>
         <td>
-          <button class="button is-link" @click="activateVendor(item.id)">Aktifkan</button>
+          <button class="button is-link"
+            @click="activateVendor(item.id)" v-if="!item.confirmed">Aktifkan</button>
         </td>
       </tr>
     </tbody>

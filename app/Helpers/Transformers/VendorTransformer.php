@@ -11,6 +11,8 @@ class VendorTransformer extends AbstractTransformer {
         $arr = [
             "id"    =>  $vendor->id,
             "name"  =>  $vendor->name,
+            "email" =>  $vendor->email,
+            "confirmed" =>  (Boolean) $vendor->confirmed,
             "picture_url"   =>  $vendor->picture_url,
             "total_product" =>  $vendor->ProductVendor()->count(),
             "total_review"  =>  0

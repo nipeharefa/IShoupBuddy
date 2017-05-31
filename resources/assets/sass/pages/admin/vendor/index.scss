@@ -1,5 +1,12 @@
 @import "node_modules/bulma/bulma";
 
-.table {
-  font-size: 0.9rem !important;
+table {
+  margin-top: 1rem;
+  thead {
+    font-size: $size-6;
+  }
+  tbody {
+    color: $grey;
+    font-size: 0.9rem;
+  }
 }
