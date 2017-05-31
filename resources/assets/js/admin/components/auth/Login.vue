@@ -54,6 +54,7 @@
 
         this.$http.post('admin/login', data).then(response => {
           console.log(response.data)
+          window.location.assign('/admin/product')
         }).catch(err => err)
       }
     }
