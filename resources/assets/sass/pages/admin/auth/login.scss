@@ -1,5 +1,16 @@
 @import "node_modules/bulma/bulma";
 
+.f_login {
+
+  @include touch() {
+    margin-top: 25%;
+  }
+}
+.f_login_header {
+  display: flex;
+  margin-bottom: 1.2rem;
+  justify-content: center;
+}
 .table {
   font-size: 0.9rem !important;
 }

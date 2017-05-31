@@ -1,14 +1,14 @@
 <template>
   <div>
-    <section class="section">
-      <div class="columns ">
+    <section class="section f_login">
+      <div class="columns">
         <div class="column is-4 is-offset-one-third">
-          <div>
+          <div class="f_login_header">
             <h2 class="title is-3 has-text-centered">Admin Login</h2>
           </div>
           <div class="field">
             <p class="control has-icons-left">
-              <input class="input" type="email" placeholder="Email" v-model="login.email" @keyup.enter="login">
+              <input class="input" type="email" placeholder="Email" v-model="login.email" @keyup.enter="login" name="email">
               <span class="icon is-small is-left">
                 <i class="fa fa-envelope"></i>
               </span>
