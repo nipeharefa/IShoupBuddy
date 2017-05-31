@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="{{ mix('css/admin/vendor/index.css') }}">
 @stop
 
+@section('title')
+    Vendor List | Admin Dashboard - Shoupbud
+@stop
+
 @section('js')
     <script src="{{ mix('js/manifest.js') }}"></script>
 

@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="{{ mix('css/admin/product/create.css') }}">
 @stop
 
+@section('title')
+    Add Product | Admin Dashboard - Shoupbud
+@stop
+
 @section('js')
     <script src="{{ mix('js/manifest.js') }}"></script>
 
