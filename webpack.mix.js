@@ -53,6 +53,13 @@ mix.extract(['vue', 'axios', 'vee-validate'])
 
 mix.disableNotifications()
 
+mix.sourceMaps(); // Enable sourcemaps
+
 if (mix.config.inProduction) {
   mix.version()
 }
+
+// mix.browserSync({
+//   open: false,
+//   proxy: 'skripsi.home.dev'
+// });
