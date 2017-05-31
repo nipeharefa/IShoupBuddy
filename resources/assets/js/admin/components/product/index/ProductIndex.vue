@@ -48,7 +48,7 @@
         'initProducts'
       ]),
       getProducts () {
-        this.$http.get('api/product?without_filter=true').then(response => {
+        this.$http.get('api/admin/product').then(response => {
           this.initProducts(response.data.products)
         }).catch(err => err)
       }

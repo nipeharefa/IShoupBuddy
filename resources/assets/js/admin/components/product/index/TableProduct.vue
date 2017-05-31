@@ -16,8 +16,8 @@
         <td>{{ item.total_review }} / {{ item.avg_rating || 0 }}</td>
         <td>{{ item.total_vendor }}</td>
         <td>
-          <a class="is-link" :href="`/admin/product/${item.id}/edit`">Edit</a>
-          <a class="is-link is-danger">Hide</a>
+          <a class="button is-small" :href="`/admin/product/${item.id}/edit`">Edit</a>
+          <a class="button is-small is-danger">Hide</a>
         </td>
       </tr>
     </tbody>

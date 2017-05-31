@@ -72,6 +72,12 @@ Route::group(['namespace' => 'API'], function() {
 
         Route::post('product-vendor/restore/{id}', 'ProductVendorController@restore');
 
+        Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
+
+            Route::resource('product', 'ProductController',
+                ['only' =>  ['index']]);
+        });
+
 	});
 
     Route::group(['prefix' => 'me', 'middleware' => 'auth:api'], function() {
