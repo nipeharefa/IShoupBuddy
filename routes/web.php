@@ -59,6 +59,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 
     Route::get('login', 'LoginController@showLoginForm');
     Route::post('login', 'LoginController@login');
+    Route::delete('logout', 'LoginController@logout');
 });
 
 Route::group(['prefix' => 'vendor', 'namespace' => 'Vendor'], function() {
