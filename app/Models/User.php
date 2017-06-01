@@ -50,4 +50,9 @@ class User extends Authenticatable
 
         return $this->hasMany(Review::class);
     }
+
+    public function Saldo() {
+
+        return $this->hasOne(Saldo::class);
+    }
 }

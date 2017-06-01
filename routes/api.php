@@ -24,6 +24,7 @@ Route::group(['prefix' => 'oauth', 'namespace' => 'Auth'], function() {
 Route::group(['namespace' => 'API'], function() {
     Route::post('user/change_password','UserController@change_password')
         ->middleware('auth:api');
+
     Route::resource('user', 'UserController',
         ['only' => ['show']]);
 
@@ -70,10 +71,12 @@ Route::group(['namespace' => 'API'], function() {
         Route::resource('review', 'ReviewController',
             ['only' =>  ['store', 'update', 'destroy']]);
 
+        Route::resource('saldo', 'SaldoController',
+            ['only' =>  ['store']]);
+
         Route::post('product-vendor/restore/{id}', 'ProductVendorController@restore');
 
         Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
-
             Route::resource('product', 'ProductController',
                 ['only' =>  ['index']]);
         });
