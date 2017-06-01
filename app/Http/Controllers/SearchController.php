@@ -15,19 +15,38 @@ class SearchController extends Controller
      */
     public function index(Request $request)
     {
-        $q = $request->q ?? null;
+        $user = $request->user() ?? null;
 
-        if (Auth::check()) {
+        $js     = mix('js/search_result.js');
+        $css    = mix('css/guest/search_result.css');
 
-            $user = $request->user();
+        $view = view('pages.search.index');
 
-            return view('pages.me.home.search_result')
-                ->with('user', $user)
-                ->with('keyword', $q);
+        $q = $request->q;
 
+        if ($user) {
+            switch ($user->role) {
+                case 0:
+                    # admin
+                    $js = mix('js/asearch.js');
+                    break;
+                case 1:
+                    # Member
+                    $js     = mix('js/msearch.js');
+                    $css    = mix('css/member/search.css');
+                    break;
+                default:
+                    # Vendor
+                    $js = mix('js/vhome.js');
+                    break;
+            }
+
+            $view->with('user', $user);
         }
-        return view('pages.guest.search_result')
-            ->with('keyword', $q);
+
+        return $view->with('keyword', $q)
+                    ->with('js', $js)
+                    ->with('css', $css);
     }
 
     /**
