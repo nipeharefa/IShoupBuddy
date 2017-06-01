@@ -115,7 +115,13 @@ class SaldoController extends Controller
 
         } catch (Exception $e) {
 
-            return $e->getMessage();
+            $err = [
+                "status"    =>  "ERROR",
+                "message"   =>  $e->getMessage(),
+                "transaction"   =>  null
+            ];
+
+            return response()->json($err, 400);
         }
     }
 
@@ -148,9 +154,45 @@ class SaldoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
+        // Admin cancel topup transaction
         //
+
+        $user = $request->user();
+
+        try {
+
+           DB::beginTransaction();
+
+           $userSaldo = $user->Saldo;
+
+           $transaction  = $userSaldo->Transaction()->findOrFail($id);
+
+           $transaction->update(['status' => 2]);
+
+           DB::commit();
+
+           $response = [
+                "status"    =>  "OK",
+                "message"   =>  "Transaction Canceled",
+                "transaction"   =>  $this->transformUnPaind($transaction)
+           ];
+
+           return response()->json($response, 200);
+
+        } catch (Exception $e) {
+
+            DB::rollback();
+
+            $err = [
+                "status"    =>  "ERROR",
+                "message"   =>  $e->getMessage(),
+                "transaction"   =>  null
+            ];
+
+            return response()->json($err, 400);
+        }
     }
 
     protected function transformUnPaind($trans) {
@@ -158,7 +200,6 @@ class SaldoController extends Controller
         return [
             "id"                =>  $trans->id, // mean transaction id,
             "status"            =>  $trans->status,
-            "status_string"     =>  $trans->status ? "Paid" : "Unpaid",
             "nominal"           =>  $trans->nominal,
             "issueDate"         =>  $trans->updated_at->toW3cString()
         ];
