@@ -41,6 +41,7 @@ mix.js('resources/assets/js/member/pages/home.js', 'js/mhome.js')
 mix.js('resources/assets/js/member/pages/product-detail.js', 'js/mproduct-detail.js')
 mix.js('resources/assets/js/member/pages/me.js', 'js/me.js')
 mix.js('resources/assets/js/member/pages/edit_profile.js', 'js/edit_profile.js')
+mix.js('resources/assets/js/member/pages/search.js', 'js/msearch.js')
 
 
 // Member SASS
@@ -48,6 +49,7 @@ mix.sass('resources/assets/sass/pages/member/home.scss', 'css/member/home.css')
 mix.sass('resources/assets/sass/pages/member/me.scss', 'css/member/me.css')
 mix.sass('resources/assets/sass/pages/member/edit_profile.scss', 'css/member/edit_profile.css')
 mix.sass('resources/assets/sass/pages/member/product/product-detail.scss', 'css/member/product-detail.css')
+mix.sass('resources/assets/sass/pages/member/search/index.scss', 'css/member/search.css')
 
 mix.extract(['vue', 'axios', 'vee-validate'])
 

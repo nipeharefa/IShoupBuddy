@@ -20,11 +20,14 @@
   }
   .user_info {
     display: flex;
-  }
-
-  @include desktop() {
-    .nav-item {
-
+    align-items: center;
+    @include desktop() {
+      a {
+        height: 100%;
+        i {
+          font-size: 2rem;
+        }
+      }
     }
   }
 
