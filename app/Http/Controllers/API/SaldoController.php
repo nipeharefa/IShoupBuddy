@@ -49,26 +49,13 @@ class SaldoController extends Controller
 
             $userSaldo = $user->Saldo;
 
-            // Create Polifyl
             if (!$userSaldo) {
 
                 $user->Saldo()->create(['nominal' => 0]);
             }
 
-
-            $hasUnPaid = $userSaldo->getUnPaid()->first();
-
-            if ($hasUnPaid) {
-
-                $hasUnPaid->update(['nominal' => 1000]);
-
-
-
-            } else {
-
-                $hasUnPaid =  $userSaldo->getUnPaid()
-                    ->create(['nominal' => 1, 'user_id' => $user->id, 'status' => false]);
-            }
+            $hasUnPaid =  $userSaldo->transaction()->create(['nominal' => $reqNominal,
+                'user_id' => $user->id, 'status' => false]);
 
 
             $response = [
@@ -77,9 +64,10 @@ class SaldoController extends Controller
                 "saldo"     =>  $this->transformUnPaind($hasUnPaid)
             ];
 
+            DB::commit();
+
             return response()->json($response);
 
-            DB::commit();
 
         } catch (Exception $e) {
 
