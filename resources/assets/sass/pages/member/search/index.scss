@@ -1,0 +1,13 @@
+@import "node_modules/bulma/bulma";
+@import "~sassComponents/NavbarDesktopDefault";
+@import "../partials/navbar";
+@import "~designHelper/ProductCard.scss";
+@import "~sassComponents/ProductCard";
+
+
+.search_result_head_total {
+  margin-top: 2rem;
+}
+.search_result_row {
+  margin-top: 2rem;
+}
