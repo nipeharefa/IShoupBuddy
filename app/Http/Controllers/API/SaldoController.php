@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SaldoStore;
+use DB;
+use Exception;
 
 class SaldoController extends Controller
 {
@@ -39,32 +41,59 @@ class SaldoController extends Controller
     {
         $user = $request->user();
 
-        $reqNominal = $request->nominal;
+        try {
 
-        $userSaldo = $user->Saldo;
+            DB::beginTransaction();
 
-        // Create Polifyl
-        if (!$userSaldo) {
+            $reqNominal = $request->nominal;
 
-            $user->Saldo()->create(['nominal' => 0]);
+            $userSaldo = $user->Saldo;
+
+            // Create Polifyl
+            if (!$userSaldo) {
+
+                $user->Saldo()->create(['nominal' => 0]);
+            }
+
+
+            $hasUnPaid = $userSaldo->getUnPaid()->first();
+
+            if ($hasUnPaid) {
+
+                $hasUnPaid->update(['nominal' => 1000]);
+
+
+
+            } else {
+
+                $hasUnPaid =  $userSaldo->getUnPaid()
+                    ->create(['nominal' => 1, 'user_id' => $user->id, 'status' => false]);
+            }
+
+
+            $response = [
+                "status"    =>  "OK",
+                "message"   =>  null,
+                "saldo"     =>  $this->transformUnPaind($hasUnPaid)
+            ];
+
+            return response()->json($response);
+
+            DB::commit();
+
+        } catch (Exception $e) {
+
+            DB::rollback();
+
+            $err = [
+                "status"    =>  "OK",
+                "message"   =>  $e->getMessage(),
+                "saldo"     =>  null
+            ];
+
+            return response()->json($err, 400);
+
         }
-
-
-        $hasUnPaid = $userSaldo->getUnPaid()->first();
-
-        if ($hasUnPaid) {
-
-            $hasUnPaid->update(['nominal' => 1000]);
-
-            $response = [];
-
-        } else {
-
-            $hasUnPaid =  $userSaldo->getUnPaid()
-                ->create(['nominal' => 1, 'user_id' => $user->id, 'status' => false]);
-        }
-
-        return $hasUnPaid;
 
     }
 
@@ -111,5 +140,15 @@ class SaldoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    protected function transformUnPaind($trans) {
+
+        return [
+            "id"        =>  $trans->id, // mean transaction id,
+            "status"    =>  $trans->status ? "Paid" : "Unpaid",
+            "nominal"   =>  $trans->nominal,
+            "issueDate" =>  $trans->updated_at->toW3cString()
+        ];
     }
 }

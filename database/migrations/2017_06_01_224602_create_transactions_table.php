@@ -19,6 +19,7 @@ class CreateTransactionsTable extends Migration
             $table->double('nominal')->default(0);
             $table->boolean('status');
             $table->morphs('transactable');
+            $table->string('attachments')->nullable();
             $table->foreign('user_id')->references('id')
                 ->on('users');
             $table->timestamps();
