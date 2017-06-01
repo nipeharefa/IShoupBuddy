@@ -91,9 +91,32 @@ class SaldoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        //
+
+        $user = $request->user();
+
+        try {
+
+            DB::beginTransaction();
+
+            $userSaldo = $user->Saldo;
+
+            $transaction  = $userSaldo->Transaction()->findOrFail($id);
+
+
+            $response = [
+                "status"    =>  "OK",
+                "message"   =>  "",
+                "transaction"   =>  $this->transformUnPaind($transaction)
+            ];
+
+            return $response;
+
+        } catch (Exception $e) {
+
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -133,10 +156,11 @@ class SaldoController extends Controller
     protected function transformUnPaind($trans) {
 
         return [
-            "id"        =>  $trans->id, // mean transaction id,
-            "status"    =>  $trans->status ? "Paid" : "Unpaid",
-            "nominal"   =>  $trans->nominal,
-            "issueDate" =>  $trans->updated_at->toW3cString()
+            "id"                =>  $trans->id, // mean transaction id,
+            "status"            =>  $trans->status,
+            "status_string"     =>  $trans->status ? "Paid" : "Unpaid",
+            "nominal"           =>  $trans->nominal,
+            "issueDate"         =>  $trans->updated_at->toW3cString()
         ];
     }
 }
