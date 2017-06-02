@@ -42,9 +42,13 @@
       }
     },
     methods: {
+      ...mapActions([
+        'initTransactions'
+      ]),
       getTransactions () {
         this.$http.get('api/admin/transaction').then(response => {
           this.transaction = response.data.transactions
+          this.initTransactions(response.data.transactions)
         }).catch(err => err)
       }
     }
