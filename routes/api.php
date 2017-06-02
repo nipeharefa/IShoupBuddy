@@ -79,9 +79,13 @@ Route::group(['namespace' => 'API'], function() {
         Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
             Route::resource('product', 'ProductController',
                 ['only' =>  ['index']]);
+
+            Route::resource('transaction', 'TransactionController',
+                ['except'   =>  ['create', 'edit']]);
         });
 
 	});
+
 
     Route::group(['prefix' => 'me', 'middleware' => 'auth:api'], function() {
 
