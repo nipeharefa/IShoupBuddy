@@ -17,6 +17,7 @@ mix.js('resources/assets/js/admin/pages/product/product-index.js', 'js/a-index-p
 mix.js('resources/assets/js/admin/pages/product/product-create.js', 'js/a-add-product.js')
 mix.js('resources/assets/js/admin/pages/product/product-edit.js', 'js/a-edit-product.js')
 mix.js('resources/assets/js/admin/pages/vendor/vendor-index.js', 'js/a-vendor-user.js')
+mix.js('resources/assets/js/admin/pages/transactions/index.js', 'js/a-transactions-index.js')
 
 // Guest JS
 
