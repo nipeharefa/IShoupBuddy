@@ -8,6 +8,7 @@ mix.sass('resources/assets/sass/pages/admin/product/index.scss', 'css/admin/prod
 mix.sass('resources/assets/sass/pages/admin/product/create.scss', 'css/admin/product/create.css')
 mix.sass('resources/assets/sass/pages/admin/product/edit.scss', 'css/admin/product/edit.css')
 mix.sass('resources/assets/sass/pages/admin/vendor/index.scss', 'css/admin/vendor/index.css')
+mix.sass('resources/assets/sass/pages/admin/transactions/index.scss', 'css/admin/transactions/index.css')
 
 
 // Admin JS
