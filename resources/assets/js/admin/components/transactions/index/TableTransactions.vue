@@ -7,7 +7,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="item in transactions">
+      <tr>
       </tr>
     </tbody>
   </table>
@@ -15,11 +15,5 @@
 
 
 <script>
-  import { mapGetters } from 'vuex'
-  export default {
-    props: ['role'],
-    computed: {
-      ...mapGetters([])
-    }
-  }
+  export default {}
 </script>
