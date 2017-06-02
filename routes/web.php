@@ -56,6 +56,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 
     Route::resource('vendor', 'VendorController',
         ['only' => ['index']]);
+    Route::resource('transactions', 'TransactionController');
 
     Route::get('login', 'LoginController@showLoginForm');
     Route::post('login', 'LoginController@login');
