@@ -67,3 +67,7 @@ if (mix.config.inProduction) {
 //   open: false,
 //   proxy: 'skripsi.home.dev'
 // });
+
+mix.options({
+  extractVueStyles: true,
+});

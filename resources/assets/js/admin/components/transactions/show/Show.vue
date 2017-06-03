@@ -32,7 +32,7 @@
 
 
 <style lang="scss" scoped>
-  @import "node_modules/bulma/bulma";
+
 </style>
 
 <script>

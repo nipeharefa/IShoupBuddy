@@ -1,5 +1,6 @@
 <template>
   <div>
+    <vue-progress-bar></vue-progress-bar>
     <div>
       <section class="section">
         <div class="container">
@@ -8,7 +9,6 @@
               <admin-sidebar></admin-sidebar>
             </div>
             <div class="column">
-              <vue-progress-bar></vue-progress-bar>
               <router-view></router-view>
             </div>
           </div>
