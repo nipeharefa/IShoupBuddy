@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use Auth;
+use App\Helpers\Transformers\TransactionTransformer;
 
 class TransactionController extends Controller
 {
@@ -16,8 +17,9 @@ class TransactionController extends Controller
      */
     public function index(Request $request)
     {
+        $transaction  = Transaction::orderByDesc('updated_at')->get();
         $response = [
-            "transactions"  =>  Transaction::orderByDesc('updated_at')->get(),
+            "transactions"  =>  TransactionTransformer::transform($transaction),
             "message"   =>  null,
             "status"    =>  "OK"
         ];

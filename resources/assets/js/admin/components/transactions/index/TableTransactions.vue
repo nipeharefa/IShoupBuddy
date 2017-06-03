@@ -5,6 +5,7 @@
         <th>ID Transaksi</th>
         <th>User</th>
         <th>Nominal</th>
+        <th>Type</th>
         <th>Status</th>
         <th></th>
       </tr>
@@ -18,13 +19,16 @@
           </router-link>
         </td>
         <td>
-          {{ item.user_id }}
+          {{ item.user.id }}
         </td>
         <td>
-          {{ item.nominal }}
+          {{ item.nominal_string }}
         </td>
         <td>
-          Success
+          {{ item.type }}
+        </td>
+        <td>
+          {{ item.status_string }}
         </td>
         <td>
           <a class="button is-small is-primary">Approve</a>
