@@ -48,7 +48,7 @@ class TransactionController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('pages.admin.transactions.index');
     }
 
     /**

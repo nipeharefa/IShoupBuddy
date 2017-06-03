@@ -52,9 +52,15 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Transaction $transaction)
     {
-        //
+        $response = [
+            "status"    =>  "OK",
+            "message"   =>  null,
+            "transaction"   =>  $transaction
+        ];
+
+        return response()->json($response);
     }
 
     /**

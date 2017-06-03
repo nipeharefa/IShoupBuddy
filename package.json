@@ -41,7 +41,10 @@
     "vue-bulma-collapse": "^1.0.3",
     "vue-chartjs": "^2.6.0",
     "vue-lazyload": "^1.0.3",
+    "vue-progressbar": "^0.7.2",
+    "vue-router": "^2.5.3",
     "vue-star-rating": "^1.2.2",
-    "vuex": "^2.3.1"
+    "vuex": "^2.3.1",
+    "vuex-router-sync": "^4.2.0"
   }
 }

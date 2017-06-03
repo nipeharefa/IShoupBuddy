@@ -12,7 +12,10 @@
     <tbody>
       <tr v-for="item in transactions">
         <td>
-          {{ item.id }}
+          <router-link
+          :to="{ name: 'detailTransaction', params: { id: item.id }}" append>
+            {{ item.id }}
+          </router-link>
         </td>
         <td>
           {{ item.user_id }}
