@@ -72,7 +72,7 @@ Route::group(['namespace' => 'API'], function() {
             ['only' =>  ['store', 'update', 'destroy']]);
 
         Route::resource('saldo', 'SaldoController',
-            ['only' =>  ['store', 'show', 'destroy']]);
+            ['only' =>  ['store', 'show','index']]);
 
         Route::post('product-vendor/restore/{id}', 'ProductVendorController@restore');
 
@@ -85,6 +85,8 @@ Route::group(['namespace' => 'API'], function() {
 
             Route::resource('transaction', 'TransactionController',
                 ['except'   =>  ['create', 'edit']]);
+
+            Route::post('transaction/{transaction}/approve', 'TransactionController@approve');
         });
 
 	});

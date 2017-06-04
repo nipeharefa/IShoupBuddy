@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SaldoStore;
 use DB;
 use Exception;
+use App\Models\Saldo;
 
 class SaldoController extends Controller
 {
@@ -16,9 +17,23 @@ class SaldoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $user = $request->user();
+
+        $response = [
+            "message"   =>  "",
+            "saldo"     =>  $user->Saldo->nominal ?? 0,
+            "history"   =>  $this->getHistorySaldo($user->Saldo),
+            "status"    =>  "OK"
+        ];
+
+        return response()->json($response);
+    }
+
+    protected function getHistorySaldo(Saldo $saldo) {
+
+        return transform($saldo->Transaction);
     }
 
     /**
@@ -54,8 +69,11 @@ class SaldoController extends Controller
                 $user->Saldo()->create(['nominal' => 0]);
             }
 
-            $hasUnPaid =  $userSaldo->transaction()->create(['nominal' => $reqNominal,
-                'user_id' => $user->id, 'status' => false]);
+            $hasUnPaid =  $userSaldo->transaction()->create([
+                'nominal' => $reqNominal + rand(0,100),
+                'user_id' => $user->id,
+                'status' => false
+            ]);
 
 
             $response = [

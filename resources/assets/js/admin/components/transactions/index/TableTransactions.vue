@@ -31,7 +31,7 @@
           {{ item.status_string }}
         </td>
         <td>
-          <a class="button is-small is-primary">Approve</a>
+          <a class="button is-small is-primary" @click="approve(item)">Approve</a>
           <a class="button is-small is-danger">Cancel</a>
         </td>
       </tr>
@@ -47,6 +47,20 @@
       ...mapGetters([
         'transactions'
       ])
+    },
+    methods: {
+      approve (item) {
+        if (item.type === 'Saldo') {
+          this.approveSaldo(item)
+          return
+        }
+      },
+      approveSaldo (item) {
+        this.$http.post(`api/admin/transaction/${item.id}/approve`).then(response => {
+          const { data } = response
+          console.log(data)
+        }).catch(err => err)
+      }
     }
   }
 </script>

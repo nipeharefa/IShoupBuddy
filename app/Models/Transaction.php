@@ -19,4 +19,9 @@ class Transaction extends Model
 
         return $this->hasMany(TransactionDetail::class);
     }
+
+    public function Saldo() {
+
+        return $this->transactable()->belongsTo(Saldo::class);
+    }
 }
