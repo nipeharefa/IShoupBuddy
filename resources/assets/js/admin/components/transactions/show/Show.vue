@@ -24,15 +24,32 @@
     </div>
     <div class="t_table_order">
       <table class="table">
-
+        <thead>
+          <tr>
+            <td></td>
+            <td>Nama Item</td>
+            <td>Quantity</td>
+            <td>Satuan</td>
+            <td>Total</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Saldo</td>
+            <td>1</td>
+            <td>10000</td>
+            <td>1</td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </div>
 </template>
 
 
-<style lang="scss" scoped>
-
+<style lang="scss">
+  @import "~sassPages/admin/transactions/show";
 </style>
 
 <script>

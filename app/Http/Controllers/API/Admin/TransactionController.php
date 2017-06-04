@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
+use App\Models\Saldo;
 use Auth;
 use App\Helpers\Transformers\TransactionTransformer;
 
@@ -17,7 +18,8 @@ class TransactionController extends Controller
      */
     public function index(Request $request)
     {
-        $transaction  = Transaction::orderByDesc('updated_at')->get();
+        $transaction  = Transaction::where('transactable_type', "!=", Saldo::class)
+            ->orderByDesc('updated_at')->get();
         $response = [
             "transactions"  =>  TransactionTransformer::transform($transaction),
             "message"   =>  null,

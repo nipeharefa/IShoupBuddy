@@ -76,6 +76,9 @@ Route::group(['namespace' => 'API'], function() {
 
         Route::post('product-vendor/restore/{id}', 'ProductVendorController@restore');
 
+        Route::resource('transaction', 'TransactionController',
+            ['only' =>  ['index', 'store']]);
+
         Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
             Route::resource('product', 'ProductController',
                 ['only' =>  ['index']]);

@@ -22,6 +22,10 @@ class TransactionTransformer extends AbstractTransformer {
             "links"             =>  $this->getLinkAction($model)
         ];
 
+        if ($this->isRelationshipLoaded($model, 'Detail')) {
+            $arr['detail'] = DetailTransformer::transform($model->Detail);
+        }
+
         return $arr;
     }
 

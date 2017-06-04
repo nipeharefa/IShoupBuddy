@@ -181,6 +181,7 @@ return [
 
         // Appstract\Opcache\OpcacheServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
+        Themsaid\Transformers\TransformersServiceProvider::class
 
 
     ],

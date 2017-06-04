@@ -55,4 +55,8 @@ class User extends Authenticatable
 
         return $this->hasOne(Saldo::class);
     }
+
+    public function Transaction () {
+        return $this->morphMany(Transaction::class, 'transactable');
+    }
 }

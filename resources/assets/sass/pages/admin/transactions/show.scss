@@ -1,0 +1,19 @@
+@import "node_modules/bulma/sass/utilities/_all";
+.t_detail {
+
+  .t_info_user {
+    display: flex;
+    flex-direction: column !important;
+    justify-content: space-between;
+    font-size: $size-7;
+    margin-top: 1rem;
+
+    .t_shipping {
+      margin-top: 1rem;
+    }
+
+    table {
+      font-size: $size-7;
+    }
+  }
+}
