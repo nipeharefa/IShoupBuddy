@@ -15,10 +15,10 @@ class CreateCartsTable extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('identify_id');
             $table->integer('transaction_id');
             $table->integer('product_vendor_id')->unsigned();
             $table->integer('quantity')->default(1);
-            $table->double('harga')->default(1);
             $table->timestamps();
             $table->foreign('product_vendor_id')->references('id')->on('product_vendors')
                 ->onDelete('cascade');
