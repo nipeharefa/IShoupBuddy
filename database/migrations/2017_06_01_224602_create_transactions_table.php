@@ -19,6 +19,8 @@ class CreateTransactionsTable extends Migration
             $table->double('nominal')->default(0);
             $table->boolean('status');
             $table->morphs('transactable');
+            $table->boolean('debit_credit')->default(0)
+                ->comment('Debit = 0, Credit = 1');
             $table->string('attachments')->nullable();
             $table->foreign('user_id')->references('id')
                 ->on('users');
