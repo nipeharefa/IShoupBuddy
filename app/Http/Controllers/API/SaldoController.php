@@ -8,9 +8,11 @@ use App\Http\Requests\SaldoStore;
 use DB;
 use Exception;
 use App\Models\Saldo;
+use App\Helpers\Traits\RupiahFormated;
 
 class SaldoController extends Controller
 {
+    use RupiahFormated;
 
     /**
      * Display a listing of the resource.
@@ -21,9 +23,12 @@ class SaldoController extends Controller
     {
         $user = $request->user();
 
+        $saldo = $user->Saldo->nominal ?? 0;
+
         $response = [
             "message"   =>  "",
-            "saldo"     =>  $user->Saldo->nominal ?? 0,
+            "saldo"     =>  $saldo,
+            "saldo_string"  => $this->formatRupiah($saldo),
             "history"   =>  $this->getHistorySaldo($user->Saldo),
             "status"    =>  "OK"
         ];
