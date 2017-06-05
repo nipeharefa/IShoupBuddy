@@ -9,9 +9,11 @@ use App\Helpers\Transformers\CartTransformer;
 use App\Models\ProductVendor;
 use Exception;
 use DB;
+use App\Helpers\Traits\RupiahFormated;
 
 class CartController extends Controller
 {
+    use RupiahFormated;
     /**
      * Display a listing of the resource.
      *
@@ -21,15 +23,17 @@ class CartController extends Controller
     {
         $user =  $request->user();
 
+        $carts_total = $user->Cart->sum(function ($product) {
+                    return $product->harga;
+                });
+
         $response = [
             "data"  =>  "OK",
             "message"   =>  null,
             "carts"     =>  [
                 "items" =>  CartTransformer::transform($user->Cart),
-                "total" =>  $user->Cart->sum(function ($product) {
-                    return $product->harga;
-                }),
-                "total_strings" =>  ""
+                "total" =>  $carts_total,
+                "total_strings" => $this->formatRupiah($carts_total)
             ]
         ];
 

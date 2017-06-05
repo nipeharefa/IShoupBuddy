@@ -28,14 +28,18 @@ class TransactionController extends Controller
                 case 'd':
                     $trans->load('Detail');
                     break;
-
                 default:
-                    # code...
                     break;
             }
         });
 
-        return transform($trans);
+        $response = [
+            "message"   =>  null,
+            "status"    =>  "OK",
+            "transactions" => TransactionTransformer::transform($trans)
+        ];
+
+        return response()->json($response, 200);
     }
 
     /**
@@ -61,6 +65,16 @@ class TransactionController extends Controller
 
             $cart = $user->Cart;
 
+            $saldo = $user->Saldo->nominal ?? 0;
+
+            $total_belanja = $cart->sum(function($item){
+                    return $item->quantity * $item->harga;
+                });
+
+            if ($total_belanja > $saldo) {
+                throw new Exception("Saldo tidak cukup", 1);
+            }
+
             if (!$cart->count()) {
                 throw new Exception("Cart null", 2011);
             }
@@ -68,9 +82,7 @@ class TransactionController extends Controller
 
             // Transaction
             $data = [
-                "nominal"   =>  $cart->sum(function($item){
-                    return $item->quantity * $item->harga;
-                }),
+                "nominal"   =>  $total_belanja,
                 "status"    =>  2,
                 "user_id"   =>  $user->id
             ];

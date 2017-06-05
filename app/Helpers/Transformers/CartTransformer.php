@@ -13,6 +13,7 @@ class CartTransformer extends AbstractTransformer {
             "id"            =>  $cart->id,
             "items"         =>  ProductVendorTransformer::transform($cart->ProductVendor),
             "total"         =>  $cart->harga,
+            "total_string"  =>  $this->formatRupiah($cart->harga),
             "quantity"      =>  $cart->quantity
         ];
 
