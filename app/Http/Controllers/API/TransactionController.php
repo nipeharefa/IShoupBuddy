@@ -83,7 +83,7 @@ class TransactionController extends Controller
             // Transaction
             $data = [
                 "nominal"   =>  $total_belanja,
-                "status"    =>  2,
+                "status"    =>  0,
                 "user_id"   =>  $user->id
             ];
 

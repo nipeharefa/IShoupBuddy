@@ -17,7 +17,8 @@ class CreateTransactionsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->double('nominal')->default(0);
-            $table->boolean('status');
+            $table->boolean('status')
+                ->comment('Pending = 0, Accept = 1, Pending = 2');
             $table->morphs('transactable');
             $table->boolean('debit_credit')->default(0)
                 ->comment('Debit = 0, Credit = 1');
