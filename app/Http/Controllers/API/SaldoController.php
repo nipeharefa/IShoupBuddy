@@ -71,7 +71,7 @@ class SaldoController extends Controller
 
             if (!$userSaldo) {
 
-                $user->Saldo()->create(['nominal' => 0]);
+                $userSaldo = $user->Saldo()->create(['nominal' => 0]);
             }
 
             $hasUnPaid =  $userSaldo->transaction()->create([
