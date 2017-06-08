@@ -29,7 +29,7 @@
     "jquery": "^3.1.1",
     "lodash": "^4.17.4",
     "sw-precache-webpack-plugin": "^0.9.2",
-    "vue": "^2.2.6"
+    "vue": "^2.3.4"
   },
   "dependencies": {
     "bulma": "^0.4.0",
@@ -39,7 +39,7 @@
     "notie": "^4.3.1",
     "vee-validate": "^2.0.0-beta.25",
     "vue-bulma-collapse": "^1.0.3",
-    "vue-chartjs": "^2.6.0",
+    "vue-chartjs": "^2.6.4",
     "vue-lazyload": "^1.0.3",
     "vue-progressbar": "^0.7.2",
     "vue-router": "^2.5.3",
