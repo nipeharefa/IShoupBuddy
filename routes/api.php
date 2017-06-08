@@ -81,7 +81,7 @@ Route::group(['namespace' => 'API'], function() {
 
         Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
             Route::resource('product', 'ProductController',
-                ['only' =>  ['index']]);
+                ['only' =>  ['index', 'show']]);
 
             Route::resource('transaction', 'TransactionController',
                 ['except'   =>  ['create', 'edit']]);

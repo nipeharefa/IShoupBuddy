@@ -54,16 +54,18 @@
   </div>
 </template>
 
+<style lang="scss" scoped>
+  @import "~sassPages/admin/product/edit";
+</style>
 
 <script>
-  import { mapGetters, mapActions } from 'vuex'
   import { alert } from 'notie'
 
   const path = require('path')
 
   export default {
     mounted () {
-      this.originalImage = path.basename(this.product.picture_url.medium)
+      this.originalImage = path.basename(this.edit.picture_url.medium)
     },
     data () {
       return {
@@ -71,17 +73,9 @@
         edit: this.$store.state.product
       }
     },
-    computed: {
-      ...mapGetters([
-        'onError',
-        'product'
-      ])
-    },
     methods: {
-      ...mapActions([
-        'setOnError'
-      ]),
       _showNotif () {
+        console.log('asdfsad')
         alert({
           type: 1,
           text: 'Data produk berhasil diperbaharui'

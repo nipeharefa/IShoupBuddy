@@ -19,7 +19,7 @@
           <router-link
           :to="{ name: 'formEditProduct', params: { id: item.id }}" append
           class="button is-small is-info">
-            {{ item.id }}
+            Edit
           </router-link>
         </td>
       </tr>

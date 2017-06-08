@@ -8,12 +8,13 @@ import mutations from './mutations'
 
 Vue.use(Vuex)
 
-const strict = process.env.NODE_ENV !== 'production'
+const strict = false
 
 const state = {
   transactions: [],
   products: [],
-  onError: false
+  onError: false,
+  product: null
 }
 
 const store = new Vuex.Store({

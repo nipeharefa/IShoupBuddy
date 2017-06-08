@@ -4,29 +4,23 @@ namespace App\Http\Controllers\API\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Helpers\Transformers\ProductTransformer;
-use App\Models\Product;
+use App\Models\Vendor;
 
-class ProductController extends Controller
+class VendorController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $product = Product::orderByDesc('created_at');
-
-        $options = [];
-
-        $data = [
-            "status"    =>  "OK",
-            "products"  =>  ProductTransformer::transform($product->get(), $options),
-            "message"   =>  NULL
+        $response = [
+            "message"   => null,
+            "vendors"   =>  Vendor::all();
         ];
 
-        return response()->json($data, 200);
+        return response()->json($response, 200);
     }
 
     /**
@@ -56,18 +50,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product, Request $request)
+    public function show($id)
     {
-
-        $options = [];
-
-        $data = [
-            "status"    =>  "OK",
-            "product"  =>  ProductTransformer::transform($product, $options),
-            "message"   =>  NULL
-        ];
-
-        return response()->json($data);
+        //
     }
 
     /**

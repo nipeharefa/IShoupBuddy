@@ -1,4 +1,5 @@
 @import "node_modules/bulma/bulma";
+@import "node_modules/notie/src/notie.scss";
 
 table {
   margin-top: 1rem;
@@ -8,5 +9,11 @@ table {
   tbody {
     color: $grey;
     font-size: 0.9rem;
+  }
+
+  @include touch() {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
   }
 }
