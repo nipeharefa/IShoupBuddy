@@ -17,7 +17,7 @@ class VendorController extends Controller
     {
         $response = [
             "message"   => null,
-            "vendors"   =>  Vendor::all();
+            "vendors"   =>  Vendor::all()
         ];
 
         return response()->json($response, 200);

@@ -5,10 +5,14 @@ import Vuex from 'vuex'
 import * as actions from './actions'
 import * as getters from './getters'
 import mutations from './mutations'
-
+import vendor from './modules/vendor'
 Vue.use(Vuex)
 
 const strict = false
+
+const modules = {
+  vendor
+}
 
 const state = {
   transactions: [],
@@ -22,7 +26,8 @@ const store = new Vuex.Store({
   mutations,
   actions,
   getters,
-  strict
+  strict,
+  modules
 })
 
 export default store

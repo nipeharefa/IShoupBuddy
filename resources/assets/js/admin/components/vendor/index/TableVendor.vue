@@ -30,11 +30,15 @@
 
 
 <script>
+  import { mapGetters } from 'vuex'
   export default {
     data () {
-      return {
-        vendors: []
-      }
+      return {}
+    },
+    computed: {
+      ...mapGetters([
+        'vendors'
+      ])
     },
     methods: {
       activateVendor (id) {

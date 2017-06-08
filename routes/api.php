@@ -83,6 +83,9 @@ Route::group(['namespace' => 'API'], function() {
             Route::resource('product', 'ProductController',
                 ['only' =>  ['index', 'show']]);
 
+            Route::resource('vendor', 'VendorController',
+                ['only' =>  ['index', 'show']]);
+
             Route::resource('transaction', 'TransactionController',
                 ['except'   =>  ['create', 'edit']]);
 

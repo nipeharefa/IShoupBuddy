@@ -21,11 +21,13 @@ const app = new Vue({
   created () {
     this.getTransactions()
     this.getProducts()
+    this.getVendors()
   },
   methods: {
     ...mapActions([
       'initTransactions',
-      'initProducts'
+      'initProducts',
+      'initVendors'
     ]),
     getTransactions () {
       this.$http.get('api/admin/transaction').then(response => {
@@ -36,6 +38,11 @@ const app = new Vue({
     getProducts () {
       this.$http.get('api/admin/product').then(response => {
         this.initProducts(response.data.products)
+      }).catch(err => err)
+    },
+    getVendors () {
+      this.$http.get('api/admin/vendor').then(response => {
+        this.initVendors(response.data.vendors)
       }).catch(err => err)
     }
   }
