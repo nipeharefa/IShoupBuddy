@@ -49,7 +49,7 @@ Route::get('home', 'HomeController@index');
 Route::resource('product', 'ProductController',
 	['only' => ['show']]);
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth']], function() {
 
     Route::get('login', 'LoginController@showLoginForm');
     Route::post('login', 'LoginController@login');
