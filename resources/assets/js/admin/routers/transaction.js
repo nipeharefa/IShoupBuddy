@@ -18,7 +18,7 @@ const router = new Router({
     { name: 'detailTransaction', path: '/admin/transactions/:id', component: TransactionDetail },
     { name: 'listVendor', path: '/admin/vendor/', component: TableVendor },
     { name: 'formAddProduct', path: '/admin/product/create', component: FormAddProduct },
-    { name: 'listProducts', path: '/admin/product', component: ProductIndex },
+    { name: 'listProducts', path: '/admin/product', component: ProductIndex, title: 'Vendor' },
     { name: 'formEditProduct', path: '/admin/product/:id/edit', component: ProductEdit }
   ]
 })
