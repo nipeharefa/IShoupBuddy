@@ -6,6 +6,7 @@ const TransactionDetail = () => System.import('adminComponents/transactions/show
 const TableVendor = () => System.import('adminComponents/vendor/index/TableVendor')
 const FormAddProduct = () => System.import('adminProduct/create/FormAddProduct.vue')
 const ProductIndex = () => import('adminComponents/product/index/ProductIndex.vue')
+const ProductEdit = () => import('adminComponents/product/edit/ProductEdit.vue')
 
 Vue.use(Router)
 
@@ -17,7 +18,8 @@ const router = new Router({
     { name: 'detailTransaction', path: '/admin/transactions/:id', component: TransactionDetail },
     { name: 'listVendor', path: '/admin/vendor/', component: TableVendor },
     { name: 'formAddProduct', path: '/admin/product/create', component: FormAddProduct },
-    { name: 'listProducts', path: '/admin/product', component: ProductIndex }
+    { name: 'listProducts', path: '/admin/product', component: ProductIndex },
+    { name: 'formEditProduct', path: '/admin/product/:id/edit', component: ProductEdit }
   ]
 })
 

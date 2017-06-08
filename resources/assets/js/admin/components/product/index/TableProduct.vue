@@ -16,7 +16,11 @@
         <td>{{ item.total_review }} / {{ item.avg_rating || 0 }}</td>
         <td>{{ item.total_vendor }}</td>
         <td>
-          <a class="button is-small is-info" :href="`/admin/product/${item.id}/edit`">Edit</a>
+          <router-link
+          :to="{ name: 'formEditProduct', params: { id: item.id }}" append
+          class="button is-small is-info">
+            {{ item.id }}
+          </router-link>
         </td>
       </tr>
     </tbody>
