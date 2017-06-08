@@ -7,7 +7,7 @@ import mutations from './mutations'
 const strict = false
 
 const state = {
-  vendors: [],
+  vendors: null,
   vendor: null,
   onError: false
 }
