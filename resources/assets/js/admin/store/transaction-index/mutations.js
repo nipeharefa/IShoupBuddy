@@ -4,5 +4,8 @@ export default {
   },
   INIT_PRODUCTS (state, products) {
     state.products = products
+  },
+  SET_ON_ERROR (state, error) {
+    state.onError = error
   }
 }

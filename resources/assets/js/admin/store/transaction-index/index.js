@@ -12,7 +12,8 @@ const strict = process.env.NODE_ENV !== 'production'
 
 const state = {
   transactions: [],
-  products: []
+  products: [],
+  onError: false
 }
 
 const store = new Vuex.Store({

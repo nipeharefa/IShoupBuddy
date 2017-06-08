@@ -18,11 +18,6 @@ class ProductController extends Controller
     {
         $product = Product::orderByDesc('created_at');
 
-
-        $product->whereHas('productvendor', function($pv){
-            return $pv;
-        });
-
         $options = [];
 
         $data = [

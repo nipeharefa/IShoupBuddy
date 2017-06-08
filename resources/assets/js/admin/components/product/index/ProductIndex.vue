@@ -1,6 +1,6 @@
 <template>
   <div class="ss">
-    <a href="/admin/product/create" class="button is-primary">Tambah Produk</a>
+    <router-link :to="{ name: 'formAddProduct' }" append class="button is-primary">Tambah Produk</router-link>
     <br>
     <table-product></table-product>
   </div>
