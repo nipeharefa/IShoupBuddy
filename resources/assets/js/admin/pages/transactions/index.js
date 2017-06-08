@@ -20,15 +20,22 @@ const app = new Vue({
   store,
   created () {
     this.getTransactions()
+    this.getProducts()
   },
   methods: {
     ...mapActions([
-      'initTransactions'
+      'initTransactions',
+      'initProducts'
     ]),
     getTransactions () {
       this.$http.get('api/admin/transaction').then(response => {
         this.transaction = response.data.transactions
         this.initTransactions(response.data.transactions)
+      }).catch(err => err)
+    },
+    getProducts () {
+      this.$http.get('api/admin/product').then(response => {
+        this.initProducts(response.data.products)
       }).catch(err => err)
     }
   }

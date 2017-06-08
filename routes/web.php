@@ -51,16 +51,11 @@ Route::resource('product', 'ProductController',
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 
-    Route::resource('product', 'ProductController',
-        ['only' => ['index', 'create', 'edit']]);
-
-    Route::resource('vendor', 'VendorController',
-        ['only' => ['index']]);
-    Route::resource('transactions', 'TransactionController');
-
     Route::get('login', 'LoginController@showLoginForm');
     Route::post('login', 'LoginController@login');
     Route::delete('logout', 'LoginController@logout');
+
+    Route::get('/{any?}/{any2?}/{any3?}', 'TransactionController@index');
 });
 
 Route::group(['prefix' => 'vendor', 'namespace' => 'Vendor'], function() {

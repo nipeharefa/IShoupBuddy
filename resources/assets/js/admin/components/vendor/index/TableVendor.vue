@@ -31,7 +31,11 @@
 
 <script>
   export default {
-    props: ['vendors'],
+    data () {
+      return {
+        vendors: []
+      }
+    },
     methods: {
       activateVendor (id) {
         const data = { 'product_id': id }
