@@ -49,13 +49,15 @@ Route::get('home', 'HomeController@index');
 Route::resource('product', 'ProductController',
 	['only' => ['show']]);
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth']], function() {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 
     Route::get('login', 'LoginController@showLoginForm');
     Route::post('login', 'LoginController@login');
-    Route::delete('logout', 'LoginController@logout');
+    Route::group(['middleware' => ['auth']], function() {
+        Route::delete('logout', 'LoginController@logout');
+        Route::get('/{any?}/{any2?}/{any3?}', 'TransactionController@index');
+    });
 
-    Route::get('/{any?}/{any2?}/{any3?}', 'TransactionController@index');
 });
 
 Route::group(['prefix' => 'vendor', 'namespace' => 'Vendor'], function() {

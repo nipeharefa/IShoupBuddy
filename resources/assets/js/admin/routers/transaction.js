@@ -7,6 +7,7 @@ const TableVendor = () => System.import('adminComponents/vendor/index/TableVendo
 const FormAddProduct = () => System.import('adminProduct/create/FormAddProduct.vue')
 const ProductIndex = () => import('adminComponents/product/index/ProductIndex.vue')
 const ProductEdit = () => import('adminComponents/product/edit/ProductEdit.vue')
+const UserIndex = () => import('adminComponents/users/index/UserIndex.vue')
 
 Vue.use(Router)
 
@@ -19,7 +20,8 @@ const router = new Router({
     { name: 'listVendor', path: '/admin/vendor/', component: TableVendor },
     { name: 'formAddProduct', path: '/admin/product/create', component: FormAddProduct },
     { name: 'listProducts', path: '/admin/product', component: ProductIndex, title: 'Vendor' },
-    { name: 'formEditProduct', path: '/admin/product/:id/edit', component: ProductEdit }
+    { name: 'formEditProduct', path: '/admin/product/:id/edit', component: ProductEdit },
+    { name: 'listUser', path: '/admin/users', component: UserIndex },
   ]
 })
 

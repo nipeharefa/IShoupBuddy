@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         $response = [
-            "users"     =>  User::all(),
+            "users"     =>  User::whereRole(1)->get(),
             "messages"  => null
         ];
 

@@ -6,6 +6,8 @@ import mutations from './mutations'
 
 const strict = false
 
+const namespaced = false
+
 const state = {
   vendors: null,
   vendor: null,
@@ -17,5 +19,6 @@ export default {
   strict,
   getters,
   actions,
-  mutations
+  mutations,
+  namespaced
 }
