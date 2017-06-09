@@ -6,7 +6,7 @@
         <div class="container">
           <div class="columns">
             <div class="column is-one-quarter">
-              <admin-sidebar></admin-sidebar>
+              <vendor-sidebar></vendor-sidebar>
             </div>
             <div class="column">
               <router-view></router-view>
@@ -23,12 +23,12 @@
 
 <script>
   const FooterApps = () => import('otherComponents/Footer.vue')
-  const AdminSidebar = () => import('global/components/Sidebars/AdminSidebar.vue')
+  const VendorSidebar = () => import('global/components/Sidebars/VendorSidebar.vue')
 
   export default {
     components: {
       FooterApps,
-      AdminSidebar
+      VendorSidebar
     },
     created () {
       this.$Progress.start()

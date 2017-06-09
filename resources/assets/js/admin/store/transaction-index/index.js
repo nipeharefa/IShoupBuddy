@@ -6,12 +6,14 @@ import * as actions from './actions'
 import * as getters from './getters'
 import mutations from './mutations'
 import vendor from './modules/vendor'
+import user from './modules/user'
 Vue.use(Vuex)
 
 const strict = false
 
 const modules = {
-  vendor
+  vendor,
+  user
 }
 
 const state = {

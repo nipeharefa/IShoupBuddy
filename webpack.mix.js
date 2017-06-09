@@ -53,6 +53,13 @@ mix.sass('resources/assets/sass/pages/member/edit_profile.scss', 'css/member/edi
 mix.sass('resources/assets/sass/pages/member/product/product-detail.scss', 'css/member/product-detail.css')
 mix.sass('resources/assets/sass/pages/member/search/index.scss', 'css/member/search.css')
 
+// Vendor JS
+mix.js('resources/assets/js/vendor/pages/auth/login.js', 'js/vendor_login.js')
+mix.js('resources/assets/js/vendor/pages/product/index.js', 'js/vendor_product_index.js')
+// Vendor SASS
+mix.sass('resources/assets/sass/pages/vendor/auth/login.scss', 'css/vendor/login.css')
+mix.sass('resources/assets/sass/pages/vendor/product/index.scss', 'css/vendor/product/index.css')
+
 mix.extract(['vue', 'axios', 'vee-validate'])
 
 mix.disableNotifications()

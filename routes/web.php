@@ -60,7 +60,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 
 });
 
-Route::group(['prefix' => 'vendor', 'namespace' => 'Vendor'], function() {
+Route::group(['prefix' => 'vendor', 'namespace' => 'Vendor', 'middleware' => ['auth']], function() {
 
     Route::resource('product', 'ProductController');
 
