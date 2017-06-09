@@ -24,8 +24,6 @@ class LoginVendorController extends Controller
 
     public function login(Request $request) {
 
-        // return $request->all();
-
         try {
 
             $user = User::where('email', $request->email)->firstOrFail();
@@ -80,5 +78,12 @@ class LoginVendorController extends Controller
             "message"   =>  "Invalid Login"
         ];
         return response()->json($data, 401);
+    }
+
+    protected function credentials(Request $request)
+    {
+        $data = $request->only($this->username(), 'password');
+        $data['role'] = 2;
+        return $data;
     }
 }
