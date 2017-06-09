@@ -39,7 +39,7 @@ class ProductController extends Controller
                     "markUsed"      =>  true,
                     "vendor"        =>  $vendor
                 ];
-                $product = transform(Product::get(), $options);
+                $product = transform(Product::orderBy('name')->get(), $options);
             }
 
             $response = [

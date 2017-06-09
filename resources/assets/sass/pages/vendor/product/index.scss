@@ -1,2 +1,19 @@
 @import "node_modules/bulma/sass/utilities/_all";
-@import "../_partials/navbar"
+@import "../_partials/navbar";
+
+table {
+  margin-top: 1rem;
+  thead {
+    font-size: $size-6;
+  }
+  tbody {
+    color: $grey;
+    font-size: 0.9rem;
+  }
+
+  @include touch() {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
+}

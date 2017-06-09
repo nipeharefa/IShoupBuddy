@@ -8,9 +8,12 @@
       <li>
         <router-link :to="{ name: 'product-index' }" append>Products</router-link>
       </li>
-      <!-- <li>
-        <router-link :to="{ name: 'review-index' }" append>Review</router-link>
-      </li> -->
+      <li>
+        <router-link :to="{ name: 'product-index' }" append>Review</router-link>
+      </li>
+      <li>
+        <router-link :to="{ name: 'product-index' }" append>Transactions</router-link>
+      </li>
     </ul>
   </aside>
 </template>
