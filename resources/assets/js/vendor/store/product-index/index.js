@@ -6,7 +6,7 @@ import * as actions from './actions'
 import * as getters from './getters'
 import mutations from './mutations'
 
-import { isActive, searchActive, activeUser } from 'statesStore'
+import { isActive, searchActive, activeUser, product } from 'statesStore'
 
 Vue.use(Vuex)
 
@@ -17,7 +17,10 @@ const state = {
   promo: [],
   products: [],
   isActive,
-  searchActive
+  searchActive,
+  product,
+  ownProducts: null,
+  ownProduct: null
 }
 
 const store = new Vuex.Store({

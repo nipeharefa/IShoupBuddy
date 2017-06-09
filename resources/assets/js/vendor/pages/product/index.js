@@ -22,11 +22,25 @@ const app = new Vue({
   render: h => h(App),
   created () {
     this.initActiveUser(window._sharedData.user)
+    this.getOwnProducts()
+    this.getProducts()
   },
   methods: {
     ...mapActions([
-      'initActiveUser'
-    ])
+      'initActiveUser',
+      'initProducts',
+      'initOwnProducts'
+    ]),
+    getProducts () {
+      this.$http.get('api/vendor/product').then(response => {
+        this.initProducts(response.data.products)
+      })
+    },
+    getOwnProducts () {
+      this.$http.get('api/vendor/product?type=own').then(response => {
+        this.initOwnProducts(response.data.products)
+      })
+    }
   }
 })
 

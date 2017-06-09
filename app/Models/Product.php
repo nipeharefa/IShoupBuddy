@@ -33,4 +33,9 @@ class Product extends Model
 
         return $this->hasManyThrough(PriceStatistic::class, ProductVendor::class);
     }
+
+    public function alreadyInVendor() {
+
+        return $this->ProductVendor->first();
+    }
 }

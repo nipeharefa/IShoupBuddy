@@ -12,5 +12,11 @@ export default {
     state.promo = promo
   },
   SET_ISACTIVE,
-  SET_SEARCH_ACTIVE
+  SET_SEARCH_ACTIVE,
+  INIT_OWN_PRODUCTS (state, products) {
+    state.ownProducts = products
+  },
+  INIT_OWN_PRODUCT (state, product) {
+    state.ownProduct = product
+  }
 }

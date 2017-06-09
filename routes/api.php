@@ -40,11 +40,6 @@ Route::group(['namespace' => 'API'], function() {
     Route::resource('product', 'ProductController',
         ['only' => ['index', 'show']]);
 
-    Route::resource('vendor', 'VendorController',
-        ['only' => ['index', 'show']]);
-
-    Route::post('vendor/activate', 'VendorController@activate');
-
     Route::resource('review', 'ReviewController',
         ['only' => ['index', 'show']]);
 
@@ -95,7 +90,17 @@ Route::group(['namespace' => 'API'], function() {
             Route::post('transaction/{transaction}/approve', 'TransactionController@approve');
         });
 
+        Route::group(['namespace' => 'Vendor', 'prefix' => 'vendor'], function() {
+
+            Route::resource('product', 'ProductController');
+        });
+
 	});
+
+    Route::resource('vendor', 'VendorController',
+        ['only' => ['index', 'show']]);
+
+    Route::post('vendor/activate', 'VendorController@activate');
 
 
     Route::group(['prefix' => 'me', 'middleware' => 'auth:api'], function() {

@@ -5,21 +5,16 @@
         <th>Nama Produk</th>
         <th>Barcode</th>
         <th>Rating</th>
-        <th>Total Vendor</th>
+        <th>Harga</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="item in products">
+      <tr v-for="item in ownProducts">
         <td>{{ item.name }}</td>
         <td>{{ item.barcode }}</td>
-        <td>{{ item.total_review || 0}} / {{ item.avg_rating || 0 }}</td>
-        <td>{{ item.vendors.length }}</td>
-        <td>
-          <a class="button is-small" title="Add to My Product">
-            <i class="fa fa-plus"></i>
-          </a>
-        </td>
+        <td>{{ item.total_review || 0 }} / {{ item.avg_rating || 0 }}</td>
+        <td>{{ item.price_string }}</td>
       </tr>
     </tbody>
   </table>
@@ -32,7 +27,7 @@
     props: ['role'],
     computed: {
       ...mapGetters([
-        'products'
+        'ownProducts'
       ])
     }
   }

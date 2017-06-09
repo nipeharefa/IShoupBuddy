@@ -6,7 +6,7 @@
     </div>
     <div class="field">
         <label class="label">Email</label>
-        <input  v-validate="'required|email'" type="text" class="input" placeholder="Email Vendor"
+        <input  v-validate="'required|email'" type="email" class="input" placeholder="Email Vendor"
         v-model="login.email"  name="email" :class="{'is-danger': errors.has('email') }"/>
 
         <p class="help is-danger" v-show="errors.has('email')">This email is invalid</p>
