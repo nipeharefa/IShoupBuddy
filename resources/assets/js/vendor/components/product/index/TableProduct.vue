@@ -16,7 +16,7 @@
         <td>{{ item.total_review || 0}} / {{ item.avg_rating || 0 }}</td>
         <td>{{ item.vendors.length }}</td>
         <td>
-          <a class="button is-small" title="Add to My Product">
+          <a class="button is-small" title="Add to My Product" :disabled="item.used">
             <i class="fa fa-plus"></i>
           </a>
         </td>

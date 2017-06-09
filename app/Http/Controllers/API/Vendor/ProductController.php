@@ -35,7 +35,11 @@ class ProductController extends Controller
 
             } else {
 
-                $product = transform(Product::get());
+                $options = [
+                    "markUsed"      =>  true,
+                    "vendor"        =>  $vendor
+                ];
+                $product = transform(Product::get(), $options);
             }
 
             $response = [

@@ -13,6 +13,8 @@ class ProductTransformer extends AbstractTransformer {
 
         $secure = env('APP_ENV') == "production";
 
+        $options = @$this->options;
+
         $arr = [
             "id"            =>  $product->id,
             "name"          =>  $product->name,
@@ -54,6 +56,13 @@ class ProductTransformer extends AbstractTransformer {
                 $arr['inTrash']             =   $productVendor ? $productVendor->trashed() : false;
                 $arr['product_vendor_id']   =   $productVendor->id ?? null;
             }
+        }
+
+        if ($options['markUsed']) {
+
+            $vendor = $options['vendor'];
+            $arr['used'] = (Boolean)$product->ProductVendor()
+                ->whereVendorId($vendor->id)->count();
         }
 
         return $arr;
