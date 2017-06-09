@@ -10,6 +10,9 @@ use App\Http\Controllers\Controller;
 use App\Helpers\Transformers\ProductVendorTransformer;
 use App\Helpers\Transformers\ProductTransformer;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use DB;
+use Exception;
+use App\Http\Requests\StoreProductVendor;
 
 class ProductVendorController extends Controller
 {
@@ -47,32 +50,50 @@ class ProductVendorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProductVendor $request)
     {
-        $data = [
-            "product_id"    =>  $request->productID,
-            "harga"         =>  $request->price,
-            "status"        =>  $request->status ?? 1
-        ];
+        try {
+
+            $data = [
+                "product_id"    =>  $request->productID,
+                "harga"         =>  $request->price,
+                "status"        =>  $request->status ?? 1
+            ];
+
+            $vendor = Vendor::find($request->user()->id);
 
 
-        $vendor = Vendor::find($request->user()->id);
+            $firstParam = [
+                "product_id"    =>  $request->productID
+            ];
 
+            DB::beginTransaction();
+            $res = $vendor->ProductVendor()->updateOrCreate($firstParam, $data);
 
-        $firstParam = [
-            "product_id"    =>  $request->productID
-        ];
-        $res = $vendor->ProductVendor()->updateOrCreate($firstParam, $data);
+            $productInstance = Product::find($request->productID);
 
-        $productInstance = Product::find($request->productID);
+            $response = [
+                "status"    =>  "created",
+                "product"   =>  ProductTransformer::transform($productInstance),
+                "message"   =>  null
+            ];
 
-        $response = [
-            "status"    =>  "created",
-            "product"   =>  ProductTransformer::transform($productInstance),
-            "message"   =>  null
-        ];
+            DB::commit();
 
-        return response()->json($response, 201);
+            return response()->json($response, 201);
+
+        } catch (Exception $e) {
+
+            DB::rollback();
+
+            $err = [
+                "message"   =>  $e->getMessage(),
+                "product"   =>  null,
+                "status"    =>  "ERROR"
+            ];
+
+            return response()->json($err, 400);
+        }
     }
 
     /**

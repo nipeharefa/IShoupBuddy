@@ -58,7 +58,7 @@ class ProductTransformer extends AbstractTransformer {
             }
         }
 
-        if ($options['markUsed']) {
+        if (isset($options['markUsed']) && $options['markUsed']) {
 
             $vendor = $options['vendor'];
             $arr['used'] = (Boolean)$product->ProductVendor()
