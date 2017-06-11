@@ -9,6 +9,7 @@ use App\Models\Saldo;
 use App\Models\User;
 use Auth;
 use App\Helpers\Transformers\TransactionTransformer;
+use App\Helpers\Transformers\DetailTransactionTransformer;
 use DB;
 use Exception;
 
@@ -63,7 +64,7 @@ class TransactionController extends Controller
         $response = [
             "status"    =>  "OK",
             "message"   =>  null,
-            "transaction"   =>  $transaction
+            "transaction"   =>  DetailTransactionTransformer::transform($transaction)
         ];
 
         return response()->json($response);

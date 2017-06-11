@@ -14,8 +14,10 @@ class ActiveUserTransformer extends AbstractTransformer {
             "picture_links" =>  $this->generateUserPictureLinks($user->picture_url),
             "address"       =>  $user->address,
             "phone"         =>  $user->phone,
-            "saldo"         =>  $user->saldo,
-            "saldo_string"  =>  $this->formatRupiah($user->saldo),
+            "saldo"         =>  $user->Saldo->nominal ?? 0,
+            "saldo_string"  =>  $user->Saldo->nominal
+                                ? $this->formatRupiah($user->Saldo->nominal)
+                                : 0,
             "role"          =>  $user->role,
             "langitude"     =>  $user->langitude,
             "longitude"     =>  $user->longitude
