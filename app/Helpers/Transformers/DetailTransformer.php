@@ -10,6 +10,7 @@ class DetailTransformer extends AbstractTransformer {
 
         $arr = [
             "id"                =>  $model->id,
+            "name"              =>  $model->ProductVendor->Product->name,
             "quantity"          =>  $model->quantity,
             "harga"             =>  $model->harga,
             "harga_string"      =>  $this->formatRupiah($model->harga),

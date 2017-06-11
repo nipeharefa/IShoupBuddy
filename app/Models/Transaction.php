@@ -24,4 +24,9 @@ class Transaction extends Model
 
         return $this->transactable()->belongsTo(Saldo::class);
     }
+
+    public function User() {
+
+        return $this->belongsTo(User::class);
+    }
 }

@@ -12,6 +12,9 @@ class DetailTransactionTransformer extends AbstractTransformer {
 
         $arr = [
             "id"                =>  $model->id,
+            "type"              =>  $this->getType($model->transactable_type),
+            "detail"            =>  $this->transformDetail($model),
+            "user"              =>  UserTransformers::transform($model->User)
         ];
 
         if ($this->isRelationshipLoaded($model, 'Detail')) {
@@ -32,6 +35,25 @@ class DetailTransactionTransformer extends AbstractTransformer {
             "approve"   =>  "/api/admin/transaction/{$model->id}/approve",
             "cancel"    =>  "/api/admin/transaction/{$model->id}/cancel"
         ];
+    }
+
+    protected function transformDetail(Model $model) {
+
+        if ($this->getType($model->transactable_type) == "Saldo") {
+
+            $detail = [
+                "name"  =>  "Penambahan Saldo",
+                "quantity"  => 1,
+                "harga"    =>  $model->nominal,
+                "harga_string" =>  $this->formatRupiah($model->nominal),
+                "total"     =>  $model->nominal,
+                "total_string" =>  $this->formatRupiah($model->nominal),
+            ];
+
+            return [$detail];
+        }
+
+        return $model->Detail;
     }
 
     protected function getStatus($status) {
