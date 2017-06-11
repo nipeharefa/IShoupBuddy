@@ -14,7 +14,7 @@
         <td>{{ item.name }}</td>
         <td>{{ item.email }}</td>
         <td>{{ item.phone }}</td>
-        <td>0</td>
+        <td>{{ item.saldo.saldo_string }}</td>
         <td>
         </td>
       </tr>

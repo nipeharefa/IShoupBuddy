@@ -8,7 +8,7 @@
         <router-link :to="{ name: 'listProducts' }" append>Products</router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'listProducts' }" append>Review</router-link>
+        <router-link :to="{ name: 'listReview' }" append>Review</router-link>
       </li>
       <li>
         <router-link :to="{ name: 'listTransaction' }" append>Transactions</router-link>

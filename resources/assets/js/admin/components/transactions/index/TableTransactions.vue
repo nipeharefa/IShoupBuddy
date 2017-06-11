@@ -15,7 +15,7 @@
         <td>
           <router-link
           :to="{ name: 'detailTransaction', params: { id: item.id }}" append>
-            {{ item.id }}
+            #{{ item.id }}
           </router-link>
         </td>
         <td>

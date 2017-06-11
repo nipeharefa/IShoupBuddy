@@ -1,8 +1,8 @@
 import { INIT_USERS, INIT_USER } from 'globalVuexConstant'
-export const initVendors = ({ commit }, users) => {
+export const initUsers = ({ commit }, users) => {
   commit(INIT_USERS, users)
 }
 
-export const initProduct = ({ commit }, user) => {
+export const initUser = ({ commit }, user) => {
   commit(INIT_USER, user)
 }

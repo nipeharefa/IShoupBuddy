@@ -153,6 +153,8 @@ class ProductVendorController extends Controller
     public function restore($productVendor) {
         try {
 
+            DB::beginTransaction();
+
             $productVendor = ProductVendor::withTrashed()->findOrFail($productVendor);
 
             $result = $productVendor->restore();
@@ -162,9 +164,14 @@ class ProductVendorController extends Controller
                 "product"   =>  $result,
                 "message"   =>  null
             ];
+
+            DB::commit();
+
             return response()->json($response, 200);
 
         } catch (ModelNotFoundException $e) {
+            DB::rollback();
+
             $response = [
                 "status"    =>  "OK",
                 "product"   =>  $e->getMessage(),

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Helpers\Transformers\UserTransformers;
 
 class UserController extends Controller
 {
@@ -15,8 +16,15 @@ class UserController extends Controller
      */
     public function index()
     {
+        $options = [
+            "show_email"    =>  true,
+            "show_saldo"    =>  true
+        ];
+
+        $users = UserTransformers::transform(User::whereRole(1)->with(['Saldo'])->get(), $options);
+
         $response = [
-            "users"     =>  User::whereRole(1)->get(),
+            "users"     =>  $users,
             "messages"  => null
         ];
 

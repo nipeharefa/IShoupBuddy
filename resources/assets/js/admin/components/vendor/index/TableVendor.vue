@@ -20,8 +20,8 @@
         <td>{{ item.total_product }}</td>
         <td>{{ item.confirmed ? "Aktif" : "Belum Aktif" }}</td>
         <td>
-          <button class="button is-link"
-            @click="activateVendor(item.id)" v-if="!item.confirmed">Aktifkan</button>
+          <a class="is-link"
+            @click="activateVendor(item.id)" v-if="!item.confirmed">Aktifkan</a>
         </td>
       </tr>
     </tbody>

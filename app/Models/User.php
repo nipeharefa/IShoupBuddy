@@ -31,6 +31,12 @@ class User extends Authenticatable
     ];
 
 
+    public function Emaill() {
+
+        return $this->email;
+    }
+
+
     public function Wishlist() {
 
         return $this->hasMany(Wishlist::class);
@@ -45,6 +51,7 @@ class User extends Authenticatable
 
         return $this->hasMany(Cart::class, 'identify_id');
     }
+
 
     public function Review() {
 

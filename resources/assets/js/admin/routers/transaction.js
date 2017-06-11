@@ -8,6 +8,7 @@ const FormAddProduct = () => System.import('adminProduct/create/FormAddProduct.v
 const ProductIndex = () => import('adminComponents/product/index/ProductIndex.vue')
 const ProductEdit = () => import('adminComponents/product/edit/ProductEdit.vue')
 const UserIndex = () => import('adminComponents/users/index/UserIndex.vue')
+const Reviewindex = () => import('adminComponents/reviews/index/index.vue')
 
 Vue.use(Router)
 
@@ -22,6 +23,7 @@ const router = new Router({
     { name: 'listProducts', path: '/admin/product', component: ProductIndex, title: 'Vendor' },
     { name: 'formEditProduct', path: '/admin/product/:id/edit', component: ProductEdit },
     { name: 'listUser', path: '/admin/users', component: UserIndex },
+    { name: 'listReview', path: '/admin/reviews', component: Reviewindex }
   ]
 })
 
