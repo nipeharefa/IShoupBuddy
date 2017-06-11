@@ -60,8 +60,7 @@
         const data = this.login
         const self = this
         this.$http.post('/auth/vendor/login', data).then(x => {
-          console.log(x.data)
-          window.location.assign('/vendor/product');
+          window.location.assign('/vendor/product')
         }).catch(x => {
           self.onError = true
         })
