@@ -110,6 +110,13 @@ class TransactionController extends Controller
 
             return $this->approveSaldo($transaction);
         }
+
+        return;
+    }
+
+    protected function approveTransactionBiasa (Transaction $transaction, Request $request) {
+
+        return $transaction;
     }
 
     protected function approveSaldo(Transaction $transaction) {
@@ -126,6 +133,7 @@ class TransactionController extends Controller
             $saldo->nominal += $transaction->nominal;
             $saldo->save();
             DB::commit();
+
             return transform($transaction);
 
         } catch (Exception $e) {

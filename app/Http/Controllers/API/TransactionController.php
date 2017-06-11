@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use Exception;
+use App\Models\User;
 
 use App\Helpers\Transformers\TransactionTransformer;
 
@@ -83,7 +84,7 @@ class TransactionController extends Controller
             // Transaction
             $data = [
                 "nominal"   =>  $total_belanja,
-                "status"    =>  0,
+                "status"    =>  1,
                 "user_id"   =>  $user->id
             ];
 
@@ -96,7 +97,10 @@ class TransactionController extends Controller
                 $item->delete();
             });
 
+            $this->payWithWallet($total_belanja, $user);
+
             DB::commit();
+
             return transform($trans->load('Detail'));
 
 
@@ -154,5 +158,20 @@ class TransactionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    protected function payWithWallet($nominal, User $user) {
+
+        $userSaldo = $user->Saldo;
+
+        $hasUnPaid =  $userSaldo->transaction()->create([
+            'nominal' => $nominal,
+            'user_id' => $user->id,
+            'status' => true,
+            "debit_credit"  =>  1
+        ]);
+
+        $userSaldo->nominal -= $nominal;
+        $userSaldo->save();
     }
 }

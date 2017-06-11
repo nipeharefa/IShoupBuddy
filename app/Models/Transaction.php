@@ -8,7 +8,7 @@ use App\Helpers\Traits\UserTrait;
 class Transaction extends Model
 {
     use UserTrait;
-    protected $fillable = ['user_id', 'nominal', 'status'];
+    protected $fillable = ['user_id', 'nominal', 'status', 'debit_credit'];
 
     public function transactable()
     {
