@@ -7,6 +7,8 @@ class ActiveUserTransformer extends AbstractTransformer {
 
     public function transformModel(Model $user){
 
+        $saldo = $user->Saldo->nominal ?? null;
+
         $arr = [
             "id"            =>  $user->id,
             "name"          =>  $user->name,
@@ -14,9 +16,9 @@ class ActiveUserTransformer extends AbstractTransformer {
             "picture_links" =>  $this->generateUserPictureLinks($user->picture_url),
             "address"       =>  $user->address,
             "phone"         =>  $user->phone,
-            "saldo"         =>  $user->Saldo->nominal ?? 0,
-            "saldo_string"  =>  $user->Saldo->nominal
-                                ? $this->formatRupiah($user->Saldo->nominal)
+            "saldo"         =>  $saldo ?? 0,
+            "saldo_string"  =>  $saldo
+                                ? $this->formatRupiah($user->Saldo->nominal ?? 0)
                                 : 0,
             "role"          =>  $user->role,
             "langitude"     =>  $user->langitude,
