@@ -33,7 +33,8 @@
         <td>
           <a class="button is-small is-primary" @click="approve(item)"
           :disabled="item.status === 1 ? 'disabled' : false">Approve</a>
-          <a class="button is-small is-danger">Cancel</a>
+          <a class="button is-small is-danger"
+          :disabled="item.status === 1 ? 'disabled' : false">Cancel</a>
         </td>
       </tr>
     </tbody>
@@ -51,16 +52,20 @@
     },
     methods: {
       approve (item) {
-        if (item.type === 'Saldo') {
-          this.approveSaldo(item)
+        if (item.status === 1) {
           return
         }
+        this.approveSaldo(item)
+        return
       },
       approveSaldo (item) {
         this.$http.post(`api/admin/transaction/${item.id}/approve`).then(response => {
           const { data } = response
           console.log(data)
         }).catch(err => err)
+      },
+      approveTransBiasa (item) {
+        console.log(item)
       }
     }
   }
