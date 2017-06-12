@@ -10,6 +10,8 @@ const ProductEdit = () => import('adminComponents/product/edit/ProductEdit.vue')
 const UserIndex = () => import('adminComponents/users/index/UserIndex.vue')
 const Reviewindex = () => import('adminComponents/reviews/index/index.vue')
 const Dashboard = () => import('adminComponents/dashboard/index/index.vue')
+const CategoryIndex = () => import('adminComponents/category/index/index.vue')
+const FormAddCategory = () => import('adminComponents/category/store/store.vue')
 
 Vue.use(Router)
 
@@ -25,7 +27,9 @@ const router = new Router({
     { name: 'formEditProduct', path: '/admin/product/:id/edit', component: ProductEdit },
     { name: 'listUser', path: '/admin/users', component: UserIndex },
     { name: 'listReview', path: '/admin/reviews', component: Reviewindex },
-    { name: 'dashboard', path: '/admin/', component: Dashboard }
+    { name: 'dashboard', path: '/admin/', component: Dashboard },
+    { name: 'listCategory', path: '/admin/category', component: CategoryIndex },
+    { name: 'formAddCategory', path: '/admin/category/create', component: FormAddCategory }
   ]
 })
 
