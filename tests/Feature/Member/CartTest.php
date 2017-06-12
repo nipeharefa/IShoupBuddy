@@ -81,12 +81,6 @@ class CartTest extends TestCase
         ]);
     }
 
-    public function test_guest_get_item_from_cart() {
-
-        $response = $this->json('GET', 'api/cart', []);
-        $response->assertStatus(401);
-    }
-
     public function generateCart() {
 
         $category = Category::first();
