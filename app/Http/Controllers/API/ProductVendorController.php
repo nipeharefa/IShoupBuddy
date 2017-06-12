@@ -127,7 +127,24 @@ class ProductVendorController extends Controller
      */
     public function update(Request $request, ProductVendor $productVendor)
     {
-        //
+        try {
+            $user = $request->user();
+
+            DB::beginTransaction();
+
+            DB::commit();
+
+        } catch (Exception $e) {
+
+            DB::rollback();
+
+            $err = [
+                "message"   =>  $e->getMessage(),
+                "status"    =>  "ERROR"
+            ];
+
+            return response()->json($err, 400);
+        }
     }
 
     /**
