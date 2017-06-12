@@ -36,6 +36,7 @@ class HomeController extends Controller
                 case 0:
                     # admin
                     $js = mix('js/ahome.js');
+                    $css = mix('css/admin/home/index.css');
                     break;
                 case 1:
                     # Member

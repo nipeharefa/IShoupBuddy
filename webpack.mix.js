@@ -4,20 +4,14 @@ let mix = require('laravel-mix')
 // Admin Sass
 
 mix.sass('resources/assets/sass/pages/admin/auth/login.scss', 'css/admin/auth/login.css')
-mix.sass('resources/assets/sass/pages/admin/product/index.scss', 'css/admin/product/index.css')
-mix.sass('resources/assets/sass/pages/admin/product/create.scss', 'css/admin/product/create.css')
-mix.sass('resources/assets/sass/pages/admin/product/edit.scss', 'css/admin/product/edit.css')
-mix.sass('resources/assets/sass/pages/admin/vendor/index.scss', 'css/admin/vendor/index.css')
 mix.sass('resources/assets/sass/pages/admin/transactions/index.scss', 'css/admin/transactions/index.css')
+mix.sass('resources/assets/sass/pages/admin/home/home.scss', 'css/admin/home/index.css')
 
 
 // Admin JS
 
 mix.js('resources/assets/js/admin/pages/auth/login.js', 'js/a-auth-login.js')
-mix.js('resources/assets/js/admin/pages/product/product-index.js', 'js/a-index-product.js')
-mix.js('resources/assets/js/admin/pages/product/product-create.js', 'js/a-add-product.js')
-mix.js('resources/assets/js/admin/pages/product/product-edit.js', 'js/a-edit-product.js')
-mix.js('resources/assets/js/admin/pages/vendor/vendor-index.js', 'js/a-vendor-user.js')
+mix.js('resources/assets/js/admin/pages/home/home.js', 'js/ahome.js')
 mix.js('resources/assets/js/admin/pages/transactions/index.js', 'js/a-transactions-index.js')
 
 // Guest JS
