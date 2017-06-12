@@ -1,1 +1,17 @@
 @import "node_modules/bulma/bulma";
+@import "~sassComponents/NavbarDesktopDefault";
+@import "~sassComponents/ProductCardContainer";
+@import "~sassComponents/ProductCard";
+
+.caption-head {
+  display: flex;
+
+}
+
+.column {
+  &.wrapping {
+    display: flex;
+    flex-wrap: wrap !important;
+    flex-direction: row !important;
+  }
+}

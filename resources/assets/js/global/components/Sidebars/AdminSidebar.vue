@@ -8,6 +8,9 @@
         <router-link :to="{ name: 'dashboard' }" append>Overview</router-link>
       </li>
       <li>
+        <router-link :to="{ name: 'listCategory' }" append>Category</router-link>
+      </li>
+      <li>
         <router-link :to="{ name: 'listProducts' }" append>Products</router-link>
       </li>
       <li>
