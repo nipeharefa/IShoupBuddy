@@ -2,7 +2,7 @@
   <div class="card product-card">
     <div class="product-media">
       <figure>
-        <img :src="product.picture_url.small" :alt="product.name">
+        <img :alt="product.name" v-lazy="renderImg(product.picture_url.medium)">
       </figure>
     </div>
     <div class="product-description">
@@ -28,6 +28,20 @@
     props: ['product'],
     components: {
       StarRating
+    },
+    methods: {
+      renderImg (photo) {
+        if (!photo) {
+          return '/images/assets/profile-no-pic.jpg'
+        }
+
+        const img = {
+          src: photo,
+          error: '/img/product-image-not-available.gif',
+          loading: '/img/ring-loader.svg'
+        }
+        return img
+      }
     }
   }
 </script>
