@@ -17,7 +17,7 @@
 
 
 <script>
-  const Navbar = () => import('global/components/Navbars/MemberNavbar.vue')
+  const Navbar = () => import('global/components/Navbars/AdminNavbar.vue')
   const ListPromo = () => import('global/components/Home/SlidePromo.vue')
   const ListProduct = () => import('global/components/Home/ListProduct.vue')
   const FooterApps = () => import('otherComponents/Footer.vue')

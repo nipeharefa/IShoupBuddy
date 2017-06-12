@@ -6,11 +6,8 @@
       <a @click="setSearchActive(true)">
         <i class="fa fa-search"></i>
       </a>
-      <a href="/me">
+      <a href="/admin">
         <i class="fa fa-user" aria-hidden="true"></i>
-      </a>
-      <a href="#">
-        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
       </a>
     </div>
     <div slot="mobile-left-drawer" class="container-menu-touch is-hidden-desktop" v-if="isActive">
@@ -27,7 +24,7 @@
   const DrawerMember = () => import('./partials/DrawerMember.vue')
   const RightSearch = () => import('./partials/RightSearch.vue')
   const Navbar = () => import('./Navbar.vue')
-  const RightMenuItem = () => import('./partials/RightMenuMember.vue')
+  const RightMenuItem = () => import('./partials/RightMenuAdmin.vue')
 
   import { mapGetters, mapActions } from 'vuex'
 
