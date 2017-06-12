@@ -14,6 +14,7 @@ use App\Models\Vendor;
 use App\Models\ProductVendor;
 use App\Models\Review;
 use App\Models\Cart;
+use Log;
 
 class CartTest extends TestCase
 {
@@ -23,9 +24,14 @@ class CartTest extends TestCase
      *
      * @return void
      */
+    public function setUp() {
+        parent::setUp();
+        $this->seed('InsertDefaultCategory');
+    }
+
     public function testExample()
     {
-        $category = factory(Category::class)->create();
+        $category = Category::first();
         $vendor = factory(Vendor::class)->create();
 
         $product = factory(Product::class)->create([
@@ -39,10 +45,7 @@ class CartTest extends TestCase
             ]));
 
         $user = factory(User::class)->create();
-
         $this->actingAs($user, 'api');
-
-
         $this->assertCount(0, $user->Cart); // Asssert user;s cart i null
 
         $data = [
@@ -51,6 +54,9 @@ class CartTest extends TestCase
             "quantity"      =>  2
         ];
 
-        $response = $this->json('POST', '/api/cart', $data);
+        $response = $this->json('POST', 'api/cart', $data);
+        $response->assertStatus(201);
+
+        $this->assertCount(1, Cart::get());
     }
 }
