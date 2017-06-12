@@ -23,13 +23,15 @@ const app = new Vue({
     this.getProducts()
     this.getVendors()
     this.getUsers()
+    this.getCategory()
   },
   methods: {
     ...mapActions([
       'initTransactions',
       'initProducts',
       'initVendors',
-      'initUsers'
+      'initUsers',
+      'initCategories'
     ]),
     getTransactions () {
       this.$http.get('api/admin/transaction').then(response => {
@@ -51,6 +53,11 @@ const app = new Vue({
       this.$http.get('api/admin/user').then(response => {
         this.initUsers(response.data.users)
       }).catch(err => err)
+    },
+    getCategory () {
+      this.$http.get('api/admin/category').then(response => {
+        this.initCategories(response.data)
+      })
     }
   }
 })

@@ -9,9 +9,9 @@ const strict = false
 const namespaced = false
 
 const state = {
-  users: null,
-  user: null,
-  onError: false
+  categories: null,
+  category: null,
+  onLoad: false
 }
 
 export default {

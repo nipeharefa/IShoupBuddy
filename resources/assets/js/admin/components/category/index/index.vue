@@ -1,6 +1,10 @@
 <template>
   <div>
-   <tableCategory />
+     <router-link :to="{ name: 'formAddCategory' }"
+     append class="button is-primary is-small">Tambah Kategori
+     </router-link>
+
+    <tableCategory />
   </div>
 </template>
 
