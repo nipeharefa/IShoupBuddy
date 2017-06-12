@@ -15,5 +15,24 @@
         <router-link :to="{ name: 'product-index' }" append>Transactions</router-link>
       </li>
     </ul>
+    <p class="menu-label">
+      Settings
+    </p>
+    <ul class="menu-list">
+      <li><a @click="logout">Logout</a></li>
+    </ul>
   </aside>
 </template>
+
+
+<script>
+  export default {
+    methods: {
+      logout () {
+        this.$http.delete('auth/vendor/logout').then(response => {
+          window.location.assign('/vendor/login')
+        }).catch(err => err)
+      }
+    }
+  }
+</script>
