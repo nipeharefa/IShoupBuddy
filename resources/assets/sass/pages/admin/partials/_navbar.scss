@@ -173,3 +173,16 @@
     }
   }
 }
+
+
+.fa-search {
+  @include desktop() {
+    font-size: 0.9rem !important;
+  }
+}
+
+.fa-user {
+  @include desktop() {
+    font-size: 1rem !important;
+  }
+}
