@@ -1,3 +1,14 @@
 <template>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit eum mollitia repudiandae laudantium ratione, culpa quibusdam. Consequuntur quas iure quidem repellendus quos repudiandae non delectus temporibus atque obcaecati, aut odit.</p>
+  <div>
+    <formAddCategory />
+  </div>
 </template>
+
+<script>
+  const FormAddCategory = () => import('./FormAddCategory.vue')
+  export default {
+    components: {
+      FormAddCategory
+    }
+  }
+</script>

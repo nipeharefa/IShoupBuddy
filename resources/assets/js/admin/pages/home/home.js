@@ -8,7 +8,7 @@ Vue.use(VueLazyload)
 
 const App = r => require.ensure([], () => r(require('adminComponents/home/Home.vue')), 'admin-home')
 
-console.log('asfasdf')
+console.log(App)
 new Vue({
   store,
   render: h => h(App)

@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Log;
-use \Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\Debug\Exception\FlattenException;
