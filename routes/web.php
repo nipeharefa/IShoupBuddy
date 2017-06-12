@@ -28,7 +28,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function() {
     Route::post('vendor/register', 'RegisterVendorController@register');
 });
 
-Route::group(['prefix' => 'me', 'middleware' => ['auth']], function() {
+Route::group(['prefix' => 'me', 'middleware' => ['auth', 'member_only']], function() {
 
     Route::resource('/', 'MeController',
     	['only' => 'index', 'show']);
