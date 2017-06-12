@@ -87,6 +87,9 @@ Route::group(['namespace' => 'API'], function() {
             Route::resource('transaction', 'TransactionController',
                 ['except'   =>  ['create', 'edit']]);
 
+            Route::resource('category', 'CategoryController',
+                ['only' =>  ['index', 'store', 'update']]);
+
             Route::post('transaction/{transaction}/approve', 'TransactionController@approve');
         });
 

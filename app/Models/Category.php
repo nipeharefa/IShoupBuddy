@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Category extends Model
 {
+    use Sluggable;
+
     protected $fillable = ['name', 'slug', 'description'];
 
     protected $hidden = [
@@ -15,5 +18,14 @@ class Category extends Model
     public function Product() {
 
         return $this->hasMany(Product::class);
+    }
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
     }
 }
