@@ -92,7 +92,6 @@ class ReviewController extends Controller
 
             switch ($request->groupBy) {
                 case 'product':
-                    // dd($reviewTransform->groupBy('product.id'));
                     $reviewTransform = $reviewTransform->groupBy('product.id');
                     break;
                 default:
