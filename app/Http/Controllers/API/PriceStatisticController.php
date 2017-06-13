@@ -39,8 +39,9 @@ class PriceStatisticController extends Controller
                 ->where('vendor_id', $request->vendor_id)->firstOrFail();
 
 
-            $s = $productVendor->Statistic()->orderByDesc('created_at')->take($range)->get()
+            $s = $productVendor->Statistic()->orderByDesc('updated_at')->take($range)->get()
                 ->reverse()->flatten();
+
 
             $s4 = $s->map(function($item){
                 return PricesStatisticTransformer::transform($item);

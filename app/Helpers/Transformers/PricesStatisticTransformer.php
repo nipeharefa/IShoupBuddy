@@ -10,7 +10,7 @@ class PricesStatisticTransformer extends AbstractTransformer
         $arr = [
             "id"        =>  $statistic->id,
             "value"     =>  $statistic->harga,
-            "date"      =>  $statistic->created_at->toW3cString(),
+            "date"      =>  $statistic->updated_at->toW3cString(),
             "vendor"    =>  $statistic->ProductVendor->vendor_id,
             "product"   =>  $statistic->ProductVendor->product_id
         ];

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class PriceStatistic extends Model
 {
 
-    protected $fillable = ['harga'];
+    protected $fillable = ['harga', 'updated_at'];
 
     public function ProductVendor() {
 
