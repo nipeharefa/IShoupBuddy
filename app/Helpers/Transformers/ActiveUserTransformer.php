@@ -13,6 +13,7 @@ class ActiveUserTransformer extends AbstractTransformer {
             "id"            =>  $user->id,
             "name"          =>  $user->name,
             "picture_url"   =>  $user->picture_url,
+            "email"         =>  $user->email,
             "picture_links" =>  $this->generateUserPictureLinks($user->picture_url),
             "address"       =>  $user->address,
             "phone"         =>  $user->phone,

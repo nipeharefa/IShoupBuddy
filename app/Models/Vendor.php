@@ -25,4 +25,9 @@ class Vendor extends User
 
         return $this->hasMany(ProductVendor::class, 'vendor_id');
     }
+
+    public function Review() {
+
+        return $this->hasManyThrough(Review::class, ProductVendor::class);
+    }
 }

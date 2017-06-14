@@ -26,6 +26,7 @@ const app = new Vue({
     this.initActiveUser(window._sharedData.user)
     this.getOwnProducts()
     this.getProducts()
+    this.getVendors()
   },
   methods: {
     ...mapActions([
@@ -42,6 +43,11 @@ const app = new Vue({
       this.$http.get('api/vendor/product?type=own').then(response => {
         this.initOwnProducts(response.data.products)
       })
+    },
+    getVendors () {
+      this.$http.get('api/vendor/review', []).then(response => {
+        console.log(response.data)
+      }).catch( err => err)
     }
   }
 })

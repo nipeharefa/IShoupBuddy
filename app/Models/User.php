@@ -31,12 +31,6 @@ class User extends Authenticatable
     ];
 
 
-    public function Emaill() {
-
-        return $this->email;
-    }
-
-
     public function Wishlist() {
 
         return $this->hasMany(Wishlist::class);

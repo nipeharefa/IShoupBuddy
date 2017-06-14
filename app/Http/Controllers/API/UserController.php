@@ -54,7 +54,7 @@ class UserController extends Controller implements DefaultAPIResponse
 
         $validator = Validator::make($request->all(), [
                 'name'          =>  'required',
-                'gender'        =>  'required|boolean',
+                'gender'        =>  'required',
                 'picture_url'   =>  'required',
                 'address'       =>  'required',
                 "langitude"     =>  "nullable",

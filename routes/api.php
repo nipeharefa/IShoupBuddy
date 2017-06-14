@@ -96,6 +96,8 @@ Route::group(['namespace' => 'API'], function() {
         Route::group(['namespace' => 'Vendor', 'prefix' => 'vendor'], function() {
 
             Route::resource('product', 'ProductController');
+            Route::resource('review', 'ReviewController',
+                ['except' => ['create', 'edit']]);
         });
 
 	});
