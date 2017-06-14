@@ -5,10 +5,12 @@ import VeeValidate from 'vee-validate'
 import router from 'vendor/routers'
 import { sync } from 'vuex-router-sync'
 import store from 'vendor/store/product-index'
+import ImageUploader from 'lib/imageuploader'
 
 Vue.use(VueAxios)
 Vue.use(VueProgressBar, { color: 'rgb(26, 146, 47)', failedColor: 'red', height: '3px' })
 Vue.use(VeeValidate)
+Vue.use(ImageUploader)
 
 sync(store, router)
 

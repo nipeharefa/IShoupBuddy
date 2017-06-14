@@ -64,6 +64,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 Route::group(['prefix' => 'vendor', 'namespace' => 'Vendor', 'middleware' => ['auth']], function() {
 
     Route::resource('product', 'ProductController');
+    Route::get('/{any?}/{any2?}/{any3?}', 'ProductController@index');
 
 });
 

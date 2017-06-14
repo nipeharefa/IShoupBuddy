@@ -1,17 +1,4 @@
-@import "node_modules/bulma/bulma";
-@import "~sassComponents/NavbarDesktopDefault";
-@import "./partials/_navbar";
-// @import "../core/_breadcrumb.sass";
-// @import "./partials/_navbar.scss";
-
-.be-body-bro {
-  @include touch() {
-    padding-top: 2rem;
-  }
-  @include desktop() {
-    padding-top: 5rem !important;
-  }
-}
+@import "node_modules/bulma/sass/utilities/_all";
 .change-image {
   display: flex;
   flex-direction: row;
@@ -41,5 +28,4 @@
 .wrapper-change-photo {
   margin-left: 1rem;
   background-color: $white-bis;
-  width: 64px;
 }

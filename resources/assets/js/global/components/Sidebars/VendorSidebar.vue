@@ -19,6 +19,9 @@
       Settings
     </p>
     <ul class="menu-list">
+      <li>
+        <router-link :to="{ name: 'change-profile' }" append>Change Profile</router-link>
+      </li>
       <li><a @click="logout">Logout</a></li>
     </ul>
   </aside>

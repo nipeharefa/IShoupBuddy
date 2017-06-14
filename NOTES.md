@@ -5,4 +5,6 @@ sudo chmod -R ug+rwx storage bootstrap/cache
 
 chmod -R 644 /etc/cron.d
 
+* * * * * php /var/www/Skripsi/artisan schedule:run >> /dev/null 2>&1
+
 service cron restart
