@@ -18,7 +18,7 @@ class ReviewTransformer extends AbstractTransformer {
             "rating"    =>  $review->rating,
             "body"      =>  $review->body,
             "sentimen"  =>  $this->getScore($review->body, $review),
-            "user"      =>  UserTransformers::transform($review->User),
+            "user"      =>  $this->getCacheUser($review->User),
             "product"   =>  ProductTransformer::transform($review->Product),
             "vendor"    =>  VendorTransformer::transform($review->Vendor),
             "date"      =>  $review->created_at->toW3cString()
@@ -35,6 +35,15 @@ class ReviewTransformer extends AbstractTransformer {
             $arr = $this->score($sentence);
             $collection = collect($arr)->only(['pos', 'neg', 'neu'])->toArray();
             return $collection;
+        });
+    }
+
+    protected function getCacheUser($user) {
+
+        $key = "user_{$user->id}_{$user->updated_at}";
+
+        return Cache::rememberForever($key, function() use ($user) {
+            return UserTransformers::transform($user);
         });
     }
 }
