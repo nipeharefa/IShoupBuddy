@@ -15,7 +15,9 @@ class VendorTransformer extends AbstractTransformer {
             "confirmed" =>  (Boolean) $vendor->confirmed,
             "picture_url"   =>  $vendor->picture_url,
             "total_product" =>  $vendor->ProductVendor()->count(),
-            "total_review"  =>  0
+            "total_review"  =>  0,
+            "lat"           =>  $vendor->langitude,
+            "lng"           =>  $vendor->longitude
         ];
 
         return $arr;
