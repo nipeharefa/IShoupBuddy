@@ -21,7 +21,9 @@ Route::group(['prefix' => 'oauth', 'namespace' => 'Auth'], function() {
     Route::post('register', 'PassportAuthController@register');
 });
 
+
 Route::group(['namespace' => 'API'], function() {
+    Route::resource('geo', 'GeoLocationController');
     Route::post('user/change_password','UserController@change_password')
         ->middleware('auth:api');
 

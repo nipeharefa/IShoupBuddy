@@ -52,6 +52,18 @@ class Sentimen
 
     }
 
+    public function getDictionary() {
+
+        return $this->dictionary;
+    }
+
+    public function getPrior() {
+
+        return $this->prior;
+    }
+
+
+
     # Class atau type yang akan di analisa
     # ada 3
     # pos sebagai positif
@@ -107,6 +119,88 @@ class Sentimen
     }
 
 
+    public function scoreDebug($sentence) {
+
+        $start = Carbon::now();
+
+        Log::info("START DEBUG {$start}");
+
+        #
+        $tokens = $this->_getTokens($sentence);
+
+        # Inisialisasi score
+        $total_score = 0;
+
+        # Inisilaisasi array $score
+        $scores = array();
+
+
+        //Loop through all of the different classes set in the $classes variable
+        # lakukan perulangan ke semua class atau type
+        foreach ($this->classes as $class) {
+
+            Log::info('Class yang di analisa : ' . $class);
+
+            # Buat array baru dengan key adalah value dari class
+            $scores[$class] = 1;
+
+            Log::info("Score awal class {$class} adalah {$scores[$class]}");
+
+            //For each of the individual words used loop through to see if they match anything in the $dictionary
+            # Lakukan perulangan ke semua token(kata yang sudah dipisahkan berdasarkan
+            # spasi ke bentuk array)
+            #
+            foreach ($tokens as $token) {
+
+                Log::info('Kata yang di analisa : ' . $token);
+
+                if (strlen($token) > $this->minTokenLength
+                    && strlen($token) < $this->maxTokenLength
+                    // && !in_array($token, $this->ignoreList)
+                    ) {
+
+                        if (isset($this->dictionary[$token][$class])) {
+                            //Set count equal to it
+                            $count = $this->dictionary[$token][$class];
+                            Log::info('__COUNT__DICT : ' . $count);
+                        } else {
+                            $count = 0;
+                        }
+                        $scores[$class] *= ($count + 1);
+                        Log::info("count = {$count}");
+                        Log::info('$scores[$class] *= ($count + 1)');
+                        Log::info($scores[$class]);
+                }
+            }
+
+            //Score for this class is the prior probability multiplyied by the score for this class
+            $scores[$class] = $this->prior[$class] * $scores[$class];
+            Log::info("Score untuk kelas {$class} = {$scores[$class]}");
+        }
+
+        //Makes the scores relative percents
+        foreach ($this->classes as $class) {
+            $total_score += $scores[$class];
+        }
+
+        Log::info("Total Score = {$total_score}");
+
+        foreach ($this->classes as $class) {
+            $scores[$class] = round($scores[$class] / $total_score, 3);
+            Log::info("Total Score Class {$class} = {$scores[$class]}");
+        }
+
+        $end = Carbon::now();
+
+        $scores['sentences'] = $sentence;
+        $scores['took'] = $end->diffInSeconds($start, true);
+
+        //Sort array in reverse order
+        arsort($scores);
+
+        return $scores;
+    }
+
     public function score($sentence) {
 
         $start = Carbon::now();
@@ -126,7 +220,6 @@ class Sentimen
         foreach ($this->classes as $class) {
             # Buat array baru dengan key adalah value dari class
             $scores[$class] = 1;
-
             //For each of the individual words used loop through to see if they match anything in the $dictionary
             # Lakukan perulangan ke semua token(kata yang sudah dipisahkan berdasarkan
             # spasi ke bentuk array)
@@ -141,27 +234,23 @@ class Sentimen
                         if (isset($this->dictionary[$token][$class])) {
                             //Set count equal to it
                             $count = $this->dictionary[$token][$class];
-                            Log::info('__COUNT__DICT : ' . $count);
                         } else {
                             $count = 0;
                         }
-
                         $scores[$class] *= ($count + 1);
-                        Log::info($scores);
                 }
             }
 
             //Score for this class is the prior probability multiplyied by the score for this class
             $scores[$class] = $this->prior[$class] * $scores[$class];
         }
-
         //Makes the scores relative percents
         foreach ($this->classes as $class) {
             $total_score += $scores[$class];
         }
-
         foreach ($this->classes as $class) {
             $scores[$class] = round($scores[$class] / $total_score, 3);
+
         }
 
         $end = Carbon::now();
