@@ -5,6 +5,7 @@ namespace App\Helpers\Transformers;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Helpers\Traits\Sentimen as SentimenTrait;
+use Cache;
 
 class ReviewTransformer extends AbstractTransformer {
 
@@ -16,7 +17,7 @@ class ReviewTransformer extends AbstractTransformer {
             "id"        =>  $review->id,
             "rating"    =>  $review->rating,
             "body"      =>  $review->body,
-            "sentimen"  =>  $this->getScore($review->body),
+            "sentimen"  =>  $this->getScore($review->body, $review),
             "user"      =>  UserTransformers::transform($review->User),
             "product"   =>  ProductTransformer::transform($review->Product),
             "vendor"    =>  VendorTransformer::transform($review->Vendor),
@@ -26,10 +27,14 @@ class ReviewTransformer extends AbstractTransformer {
         return $arr;
     }
 
-    private function getScore($sentence) {
+    private function getScore($sentence, Model $review) {
 
-        $arr = $this->score($sentence);
-        $collection = collect($arr)->only(['pos', 'neg', 'neu'])->toArray();
-        return $collection;
+        $key = "{$review->id}_{$sentence}";
+
+        return Cache::rememberForever($key, function() use ($sentence) {
+            $arr = $this->score($sentence);
+            $collection = collect($arr)->only(['pos', 'neg', 'neu'])->toArray();
+            return $collection;
+        });
     }
 }

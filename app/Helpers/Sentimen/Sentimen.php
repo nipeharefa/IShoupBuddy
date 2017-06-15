@@ -6,15 +6,21 @@ namespace App\Helpers\Sentimen;
 use Storage;
 use Exception;
 use Carbon\Carbon;
+use Log;
+use Cache;
 
 
 class Sentimen
 {
+    # Type drive filesystem
     protected $drive;
 
+    # Panjang minimal token
     private $minTokenLength = 1;
 
+    # Panjang maksimal token yang akan di analisa
     private $maxTokenLength = 15;
+
 
     private $classTokCounts = array(
         'pos' => 0,
@@ -32,20 +38,35 @@ class Sentimen
 
     function __construct()
     {
+        # Constructor
+        # Mengisi variabel $drive dengan instance storage dengan disk type local
         $this->drive = Storage::disk('local');
+        # Buka kamus
         $this->loadDefaults();
     }
 
+    # Getters untuk mengambil instance drive
     public function getDrive() {
 
         return $this->drive;
 
     }
 
+    # Class atau type yang akan di analisa
+    # ada 3
+    # pos sebagai positif
+    # neg sebagai negatif
+    # neu sebagai netral
     private $classes = array('pos', 'neg', 'neu');
 
+
     private function loadDefaults() {
+        # Lakukan perulangan sebanyak class (type) yang akan di analisa
         foreach ($this->classes as $class) {
+            # Jalankan functions setDictonory dengan parameter key dari class
+            # Jika terjadi error maka buat exception
+            # dengan pesan peringan Dictonorary dengan type terkait tidak dapat dibuka
+            # Code error 23
             if (!$this->setDictionary($class)) {
                 throw new Exception("Dictionary for class ${class} could not be loaded",23);
             }
@@ -53,18 +74,32 @@ class Sentimen
     }
 
     private function setDictionary($class) {
-
+        # Paramete $class yang merupkan tipe dari class
+        # akan langsung di masukkan ke dalam tempalte string sebagai filename
         $fn = "sentimen/{$class}.json";
 
+        # Check apakah file tersedia di storage (drive)
+        # Jika tidak maka return false
         if (!$this->drive->exists($fn)) {
             return false;
         }
 
-        $words = json_decode($this->drive->get($fn), true);
+        # Ubah data json menjadi bentuk array
+        // $words = json_decode($this->drive->get($fn), true);
+        $words = Cache::remember($fn, 3600, function()  use ($fn) {
+            $words = json_decode($this->drive->get($fn), true);
+            return $words;
+        });
+
+        # Lakukan perulangan untuk semua kata
         foreach ($words as $word) {
+            # Check apakah kata dan class sudah berisi nilai
             if (!isset($this->dictionary[$word][$class])) {
 
                 //Add to this word to the dictionary and set counter value as one. This function ensures that if a word is in the text file more than once it still is only accounted for one in the array
+                # Jika belum maka tambahkan array baru ke dictionary
+                # Dimensi pertama adalah kata
+                # Dimensi kedua adalah class atau type.
                 $this->dictionary[$word][$class] = 1;
             }//Close If statement
         }
@@ -75,16 +110,27 @@ class Sentimen
     public function score($sentence) {
 
         $start = Carbon::now();
+
+        #
         $tokens = $this->_getTokens($sentence);
+
+        # Inisialisasi score
         $total_score = 0;
+
+        # Inisilaisasi array $score
         $scores = array();
 
 
         //Loop through all of the different classes set in the $classes variable
+        # lakukan perulangan ke semua class atau type
         foreach ($this->classes as $class) {
+            # Buat array baru dengan key adalah value dari class
             $scores[$class] = 1;
 
             //For each of the individual words used loop through to see if they match anything in the $dictionary
+            # Lakukan perulangan ke semua token(kata yang sudah dipisahkan berdasarkan
+            # spasi ke bentuk array)
+            #
             foreach ($tokens as $token) {
 
                 if (strlen($token) > $this->minTokenLength
@@ -95,11 +141,13 @@ class Sentimen
                         if (isset($this->dictionary[$token][$class])) {
                             //Set count equal to it
                             $count = $this->dictionary[$token][$class];
+                            Log::info('__COUNT__DICT : ' . $count);
                         } else {
                             $count = 0;
                         }
 
                         $scores[$class] *= ($count + 1);
+                        Log::info($scores);
                 }
             }
 
