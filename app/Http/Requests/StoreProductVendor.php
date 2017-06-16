@@ -25,7 +25,7 @@ class StoreProductVendor extends FormRequest
     {
         return [
             'productID' =>  'required',
-            'price'     =>  'required|numeric|min:10000'
+            'price'     =>  'required|numeric|min:100'
         ];
     }
 }
