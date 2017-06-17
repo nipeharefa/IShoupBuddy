@@ -11,6 +11,7 @@ use Symfony\Component\Debug\Exception\FlattenException;
 
 class Handler extends ExceptionHandler
 {
+    private $sentryID;
     /**
      * A list of the exception types that should not be reported.
      *
@@ -35,6 +36,10 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        if (app()->bound('sentry') && $this->shouldReport($exception)
+            && env('APP_ENV') == "production") {
+            app('sentry')->captureException($exception);
+        }
         parent::report($exception);
     }
 
