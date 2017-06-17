@@ -17,6 +17,8 @@
     <meta content='#00d1b2' name='msapplication-navbutton-color'>
     <meta content='notranslate' name='google'>
 
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
     <!-- Styles -->
 
     <!-- Scripts -->
