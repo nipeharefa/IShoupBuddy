@@ -13,6 +13,7 @@ use App\Models\Product;
 use App\Models\Vendor;
 use App\Models\ProductVendor;
 use App\Models\Review;
+use Log;
 
 class ReviewTest extends TestCase
 {
@@ -26,6 +27,38 @@ class ReviewTest extends TestCase
     public function testExample()
     {
         $this->assertTrue(true);
+    }
+
+
+    public function test_create_review() {
+
+        $user = factory(User::class)->create();
+        $category = factory(Category::class)->create();
+        $vendor = factory(Vendor::class)->create();
+
+        $product = factory(Product::class)->create([
+            "category_id"   =>  $category->id
+        ]);
+
+        $product_vendor = $vendor->ProductVendor()
+            ->save(factory(ProductVendor::class)->create([
+                "product_id"    =>  $product->id,
+                "vendor_id"     =>  $vendor->id
+            ]));
+
+        $data = [
+            "body"          => "test",
+            "rating"        =>  3.0,
+            "product_id"    =>  $product_vendor->Product->id,
+            "vendor_id"     =>  $product_vendor->Vendor->id
+        ];
+
+        $this->actingAs($user, 'api');
+
+        $response = $this->json('POST', "/api/review", $data);
+        $response->assertStatus(201);
+
+        $this->assertCount(1, Review::get());
     }
 
     public function test_delete_review() {

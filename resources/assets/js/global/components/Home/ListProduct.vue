@@ -3,7 +3,8 @@
     <div class="column wrapping">
       <div class="nusa" v-for="item in products">
         <a :href="`/product/${item.id}`" class="alinkto">
-          <product-card :product="item"></product-card>
+          <!-- <product-card :product="item"></product-card> -->
+          <productCardPlaceholder />
         </a>
       </div>
     </div>
@@ -15,9 +16,11 @@
   import { mapGetters } from 'vuex'
 
   const ProductCard = () => import('global/components/Others/ProductCard.vue')
+  const ProductCardPlaceholder = () => import('global/components/Others/ProductCardPlaceholder.vue')
   export default {
     components: {
-      ProductCard
+      ProductCard,
+      ProductCardPlaceholder
     },
     computed: {
       ...mapGetters([

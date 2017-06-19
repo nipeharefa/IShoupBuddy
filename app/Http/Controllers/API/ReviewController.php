@@ -160,9 +160,12 @@ class ReviewController extends Controller
         $validator->validate();
 
         $user = $request->user();
+
         try {
 
+            # Search ProductVendor
             $product_vendor = ProductVendor::whereVendorId($request->vendor_id)
+                ->whereProductId($request->product_id)
                 ->firstOrFail();
 
             $product_vendor_id = $product_vendor->id;
@@ -184,7 +187,8 @@ class ReviewController extends Controller
                 "message"   =>  null,
             ];
             DB::commit();
-            return $response;
+
+            return response()->json($response, 201);
 
         } catch (Exception $e) {
 
