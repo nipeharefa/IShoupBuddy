@@ -15,7 +15,7 @@ const strict = process.env.NODE_ENV !== 'production'
 const state = {
   activeUser,
   promo: [],
-  products: [],
+  products: null,
   isActive,
   searchActive
 }

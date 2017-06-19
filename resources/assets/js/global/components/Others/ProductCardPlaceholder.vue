@@ -1,6 +1,8 @@
 <template>
   <div class="card product-card animation-background">
     <div class="background-masker header-top"></div>
+    <div class="background-masker header-title"></div>
+    <div class="background-masker header-price"></div>
   </div>
 </template>
 
@@ -23,20 +25,30 @@
     background: #f6f7f8;
     background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
     background-size: 800px 104px;
-    height: 96px;
+    height: 150px;
     position: relative;
 
     .background-masker {
       background: #fff;
       position: absolute;
-    }
-    .background-masker.header-top,
-    .background-masker.header-bottom,
-    .background-masker.subheader-bottom {
-      top: 0;
-      left: 40px;
-      right: 0;
-      height: 10px;
+      &.header-top {
+        top: 1px;
+        left: 3px;
+        width: 96%;
+        height: 5rem;
+      }
+      &.header-title {
+        height: 10px;
+        left: 2px;
+        width: 98%;
+        top: 85px;
+      }
+      &.header-price {
+        top: 125px;
+        left: 3px;
+        height: 10px;
+        width: 98px;
+      }
     }
   }
 </style>
