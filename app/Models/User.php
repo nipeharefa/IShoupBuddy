@@ -36,6 +36,11 @@ class User extends Authenticatable
         return $this->hasMany(Wishlist::class);
     }
 
+    public function wished($product_id) {
+
+        return (Boolean)$this->Wishlist()->whereProductId($product_id)->count();
+    }
+
     public function isAdmin() :Boolean {
 
         return $this->role == 2;

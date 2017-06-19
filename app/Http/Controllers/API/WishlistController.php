@@ -69,7 +69,7 @@ class WishlistController extends Controller
                 "message"   =>  NULL
             ];
 
-            return response()->json($response,200);
+            return response()->json($response,201);
 
         } catch (QueryException $e) {
 
