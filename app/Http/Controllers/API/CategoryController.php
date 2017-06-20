@@ -19,7 +19,13 @@ class CategoryController extends Controller
 
         $category = Category::orderByDesc('created_at')->get();
 
-        return response()->json($category, 200);
+        $response = [
+            "status"        =>  null,
+            "categories"    =>  $category,
+            "message"       =>  null
+        ];
+
+        return response()->json($response, 200);
 
     }
 
