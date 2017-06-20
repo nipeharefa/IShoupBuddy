@@ -57,7 +57,7 @@ class UserController extends Controller implements DefaultAPIResponse
                 'gender'        =>  'required',
                 'picture_url'   =>  'nullable',
                 'address'       =>  'required',
-                "langitude"     =>  "nullable",
+                "latitude"     =>  "nullable",
                 "langitude"     =>  "nullable",
             ]);
 
@@ -68,7 +68,7 @@ class UserController extends Controller implements DefaultAPIResponse
             "picture_url"   =>  $request->picture_url,
             "gender"        =>  $request->gender,
             "address"       =>  $request->address,
-            "langitude"     =>  $request->langitude ?? null,
+            "latitude"     =>  $request->latitude ?? null,
             "longitude"     =>  $request->longitude ?? null
         ];
 

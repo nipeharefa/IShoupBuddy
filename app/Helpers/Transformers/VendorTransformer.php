@@ -16,7 +16,7 @@ class VendorTransformer extends AbstractTransformer {
             "picture_url"   =>  $vendor->picture_url,
             "total_product" =>  $vendor->ProductVendor()->count(),
             "total_review"  =>  0,
-            "lat"           =>  $vendor->langitude,
+            "lat"           =>  $vendor->latitude,
             "lng"           =>  $vendor->longitude
         ];
 

@@ -69,4 +69,8 @@ class ProductTransformer extends AbstractTransformer {
 
         return $arr;
     }
+
+    protected function cacheRevieSummary(Model $product) {
+
+    }
 }
