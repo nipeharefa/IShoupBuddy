@@ -9,7 +9,7 @@ class Category extends Model
 {
     use Sluggable;
 
-    protected $fillable = ['name', 'slug', 'description'];
+    protected $fillable = ['name', 'slug', 'description', 'picture_url'];
 
     protected $hidden = [
         "created_at",

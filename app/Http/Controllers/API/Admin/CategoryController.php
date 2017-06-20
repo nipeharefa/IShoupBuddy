@@ -19,6 +19,7 @@ class CategoryController extends BaseCategoryController
             DB::beginTransaction();
 
             $data = $request->only('name');
+            $data['picture_url'] = $request->pictureUrl ?? null;
 
             $category = Category::create($data);
 

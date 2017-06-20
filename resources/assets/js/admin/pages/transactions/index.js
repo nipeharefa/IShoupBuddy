@@ -56,7 +56,7 @@ const app = new Vue({
     },
     getCategory () {
       this.$http.get('api/admin/category').then(response => {
-        this.initCategories(response.data)
+        this.initCategories(response.data.categories)
       })
     }
   }
