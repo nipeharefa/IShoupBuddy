@@ -5,10 +5,12 @@ namespace App\Helpers\Transformers;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 use Log;
+use App\Helpers\Traits\Sentimen as SentimenTrait;
 use Cache;
 
 class ProductTransformer extends AbstractTransformer {
 
+    use SentimenTrait;
 
     public function transformModel(Model $product){
 
