@@ -8,6 +8,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\Debug\Exception\FlattenException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Handler extends ExceptionHandler
 {
@@ -68,9 +69,8 @@ class Handler extends ExceptionHandler
 
         if ($exception instanceof ModelNotFoundException ) {
 
-            $reflector = new \ReflectionClass($exception->getModel());
-
             if ($request->expectsJson()) {
+                $reflector = new \ReflectionClass($exception->getModel());
                 $err = [
                     "status"    =>  "ERROR",
                     "user"      =>  null,

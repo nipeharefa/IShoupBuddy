@@ -158,56 +158,25 @@ class ProductController extends Controller
      */
     public function show(Product $product, Request $request)
     {
-        if ($request->barcode) {
-            # code...
-        }
-
-        // $product = Product::with('Review')->find($product)->first();
-
-        try {
-
-            if ($request->query('with')) {
-
-                $with = explode(",", $request->query('with'));
-
-                foreach ($with as $key => $value) {
-
-                    switch ($value) {
-                        case 'review':
-                            $this->product = $this->product->with('Review');
-                            break;
-
-                        default:
-                            # code...
-                            break;
-                    }
+        if ($request->query('with')) {
+            $with = explode(",", $request->query('with'));
+            foreach ($with as $key => $value) {
+                switch ($value) {
+                    case 'review':
+                        $product->load('Review');
+                        break;
+                    default:
+                        break;
                 }
-
-                // // $this->product->with('Review')->find($product)->first();
-                // $p = $this->product->find($product)->first();
-                // dd($p->relationLoaded('Review'));
             }
-
-            $pro = $this->product->find($product)->first();
-
-            $response = [
-                "status"    =>  "OK",
-                "product"   =>  ProductTransformer::transform($pro),
-                "message"   =>  null
-            ];
-
-            return response()->json($response, 200);
-
-        } catch (ModelNotFoundException $e) {
-
-            $err = [
-                "status"    =>  "ERROR",
-                "product"   =>  [],
-                "message"   =>  "Produk tidak ditemukan"
-            ];
-
-            return response()->json($err, 404);
         }
+        $response = [
+            "status"    =>  "OK",
+            "product"   =>  ProductTransformer::transform($product),
+            "message"   =>  null
+        ];
+
+        return response()->json($response, 200);
     }
 
     /**
