@@ -77,12 +77,25 @@ class ProductTransformer extends AbstractTransformer {
 
 
         $summaryAvg = [
-            "pos"   => collect($a)->avg('sentimen.pos'),
-            "neg"   =>  collect($a)->avg('sentimen.neg'),
-            "neu"   =>  collect($a)->avg('sentimen.neu')
+            "pos"   =>  collect($a)->avg('pos'),
+            "neg"   =>  collect($a)->avg('neg'),
+            "neu"   =>  collect($a)->avg('neu')
         ];
 
-        $arr["summary"]     =  array_search(max($summaryAvg),$summaryAvg);
+        $count = [
+            "pos"   =>  0,
+            "neg"   =>  0,
+            "neu"   =>  0
+        ];
+
+        foreach ($a as $key => $item) {
+            $aaa = array_search(max($item),$item);
+
+            $count[$aaa]++;
+        }
+
+        Log::info($count);
+        $arr["summary"]     =  [ "mean" => $summaryAvg, "count" =>  $count ];
 
         return $arr;
     }
