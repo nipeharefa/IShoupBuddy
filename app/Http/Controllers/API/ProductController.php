@@ -61,9 +61,7 @@ class ProductController extends Controller
 
             $with = explode(",", $request->query('with'));
 
-            return $product->with(['review'])->get();
-
-            return 1;
+            $product = $product->with(['Review']);
         }
 
         $options = [];

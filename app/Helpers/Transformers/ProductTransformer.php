@@ -5,6 +5,7 @@ namespace App\Helpers\Transformers;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 use Log;
+use Cache;
 
 class ProductTransformer extends AbstractTransformer {
 
@@ -41,7 +42,7 @@ class ProductTransformer extends AbstractTransformer {
         ];
 
         if ($this->isRelationshipLoaded($product, 'Review')) {
-            $arr['review'] = $product->Review == null ? ReviewTransformer::transform($product->Review) : null;
+            $arr['review'] = ReviewTransformer::transform($product->Review);
         }
 
 
@@ -67,10 +68,32 @@ class ProductTransformer extends AbstractTransformer {
                 ->whereVendorId($vendor->id)->count();
         }
 
+        $a = collect($product->Review)->map(function($item) {
+            return $this->getScore($item->body, $item);
+        })->toArray();
+
+
+
+        $summaryAvg = [
+            "pos"   => collect($a)->avg('sentimen.pos'),
+            "neg"   =>  collect($a)->avg('sentimen.neg'),
+            "neu"   =>  collect($a)->avg('sentimen.neu')
+        ];
+
+        $arr["summary"]     =  array_search(max($summaryAvg),$summaryAvg);
+
         return $arr;
     }
 
-    protected function cacheRevieSummary(Model $product) {
+    private function getScore($sentence, Model $review) {
 
+        $key = "{$review->id}_{$sentence}";
+
+        return Cache::rememberForever($key, function() use ($sentence) {
+            $arr = $this->score($sentence);
+            $collection = collect($arr)->only(['pos', 'neg', 'neu'])->toArray();
+            return $collection;
+        });
     }
+
 }

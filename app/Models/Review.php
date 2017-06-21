@@ -26,4 +26,9 @@ class Review extends Model
 
         return $this->ProductVendor->Vendor();
     }
+
+    public function getSummary() {
+
+        return 1;
+    }
 }
