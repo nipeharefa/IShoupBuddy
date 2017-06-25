@@ -59,7 +59,8 @@
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "php artisan optimize"
-        ]
+        ],
+        "dep": "vendor/bin/dep"
     },
     "config": {
         "preferred-install": "dist",
