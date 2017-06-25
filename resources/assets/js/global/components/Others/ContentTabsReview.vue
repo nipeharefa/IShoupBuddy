@@ -1,9 +1,9 @@
 <template>
   <div>
-    <article v-if="!product.review">
+    <article v-if="!review">
       <p class="no-review has-text-centered">Belum ada Review</p>
     </article>
-  	<article class="media" v-for="review in product.review">
+  	<article class="media" v-for="review in product.review" v-if="review">
     <figure class="media-left">
       <p class="image is-64x64">
         <img src="https://source.unsplash.com/category/nature/64x64">
@@ -43,7 +43,13 @@
     computed: {
       ...mapGetters([
         'product'
-      ])
+      ]),
+      review () {
+        if (this.product.review == null || this.product.review.length === 0) {
+          return null
+        }
+        return this.product.review
+      }
     },
     methods: {
       timeFromNow (time) {
