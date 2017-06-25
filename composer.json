@@ -10,6 +10,7 @@
         "antoineaugusti/laravel-sentiment-analysis": "^2.1",
         "appstract/laravel-opcache": "^1.0",
         "cviebrock/eloquent-sluggable": "^4.2",
+        "deployer/deployer": "^5.1",
         "doctrine/dbal": "^2.5",
         "guzzlehttp/guzzle": "^6.2",
         "intervention/image": "^2.3",
