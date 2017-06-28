@@ -65,31 +65,10 @@ class CartController extends Controller
             ])->validate();
 
         $user = $request->user();
+
         try {
 
             DB::beginTransaction();
-
-            $product_vendor = ProductVendor::whereProductId($request->product_id)
-                ->whereVendorId($request->vendor_id)->firstOrFail();
-
-            $data = [
-                "product_vendor_id"   =>  $product_vendor->id,
-                "quantity"  =>  $request->quantity ?? 1,
-                "harga"     =>  $request->quantity * $product_vendor->harga
-            ];
-
-            $cart = $user->Cart()->updateOrCreate([
-                    'product_vendor_id' =>  $product_vendor->id,
-                    "identify_id"       =>  $user->id
-                ], $data);
-
-            DB::commit();
-
-            $response = [
-                "status"    =>  "OK",
-                "cart"      =>  CartTransformer::transform($cart),
-                "message"   =>  "Cart added"
-            ];
 
             return response()->json($response, 201);
 
@@ -105,8 +84,6 @@ class CartController extends Controller
 
             return response()->json($err, 400);
         }
-
-        // return $user->Cart()->create(['product_vendor_id' => $request->product_id]);
     }
 
     /**

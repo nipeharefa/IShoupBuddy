@@ -60,7 +60,8 @@
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "php artisan optimize"
         ],
-        "dep": "vendor/bin/dep"
+        "dep": "vendor/bin/dep",
+        "test": "vendor/bin/phpunit"
     },
     "config": {
         "preferred-install": "dist",

@@ -12,12 +12,13 @@
 */
 
 Route::get('/', 'HomeController@index');
-
+Route::get('home', 'HomeController@index');
 Route::get('search', 'SearchController@index');
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm');
-
 Route::get('vendor/login', 'Auth\LoginVendorController@showLoginForm');
+
+Route::resource('cart', 'CartController');
 
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function() {
     Route::post('login', 'LoginController@loginViaAjax');
@@ -45,8 +46,6 @@ Route::group(['prefix' => 'me', 'middleware' => ['auth', 'member_only']], functi
     });
 
 });
-
-Route::get('home', 'HomeController@index');
 
 Route::resource('product', 'ProductController',
 	['only' => ['show']]);
