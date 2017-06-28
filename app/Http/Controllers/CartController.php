@@ -21,7 +21,27 @@ class CartController extends Controller
 
         $view = view('pages.cart.index');
 
-        return $view->with('title', $title);
+
+        $user = $request->user() ?? null;
+
+        if ($user->role) {
+            switch ($user->role) {
+                case 1:
+                    # Member
+                    $js     = mix('js/m-cart.js');
+                    $css    = mix('css/member/cart.css');
+                    break;
+                default:
+                    # Vendor
+                    $js = mix('js/cart.js');
+                    $css = mix('css/cart.css');
+                    break;
+            }
+        }
+
+        return $view->with('title', $title)
+                    ->with('js', $js)
+                    ->with('css', $css);
     }
 
     /**
