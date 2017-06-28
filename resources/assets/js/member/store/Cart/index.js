@@ -15,7 +15,8 @@ const strict = process.env.NODE_ENV !== 'production'
 const state = {
   activeUser,
   isActive,
-  searchActive
+  searchActive,
+  carts: null
 }
 
 const store = new Vuex.Store({
