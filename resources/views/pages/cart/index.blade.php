@@ -23,6 +23,9 @@
 
     <script type="text/javascript">
 
+        window._sharedData = {
+            user: {!! $user ?? "null" !!}
+        }
     </script>
 
     <script src="{{ mix('js/manifest.js') }}"></script>

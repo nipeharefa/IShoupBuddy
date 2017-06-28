@@ -41,7 +41,8 @@ class CartController extends Controller
 
         return $view->with('title', $title)
                     ->with('js', $js)
-                    ->with('css', $css);
+                    ->with('css', $css)
+                    ->with('user', $user);
     }
 
     /**
