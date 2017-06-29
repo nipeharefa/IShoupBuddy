@@ -9,6 +9,7 @@
         "alexpechkarev/google-maps": "1.0.7",
         "antoineaugusti/laravel-sentiment-analysis": "^2.1",
         "appstract/laravel-opcache": "^1.0",
+        "barryvdh/laravel-debugbar": "^2.4",
         "cviebrock/eloquent-sluggable": "^4.2",
         "deployer/deployer": "^5.1",
         "doctrine/dbal": "^2.5",

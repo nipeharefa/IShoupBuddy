@@ -182,7 +182,8 @@ return [
 
         // Appstract\Opcache\OpcacheServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
-        Themsaid\Transformers\TransformersServiceProvider::class
+        Themsaid\Transformers\TransformersServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
 
     ],
@@ -235,6 +236,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Sentry' => Sentry\SentryLaravel\SentryFacade::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 
