@@ -19,6 +19,11 @@ use Log;
 class CartTest extends TestCase
 {
     use DatabaseMigrations;
+
+    private $user;
+    private $category;
+    private $product;
+    private $vendor;
     /**
      * A basic test example.
      *
@@ -27,44 +32,40 @@ class CartTest extends TestCase
     public function setUp() {
         parent::setUp();
         $this->seed('InsertDefaultCategory');
+        $this->generateCart();
     }
 
 
     public function testAddItemToCart()
     {
+        $this->actingAs($this->user, 'api');
+
+        $data  = [
+            'product_vendor_id' =>  $this->productVendor->id,
+            'quantity'          =>  3
+        ];
+
+        $response = $this->json("POST", "api/cart", $data);
+
+        Log::info($response->getContent());
         $this->assertTrue(true);
     }
 
     public function generateCart() {
 
-        $category = Category::first();
-        $vendor = factory(Vendor::class)->create();
+        $this->category = Category::first();
+        $this->vendor = factory(Vendor::class)->create();
 
-        $product = factory(Product::class)->create([
-            "category_id"   =>  $category->id
+        $this->product = factory(Product::class)->create([
+            "category_id"   =>  $this->category->id
         ]);
 
-        $product_vendor = $vendor->ProductVendor()
+        $this->productVendor = $this->vendor->ProductVendor()
             ->save(factory(ProductVendor::class)->create([
-                "product_id"    =>  $product->id,
-                "vendor_id"     =>  $vendor->id
+                "product_id"    =>  $this->product->id,
+                "vendor_id"     =>  $this->vendor->id
             ]));
 
-        $data = [
-            "product_id"    =>  $product->id,
-            "vendor_id"     =>  $vendor->id,
-            "quantity"      =>  2
-        ];
-
-        $user = factory(User::class)->create();
-
-        $this->actingAs($user, 'api');
-        $data = [
-            "product_id"    =>  $product->id,
-            "vendor_id"     =>  $vendor->id,
-            "quantity"      =>  2
-        ];
-
-        $this->json('POST', 'api/cart', $data);
+        $this->user = factory(User::class)->create();
     }
 }

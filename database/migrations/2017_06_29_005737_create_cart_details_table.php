@@ -16,10 +16,13 @@ class CreateCartDetailsTable extends Migration
         Schema::create('cart_details', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('cart_id')->unsigned();
+            $table->integer('product_vendor_id')->unsigned();
             $table->integer('quantity');
             $table->double('price');
             $table->timestamps();
             $table->foreign('cart_id')->references('id')->on('carts')
+                ->onDelete('cascade');
+            $table->foreign('product_vendor_id')->references('id')->on('product_vendors')
                 ->onDelete('cascade');
         });
     }

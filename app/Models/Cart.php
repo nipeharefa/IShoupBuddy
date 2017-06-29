@@ -6,11 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model
 {
-    protected $fillable = ['product_vendor_id', 'quantity', 'harga'];
+    protected $fillable = ['vendor_id', 'quantity', 'harga'];
 
+    public function Vendor()
+    {
+        return $this->belongsTo(Vendor::class);
+    }
 
     public function ProductVendor() {
 
         return $this->belongsTo(ProductVendor::class);
+    }
+
+    public function Detail()
+    {
+        return $this->hasMany(CartDetail::class);
     }
 }

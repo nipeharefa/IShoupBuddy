@@ -12,11 +12,17 @@ new Vue({
   store,
   created () {
     this.initActiveUser(window._sharedData.user)
+    this.getCarts()
   },
   methods: {
     ...mapActions([
       'initActiveUser'
-    ])
+    ]),
+    getCarts () {
+      this.$http.get('api/cart').then(response => {
+        console.log(response.data)
+      })
+    }
   },
   render (h) {
     return (

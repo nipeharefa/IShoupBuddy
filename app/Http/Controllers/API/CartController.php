@@ -7,6 +7,7 @@ use App\Helpers\Traits\RupiahFormated;
 use App\Helpers\Transformers\CartTransformer;
 use App\Models\Cart;
 use App\Models\ProductVendor;
+use App\Models\Vendor;
 use DB;
 use Illuminate\Http\Request;
 use Exception;
@@ -22,23 +23,20 @@ class CartController extends Controller
      */
     public function index(Request $request)
     {
-        $user =  $request->user();
+        try {
+            $user =  $request->user();
 
-        $carts_total = $user->Cart->sum(function ($product) {
-                    return $product->harga;
-                });
 
-        $response = [
-            "data"  =>  "OK",
-            "message"   =>  null,
-            "carts"     =>  [
-                "items" =>  CartTransformer::transform($user->Cart),
-                "total" =>  $carts_total,
-                "total_strings" => $this->formatRupiah($carts_total)
-            ]
-        ];
+            $carts = $user->Cart()->get()->map(function($c){
+                return $this->cartResponse($c->Vendor, $c);
+            });
 
-        return response()->json($response);
+            return $carts;
+
+        } catch (Exception $e) {
+
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -60,8 +58,8 @@ class CartController extends Controller
     public function store(Request $request)
     {
         Validator::make($request->all(), [
-                'product_vendor_id'     =>  'required',
-                'quantity'      =>  'nullable|numeric'
+                'product_vendor_id' =>  'required',
+                'quantity'          =>  'nullable|numeric'
             ])->validate();
 
         $user = $request->user();
@@ -72,22 +70,30 @@ class CartController extends Controller
 
             $productVendor = ProductVendor::findOrFail($request->product_vendor_id);
 
-            $data = [
-                "product_vendor_id"   =>  $productVendor->id,
-                "quantity"  =>  $request->quantity ?? 1,
-                "harga"     =>  $request->quantity * $productVendor->harga
+            $dataCart = [
+                "vendor_id"   =>  $productVendor->Vendor->id,
             ];
 
-            $cart = $user->Cart()->updateOrCreate([
-                    'product_vendor_id' =>  $productVendor->id,
-                    "identify_id"       =>  $user->id
-                ], $data);
+            $cart = $user->Cart()->updateOrCreate($dataCart);
 
+            $dataCartDetails = [
+                "quantity"  =>  $request->quantity ?? 1,
+                "price"     =>  $request->quantity * $productVendor->harga
+            ];
+
+            $cartDetails = $cart->Detail()->updateOrCreate([
+                    "cart_id"   =>  $cart->id,
+                    "product_vendor_id" =>  $productVendor->id
+                ],
+            $dataCartDetails);
+
+
+            $carts = $this->cartResponse($productVendor->Vendor, $cart);
 
             $response = [
-                "status"    =>  "OK",
-                "cart"      =>  $cart,
-                "message"   =>  null
+                "cart"      =>  $carts,
+                "message"   =>  "Added",
+                "status"    =>  "OK"
             ];
 
             DB::commit();
@@ -213,5 +219,13 @@ class CartController extends Controller
 
             return response()->json($response, 400);
         }
+    }
+
+    protected function cartResponse(Vendor $vendor, Cart $cart)
+    {
+        $vendor = transform($vendor);
+        $vendor["item"] = $cart->Detail;
+
+        return $vendor;
     }
 }
