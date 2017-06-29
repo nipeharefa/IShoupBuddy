@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\API;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Validator;
-use App\Helpers\Transformers\CartTransformer;
-use App\Models\ProductVendor;
-use Exception;
-use DB;
 use App\Helpers\Traits\RupiahFormated;
+use App\Helpers\Transformers\CartTransformer;
+use App\Models\Cart;
+use App\Models\ProductVendor;
+use DB;
+use Illuminate\Http\Request;
+use Exception;
+use Validator;
 
 class CartController extends Controller
 {
@@ -59,8 +60,7 @@ class CartController extends Controller
     public function store(Request $request)
     {
         Validator::make($request->all(), [
-                'product_id'    =>  'required',
-                'vendor_id'     =>  'required',
+                'product_vendor_id'     =>  'required',
                 'quantity'      =>  'nullable|numeric'
             ])->validate();
 
@@ -69,6 +69,28 @@ class CartController extends Controller
         try {
 
             DB::beginTransaction();
+
+            $productVendor = ProductVendor::findOrFail($request->product_vendor_id);
+
+            $data = [
+                "product_vendor_id"   =>  $productVendor->id,
+                "quantity"  =>  $request->quantity ?? 1,
+                "harga"     =>  $request->quantity * $productVendor->harga
+            ];
+
+            $cart = $user->Cart()->updateOrCreate([
+                    'product_vendor_id' =>  $productVendor->id,
+                    "identify_id"       =>  $user->id
+                ], $data);
+
+
+            $response = [
+                "status"    =>  "OK",
+                "cart"      =>  $cart,
+                "message"   =>  null
+            ];
+
+            DB::commit();
 
             return response()->json($response, 201);
 

@@ -14,6 +14,7 @@ class AddFieldHrgaCart extends Migration
     public function up()
     {
         Schema::table('carts', function($table) {
+            $table->integer('quantity');
             $table->double('harga')->after('quantity')->default(0);
         });
     }

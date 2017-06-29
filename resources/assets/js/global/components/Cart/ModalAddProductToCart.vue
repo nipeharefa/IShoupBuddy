@@ -62,8 +62,7 @@
     methods: {
       addToCart () {
         const data = {
-          'product_id': this.product.id,
-          'vendor_id': this.product_vendor.vendor.id,
+          'product_vendor_id': this.product_vendor.id,
           'quantity': this.quantity
         }
         console.log(data)
