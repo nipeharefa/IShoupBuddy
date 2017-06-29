@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\API;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Helpers\Transformers\TransactionTransformer;
+use App\Models\User;
 use DB;
 use Exception;
-use App\Models\User;
-
-use App\Helpers\Transformers\TransactionTransformer;
+use Illuminate\Http\Request;
+use Log;
 
 class TransactionController extends Controller
 {
@@ -68,44 +68,54 @@ class TransactionController extends Controller
 
             $saldo = $user->Saldo->nominal ?? 0;
 
-            $total_belanja = $cart->sum(function($item){
-                    return $item->quantity * $item->harga;
-                });
+            $totalBelanja = $cart->sum(function($item){
+                return $item->Detail()->sum('price');
+            });
 
-            if ($total_belanja > $saldo) {
-                throw new Exception("Saldo tidak cukup", 1);
+            if ($totalBelanja > $saldo) {
+                throw new Exception("Saldo tidak cukup" . $saldo, 1);
             }
 
             if (!$cart->count()) {
                 throw new Exception("Cart null", 2011);
             }
+
             DB::beginTransaction();
 
-            // Transaction
-            $data = [
-                "nominal"   =>  $total_belanja,
-                "status"    =>  1,
-                "user_id"   =>  $user->id
-            ];
+            $currenTransactions = $cart->map(function($cartItem) use ($user) {
 
-            $trans = $user->Transaction()->create($data);
+                $data = [
+                    "nominal"   =>  $cartItem->Detail->sum('price'),
+                    "status"    =>  1,
+                    "user_id"   =>  $user->id
+                ];
 
-            $cart->each(function($item) use ($trans) {
 
-                $data =  collect($item)->toArray();
-                $trans->Detail()->create($data);
-                $item->delete();
+                $trans = $user->Transaction()->create($data);
+
+                $cartItem->Detail->each(function($item) use ($trans) {
+                    $transactionDetail = [
+                        "product_vendor_id" =>  $item->product_vendor_id,
+                        "quantity"          =>  $item->quantity,
+                        "harga"             =>  $item->ProductVendor->harga,
+                        "total"             =>  $item->price
+                    ];
+                    $trans->Detail()->create($transactionDetail);
+                });
+                $cartItem->delete();
+                return $trans;
             });
 
-            $this->payWithWallet($total_belanja, $user);
+            $this->payWithWallet($totalBelanja, $user);
 
             DB::commit();
 
-            return transform($trans->load('Detail'));
-
+            return transform($currenTransactions->load('Detail'));
 
         } catch (Exception $e) {
             DB::rollback();
+
+            Log::info($e->getMessage());
 
             $err = [
                 "message"   =>  $e->getMessage()

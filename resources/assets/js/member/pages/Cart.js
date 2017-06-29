@@ -16,11 +16,12 @@ new Vue({
   },
   methods: {
     ...mapActions([
-      'initActiveUser'
+      'initActiveUser',
+      'initCarts'
     ]),
     getCarts () {
       this.$http.get('api/cart').then(response => {
-        console.log(response.data)
+        this.initCarts(response.data)
       })
     }
   },

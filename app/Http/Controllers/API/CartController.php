@@ -74,6 +74,8 @@ class CartController extends Controller
                 "vendor_id"   =>  $productVendor->Vendor->id,
             ];
 
+            # Create Cart vendor
+
             $cart = $user->Cart()->updateOrCreate($dataCart);
 
             $dataCartDetails = [

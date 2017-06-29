@@ -12,4 +12,9 @@ class CartDetail extends Model
     {
         return $this->belongsTo(Cart::class);
     }
+
+    public function ProductVendor()
+    {
+        return $this->belongsTo(ProductVendor::class);
+    }
 }
