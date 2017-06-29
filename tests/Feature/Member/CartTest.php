@@ -51,23 +51,12 @@ class CartTest extends TestCase
 
         $response = $this->json("POST", "api/cart", $data);
         $this->assertCount(1, Cart::get());
-        dump(Cart::get());
 
         $responseCheckout = $this->json('POST', 'api/transaction', []);
 
         # Check if wallet not enough
         #
         $this->assertSame(400, $responseCheckout->getStatusCode());
-
-        # Test if wallet passed
-
-        $data['quantity']   = 1;
-        $response = $this->json("POST", "api/cart", $data);
-        // $this->assertCount(1, Cart::get());
-        dump(Cart::get());
-        // $responseCheckout = $this->json('POST', 'api/transaction', []);
-        // $this->assertSame(200, $responseCheckout->getStatusCode());
-        // $this->assertCount(0, Cart::get());
 
 
     }
