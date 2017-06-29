@@ -225,7 +225,7 @@ class CartController extends Controller
 
     protected function cartResponse(Vendor $vendor, Cart $cart)
     {
-        $vendor = transform($vendor);
+        $vendor["vendor"] = transform($vendor);
         $vendor["item"] = $cart->Detail;
 
         return $vendor;
