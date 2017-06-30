@@ -16,7 +16,8 @@ const state = {
   activeUser: null,
   product: null,
   isActive,
-  searchActive
+  searchActive,
+  recommendationProducts: null
 }
 
 const store = new Vuex.Store({

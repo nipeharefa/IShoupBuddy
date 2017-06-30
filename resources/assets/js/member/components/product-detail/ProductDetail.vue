@@ -76,8 +76,11 @@
 
       </div>
 
-      <div class="column">
-        <p>penjual</p>
+      <div class="column recommendationProducts">
+        <a href="#" v-for="product in recommendation"
+          :key="product.id">
+          <productCard :product="product" />
+        </a>
       </div>
 
     </div>
@@ -97,6 +100,7 @@
   const ImageCover = () => import('global/components/Others/ImageInProductDetail.vue')
   const ModalAddToCart = () => import('global/components/Cart/ModalAddProductToCart.vue')
   const ModalsBaru = () => import('global/components/Cart/ModalAddProductToCart.vue')
+  const ProductCard = () => import('global/components/Others/ProductCard.vue')
 
   import { mapGetters } from 'vuex'
 
@@ -111,11 +115,13 @@
       ButtonControlTouch,
       Tabs,
       ImageCover,
-      ModalAddToCart
+      ModalAddToCart,
+      ProductCard
     },
     computed: {
       ...mapGetters([
-        'product'
+        'product',
+        'recommendation'
       ])
     },
     data ()  {

@@ -30,7 +30,6 @@ Route::group(['namespace' => 'API'], function() {
     Route::resource('user', 'UserController',
         ['only' => ['show']]);
 
-
     Route::resource('category', 'CategoryController',
         ['only' => ['index']]);
 
@@ -41,6 +40,9 @@ Route::group(['namespace' => 'API'], function() {
 
     Route::resource('product', 'ProductController',
         ['only' => ['index', 'show']]);
+
+    Route::resource('recommendation', 'RecommendationController',
+        ['only' =>  ['index']]);
 
     Route::resource('review', 'ReviewController',
         ['only' => ['index', 'show']]);

@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueAxios from 'lib/axios-plugin'
+import VueLazyload from 'vue-lazyload'
+Vue.use(VueLazyload)
 Vue.use(VueAxios)
 
 import App from 'member/components/product-detail/ProductDetail.vue'
@@ -7,9 +9,10 @@ import App from 'member/components/product-detail/ProductDetail.vue'
 import store from 'member/store/product-detail/'
 
 import { mapActions, mapGetters } from 'vuex'
+
 new Vue({
   created () {
-    this.getProductDetail()
+    this.initDataVuex()
   },
   store,
   computed: {
@@ -19,13 +22,23 @@ new Vue({
   },
   methods: {
     ...mapActions([
-      'initProduct'
+      'initProduct',
+      'initRecommendationProducts'
     ]),
+    initDataVuex () {
+      this.getProductDetail()
+      this.getRecomendationProducts()
+    },
     getProductDetail () {
       const id = window._sharedData.product_id
-      this.$http.get(`api/product/${id}`).then(response => {
+      this.$http.get(`api/product/${id}?with=review`).then(response => {
         this.initProduct(response.data.product)
       }).catch(err => err)
+    },
+    getRecomendationProducts () {
+      this.$http.get('api/recommendation').then(response => {
+        this.initRecommendationProducts(response.data.products)
+      })
     }
   },
   render (h) {

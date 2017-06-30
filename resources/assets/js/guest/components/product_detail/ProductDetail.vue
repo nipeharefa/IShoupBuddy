@@ -70,8 +70,11 @@
 
       </div>
 
-      <div class="column">
-        <p>penjual</p>
+      <div class="column recommendationProducts">
+        <a href="#" v-for="product in recommendation"
+          :key="product.id">
+          <productCard :product="product" />
+        </a>
       </div>
 
     </div>
@@ -87,6 +90,7 @@
   const Ratings = () => import('global/components/Others/Ratings.vue')
   const Tabs = () => import('global/components/Others/Tabs.vue')
   const ImageCover = () => import('global/components/Others/ImageInProductDetail.vue')
+  const ProductCard = () => import('global/components/Others/ProductCard.vue')
 
   import { mapGetters } from 'vuex'
 
@@ -98,11 +102,13 @@
       DiscountBox,
       Ratings,
       Tabs,
-      ImageCover
+      ImageCover,
+      ProductCard
     },
     computed: {
       ...mapGetters([
-        'product'
+        'product',
+        'recommendation'
       ])
     }
   }
