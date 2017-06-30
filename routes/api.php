@@ -52,8 +52,11 @@ Route::group(['namespace' => 'API'], function() {
 
 	Route::group(['middleware' => 'auth:api'], function () {
 
+        Route::put('cart/{cart}/detail/{id}', 'CartDetailController@update');
+        Route::delete('cart/{cart}/detail/{id}', 'CartDetailController@destroy');
         Route::resource('cart', 'CartController',
             ['only' =>  ['index', 'store', 'update', 'destroy']]);
+
 
 	    Route::resource('user', 'UserController',
             ['only' => ['index', 'store']]);

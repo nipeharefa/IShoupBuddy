@@ -168,9 +168,34 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        try {
+
+            DB::beginTransaction();
+
+            $user = $request->user();
+
+            $user->Cart()->findOrFail($id);
+
+            $response = [
+                "message"   =>  null
+            ];
+
+            DB::commit();
+
+            return response()->json($response, 204);
+
+        } catch (Exception $e) {
+
+            DB::rollback();
+
+            $err = [
+                "message"   =>  $e->getMessage()
+            ];
+
+            return response()->json($err, 400);
+        }
     }
 
     protected function payWithWallet($nominal, User $user) {
