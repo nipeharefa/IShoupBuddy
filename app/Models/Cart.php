@@ -8,6 +8,11 @@ class Cart extends Model
 {
     protected $fillable = ['vendor_id', 'quantity', 'harga'];
 
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'identify_id');
+    }
+
     public function Vendor()
     {
         return $this->belongsTo(Vendor::class);

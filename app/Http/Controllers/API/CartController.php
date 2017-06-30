@@ -28,10 +28,22 @@ class CartController extends Controller
 
 
             $carts = $user->Cart()->get()->map(function($c){
-                return $this->cartResponse($c->Vendor, $c);
+                return $this->indexCartResponse($c->Vendor, $c);
             });
 
-            return $carts;
+            $totalBelanja = $user->Cart->sum(function($item){
+                return $item->Detail()->sum('price');
+            });
+
+            $response = [
+                "carts"         =>  $carts,
+                "message"       =>  null,
+                "status"        =>  "OK",
+                "total"         =>  $totalBelanja,
+                "total_string"  =>  $this->formatRupiah($totalBelanja),
+            ];
+
+            return response()->json($response);
 
         } catch (Exception $e) {
 
@@ -221,6 +233,14 @@ class CartController extends Controller
 
             return response()->json($response, 400);
         }
+    }
+
+    public function indexCartResponse(Vendor $vendor, Cart $cart) {
+
+        $carts = collect($cart)->except('vendor')->toArray();
+        $carts['vendor'] = transform($vendor);
+        $carts["item"] = transform($cart->Detail);
+        return $carts;
     }
 
     protected function cartResponse(Vendor $vendor, Cart $cart)
