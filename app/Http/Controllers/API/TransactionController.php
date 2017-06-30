@@ -9,6 +9,7 @@ use DB;
 use Exception;
 use Illuminate\Http\Request;
 use Log;
+use App\Http\Requests\StoreTransaction;
 
 class TransactionController extends Controller
 {
@@ -59,12 +60,14 @@ class TransactionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTransaction $request)
     {
         $user  = $request->user();
         try {
 
-            $cart = $user->Cart;
+            $cartID = $request->cart_id;
+
+            $cart = $user->Cart()->findOrFail($cartID);
 
             $saldo = $user->Saldo->nominal ?? 0;
 
