@@ -54,11 +54,6 @@ class CartTest extends TestCase
 
         $responseCheckout = $this->json('POST', 'api/transaction', []);
 
-        # Check if wallet not enough
-        #
-        $this->assertSame(400, $responseCheckout->getStatusCode());
-
-
     }
 
     private function generateCart() {
