@@ -42,8 +42,11 @@
       display: flex;
       justify-content: left;
 
-      i.fa-shopping-cart {
-        font-size: 2.1rem !important;
+      i {
+        font-size: 1.5rem !important;
+        &.white {
+          color: #fff !important;
+        }
       }
     }
   }

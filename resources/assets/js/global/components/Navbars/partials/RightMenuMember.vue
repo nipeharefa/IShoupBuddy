@@ -1,7 +1,7 @@
 <template>
   <div class="nav-right nav-menu">
       <a class="nav-item is-tab" href="/cart">
-        <i class="fa fa-shopping-cart"></i>
+        <i class="fa fa-shopping-cart white" aria-hidden="true"></i>
       </a>
       <div class="user_info">
         <a class="nav-item" href="/me">

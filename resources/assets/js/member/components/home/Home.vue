@@ -1,5 +1,5 @@
 <template>
-  <div id="sub-apps">
+  <div id="sub-apps-member">
     <div>
       <navbar></navbar>
     </div>
