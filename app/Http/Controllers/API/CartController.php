@@ -173,7 +173,7 @@ class CartController extends Controller
 
             $data = collect($request->only('quantity'))->filter()->toArray();
 
-            $cart = $user->CartDetail()->findOrFail($id);
+            $cart = CartDetail::findOrFail($id);
             $cart->update($data);
 
             DB::commit();
