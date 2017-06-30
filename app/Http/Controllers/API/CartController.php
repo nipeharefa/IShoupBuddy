@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Helpers\Traits\RupiahFormated;
 use App\Helpers\Transformers\CartTransformer;
 use App\Models\Cart;
+use App\Models\CartDetail;
 use App\Models\ProductVendor;
 use App\Models\Vendor;
 use DB;
@@ -172,14 +173,14 @@ class CartController extends Controller
 
             $data = collect($request->only('quantity'))->filter()->toArray();
 
-            $cart = $user->Cart()->findOrFail($id);
+            $cart = $user->CartDetail()->findOrFail($id);
             $cart->update($data);
 
             DB::commit();
 
             $response = [
                 "status"    =>  "OK",
-                "cart"      =>  CartTransformer::transform($cart),
+                "cart"      =>  CartDetailTransformer::transform($cart),
                 "messaage"  =>  "updated"
             ];
 
