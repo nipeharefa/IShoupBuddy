@@ -7,7 +7,8 @@ const echo = new Echo({
   broadcaster: 'pusher',
   key: '37ca8f9beb8432c37194',
   cluster: 'mt1',
-  authEndpoint: '/broadcasting/auth'
+  authEndpoint: '/broadcasting/auth',
+  encrypted: true
 })
 export default (Vue) => {
   Object.defineProperties(Vue.prototype, {
