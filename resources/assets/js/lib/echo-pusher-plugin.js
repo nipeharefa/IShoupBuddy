@@ -5,7 +5,7 @@ window.Pusher = require('pusher-js')
 window.keyPusher = PUSHER_KEYS
 const echo = new Echo({
   broadcaster: 'pusher',
-  key: '37ca8f9beb8432c37194',
+  key: PUSHER_KEYS,
   cluster: 'mt1',
   authEndpoint: '/broadcasting/auth',
   encrypted: true
