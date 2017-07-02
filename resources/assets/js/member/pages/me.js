@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import VueAxios from 'lib/axios-plugin'
 import store from '../store/me'
-
-Vue.use(VueAxios)
-
+import VueEcho from 'lib/echo-pusher-plugin'
 import App from 'member/components/me/Me.vue'
 import { mapActions } from 'vuex'
+Vue.use(VueEcho)
+Vue.use(VueAxios)
+
 
 new Vue({
   created () {

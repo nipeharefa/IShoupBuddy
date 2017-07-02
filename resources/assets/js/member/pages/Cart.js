@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import VueAxios from 'lib/axios-plugin'
 import VueLazyload from 'vue-lazyload'
-Vue.use(VueAxios)
-Vue.use(VueLazyload)
 import { mapActions } from 'vuex'
 import store from 'member/store/Cart/'
+import VueEcho from 'lib/echo-pusher-plugin'
+Vue.use(VueEcho)
+Vue.use(VueAxios)
+Vue.use(VueLazyload)
 
 const App = r => require.ensure([], () => r(require('member/components/Cart/Cart.vue')), 'mem-cart')
 

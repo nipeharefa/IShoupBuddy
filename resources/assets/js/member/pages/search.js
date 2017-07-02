@@ -1,12 +1,11 @@
 import Vue from 'vue'
+import VueEcho from 'lib/echo-pusher-plugin'
 import VueAxios from 'lib/axios-plugin'
-Vue.use(VueAxios)
-
 import App from 'member/components/search/Search.vue'
-
 import store from 'member/store/search/'
-
 import { mapActions } from 'vuex'
+Vue.use(VueAxios)
+Vue.use(VueEcho)
 
 new Vue({
   created () {

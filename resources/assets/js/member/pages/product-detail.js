@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueAxios from 'lib/axios-plugin'
 import VueLazyload from 'vue-lazyload'
+import VueEcho from 'lib/echo-pusher-plugin'
+Vue.use(VueEcho)
 Vue.use(VueLazyload)
 Vue.use(VueAxios)
 

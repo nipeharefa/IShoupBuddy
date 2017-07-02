@@ -32,6 +32,13 @@
   import { mapGetters, mapActions } from 'vuex'
 
   export default {
+    created () {
+      const id = this.activeUser.id
+      const echo = this.$echo.private(`saldo.user.${id}`)
+                    .listen('SaldoNominalUpdated', (payload) => {
+                      console.log(payload)
+                  })
+    },
     components: {
       Navbar,
       DrawerMember,
@@ -41,7 +48,8 @@
     computed: {
       ...mapGetters([
         'isActive',
-        'searchActive'
+        'searchActive',
+        'activeUser'
       ])
     },
     methods: {
