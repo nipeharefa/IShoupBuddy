@@ -11,14 +11,19 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use App\Models\Review;
 use App\Models\User;
+use App\Models\Product;
 
-class ReviewCreated
+class ReviewCreated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     protected $product;
 
+    protected $productVendor;
+
     protected $user;
+
+    protected $reviewModel;
 
     public $review;
 
@@ -31,9 +36,13 @@ class ReviewCreated
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Review $review)
     {
-        //
+        $this->reviewModel = $review;
+        $this->product = $review->Product;
+        $this->productVendor = $review->ProductVendor;
+
+        $this->review = transform($review);
     }
 
     /**
@@ -43,6 +52,9 @@ class ReviewCreated
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return [
+            new PrivateChannel('review.product.'.$this->product->id),
+            new PrivateChannel('review.product_vendor.'.$this->productVendor->id)
+        ];
     }
 }
