@@ -45,8 +45,8 @@ class ReviewCreated implements ShouldBroadcast
         $this->reviewModel = $review;
         $this->product = $review->Product;
         $this->productVendor = $review->ProductVendor;
-
         $this->review = transform($review);
+        $this->mapReview();
     }
 
     /**
