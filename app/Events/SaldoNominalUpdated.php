@@ -40,7 +40,7 @@ class SaldoNominalUpdated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('saldo.user.'.$this->user->id);
+        return new Channel('saldo.user.'.$this->user->id);
     }
 
     public function broadcastAs()
