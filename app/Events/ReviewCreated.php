@@ -57,8 +57,13 @@ class ReviewCreated implements ShouldBroadcast
     public function broadcastOn()
     {
         return [
-            new PrivateChannel('review.product.'.$this->product->id),
-            new PrivateChannel('review.product_vendor.'.$this->productVendor->id)
+            new Channel('review.product.'.$this->product->id),
+            new Channel('review.product_vendor.'.$this->productVendor->id)
         ];
+    }
+
+    public function broadcastAs()
+    {
+        return 'review.created';
     }
 }
