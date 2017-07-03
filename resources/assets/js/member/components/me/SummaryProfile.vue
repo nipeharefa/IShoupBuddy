@@ -8,7 +8,7 @@
         </div>
         <div class="user-email">
           <small>Nama Lengkap</small>
-          <span>nipehaefa@gmail.com</span>
+          <span>{{ activeUser.email }}</span>
         </div>
         <div class="user-phone">
           <small>Nomor Handphone</small>
@@ -24,7 +24,7 @@
 
       </div>
       <div class="user-profile-picture">
-        <div class="image is-64x64 is-square image-photo">
+        <div class="image is-128x128 is-square image-photo">
           <img :src="activeUser.picture_links.small" alt="profile Logo">
         </div>
       </div>
