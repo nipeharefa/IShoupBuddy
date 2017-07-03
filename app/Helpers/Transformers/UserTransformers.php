@@ -31,7 +31,7 @@ class UserTransformers extends AbstractTransformer {
                 "nominal"       =>  $saldo,
                 "saldo_string"  =>  $this->formatRupiah($saldo),
                 "history"       =>  $user->Saldo->Transaction
-                                    ? transform($user->Saldo->Transaction)
+                                    ? Transaction::transform($user->Saldo->Transaction)
                                     : []
             ];
         }
