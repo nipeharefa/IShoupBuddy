@@ -20,6 +20,7 @@ before_script:
   - composer du
   - php artisan key:generate
   - yarn
+  - cp resources/assets/js/lib/pusher-conf.js.example resources/assets/js/lib/pusher-conf.js
   - yarn run production
 
 cache:
