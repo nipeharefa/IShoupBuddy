@@ -30,18 +30,11 @@ class UserTransformers extends AbstractTransformer {
             $arr['saldo'] = [
                 "nominal"       =>  $saldo,
                 "saldo_string"  =>  $this->formatRupiah($saldo),
-                "history"       =>  $user->Saldo->Transaction
-                                    ? TransactionTransformer::transform($user->Saldo->Transaction)
-                                    : []
+                "history"       =>  null
             ];
         }
-
-
 
         return $arr;
     }
 
-    protected function generateUserPictureLinks($url) {
-
-    }
 }

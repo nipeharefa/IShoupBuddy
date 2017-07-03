@@ -64,6 +64,7 @@ class ReviewTest extends TestCase
     }
 
     public function test_delete_review() {
+        Event::fake();
 
         $category = factory(Category::class)->create();
         $vendor = factory(Vendor::class)->create();

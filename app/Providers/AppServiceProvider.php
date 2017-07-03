@@ -6,8 +6,10 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use App\Models\ProductVendor;
 use App\Models\Review;
+use App\Models\Saldo;
 use App\Observers\ProductVendorObserver;
 use App\Observers\ReviewObserver;
+use App\Observers\SaldoObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,7 +22,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         ProductVendor::observe(ProductVendorObserver::class);
-        Review::observe(ReviewObserver::class);
+        Saldo::observe(SaldoObserver::class);
+        // Review::observe(ReviewObserver::class);
     }
 
     /**

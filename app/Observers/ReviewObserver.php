@@ -22,10 +22,7 @@ class ReviewObserver
 
             $review = new ReviewCreated($review);
             event($review);
-
-        } catch (Exception $e) {
-            Log::debug($e->getMesssage());
-        }
+        } catch (Exception $e) {}
     }
 
     public function updated(Review $review)
