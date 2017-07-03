@@ -7,10 +7,16 @@
         <a class="nav-item" href="/me">
           <i class="fa fa-user" aria-hidden="true"></i>
         </a>
-        <span>Hi, {{activeUser.name}}</span>
+        <span class="user_name">Hi, {{activeUser.name}}</span>
       </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+  span.user_name {
+    font-size: 0.8rem;
+  }
+</style>
 
 <script>
   import { mapGetters } from 'vuex'

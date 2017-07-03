@@ -22,7 +22,7 @@
         </li>
 
         <li>
-          <a href="" @click="logout">Log out</a>
+          <a @click="logout">Log out</a>
         </li>
 
 		</ul>
@@ -44,6 +44,7 @@
       logout () {
         this.$http.delete('auth/logout').then(response => {
           window.location.assign('/')
+          console.log(response)
         }).catch(err => {
           console.log(err)
         })
