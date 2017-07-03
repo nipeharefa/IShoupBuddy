@@ -14,6 +14,8 @@ use App\Models\Vendor;
 use App\Models\ProductVendor;
 use App\Models\Review;
 use Log;
+use Illuminate\Support\Facades\Event;
+use App\Events\ReviewCreated;
 
 class ReviewTest extends TestCase
 {
@@ -31,7 +33,7 @@ class ReviewTest extends TestCase
 
 
     public function test_create_review() {
-
+        Event::fake();
         $user = factory(User::class)->create();
         $category = factory(Category::class)->create();
         $vendor = factory(Vendor::class)->create();

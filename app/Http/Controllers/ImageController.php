@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Storage;
 use Image;
 use Illuminate\Http\Response as IlluminateResponse;
+use Exception;
 
 class ImageController extends Controller
 {
@@ -40,49 +41,53 @@ class ImageController extends Controller
 
         $exists = $drive->exists($path);
 
+        try {
 
-        if ($path) {
+            if ($path) {
 
-            $size = false;
+                $size = false;
 
-            switch ($ratio) {
-                case 'thumb':
-                    $size = 150;
-                    break;
-                case 'small':
-                    $size = 400;
-                    break;
-                case 'medium':
-                    $size = 600;
-                    break;
-                case 'large':
-                    $size = 800;
-                    break;
-                default:
-                    # original size
-                    break;
-            }
-
-            $temp = $drive->get($path);
-
-            $img = Image::cache(function($image) use ($path, $size, $temp){
-
-                $img = $image->make($temp);
-
-                if ($size) {
-
-                    $img = $img->resize($size, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                    });
+                switch ($ratio) {
+                    case 'thumb':
+                        $size = 150;
+                        break;
+                    case 'small':
+                        $size = 400;
+                        break;
+                    case 'medium':
+                        $size = 600;
+                        break;
+                    case 'large':
+                        $size = 800;
+                        break;
+                    default:
+                        # original size
+                        break;
                 }
 
-                return $img;
-            });
+                $temp = $drive->get($path);
 
-            return $this->buildResponse($img);
+                $img = Image::cache(function($image) use ($path, $size, $temp){
+
+                    $img = $image->make($temp);
+
+                    if ($size) {
+
+                        $img = $img->resize($size, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                        });
+                    }
+
+                    return $img;
+                });
+
+                return $this->buildResponse($img);
+            }
+
+        } catch (Exception $e) {
+            abort(404);
         }
 
-        abort(404);
     }
 
     protected function buildResponse($content)
