@@ -30,7 +30,7 @@ class ProductTransformer extends AbstractTransformer {
                 "medium"    =>  url('/image/medium', $product->picture_url, $secure),
                 "large"     =>  url('/image/large', $product->picture_url, $secure),
             ],
-            "description"   =>  "",
+            "description"   =>  $product->description,
             "vendors"       =>  ProductVendorTransformer::transform($product->ProductVendor),
             "total_review"  =>  $product->Review()->count(),
             "total_vendor"  =>  $product->ProductVendor()->count(),
