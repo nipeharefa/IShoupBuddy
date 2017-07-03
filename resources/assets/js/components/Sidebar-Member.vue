@@ -5,27 +5,32 @@
 		</p> -->
 		<ul class="menu-list">
 		    <li>
-          <a href="/me">Dashboard</a>
+          <router-link :to="{ name: 'summaryProfile' }" append>Dashboard</router-link>
+        </li>
+        <li>
+          <router-link :to="{ name: 'formChangePassword' }" append>Change Password</router-link>
         </li>
 
         <li>
-          <a href="/me/change_password">Tukar Password</a>
-        </li>
-
-        <li>
-          <a href="/me/transactions">Transaksi</a>
+          <router-link :to="{ name: 'tableTransaction' }" append>Transactions</router-link>
         </li>
 
 
         <li>
-          <a href="/me/product_favorite">Produk Favorit</a>
-        </li>
-
-        <li>
-          <a @click="logout">Log out</a>
+          <router-link :to="{ name: 'tableTransaction' }" append>Produk Favorite</router-link>
         </li>
 
 		</ul>
+
+    <p class="menu-label">
+      Settings
+    </p>
+
+    <ul class="menu-list">
+      <li>
+        <a @click="logout">Log out</a>
+      </li>
+    </ul>
 
 	</aside>
 </template>

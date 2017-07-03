@@ -1,28 +1,40 @@
 import Vue from 'vue'
 import VueAxios from 'lib/axios-plugin'
-import store from '../store/me'
-import VueEcho from 'lib/echo-pusher-plugin'
-import App from 'member/components/me/Me.vue'
+import VueProgressBar from 'vue-progressbar'
+import router from 'member/routers/me'
+import store from 'member/store/me'
+import VeeValidate from 'vee-validate'
+import { sync } from 'vuex-router-sync'
 import { mapActions } from 'vuex'
-Vue.use(VueEcho)
+import VueEcho from 'lib/echo-pusher-plugin'
+
+Vue.use(VueProgressBar, { color: 'rgb(26, 146, 47)', failedColor: 'red', height: '3px' })
 Vue.use(VueAxios)
+Vue.use(VeeValidate)
+Vue.use(VueEcho)
 
+sync(store, router)
 
-new Vue({
-  created () {
-    this.initActiveUser(window._sharedData.user)
-  },
+const App = r => require.ensure([], () => r(require('member/views/Me.vue')), 'group-member-me')
+
+const app = new Vue({
+  render: h => h(App),
+  router,
   store,
-  render (h) {
-    return (
-      <div>
-        <App />
-			</div>
-    )
+  created () {
+    this.initAllData()
   },
   methods: {
     ...mapActions([
       'initActiveUser'
-    ])
+    ]),
+    initAllData () {
+      this.initActiveUser(window._sharedData.user)
+    }
   }
-}).$mount('#app')
+})
+
+router.onReady(() => {
+  app.$mount('#app')
+})
+
