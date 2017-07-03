@@ -30,7 +30,7 @@
           <div class="column">
             <div>
               <span class="product-name">{{ product.name }}</span>
-              <ratings></ratings>
+              <ratings :ratings="product.total_rating"></ratings>
               <hr>
             </div>
             <div>
@@ -52,9 +52,9 @@
                     <td>{{ item.vendor.name }}</td>
                     <td>{{ item.price_string }}</td>
                     <td>
-                      <span class="to-cart" title="Tambahkan ke keranjang belanja">
+                      <!-- <span class="to-cart" title="Tambahkan ke keranjang belanja">
                         <i class="fa fa-shopping-cart"></i>
-                      </span>
+                      </span> -->
                     </td>
                   </tr>
                 </tbody>
@@ -71,10 +71,11 @@
       </div>
 
       <div class="column recommendationProducts">
-        <a href="#" v-for="product in recommendation"
-          :key="product.id">
-          <productCard :product="product" />
-        </a>
+        <template v-for="product in recommendation">
+          <a :href="`/product/${product.id}`">
+            <productCard :product="product" />
+          </a>
+        </template>
       </div>
 
     </div>

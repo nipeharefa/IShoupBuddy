@@ -6,7 +6,8 @@
   	<article class="media" v-for="review in product.review" v-if="review">
     <figure class="media-left">
       <p class="image is-64x64">
-        <img src="https://source.unsplash.com/category/nature/64x64">
+        <img v-if="review.user.picture_url != null" :src="getSmallImage(review.user.picture_url)">
+        <img v-else src="https://source.unsplash.com/category/nature/64x64">
       </p>
     </figure>
     <div class="media-content">
@@ -54,6 +55,9 @@
     methods: {
       timeFromNow (time) {
         return moment(time).fromNow()
+      },
+      getSmallImage(value){
+        return "https://shoupbud.xyz/image/medium/" + value;
       }
     }
   }

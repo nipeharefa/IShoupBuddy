@@ -25,11 +25,13 @@ new Vue({
   methods: {
     ...mapActions([
       'initProduct',
-      'initRecommendationProducts'
+      'initRecommendationProducts',
+      'initActiveUser'
     ]),
     initDataVuex () {
       this.getProductDetail()
       this.getRecomendationProducts()
+      this.initActiveUser(window._sharedData.user)
     },
     getProductDetail () {
       const id = window._sharedData.product_id

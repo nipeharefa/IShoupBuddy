@@ -2,7 +2,9 @@
   <div class="swiper-container">
     <div class="swiper-wrapper">
       <div class="nusa swiper-slide" v-for="item in products">
-        <product-card :product="item"></product-card>
+        <a :href="`/product/${item.id}`" class="alinkto">
+          <product-card :product="item"></product-card>
+        </a>
       </div>
     </div>
     <div class="swiper-button-prev"></div>
