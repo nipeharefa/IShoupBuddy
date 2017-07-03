@@ -23,7 +23,8 @@
 
     <script type="text/javascript">
         window._sharedData = {
-            "product_id": {{ $id }}
+            "product_id": {{ $id }},
+            user: {!! $user !!}
         }
     </script>
     <script src="{{ mix('js/manifest.js') }}"></script>

@@ -7,7 +7,7 @@
         <a class="nav-item" href="/me">
           <i class="fa fa-user" aria-hidden="true"></i>
         </a>
-        <span>Hi</span>
+        <span>Hi, {{activeUser.name}}</span>
       </div>
   </div>
 </template>

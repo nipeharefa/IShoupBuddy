@@ -21,7 +21,33 @@
           <a href="/me/product_favorite">Produk Favorit</a>
         </li>
 
+        <li>
+          <a href="" @click="logout">Log out</a>
+        </li>
+
 		</ul>
 
 	</aside>
 </template>
+
+<script>
+  import { mapGetters } from 'vuex'
+  export default {
+    mounted () {
+    },
+    data () {
+      return {
+      }
+    },
+    compoents: {},
+    methods: {
+      logout () {
+        this.$http.delete('auth/logout').then(response => {
+          window.location.assign('/')
+        }).catch(err => {
+          console.log(err)
+        })
+      }
+    }
+  }
+</script>

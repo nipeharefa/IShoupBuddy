@@ -17,7 +17,7 @@
               <p>{{ product.name }}</p>
             </b>
           </div>
-          <ratings></ratings>
+          <ratings :ratings="product.total_rating"></ratings>
           <discount-box></discount-box>
         </div>
         <button-control-touch></button-control-touch>
@@ -36,7 +36,7 @@
           <div class="column">
             <div>
               <span class="product-name">{{ product.name }}</span>
-              <ratings></ratings>
+              <ratings :ratings="product.total_rating"></ratings>
               <hr>
             </div>
             <div>
@@ -77,10 +77,11 @@
       </div>
 
       <div class="column recommendationProducts">
-        <a href="#" v-for="product in recommendation"
-          :key="product.id">
-          <productCard :product="product" />
-        </a>
+        <template v-for="product in recommendation">
+          <a :href="`/product/${product.id}`">
+            <productCard :product="product" />
+          </a>
+        </template>
       </div>
 
     </div>

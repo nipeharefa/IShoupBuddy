@@ -49,11 +49,11 @@ class ProductController extends Controller
     public function show($id)
     {
         if (Auth::check()) {
-
+            $user = Auth::user();
             $view = view('pages.product.show')
                 ->with('js', mix('js/mproduct-detail.js'))
                 ->with('css', mix('css/member/product-detail.css'))
-                ->with('user', $id);
+                ->with('user', $user);
         } else {
 
             $view = view("pages.product.show")
