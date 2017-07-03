@@ -11,14 +11,23 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use App\Models\Review;
 use App\Models\User;
+use App\Models\Product;
+use App\Helpers\Traits\Sentimen as SentimenTrait;
+use App\Helpers\Traits\ScoreReviewOnEvents;
 
 class ReviewUpdated implements ShouldBroadcast
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable, InteractsWithSockets,
+        SerializesModels, SentimenTrait,
+        ScoreReviewOnEvents;
 
     protected $product;
 
+    protected $productVendor;
+
     protected $user;
+
+    protected $reviewModel;
 
     public $review;
 
@@ -31,9 +40,13 @@ class ReviewUpdated implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Review $review)
     {
-        //
+        $this->reviewModel = $review;
+        $this->product = $review->Product;
+        $this->productVendor = $review->ProductVendor;
+        $this->review = transform($review);
+        $this->mapReview();
     }
 
     /**
@@ -43,6 +56,9 @@ class ReviewUpdated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return [
+            new PrivateChannel('review.product.'.$this->product->id),
+            new PrivateChannel('review.product_vendor.'.$this->productVendor->id)
+        ];
     }
 }

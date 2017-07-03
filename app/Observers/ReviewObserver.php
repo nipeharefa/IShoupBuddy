@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Review;
 use App\Events\ReviewCreated;
+use App\Events\ReviewUpdated;
 use Exception;
 use Log;
 
@@ -20,6 +21,18 @@ class ReviewObserver
         try {
 
             $review = new ReviewCreated($review);
+            event($review);
+
+        } catch (Exception $e) {
+            Log::debug($e->getMesssage());
+        }
+    }
+
+    public function updated(Review $review)
+    {
+        try {
+            $review = new ReviewUpdated($review);
+            event($review);
 
         } catch (Exception $e) {
 

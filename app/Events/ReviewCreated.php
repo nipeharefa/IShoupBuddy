@@ -12,10 +12,14 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use App\Models\Review;
 use App\Models\User;
 use App\Models\Product;
+use App\Helpers\Traits\Sentimen as SentimenTrait;
+use App\Helpers\Traits\ScoreReviewOnEvents;
 
 class ReviewCreated implements ShouldBroadcast
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable, InteractsWithSockets,
+        SerializesModels, SentimenTrait,
+        ScoreReviewOnEvents;
 
     protected $product;
 
