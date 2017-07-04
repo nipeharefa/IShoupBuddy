@@ -27,14 +27,10 @@ class ProductController extends Controller
             $vendor = Vendor::find($user->id);
 
             if ($request->type == "own") {
-
-                $product = $vendor->ProductVendor->transform(function($item){
-
+                $product = $vendor->ProductVendor->transform(function ($item) {
                     return ProductVendorTransformer::transform($item);
                 });
-
             } else {
-
                 $options = [
                     "markUsed"      =>  true,
                     "vendor"        =>  $vendor
@@ -50,7 +46,6 @@ class ProductController extends Controller
 
             return response()->json($response);
         } catch (Exception $e) {
-
             $err = [
                 "message"   =>  $e->getMessage()
             ];
@@ -125,8 +120,8 @@ class ProductController extends Controller
         //
     }
 
-    protected function transformOwnProduct($pv) {
-
+    protected function transformOwnProduct($pv)
+    {
         return [
             "id"    =>  $pv->id,
             "product"   =>  $pv->Product,

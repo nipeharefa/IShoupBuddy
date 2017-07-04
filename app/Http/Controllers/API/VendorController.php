@@ -56,7 +56,6 @@ class VendorController extends Controller
     public function show($vendor)
     {
         try {
-
             $result = Vendor::findOrFail($vendor);
             $response = [
                 "status"    =>  "OK",
@@ -65,10 +64,7 @@ class VendorController extends Controller
             ];
 
             return response()->json($response, 200);
-
         } catch (ModelNotFoundException $e) {
-
-
             $response = [
                 "status"    =>  "OK",
                 "vendor"    =>  null,
@@ -76,7 +72,6 @@ class VendorController extends Controller
             ];
 
             return response()->json($response, 404);
-
         }
     }
 
@@ -114,8 +109,8 @@ class VendorController extends Controller
         //
     }
 
-    public function activate(Request $request) {
-
+    public function activate(Request $request)
+    {
         $vendor = Vendor::find($request->product_id);
 
         $vendor->confirmed = true;

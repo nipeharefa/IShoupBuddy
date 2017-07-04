@@ -74,7 +74,6 @@ class UserController extends Controller implements DefaultAPIResponse
 
 
         if ($request->file('picture_url') && $request->file('picture_url')->isValid()) {
-
             $filename = str_random(20) . ".jpg";
 
             $path = $request->picture_url->storeAs('original', $filename, 'public');
@@ -82,7 +81,7 @@ class UserController extends Controller implements DefaultAPIResponse
             $dataUpdate['picture_url'] = $filename;
         }
 
-        $dataUpdate = collect($dataUpdate)->filter(function($item){
+        $dataUpdate = collect($dataUpdate)->filter(function ($item) {
             return ($item != null || $item != '');
         })->toArray();
 
@@ -91,7 +90,6 @@ class UserController extends Controller implements DefaultAPIResponse
 
 
         if ($update) {
-
             $response = [
                 "status"     => "OK",
                 "user"       => $user,
@@ -119,9 +117,7 @@ class UserController extends Controller implements DefaultAPIResponse
      */
     public function show($id)
     {
-
         try {
-
             $user = User::findOrFail($id);
 
             $response = [
@@ -131,10 +127,8 @@ class UserController extends Controller implements DefaultAPIResponse
             ];
 
             return $this->onSuccess($response);
-
         } catch (ModelNotFoundException $e) {
-
-             $response = [
+            $response = [
                 "status"    => "ERROR",
                 "user"      => null,
                 "message"   => "Pengguna tidak ditemukan"
@@ -142,7 +136,6 @@ class UserController extends Controller implements DefaultAPIResponse
 
             return $this->onFailure($response, 404);
         }
-
     }
 
     /**
@@ -165,7 +158,6 @@ class UserController extends Controller implements DefaultAPIResponse
      */
     public function update(Request $request, $id)
     {
-
     }
 
     /**
@@ -179,12 +171,12 @@ class UserController extends Controller implements DefaultAPIResponse
         //
     }
 
-    public function change_password(Request $request) {
-
+    public function change_password(Request $request)
+    {
         $user = $request->user();
 
 
-        $validator = Validator::make($request->toArray(),[
+        $validator = Validator::make($request->toArray(), [
             'current_password'      => 'required',
             'password'              => 'required|confirmed'
         ]);
@@ -210,6 +202,5 @@ class UserController extends Controller implements DefaultAPIResponse
         ];
 
         return response()->json($err, 400);
-
     }
 }

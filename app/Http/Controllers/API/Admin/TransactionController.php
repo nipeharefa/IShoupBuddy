@@ -104,25 +104,23 @@ class TransactionController extends Controller
         //
     }
 
-    public function approve(Transaction $transaction, Request $request){
-
+    public function approve(Transaction $transaction, Request $request)
+    {
         if ($transaction->transactable_type === Saldo::class) {
-
             return $this->approveSaldo($transaction);
         }
 
         return;
     }
 
-    protected function approveTransactionBiasa (Transaction $transaction, Request $request) {
-
+    protected function approveTransactionBiasa(Transaction $transaction, Request $request)
+    {
         return $transaction;
     }
 
-    protected function approveSaldo(Transaction $transaction) {
-
+    protected function approveSaldo(Transaction $transaction)
+    {
         try {
-
             $saldo = $transaction->Saldo;
             DB::beginTransaction();
 
@@ -135,7 +133,6 @@ class TransactionController extends Controller
             DB::commit();
 
             return transform($transaction);
-
         } catch (Exception $e) {
             DB::rollback();
 
@@ -149,7 +146,8 @@ class TransactionController extends Controller
         }
     }
 
-    protected function getType($model) {
+    protected function getType($model)
+    {
         $reflector = new \ReflectionClass($model);
         return $reflector->getShortName();
     }

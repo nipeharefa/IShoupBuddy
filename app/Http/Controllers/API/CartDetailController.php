@@ -51,7 +51,6 @@ class CartDetailController extends Controller
      */
     public function show($id)
     {
-
     }
 
     /**
@@ -75,7 +74,6 @@ class CartDetailController extends Controller
     public function update(Request $request, Cart $cart, CartDetail $id)
     {
         try {
-
             DB::beginTransaction();
 
             $cartDetail = $id;
@@ -95,9 +93,7 @@ class CartDetailController extends Controller
             ];
 
             return response()->json($response, 200);
-
         } catch (Exception $e) {
-
             DB::rollback();
 
             $response = [
@@ -125,9 +121,7 @@ class CartDetailController extends Controller
             DB::commit();
 
             return response()->json([], 204);
-
         } catch (Exception $e) {
-
             DB::rollback();
 
             $response = [
@@ -136,7 +130,6 @@ class CartDetailController extends Controller
             ];
 
             return response()->json($response, 400);
-
         }
     }
 

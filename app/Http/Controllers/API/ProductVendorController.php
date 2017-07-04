@@ -53,7 +53,6 @@ class ProductVendorController extends Controller
     public function store(StoreProductVendor $request)
     {
         try {
-
             $data = [
                 "product_id"    =>  $request->productID,
                 "harga"         =>  $request->price,
@@ -81,9 +80,7 @@ class ProductVendorController extends Controller
             DB::commit();
 
             return response()->json($response, 201);
-
         } catch (Exception $e) {
-
             DB::rollback();
 
             $err = [
@@ -133,9 +130,7 @@ class ProductVendorController extends Controller
             DB::beginTransaction();
 
             DB::commit();
-
         } catch (Exception $e) {
-
             DB::rollback();
 
             $err = [
@@ -156,20 +151,16 @@ class ProductVendorController extends Controller
     public function destroy($productVendor, Request $request)
     {
         try {
-
             $productVendor = ProductVendor::findOrFail($productVendor);
 
             $productVendor->delete();
-
-
         } catch (ModelNotFoundException $e) {
-
         }
     }
 
-    public function restore($productVendor) {
+    public function restore($productVendor)
+    {
         try {
-
             DB::beginTransaction();
 
             $productVendor = ProductVendor::withTrashed()->findOrFail($productVendor);
@@ -185,7 +176,6 @@ class ProductVendorController extends Controller
             DB::commit();
 
             return response()->json($response, 200);
-
         } catch (ModelNotFoundException $e) {
             DB::rollback();
 

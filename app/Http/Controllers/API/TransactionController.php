@@ -25,7 +25,7 @@ class TransactionController extends Controller
         $user = $request->user();
         $trans = $user->Transaction;
 
-        collect($with)->each(function($item) use ($trans) {
+        collect($with)->each(function ($item) use ($trans) {
             switch ($item) {
                 case 'd':
                     $trans->load('Detail');
@@ -64,14 +64,13 @@ class TransactionController extends Controller
     {
         $user  = $request->user();
         try {
-
             $cartID = $request->cart_id;
 
             $cart = $user->Cart()->findOrFail($cartID);
 
             $saldo = $user->Saldo->nominal ?? 0;
 
-            $totalBelanja = $cart->sum(function($item){
+            $totalBelanja = $cart->sum(function ($item) {
                 return $item->Detail()->sum('price');
             });
 
@@ -85,8 +84,7 @@ class TransactionController extends Controller
 
             DB::beginTransaction();
 
-            $currenTransactions = $cart->map(function($cartItem) use ($user) {
-
+            $currenTransactions = $cart->map(function ($cartItem) use ($user) {
                 $data = [
                     "nominal"   =>  $cartItem->Detail->sum('price'),
                     "status"    =>  1,
@@ -96,7 +94,7 @@ class TransactionController extends Controller
 
                 $trans = $user->Transaction()->create($data);
 
-                $cartItem->Detail->each(function($item) use ($trans) {
+                $cartItem->Detail->each(function ($item) use ($trans) {
                     $transactionDetail = [
                         "product_vendor_id" =>  $item->product_vendor_id,
                         "quantity"          =>  $item->quantity,
@@ -114,7 +112,6 @@ class TransactionController extends Controller
             DB::commit();
 
             return transform($currenTransactions->load('Detail'));
-
         } catch (Exception $e) {
             DB::rollback();
 
@@ -171,7 +168,6 @@ class TransactionController extends Controller
     public function destroy(Request $request, $id)
     {
         try {
-
             DB::beginTransaction();
 
             $user = $request->user();
@@ -185,9 +181,7 @@ class TransactionController extends Controller
             DB::commit();
 
             return response()->json($response, 204);
-
         } catch (Exception $e) {
-
             DB::rollback();
 
             $err = [
@@ -198,8 +192,8 @@ class TransactionController extends Controller
         }
     }
 
-    protected function payWithWallet($nominal, User $user) {
-
+    protected function payWithWallet($nominal, User $user)
+    {
         $userSaldo = $user->Saldo;
 
         $hasUnPaid =  $userSaldo->transaction()->create([

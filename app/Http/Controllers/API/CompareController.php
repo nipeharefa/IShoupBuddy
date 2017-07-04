@@ -1,28 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\API\Me;
+namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ProductFavoriteController extends Controller
+class CompareController extends Controller
 {
-    private $user;
-
-    public function __construct(Request $request)
-    {
-        $this->user = $request->user();
-    }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-
     public function index()
     {
+        //
     }
 
     /**

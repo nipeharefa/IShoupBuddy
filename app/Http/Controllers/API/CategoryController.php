@@ -16,7 +16,6 @@ class CategoryController extends Controller
      */
     public function index()
     {
-
         $category = Category::orderByDesc('created_at')->get();
 
         $response = [
@@ -26,7 +25,6 @@ class CategoryController extends Controller
         ];
 
         return response()->json($response, 200);
-
     }
 
     /**

@@ -13,8 +13,8 @@ use Log;
 
 class PriceStatisticController extends Controller
 {
-    public function index(Request $request) {
-
+    public function index(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'product_id'   =>   'required',
             'vendor_id'    =>   'required'
@@ -23,7 +23,6 @@ class PriceStatisticController extends Controller
         $range = $request->range ?? 7;
 
         if ($validator->fails()) {
-
             $response = [
                 "status"    =>  "ERROR",
                 "message"   =>  "Missing parameters",
@@ -34,7 +33,6 @@ class PriceStatisticController extends Controller
         }
 
         try {
-
             $productVendor = ProductVendor::where('product_id', $request->product_id)
                 ->where('vendor_id', $request->vendor_id)->firstOrFail();
 
@@ -43,7 +41,7 @@ class PriceStatisticController extends Controller
                 ->reverse()->flatten();
 
 
-            $s4 = $s->map(function($item){
+            $s4 = $s->map(function ($item) {
                 return PricesStatisticTransformer::transform($item);
             });
 
@@ -54,9 +52,7 @@ class PriceStatisticController extends Controller
             ];
 
             return response()->json($response, 200);
-
         } catch (ModelNotFoundException $e) {
-
             $response = [
                 "status"    =>  "OK",
                 "message"   =>  null,

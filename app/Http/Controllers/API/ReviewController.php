@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Exception;
 use Validator;
 
-
 class ReviewController extends Controller
 {
     use SentimenTrait;
@@ -29,13 +28,11 @@ class ReviewController extends Controller
      */
     public function index(Request $request)
     {
-
         $trustedParameters = ['user_id', 'vendor_id', 'product_id'];
 
         $user = Auth::guard('api')->user();
 
         try {
-
             $checkParameter = collect($request->only($trustedParameters))->filter()->count();
 
             $youReview = null;
@@ -46,12 +43,9 @@ class ReviewController extends Controller
             $review = Review::orderByDesc('created_at');
 
             if ($request->user_id) {
-
                 $review->whereUserId($request->user_id);
             } else {
-
                 if ($user && $request->user_id != $user->id) {
-
                     $review->where('user_id', '!=', $user->id);
 
                     $id = $user->id;
@@ -60,7 +54,7 @@ class ReviewController extends Controller
                     $youReview = Review::whereUserId($id);
 
                     if ($product_id) {
-                        $youReview->whereHas('productvendor', function($item) use ($product_id) {
+                        $youReview->whereHas('productvendor', function ($item) use ($product_id) {
                             return $item->where('product_id', $product_id);
                         });
                     }
@@ -71,16 +65,15 @@ class ReviewController extends Controller
 
 
             if ($request->product_id) {
-
                 $id = $request->product_id;
-                $review->whereHas('productvendor', function($query) use ($id){
+                $review->whereHas('productvendor', function ($query) use ($id) {
                     return $query->whereProductId($id);
                 });
             }
 
             if ($request->vendor_id) {
                 $id = $request->vendor_id;
-                $review->whereHas('productvendor', function($query) use ($id){
+                $review->whereHas('productvendor', function ($query) use ($id) {
                     return $query->whereVendortId($id);
                 });
             }
@@ -110,16 +103,13 @@ class ReviewController extends Controller
                 "message"       =>  null,
                 "reviews"       =>  $reviewTransform,
                 "total_reviews" =>  $total_reviews,
-                "summary"       =>  array_search(max($summaryAvg),$summaryAvg),
+                "summary"       =>  array_search(max($summaryAvg), $summaryAvg),
                 "youReview"     =>  $youReview ? ReviewTransformer::transform($youReview) : new \stdClass
             ];
 
             return response()->json($response, 200);
-
         } catch (Exception $e) {
-
-            if ($e instanceOf GetReviewException) {
-
+            if ($e instanceof GetReviewException) {
                 $err = [
                     "status"        =>  "OK",
                     "message"       =>  null,
@@ -189,15 +179,12 @@ class ReviewController extends Controller
             DB::commit();
 
             return response()->json($response, 201);
-
         } catch (Exception $e) {
-
             DB::rollback();
 
             $errMessage = $e->getMessage();
 
-            if ($e instanceOf ModelNotFoundException) {
-
+            if ($e instanceof ModelNotFoundException) {
                 $errMessage = "Terjadi kesalahan, mohon periksa product_id dan vendor_id";
             }
 
@@ -243,13 +230,11 @@ class ReviewController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $this->validator($request->all());
 
         $user = $request->user();
 
         try {
-
             $review = $user->Review()->findOrFail($id);
 
             $product_vendor = ProductVendor::whereVendorId($request->vendor_id)
@@ -276,7 +261,6 @@ class ReviewController extends Controller
             DB::commit();
 
             return $response;
-
         } catch (Exception $e) {
             DB::rollback();
 
@@ -301,7 +285,6 @@ class ReviewController extends Controller
         $user = $request->user();
 
         try {
-
             DB::beginTransaction();
 
             $user->Review()->findOrFail($id)->delete();
@@ -314,9 +297,7 @@ class ReviewController extends Controller
             ];
 
             return response()->json($response, 204);
-
         } catch (Exception $e) {
-
             DB::rollback();
 
             $err = [
@@ -326,11 +307,10 @@ class ReviewController extends Controller
 
             return response()->json($err, 400);
         }
-
     }
 
-    protected function validator(array $data) {
-
+    protected function validator(array $data)
+    {
         $validator = Validator::make($data, [
             'product_id'    =>  'required',
             'vendor_id'     =>  'required',

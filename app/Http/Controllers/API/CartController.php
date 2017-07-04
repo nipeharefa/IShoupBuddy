@@ -28,11 +28,11 @@ class CartController extends Controller
             $user =  $request->user();
 
 
-            $carts = $user->Cart()->get()->map(function($c){
+            $carts = $user->Cart()->get()->map(function ($c) {
                 return $this->indexCartResponse($c->Vendor, $c);
             });
 
-            $totalBelanja = $user->Cart->sum(function($item){
+            $totalBelanja = $user->Cart->sum(function ($item) {
                 return $item->Detail()->sum('price');
             });
 
@@ -45,9 +45,7 @@ class CartController extends Controller
             ];
 
             return response()->json($response);
-
         } catch (Exception $e) {
-
             return $e->getMessage();
         }
     }
@@ -78,7 +76,6 @@ class CartController extends Controller
         $user = $request->user();
 
         try {
-
             DB::beginTransaction();
 
             $productVendor = ProductVendor::findOrFail($request->product_vendor_id);
@@ -114,9 +111,7 @@ class CartController extends Controller
             DB::commit();
 
             return response()->json($response, 201);
-
         } catch (Exception $e) {
-
             DB::rollback();
 
             $err = [
@@ -160,7 +155,6 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $user = $request->user();
 
         try {
@@ -185,9 +179,7 @@ class CartController extends Controller
             ];
 
             return response()->json($response);
-
         } catch (Exception $e) {
-
             DB::rollback();
 
             $err = [
@@ -211,7 +203,6 @@ class CartController extends Controller
         $user = $request->user();
 
         try {
-
             DB::beginTransaction();
 
             $user->Cart()->findOrFail($id)->delete();
@@ -223,7 +214,6 @@ class CartController extends Controller
             DB::commit();
 
             return response()->json($response, 204);
-
         } catch (Exception $e) {
             DB::rollback();
 
@@ -236,8 +226,8 @@ class CartController extends Controller
         }
     }
 
-    public function indexCartResponse(Vendor $vendor, Cart $cart) {
-
+    public function indexCartResponse(Vendor $vendor, Cart $cart)
+    {
         $carts = collect($cart)->except('vendor')->toArray();
         $carts['vendor'] = transform($vendor);
         $carts["item"] = transform($cart->Detail);

@@ -19,7 +19,7 @@ use Log;
 
 class ProductController extends Controller
 {
-    function __construct(Product $product)
+    public function __construct(Product $product)
     {
         $this->product = $product;
     }
@@ -34,31 +34,28 @@ class ProductController extends Controller
 
 
         if (!$request->query('without_filter')) {
-            $product->whereHas('productvendor', function($pv){
+            $product->whereHas('productvendor', function ($pv) {
                 return $pv;
             });
         }
 
         if ($request->keyword != null) {
-
             $product->where('name', 'LIKE',
                 "%{$request->keyword}%");
         }
 
         if ($request->category_id != null) {
-
-            $product->where('category_id',$request->category_id);
+            $product->where('category_id', $request->category_id);
         }
 
         if ($request->vendor_id != null) {
             $id = $request->vendor_id;
-            $product->whereHas('productvendortrashed', function($pv) use ($id) {
+            $product->whereHas('productvendortrashed', function ($pv) use ($id) {
                 return $pv->where('vendor_id', $id);
             });
         }
 
         if ($request->query('with')) {
-
             $with = explode(",", $request->query('with'));
 
             $product = $product->with(['Review']);
@@ -69,7 +66,7 @@ class ProductController extends Controller
         $data = [
             "status"    =>  "OK",
             "products"  =>  ProductTransformer::transform($product->get(), $options),
-            "message"   =>  NULL
+            "message"   =>  null
         ];
 
         return response()->json($data, 200);
@@ -101,11 +98,9 @@ class ProductController extends Controller
         $data['slug'] = str_slug($request->name);
 
         try {
-
             DB::beginTransaction();
 
             if (Product::whereBarcode($request->barcode)->count()) {
-
                 $err = [
                     "status"    =>  "OK",
                     "product"   =>  null,
@@ -119,9 +114,7 @@ class ProductController extends Controller
             DB::commit();
 
             return $product;
-
         } catch (QueryException $e) {
-
             DB::rollback();
 
             $err = [
@@ -131,13 +124,11 @@ class ProductController extends Controller
             ];
 
             return response()->json($err, 400);
-
         }
-
     }
 
-    protected function createProductVendor(array $data, $product_id,  $user) {
-
+    protected function createProductVendor(array $data, $product_id, $user)
+    {
         $vendor = Vendor::find($user);
 
         $arr = [
@@ -214,9 +205,7 @@ class ProductController extends Controller
             DB::commit();
 
             return response()->json($response, 200);
-
         } catch (Exception $e) {
-
             DB::rollback();
 
             $err = [
@@ -225,7 +214,6 @@ class ProductController extends Controller
                 "message"   =>  $e->getMessage()
             ];
             return response()->json($err, 400);
-
         }
     }
 
@@ -240,10 +228,9 @@ class ProductController extends Controller
         //
     }
 
-    public function barcode($barcode) {
-
+    public function barcode($barcode)
+    {
         try {
-
             $product = Product::whereBarcode($barcode)->firstOrFail();
 
             $response = [
@@ -253,9 +240,7 @@ class ProductController extends Controller
             ];
 
             return response()->json($response, 200);
-
         } catch (ModelNotFoundException $e) {
-
             $err = [
                 "status"    =>  "OK",
                 "product"   =>  null,
@@ -266,18 +251,16 @@ class ProductController extends Controller
         }
     }
 
-    protected function guard() {
-
+    protected function guard()
+    {
         return Auth::guard('api');
-
     }
 
-    protected function isAdmin() {
-
+    protected function isAdmin()
+    {
         $guard = $this->guard()->user();
 
         if ($guard && $guard->role == 0) {
-
             return $guard;
         }
 

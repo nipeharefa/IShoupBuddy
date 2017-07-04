@@ -20,15 +20,15 @@ class PromoController extends Controller
 
 
         if (!$request->query('without_filter')) {
-            $product->whereHas('productvendor', function($pv){
+            $product->whereHas('productvendor', function ($pv) {
                 return $pv;
             });
         }
 
-         $data = [
+        $data = [
             "status"    =>  "OK",
             "promo"  =>  ProductTransformer::transform($product->get()),
-            "message"   =>  NULL
+            "message"   =>  null
         ];
 
         return response()->json($data, 200);

@@ -36,8 +36,8 @@ class SaldoController extends Controller
         return response()->json($response);
     }
 
-    protected function getHistorySaldo(Saldo $saldo) {
-
+    protected function getHistorySaldo(Saldo $saldo)
+    {
         return transform($saldo->Transaction);
     }
 
@@ -62,7 +62,6 @@ class SaldoController extends Controller
         $user = $request->user();
 
         try {
-
             DB::beginTransaction();
 
             $reqNominal = $request->nominal;
@@ -70,12 +69,11 @@ class SaldoController extends Controller
             $userSaldo = $user->Saldo;
 
             if (!$userSaldo) {
-
                 $userSaldo = $user->Saldo()->create(['nominal' => 0]);
             }
 
             $hasUnPaid =  $userSaldo->transaction()->create([
-                'nominal' => $reqNominal + rand(0,100),
+                'nominal' => $reqNominal + rand(0, 100),
                 'user_id' => $user->id,
                 'status' => false
             ]);
@@ -90,10 +88,7 @@ class SaldoController extends Controller
             DB::commit();
 
             return response()->json($response);
-
-
         } catch (Exception $e) {
-
             DB::rollback();
 
             $err = [
@@ -103,9 +98,7 @@ class SaldoController extends Controller
             ];
 
             return response()->json($err, 400);
-
         }
-
     }
 
     /**
@@ -116,11 +109,9 @@ class SaldoController extends Controller
      */
     public function show($id, Request $request)
     {
-
         $user = $request->user();
 
         try {
-
             DB::beginTransaction();
 
             $userSaldo = $user->Saldo;
@@ -135,9 +126,7 @@ class SaldoController extends Controller
             ];
 
             return $response;
-
         } catch (Exception $e) {
-
             $err = [
                 "status"    =>  "ERROR",
                 "message"   =>  $e->getMessage(),
@@ -185,27 +174,24 @@ class SaldoController extends Controller
         $user = $request->user();
 
         try {
+            DB::beginTransaction();
 
-           DB::beginTransaction();
+            $userSaldo = $user->Saldo;
 
-           $userSaldo = $user->Saldo;
+            $transaction  = $userSaldo->Transaction()->findOrFail($id);
 
-           $transaction  = $userSaldo->Transaction()->findOrFail($id);
+            $transaction->update(['status' => 2]);
 
-           $transaction->update(['status' => 2]);
+            DB::commit();
 
-           DB::commit();
-
-           $response = [
+            $response = [
                 "status"    =>  "OK",
                 "message"   =>  "Transaction Canceled",
                 "transaction"   =>  $this->transformUnPaind($transaction)
            ];
 
-           return response()->json($response, 200);
-
+            return response()->json($response, 200);
         } catch (Exception $e) {
-
             DB::rollback();
 
             $err = [
@@ -218,8 +204,8 @@ class SaldoController extends Controller
         }
     }
 
-    protected function transformUnPaind($trans) {
-
+    protected function transformUnPaind($trans)
+    {
         return [
             "id"                =>  $trans->id, // mean transaction id,
             "status"            =>  $trans->status,

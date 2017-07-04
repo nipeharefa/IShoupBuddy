@@ -19,7 +19,6 @@ class WishlistController extends Controller
      */
     public function index(Request $request)
     {
-
         $user = $request->user();
 
         $data = [
@@ -58,7 +57,6 @@ class WishlistController extends Controller
         $validator->validate();
 
         try {
-
             Product::findOrFail($request->product_id);
 
             $wish = $user->Wishlist()->updateOrCreate(['product_id' => $request->product_id]);
@@ -66,23 +64,19 @@ class WishlistController extends Controller
             $response  = [
                 "status"    =>  "OK",
                 "wishlist"  =>  $wish,
-                "message"   =>  NULL
+                "message"   =>  null
             ];
 
-            return response()->json($response,201);
-
+            return response()->json($response, 201);
         } catch (QueryException $e) {
-
             $err = [
                 "status"    =>  "ERROR",
-                "wishlist"  =>  NULL,
+                "wishlist"  =>  null,
                 "message"   =>  "Terjadi kesalahan saat menyimpan data wishlist."
             ];
 
             return response()->json($err, 500);
-
         } catch (ModelNotFoundException $e) {
-
             $err = [
                 "status"    =>  "ERROR",
                 "wishlist"  =>  null,
@@ -90,10 +84,7 @@ class WishlistController extends Controller
             ];
 
             return response()->json($err, 400);
-
         }
-
-
     }
 
     /**

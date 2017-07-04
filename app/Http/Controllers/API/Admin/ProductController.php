@@ -23,7 +23,7 @@ class ProductController extends Controller
         $data = [
             "status"    =>  "OK",
             "products"  =>  ProductTransformer::transform($product->get(), $options),
-            "message"   =>  NULL
+            "message"   =>  null
         ];
 
         return response()->json($data, 200);
@@ -58,13 +58,12 @@ class ProductController extends Controller
      */
     public function show(Product $product, Request $request)
     {
-
         $options = [];
 
         $data = [
             "status"    =>  "OK",
             "product"  =>  ProductTransformer::transform($product, $options),
-            "message"   =>  NULL
+            "message"   =>  null
         ];
 
         return response()->json($data);

@@ -15,7 +15,6 @@ class CategoryController extends BaseCategoryController
     public function store(StoreCategory $request)
     {
         try {
-
             DB::beginTransaction();
 
             $data = $request->only('name');
@@ -26,9 +25,7 @@ class CategoryController extends BaseCategoryController
             DB::commit();
 
             return response()->json($category, 201);
-
         } catch (Exception $e) {
-
             DB::rollback();
 
             $err = [
@@ -46,6 +43,5 @@ class CategoryController extends BaseCategoryController
         $category->update($data);
 
         return response()->json($category, 200);
-
     }
 }
