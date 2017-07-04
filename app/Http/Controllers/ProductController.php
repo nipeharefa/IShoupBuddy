@@ -58,7 +58,8 @@ class ProductController extends Controller
 
             $view = view("pages.product.show")
                 ->with('js', mix('js/product_detail.js'))
-                ->with('css', mix('css/guest/product_detail.css'));
+                ->with('css', mix('css/guest/product_detail.css'))
+                ->with('user', $id);
         }
 
         $view->with('title', 'Product Title');
