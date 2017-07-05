@@ -74,6 +74,8 @@ Route::group(['namespace' => 'API'], function() {
         Route::resource('review', 'ReviewController',
             ['only' =>  ['store', 'update', 'destroy']]);
 
+        Route::get('review/check','ReviewController@checkReview');
+
         Route::resource('saldo', 'SaldoController',
             ['only' =>  ['store', 'show','index']]);
 
