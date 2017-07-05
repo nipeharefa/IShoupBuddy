@@ -329,6 +329,58 @@ class ReviewController extends Controller
 
     }
 
+    public function checkReview(Request $request)
+    {
+        $trustedParameters = ['user_id', 'vendor_id', 'product_id'];
+
+        $user = Auth::guard('api')->user();
+
+        try {
+
+            $checkParameter = collect($request->only($trustedParameters))->filter()->count();
+
+            # Search ProductVendor
+            $product_vendor = ProductVendor::whereVendorId($checkParameter->vendor_id)
+                ->whereProductId($checkParameter->product_id)
+                ->firstOrFail();
+
+            $product_vendor_id = $product_vendor->id;
+
+            $review = Review::whereProductVendorId($product_vendor_id)->whereUserId($user->id)->firstOrFail();
+
+            $response = [
+                "status"    =>  "OK",
+                "review"    =>  ReviewTransformer::transform($review),
+                "message"   =>  null,
+            ];
+
+            return response()->json($response, 200);
+
+        } catch (Exception $e) {
+
+            DB::rollback();
+
+            $errMessage = $e->getMessage();
+
+            if ($e instanceOf ModelNotFoundException) {
+
+                $errResponse = [
+                    "status"    =>  "ERROR",
+                    "review"    =>  null,
+                    "message"   =>  $errMessage
+                ];
+                return response()->json($errResponse, 404);
+            }
+
+            $errResponse = [
+                "status"    =>  "ERROR",
+                "review"    =>  null,
+                "message"   =>  $errMessage
+            ];
+            return response()->json($errResponse, 400);
+        }
+    }
+
     protected function validator(array $data) {
 
         $validator = Validator::make($data, [
