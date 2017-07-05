@@ -46,6 +46,20 @@
         </p>
       </div>
 
+      <div class="field attributesSelector" v-for="item in product.attributes">
+        <select name="" id="" class="input" v-model="item.id">
+          <option value="">Pilih</option>
+          <option :value="item.id" v-for="item in attributeRule">{{ item.value }}</option>
+        </select>
+        <input type="text" class="input" v-model="item.value">
+      </div>
+
+      <div class="field">
+        <a @click="addAttribute">
+          <i class="fa fa-plus"></i>
+        </a>
+      </div>
+
       <div class="field">
         <button class="button is-primary" @click="saveProduct">Simpan</button>
       </div>
@@ -56,6 +70,13 @@
 
 <style lang="scss" scoped>
   @import "~sassPages/admin/product/create";
+  .attributesSelector {
+    display: flex;
+    flex-direction: row;
+    select, input {
+      font-size: 0.85rem;
+    }
+  }
 </style>
 
 <script>
@@ -69,9 +90,25 @@
           name: '',
           description: '-',
           'category_id': '',
-          barcode: ''
+          barcode: '',
+          attributes: [
+            {
+              id: '',
+              value: ''
+            }
+          ]
         },
-        onProcess: false
+        onProcess: false,
+        attributeRule: [
+          {
+            'id': 1,
+            'value': 'Kapasitas (ml)'
+          },
+          {
+            'id': 2,
+            'value': 'Input Voltage (v)'
+          }
+        ]
       }
     },
     computed: {
@@ -83,6 +120,7 @@
       ...mapActions([
         'setOnError'
       ]),
+      addAttribute () {},
       generateLinkImage (filename) {
         if (filename) {
           return window.location.origin + '/image/small/' + filename

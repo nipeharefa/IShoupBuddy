@@ -24,6 +24,7 @@ Route::group(['prefix' => 'oauth', 'namespace' => 'Auth'], function() {
 
 Route::group(['namespace' => 'API'], function() {
     Route::resource('geo', 'GeoLocationController');
+    Route::resource('compare', 'CompareController');
     Route::post('user/change_password','UserController@change_password')
         ->middleware('auth:api');
 
