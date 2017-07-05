@@ -41,7 +41,7 @@ class UpdateProductVendorPrice extends Command
      */
     public function handle()
     {
-        ProductVendor::get()->each(function($pv){
+        ProductVendor::get()->each(function ($pv) {
             try {
                 $result = $pv->Statistic()->whereDay('created_at', date('d'))->firstOrFail();
                 $result->harga = $pv->harga;

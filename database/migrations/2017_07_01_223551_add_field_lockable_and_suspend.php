@@ -13,7 +13,7 @@ class AddFieldLockableAndSuspend extends Migration
      */
     public function up()
     {
-        Schema::table('users', function($table) {
+        Schema::table('users', function ($table) {
             $table->boolean('locked')->default(0)->after('longitude');
             $table->boolean('suspended')->default(0)->after('locked');
         });
@@ -26,7 +26,7 @@ class AddFieldLockableAndSuspend extends Migration
      */
     public function down()
     {
-        Schema::table('users', function($table) {
+        Schema::table('users', function ($table) {
             $table->dropColumn(['locked', 'suspended']);
         });
     }

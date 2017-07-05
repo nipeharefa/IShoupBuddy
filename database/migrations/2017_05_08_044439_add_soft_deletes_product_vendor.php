@@ -13,7 +13,7 @@ class AddSoftDeletesProductVendor extends Migration
      */
     public function up()
     {
-        Schema::table('product_vendors', function($table) {
+        Schema::table('product_vendors', function ($table) {
             $table->softDeletes();
         });
     }

@@ -13,7 +13,7 @@ class AddFieldLocationSaldoInUser extends Migration
      */
     public function up()
     {
-        Schema::table('users', function($table) {
+        Schema::table('users', function ($table) {
             $table->float('latitude')->nullable()->after('confirmed');
             $table->float('longitude')->nullable()->after('latitude');
         });
@@ -26,7 +26,7 @@ class AddFieldLocationSaldoInUser extends Migration
      */
     public function down()
     {
-        Schema::table('users', function($table) {
+        Schema::table('users', function ($table) {
             $table->dropColumn(['latitude', 'longitude']);
         });
     }

@@ -13,8 +13,7 @@ class MakeBarcodUnique extends Migration
      */
     public function up()
     {
-        Schema::table('products', function($table) {
-
+        Schema::table('products', function ($table) {
             $table->string('barcode')->unique()->change();
         });
     }
@@ -26,7 +25,7 @@ class MakeBarcodUnique extends Migration
      */
     public function down()
     {
-        Schema::table('products', function($table) {
+        Schema::table('products', function ($table) {
             $table->dropUnique('products_barcode_unique');
         });
     }

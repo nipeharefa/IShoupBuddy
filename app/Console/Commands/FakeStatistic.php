@@ -48,18 +48,17 @@ class FakeStatistic extends Command
 
         $pv = ProductVendor::get();
 
-        $pv->each(function($item) use ($totalDays) {
+        $pv->each(function ($item) use ($totalDays) {
             $this->createFakeStats($item, $totalDays);
         });
     }
 
-    protected function createFakeStats(ProductVendor $pv, $totalDays) {
-
+    protected function createFakeStats(ProductVendor $pv, $totalDays)
+    {
         $carbon = Carbon::now();
         Log::info('BEGIN');
 
         for ($i=1; $i <=$totalDays ; $i++) {
-
             $d = $carbon->toDateString();
             $p = $pv->Statistic()->whereDate('updated_at', '=', $d)->first();
 
