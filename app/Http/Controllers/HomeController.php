@@ -45,6 +45,7 @@ class HomeController extends Controller
                 default:
                     # Vendor
                     $js = mix('js/vhome.js');
+                    $css    = mix('css/vendor/home.css');
                     break;
             }
         }

@@ -1,5 +1,8 @@
 <template>
-  <div id="sub-apps">
+  <div id="sub-apps-member">
+    <div>
+      <navbar></navbar>
+    </div>
     <section class="section">
       <div class="container">
         <list-promo></list-promo>
@@ -13,33 +16,30 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
+
+  const Navbar = () => import('global/components/Navbars/VendorNavbar.vue')
   const FooterApps = () => import('otherComponents/Footer.vue')
   const ListPromo = () => import('global/components/Home/SlidePromo.vue')
   const ListProduct = () => import('global/components/Home/ListProduct.vue')
 
-  import { mapActions, mapGetters } from 'vuex'
-
   export default {
     created () {
+      this.initActiveUser(window._sharedData.user)
       this.getProducts()
       this.getPromo()
     },
     components: {
+      Navbar,
       FooterApps,
-      ListProduct,
-      ListPromo
-    },
-    computed: {
-      ...mapGetters([
-        'products',
-        'promo'
-      ])
+      ListPromo,
+      ListProduct
     },
     methods: {
       ...mapActions([
-        'initActiveUser',
-        'initProducts',
-        'initPromo'
+          'initActiveUser',
+          'initProducts',
+          'initPromo'
       ]),
       getProducts() {
         this.$http.get('api/product').then(response => {
