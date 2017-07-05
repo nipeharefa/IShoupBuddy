@@ -15,18 +15,18 @@ class Transaction extends Model
         return $this->morphTo();
     }
 
-    public function Detail() {
-
+    public function Detail()
+    {
         return $this->hasMany(TransactionDetail::class);
     }
 
-    public function Saldo() {
-
+    public function Saldo()
+    {
         return $this->transactable()->belongsTo(Saldo::class);
     }
 
-    public function User() {
-
+    public function User()
+    {
         return $this->belongsTo(User::class);
     }
 }

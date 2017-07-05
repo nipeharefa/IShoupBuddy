@@ -38,12 +38,11 @@ class LoginController extends Controller
         $this->middleware('guest', ['except' => 'logout']);
     }
 
-    public function loginViaAjax(Request $request) {
-
+    public function loginViaAjax(Request $request)
+    {
         $this->validateLogin($request);
 
         if ($this->attemptLogin($request)) {
-
             return response()->json([], 200);
         }
 

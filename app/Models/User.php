@@ -8,7 +8,6 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-
     use Notifiable, HasApiTokens;
 
     /**
@@ -31,38 +30,39 @@ class User extends Authenticatable
     ];
 
 
-    public function Wishlist() {
-
+    public function Wishlist()
+    {
         return $this->hasMany(Wishlist::class);
     }
 
-    public function wished($product_id) {
-
+    public function wished($product_id)
+    {
         return (Boolean)$this->Wishlist()->whereProductId($product_id)->count();
     }
 
-    public function isAdmin() :Boolean {
-
+    public function isAdmin() :Boolean
+    {
         return $this->role == 2;
     }
 
-    public function Cart() {
-
+    public function Cart()
+    {
         return $this->hasMany(Cart::class, 'identify_id');
     }
 
 
-    public function Review() {
-
+    public function Review()
+    {
         return $this->hasMany(Review::class);
     }
 
-    public function Saldo() {
-
+    public function Saldo()
+    {
         return $this->hasOne(Saldo::class);
     }
 
-    public function Transaction () {
+    public function Transaction()
+    {
         return $this->morphMany(Transaction::class, 'transactable');
     }
 }

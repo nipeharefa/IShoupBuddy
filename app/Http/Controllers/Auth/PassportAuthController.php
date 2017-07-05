@@ -16,16 +16,14 @@ use App\Models\User;
 
 class PassportAuthController extends Controller
 {
-
     private $oauth;
 
 
 
     public function __construct(AuthorizationServer $server,
-    							TokenRepository $tokens,
+                                TokenRepository $tokens,
                                 JwtParser $jwt)
     {
-
         $this->oauth = new AccessTokenController($server, $tokens, $jwt);
     }
 
@@ -36,13 +34,13 @@ class PassportAuthController extends Controller
      * @param  Request                $req     [description]
      * @return [type]                          [description]
      */
-    public function login(ServerRequestInterface $request, Request $req) {
-
-    	return $this->oauth->issueToken($request);
-
+    public function login(ServerRequestInterface $request, Request $req)
+    {
+        return $this->oauth->issueToken($request);
     }
 
-    public function register(Request $request) {
+    public function register(Request $request)
+    {
 
 
         # Register user here
@@ -63,7 +61,7 @@ class PassportAuthController extends Controller
 
        $user = $this->create($request->all());
 
-       $data= [
+        $data= [
             "grant_type"    => "password",
             "client_id"     => env('CLIENT_ID', 2),
             "client_secret" => env('CLIENT_SECRET'),
@@ -74,16 +72,16 @@ class PassportAuthController extends Controller
 
        # Set Request to OauthServer
        $request->offsetSet('grant_type', 'password');
-       $request->offsetSet('username', $request->email);
-       $request->offsetSet('password', $request->password);
-       $request->offsetSet('client_id', env('CLIENT_ID', 2));
-       $request->offsetSet('client_secret', env('CLIENT_SECRET', 2));
+        $request->offsetSet('username', $request->email);
+        $request->offsetSet('password', $request->password);
+        $request->offsetSet('client_id', env('CLIENT_ID', 2));
+        $request->offsetSet('client_secret', env('CLIENT_SECRET', 2));
 
 
        // remove keys email, name, phone
        $request->offsetUnset('email');
-       $request->offsetUnset('phone');
-       $request->offsetUnset('name');
+        $request->offsetUnset('phone');
+        $request->offsetUnset('name');
 
 
         $proxy = Request::create(

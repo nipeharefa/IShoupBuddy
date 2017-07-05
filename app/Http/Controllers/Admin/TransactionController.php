@@ -15,7 +15,6 @@ class TransactionController extends Controller
      */
     public function index()
     {
-
         return view('pages.admin.transactions.index');
     }
 

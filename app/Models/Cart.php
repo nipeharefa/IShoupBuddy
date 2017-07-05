@@ -18,8 +18,8 @@ class Cart extends Model
         return $this->belongsTo(Vendor::class);
     }
 
-    public function ProductVendor() {
-
+    public function ProductVendor()
+    {
         return $this->belongsTo(ProductVendor::class);
     }
 

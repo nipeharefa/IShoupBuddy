@@ -12,21 +12,23 @@ class ProductVendor extends Model
     protected $fillable = ['product_id', 'vendor_id', 'harga', 'status'];
 
 
-    public function Product() {
-
+    public function Product()
+    {
         return $this->belongsTo(Product::class);
     }
 
-    public function Vendor() {
+    public function Vendor()
+    {
         return $this->belongsTo(Vendor::class, 'vendor_id');
     }
 
-    public function Statistic() {
-
+    public function Statistic()
+    {
         return $this->hasMany(PriceStatistic::class);
     }
 
-    public function Reviews() {
+    public function Reviews()
+    {
         return $this->hasMany(Review::class);
     }
 }

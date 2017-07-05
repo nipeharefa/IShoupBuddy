@@ -10,8 +10,8 @@ use Exception;
 
 class ImageController extends Controller
 {
-    public function store(Request $request) {
-
+    public function store(Request $request)
+    {
         $filename = str_random(20);
 
         $path = $request->image->storeAs('original', "{$filename}.jpg", 'public');
@@ -33,8 +33,8 @@ class ImageController extends Controller
         return response()->json($data, 201);
     }
 
-    public function renderImage($ratio, $filename, Request $request) {
-
+    public function renderImage($ratio, $filename, Request $request)
+    {
         $drive = Storage::disk('public');
 
         $path = "original/{$filename}";
@@ -42,9 +42,7 @@ class ImageController extends Controller
         $exists = $drive->exists($path);
 
         try {
-
             if ($path) {
-
                 $size = false;
 
                 switch ($ratio) {
@@ -67,12 +65,10 @@ class ImageController extends Controller
 
                 $temp = $drive->get($path);
 
-                $img = Image::cache(function($image) use ($path, $size, $temp){
-
+                $img = Image::cache(function ($image) use ($path, $size, $temp) {
                     $img = $image->make($temp);
 
                     if ($size) {
-
                         $img = $img->resize($size, null, function ($constraint) {
                             $constraint->aspectRatio();
                         });
@@ -83,11 +79,9 @@ class ImageController extends Controller
 
                 return $this->buildResponse($img);
             }
-
         } catch (Exception $e) {
             abort(404);
         }
-
     }
 
     protected function buildResponse($content)
@@ -97,7 +91,7 @@ class ImageController extends Controller
 
         $etag = md5($content);
         $not_modified = isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] == $etag;
-        $content = $not_modified ? NULL : $content;
+        $content = $not_modified ? null : $content;
         $status_code = $not_modified ? 304 : 200;
 
         return new IlluminateResponse($content, $status_code, array(

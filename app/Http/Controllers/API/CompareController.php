@@ -17,9 +17,7 @@ class CompareController extends Controller
      */
     public function index(Request $request)
     {
-
         try {
-
             $product = Product::findOrFail($request->product_id);
             $from = [
                 "category_id"       =>  $product->category_id,
@@ -29,7 +27,7 @@ class CompareController extends Controller
             $productName = $this->_cleanString($product->name);
 
             $hasil = Product::whereNotIn('id', [$request->product_id])->get()
-                ->map(function($item) use($from, $productName) {
+                ->map(function ($item) use ($from, $productName) {
                     similar_text($productName, $this->_cleanString($item->name), $percent);
                     $target = [
                         "category_id"       =>  $item->category_id,
@@ -44,17 +42,17 @@ class CompareController extends Controller
                     ];
                 });
 
-        $sorted = collect($hasil)->sortByDesc('kemiripan')->values()->all();
+            $sorted = collect($hasil)->sortByDesc('kemiripan')->values()->all();
 
-        $response = [
-            "sourceProductName" => $this->_cleanString($product->name),
-            "target"    =>  $sorted
+            $firstProduct = collect($sorted)->first();
+
+            $response = [
+            "source"    =>  transform($product),
+            "target"    =>  transform(Product::findOrFail($firstProduct['id']))
         ];
 
-        return response()->json($response);
-
+            return response()->json($response);
         } catch (Exception $e) {
-
             $err = [
                 "message"   =>  $e->getMessage(),
                 "status"    =>  "ERROR"
@@ -68,8 +66,7 @@ class CompareController extends Controller
         ];
 
 
-        $hasil = Product::get()->map(function($item) use ($from, $productName){
-
+        $hasil = Product::get()->map(function ($item) use ($from, $productName) {
         });
 
 
@@ -143,16 +140,20 @@ class CompareController extends Controller
         //
     }
 
-    public function similarity(array $vec1, array $vec2) {
+    public function similarity(array $vec1, array $vec2)
+    {
         return $this->_dotProduct($vec1, $vec2) / ($this->_absVector($vec1) * $this->_absVector($vec2));
     }
-    protected function _dotProduct(array $vec1, array $vec2) {
+    protected function _dotProduct(array $vec1, array $vec2)
+    {
         $result = 0;
 
         foreach (array_keys($vec1) as $key1) {
-          foreach (array_keys($vec2) as $key2) {
-        if ($key1 === $key2) $result += $vec1[$key1] * $vec2[$key2];
-          }
+            foreach (array_keys($vec2) as $key2) {
+                if ($key1 === $key2) {
+                    $result += $vec1[$key1] * $vec2[$key2];
+                }
+            }
         }
 
         return $result;
@@ -163,13 +164,13 @@ class CompareController extends Controller
         $result = 0;
 
         foreach (array_values($vec) as $value) {
-          $result += $value * $value;
+            $result += $value * $value;
         }
 
         return sqrt($result);
     }
-    private function _cleanString($string) {
-
+    private function _cleanString($string)
+    {
         $diac =
                 /* A */ chr(192) . chr(193) . chr(194) . chr(195) . chr(196) . chr(197) .
                 /* a */ chr(224) . chr(225) . chr(226) . chr(227) . chr(228) . chr(229) .

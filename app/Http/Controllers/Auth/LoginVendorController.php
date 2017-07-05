@@ -17,27 +17,22 @@ class LoginVendorController extends Controller
         $this->middleware('guest', ['except' => 'logout']);
     }
 
-    public function showLoginForm(Request $request) {
-
+    public function showLoginForm(Request $request)
+    {
         return view('pages.vendor.auth.login');
     }
 
-    public function login(Request $request) {
-
+    public function login(Request $request)
+    {
         try {
-
             $user = User::where('email', $request->email)->firstOrFail();
 
             if (!$user->confirmed) {
-
                 throw new ModelNotFoundException("Error Processing Request", 1);
-
             }
 
             if ($this->attemptLogin($request)) {
-
                 return $this->sendLoginResponse($request);
-
             }
 
             if ($this->hasTooManyLoginAttempts($request)) {
@@ -49,9 +44,7 @@ class LoginVendorController extends Controller
             $this->incrementLoginAttempts($request);
 
             return $this->sendFailedLoginResponse($request);
-
         } catch (ModelNotFoundException $e) {
-
             $err = [
                 "status"    =>  "OK",
                 "message"   =>  "Invalid Login"

@@ -15,7 +15,8 @@ class RegisterVendorController extends Controller
     }
 
 
-    public function register (Request $request) {
+    public function register(Request $request)
+    {
 
         // $validator = $this->validator($request->toArray());
 
@@ -35,8 +36,8 @@ class RegisterVendorController extends Controller
         return response()->json($response, 201);
     }
 
-    protected function validator(array $data) {
-
+    protected function validator(array $data)
+    {
         return Validator::make($data, [
                 'name'      =>  'required',
                 'email'     =>  'required',
@@ -45,8 +46,8 @@ class RegisterVendorController extends Controller
             ]);
     }
 
-    protected function validateEmail($email){
-
+    protected function validateEmail($email)
+    {
         return true;
     }
 

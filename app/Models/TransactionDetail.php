@@ -8,8 +8,8 @@ class TransactionDetail extends Model
 {
     protected $fillable = ['product_vendor_id', 'quantity', 'transaction_id', 'harga'];
 
-    public function ProductVendor() {
-
+    public function ProductVendor()
+    {
         return $this->belongsTo(ProductVendor::class);
     }
 }

@@ -12,12 +12,13 @@ class Saldo extends Model
 
     protected $fillable = ['nominal'];
 
-    public function Transaction () {
+    public function Transaction()
+    {
         return $this->morphMany(Transaction::class, 'transactable');
     }
 
-    public function getUnPaid() {
-
+    public function getUnPaid()
+    {
         return $this->Transaction()->where('status', false)->get();
     }
 }

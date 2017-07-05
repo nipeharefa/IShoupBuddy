@@ -17,18 +17,18 @@ class Review extends Model
         return $this->belongsTo(ProductVendor::class);
     }
 
-    public function Product() {
-
+    public function Product()
+    {
         return $this->ProductVendor->Product();
     }
 
-    public function Vendor() {
-
+    public function Vendor()
+    {
         return $this->ProductVendor->Vendor();
     }
 
-    public function getSummary() {
-
+    public function getSummary()
+    {
         return 1;
     }
 }

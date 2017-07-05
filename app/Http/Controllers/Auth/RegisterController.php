@@ -72,8 +72,8 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function registerViaAjax(Request $request) {
-
+    public function registerViaAjax(Request $request)
+    {
         return $this->register($request);
     }
 

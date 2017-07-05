@@ -40,6 +40,7 @@ class ReviewController extends Controller
             if (!$checkParameter) {
                 throw new GetReviewException("Error Processing Request", 1);
             }
+
             $review = Review::orderByDesc('created_at');
 
             if ($request->user_id) {

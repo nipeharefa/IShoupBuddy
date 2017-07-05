@@ -10,9 +10,8 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    public function showLoginForm(Request $request) {
-
-
+    public function showLoginForm(Request $request)
+    {
         return view('pages.admin.auth.login');
     }
 
@@ -59,7 +58,6 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         if ($request->expectsJson()) {
-
             return [
                 "message"   =>  "",
                 "status"    =>  "OK",

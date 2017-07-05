@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Vendor extends User
 {
-
     protected $table = 'users';
 
     protected static function boot()
@@ -21,13 +20,13 @@ class Vendor extends User
         });
     }
 
-    public function ProductVendor() {
-
+    public function ProductVendor()
+    {
         return $this->hasMany(ProductVendor::class, 'vendor_id');
     }
 
-    public function Review() {
-
+    public function Review()
+    {
         return $this->hasManyThrough(Review::class, ProductVendor::class);
     }
 }

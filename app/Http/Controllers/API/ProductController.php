@@ -95,6 +95,7 @@ class ProductController extends Controller
         $user = $request->user();
         $data = $request->toArray();
 
+
         $data['slug'] = str_slug($request->name);
 
         try {
