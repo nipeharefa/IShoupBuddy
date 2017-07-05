@@ -89,7 +89,7 @@ class TransactionController extends Controller
 
                 $data = [
                     "nominal"   =>  $cartItem->Detail->sum('price'),
-                    "status"    =>  1,
+                    "status"    =>  0,
                     "user_id"   =>  $user->id
                 ];
 

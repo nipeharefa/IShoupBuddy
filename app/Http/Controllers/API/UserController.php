@@ -58,7 +58,7 @@ class UserController extends Controller implements DefaultAPIResponse
                 'picture_url'   =>  'nullable',
                 'address'       =>  'required',
                 "latitude"     =>  "nullable",
-                "langitude"     =>  "nullable",
+                "longitude"     =>  "nullable",
             ]);
 
         $validator->validate();
