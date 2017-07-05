@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         ProductVendor::observe(ProductVendorObserver::class);
         Saldo::observe(SaldoObserver::class);
-        // Review::observe(ReviewObserver::class);
+        Review::observe(ReviewObserver::class);
     }
 
     /**

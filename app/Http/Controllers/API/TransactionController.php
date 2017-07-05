@@ -87,7 +87,7 @@ class TransactionController extends Controller
             $currenTransactions = $cart->map(function ($cartItem) use ($user) {
                 $data = [
                     "nominal"   =>  $cartItem->Detail->sum('price'),
-                    "status"    =>  1,
+                    "status"    =>  0,
                     "user_id"   =>  $user->id
                 ];
 
