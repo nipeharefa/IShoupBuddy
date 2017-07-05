@@ -7,6 +7,7 @@ use Storage;
 use Image;
 use Illuminate\Http\Response as IlluminateResponse;
 use Exception;
+use Log;
 
 class ImageController extends Controller
 {
@@ -44,19 +45,24 @@ class ImageController extends Controller
         try {
             if ($path) {
                 $size = false;
+                $h = false;
 
                 switch ($ratio) {
                     case 'thumb':
                         $size = 150;
+                        $h = 112;
                         break;
                     case 'small':
                         $size = 400;
+                        $h = 300;
                         break;
                     case 'medium':
                         $size = 600;
+                        $h = 450;
                         break;
                     case 'large':
                         $size = 800;
+                        $h = 600;
                         break;
                     default:
                         # original size
@@ -65,11 +71,11 @@ class ImageController extends Controller
 
                 $temp = $drive->get($path);
 
-                $img = Image::cache(function ($image) use ($path, $size, $temp) {
+                $img = Image::cache(function ($image) use ($path, $size, $temp, $h) {
                     $img = $image->make($temp);
 
                     if ($size) {
-                        $img = $img->resize($size, null, function ($constraint) {
+                        $img = $img->resize($size, $h, function ($constraint) {
                             $constraint->aspectRatio();
                         });
                     }
@@ -80,6 +86,7 @@ class ImageController extends Controller
                 return $this->buildResponse($img);
             }
         } catch (Exception $e) {
+            Log::debug($e->getMessage());
             abort(404);
         }
     }
