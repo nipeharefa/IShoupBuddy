@@ -22,7 +22,7 @@ class ActiveUserTransformer extends AbstractTransformer {
                                 ? $this->formatRupiah($user->Saldo->nominal ?? 0)
                                 : 0,
             "role"          =>  $user->role,
-            "latitude"     =>  $user->langitude,
+            "latitude"     =>  $user->latitude,
             "longitude"     =>  $user->longitude
         ];
 
