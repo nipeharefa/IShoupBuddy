@@ -101,11 +101,11 @@ class ImageController extends Controller
         $content = $not_modified ? null : $content;
         $status_code = $not_modified ? 304 : 200;
 
-        return new IlluminateResponse($content, $status_code, array(
+        return new IlluminateResponse($content, $status_code, [
             'Content-Type' => $mime,
             'Cache-Control' => 'max-age='.(config('imagecache.lifetime')*60).', public',
             'Etag' => md5($content),
             'Expires' => gmdate('D, d M Y H:i:s \G\M\T', time() + 86400 * 365)
-        ));
+        ]);
     }
 }

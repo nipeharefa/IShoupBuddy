@@ -23,6 +23,5 @@ class MemberOnly
 
         $message = 'This action is unauthorized.';
         throw new AuthorizationException($message);
-
     }
 }

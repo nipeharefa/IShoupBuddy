@@ -8,19 +8,18 @@ use Themsaid\Transformers\AbstractTransformer as BaseAbstractTransformer;
 
 class AbstractTransformer extends BaseAbstractTransformer
 {
-
-    protected function getProduction() {
-
+    protected function getProduction()
+    {
         return env('APP_ENV') == "production";
     }
 
-    protected function renderArrayImage() {
-
+    protected function renderArrayImage()
+    {
         return [];
     }
 
-    protected function generateUserPictureLinks($filename) {
-
+    protected function generateUserPictureLinks($filename)
+    {
         $secure = $this->getProduction();
 
         if ($filename) {
@@ -43,7 +42,8 @@ class AbstractTransformer extends BaseAbstractTransformer
      * @param  integer $presisi [description]
      * @return [type]           [description]
      */
-    protected function formatRupiah($nominal = 0, $sign = 'Rp. ', $end = ',-', $presisi = 0) {
+    protected function formatRupiah($nominal = 0, $sign = 'Rp. ', $end = ',-', $presisi = 0)
+    {
         return $sign . number_format($nominal, $presisi, ',', '.');
     }
 }

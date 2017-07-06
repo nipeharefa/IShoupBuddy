@@ -74,7 +74,7 @@ class ReviewController extends Controller
 
             if ($request->vendor_id) {
                 $id = $request->vendor_id;
-                $review->whereHas('productvendor', function($query) use ($id){
+                $review->whereHas('productvendor', function ($query) use ($id) {
                     return $query->whereVendorId($id);
                 });
             }
@@ -104,7 +104,7 @@ class ReviewController extends Controller
                 "message"       =>  null,
                 "reviews"       =>  $reviewTransform,
                 "total_reviews" =>  $total_reviews,
-                "summary"       =>  array_search(max($summaryAvg), $summaryAvg),
+                "summary"       =>  array_search(max($summaryAvg), $summaryAvg, true),
                 "youReview"     =>  $youReview ? ReviewTransformer::transform($youReview) : new \stdClass
             ];
 
@@ -312,14 +312,12 @@ class ReviewController extends Controller
 
     public function checkReview(Request $request)
     {
-        
         $trustedParameters = ['user_id', 'vendor_id', 'product_id'];
 
         $user = Auth::guard('api')->user();
 
 
         try {
-
             $checkParameter = $request->only($trustedParameters);
             # Search ProductVendor
             $product_vendor = ProductVendor::whereVendorId($request->vendor_id)
@@ -338,15 +336,12 @@ class ReviewController extends Controller
             ];
 
             return response()->json($response, 200);
-
         } catch (Exception $e) {
-
             DB::rollback();
 
             $errMessage = $e->getMessage();
 
-            if ($e instanceOf ModelNotFoundException) {
-
+            if ($e instanceof ModelNotFoundException) {
                 $errResponse = [
                     "status"    =>  "ERROR",
                     "review"    =>  null,

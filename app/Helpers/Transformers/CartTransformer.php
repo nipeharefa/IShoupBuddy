@@ -2,13 +2,13 @@
 
 
 namespace App\Helpers\Transformers;
+
 use Illuminate\Database\Eloquent\Model;
 
-class CartTransformer extends AbstractTransformer {
-
-
-    public function transformModel(Model $cart){
-
+class CartTransformer extends AbstractTransformer
+{
+    public function transformModel(Model $cart)
+    {
         $arr = [
             "id"            =>  $cart->id,
             "items"         =>  ProductVendorTransformer::transform($cart->ProductVendor),

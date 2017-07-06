@@ -2,18 +2,19 @@
 
 
 namespace App\Helpers\Transformers;
+
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 use Log;
 use App\Helpers\Traits\Sentimen as SentimenTrait;
 use Cache;
 
-class ProductTransformer extends AbstractTransformer {
-
+class ProductTransformer extends AbstractTransformer
+{
     use SentimenTrait;
 
-    public function transformModel(Model $product){
-
+    public function transformModel(Model $product)
+    {
         $secure = env('APP_ENV') == "production";
 
         $options = @$this->options;
@@ -49,7 +50,6 @@ class ProductTransformer extends AbstractTransformer {
 
 
         if (Auth::guard('api')->check()) {
-
             $user = Auth::guard('api')->user();
 
             $arr['liked']   =   $user->wished($product->id);
@@ -64,13 +64,12 @@ class ProductTransformer extends AbstractTransformer {
         }
 
         if (isset($options['markUsed']) && $options['markUsed']) {
-
             $vendor = $options['vendor'];
             $arr['used'] = (Boolean)$product->ProductVendor()
                 ->whereVendorId($vendor->id)->count();
         }
 
-        $a = collect($product->Review)->map(function($item) {
+        $a = collect($product->Review)->map(function ($item) {
             return $this->getScore($item->body, $item);
         })->toArray();
 
@@ -89,7 +88,7 @@ class ProductTransformer extends AbstractTransformer {
         ];
 
         foreach ($a as $key => $item) {
-            $aaa = array_search(max($item),$item);
+            $aaa = array_search(max($item), $item, true);
 
             $count[$aaa]++;
         }
@@ -100,15 +99,14 @@ class ProductTransformer extends AbstractTransformer {
         return $arr;
     }
 
-    private function getScore($sentence, Model $review) {
-
+    private function getScore($sentence, Model $review)
+    {
         $key = "{$review->id}_{$sentence}";
 
-        return Cache::rememberForever($key, function() use ($sentence) {
+        return Cache::rememberForever($key, function () use ($sentence) {
             $arr = $this->score($sentence);
             $collection = collect($arr)->only(['pos', 'neg', 'neu'])->toArray();
             return $collection;
         });
     }
-
 }

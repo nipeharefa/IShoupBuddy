@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Helpers\Transformers;
+
 use Illuminate\Database\Eloquent\Model;
 
-class ProductVendorTransformer extends AbstractTransformer {
-
-    public function transformModel(Model $productV){
-
+class ProductVendorTransformer extends AbstractTransformer
+{
+    public function transformModel(Model $productV)
+    {
         $secure = env('APP_ENV') == "production";
 
         $arr = [

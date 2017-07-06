@@ -4,10 +4,10 @@ namespace App\Helpers\Transformers;
 
 use Illuminate\Database\Eloquent\Model;
 
-class VendorTransformer extends AbstractTransformer {
-
-    public function transformModel(Model $vendor){
-
+class VendorTransformer extends AbstractTransformer
+{
+    public function transformModel(Model $vendor)
+    {
         $arr = [
             "id"            =>  $vendor->id,
             "name"          =>  $vendor->name,

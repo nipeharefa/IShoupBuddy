@@ -9,7 +9,6 @@ use Carbon\Carbon;
 use Log;
 use Cache;
 
-
 class Sentimen
 {
     # Type drive filesystem
@@ -22,21 +21,21 @@ class Sentimen
     private $maxTokenLength = 15;
 
 
-    private $classTokCounts = array(
+    private $classTokCounts = [
         'pos' => 0,
         'neg' => 0,
         'neu' => 0
-    );
+    ];
 
-    private $prior = array(
+    private $prior = [
         'pos' => 0.333333333333,
         'neg' => 0.333333333333,
         'neu' => 0.333333333334
-    );
+    ];
 
     private $dictionary = [];
 
-    function __construct()
+    public function __construct()
     {
         # Constructor
         # Mengisi variabel $drive dengan instance storage dengan disk type local
@@ -46,19 +45,18 @@ class Sentimen
     }
 
     # Getters untuk mengambil instance drive
-    public function getDrive() {
-
+    public function getDrive()
+    {
         return $this->drive;
-
     }
 
-    public function getDictionary() {
-
+    public function getDictionary()
+    {
         return $this->dictionary;
     }
 
-    public function getPrior() {
-
+    public function getPrior()
+    {
         return $this->prior;
     }
 
@@ -69,10 +67,11 @@ class Sentimen
     # pos sebagai positif
     # neg sebagai negatif
     # neu sebagai netral
-    private $classes = array('pos', 'neg', 'neu');
+    private $classes = ['pos', 'neg', 'neu'];
 
 
-    private function loadDefaults() {
+    private function loadDefaults()
+    {
         # Lakukan perulangan sebanyak class (type) yang akan di analisa
         foreach ($this->classes as $class) {
             # Jalankan functions setDictonory dengan parameter key dari class
@@ -80,12 +79,13 @@ class Sentimen
             # dengan pesan peringan Dictonorary dengan type terkait tidak dapat dibuka
             # Code error 23
             if (!$this->setDictionary($class)) {
-                throw new Exception("Dictionary for class ${class} could not be loaded",23);
+                throw new Exception("Dictionary for class ${class} could not be loaded", 23);
             }
         }
     }
 
-    private function setDictionary($class) {
+    private function setDictionary($class)
+    {
         # Paramete $class yang merupkan tipe dari class
         # akan langsung di masukkan ke dalam tempalte string sebagai filename
         $fn = "sentimen/{$class}.json";
@@ -98,7 +98,7 @@ class Sentimen
 
         # Ubah data json menjadi bentuk array
         // $words = json_decode($this->drive->get($fn), true);
-        $words = Cache::remember($fn, 3600, function()  use ($fn) {
+        $words = Cache::remember($fn, 3600, function () use ($fn) {
             $words = json_decode($this->drive->get($fn), true);
             return $words;
         });
@@ -119,8 +119,8 @@ class Sentimen
     }
 
 
-    public function scoreDebug($sentence) {
-
+    public function scoreDebug($sentence)
+    {
         $start = Carbon::now();
 
         Log::info("START DEBUG {$start}");
@@ -132,13 +132,12 @@ class Sentimen
         $total_score = 0;
 
         # Inisilaisasi array $score
-        $scores = array();
+        $scores = [];
 
 
         //Loop through all of the different classes set in the $classes variable
         # lakukan perulangan ke semua class atau type
         foreach ($this->classes as $class) {
-
             Log::info('Class yang di analisa : ' . $class);
 
             # Buat array baru dengan key adalah value dari class
@@ -151,25 +150,23 @@ class Sentimen
             # spasi ke bentuk array)
             #
             foreach ($tokens as $token) {
-
                 Log::info('Kata yang di analisa : ' . $token);
 
                 if (strlen($token) > $this->minTokenLength
                     && strlen($token) < $this->maxTokenLength
                     // && !in_array($token, $this->ignoreList)
                     ) {
-
-                        if (isset($this->dictionary[$token][$class])) {
-                            //Set count equal to it
+                    if (isset($this->dictionary[$token][$class])) {
+                        //Set count equal to it
                             $count = $this->dictionary[$token][$class];
-                            Log::info('__COUNT__DICT : ' . $count);
-                        } else {
-                            $count = 0;
-                        }
-                        $scores[$class] *= ($count + 1);
-                        Log::info("count = {$count}");
-                        Log::info('$scores[$class] *= ($count + 1)');
-                        Log::info($scores[$class]);
+                        Log::info('__COUNT__DICT : ' . $count);
+                    } else {
+                        $count = 0;
+                    }
+                    $scores[$class] *= ($count + 1);
+                    Log::info("count = {$count}");
+                    Log::info('$scores[$class] *= ($count + 1)');
+                    Log::info($scores[$class]);
                 }
             }
 
@@ -201,8 +198,8 @@ class Sentimen
         return $scores;
     }
 
-    public function score($sentence) {
-
+    public function score($sentence)
+    {
         $start = Carbon::now();
 
         #
@@ -212,7 +209,7 @@ class Sentimen
         $total_score = 0;
 
         # Inisilaisasi array $score
-        $scores = array();
+        $scores = [];
 
 
         //Loop through all of the different classes set in the $classes variable
@@ -225,19 +222,17 @@ class Sentimen
             # spasi ke bentuk array)
             #
             foreach ($tokens as $token) {
-
                 if (strlen($token) > $this->minTokenLength
                     && strlen($token) < $this->maxTokenLength
                     // && !in_array($token, $this->ignoreList)
                     ) {
-
-                        if (isset($this->dictionary[$token][$class])) {
-                            //Set count equal to it
+                    if (isset($this->dictionary[$token][$class])) {
+                        //Set count equal to it
                             $count = $this->dictionary[$token][$class];
-                        } else {
-                            $count = 0;
-                        }
-                        $scores[$class] *= ($count + 1);
+                    } else {
+                        $count = 0;
+                    }
+                    $scores[$class] *= ($count + 1);
                 }
             }
 
@@ -250,7 +245,6 @@ class Sentimen
         }
         foreach ($this->classes as $class) {
             $scores[$class] = round($scores[$class] / $total_score, 3);
-
         }
 
         $end = Carbon::now();
@@ -264,7 +258,8 @@ class Sentimen
         return $scores;
     }
 
-    public function getList($type) {
+    public function getList($type)
+    {
         $wordList = [];
 
         $fn = "sentimen/{$class}.json";
@@ -288,8 +283,8 @@ class Sentimen
        return $wordList;
     }
 
-    private function _cleanString($string) {
-
+    private function _cleanString($string)
+    {
         $diac =
                 /* A */ chr(192) . chr(193) . chr(194) . chr(195) . chr(196) . chr(197) .
                 /* a */ chr(224) . chr(225) . chr(226) . chr(227) . chr(228) . chr(229) .
@@ -307,7 +302,8 @@ class Sentimen
         return strtolower(strtr($string, $diac, 'AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn'));
     }
 
-    private function _getTokens($string) {
+    private function _getTokens($string)
+    {
 
         // Replace line endings with spaces
         $string = str_replace("\r\n", " ", $string);

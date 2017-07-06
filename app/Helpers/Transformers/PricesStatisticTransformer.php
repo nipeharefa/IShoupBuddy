@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Helpers\Transformers;
+
 use Illuminate\Database\Eloquent\Model;
 
 class PricesStatisticTransformer extends AbstractTransformer
 {
-    public function transformModel(Model $statistic){
-
+    public function transformModel(Model $statistic)
+    {
         $arr = [
             "id"        =>  $statistic->id,
             "value"     =>  $statistic->harga,

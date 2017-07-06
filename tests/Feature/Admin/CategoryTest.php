@@ -23,8 +23,8 @@ class CategoryTest extends TestCase
         $this->assertCount(1, Category::get());
     }
 
-    public function test_admin_can_add_category() {
-
+    public function test_admin_can_add_category()
+    {
         $this->seed('InsertDefaultCategory');
         $user = factory(User::class)->create([
             'role' => 0,
@@ -44,8 +44,8 @@ class CategoryTest extends TestCase
         $response->assertJson(['slug' => 'food', 'name' => 'Food']);
     }
 
-    public function test_admin_can_edit_category() {
-
+    public function test_admin_can_edit_category()
+    {
         $this->seed('InsertDefaultCategory');
         $user = factory(User::class)->create([
             'role' => 0,

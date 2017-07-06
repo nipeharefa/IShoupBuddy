@@ -20,7 +20,7 @@ Route::get('vendor/login', 'Auth\LoginVendorController@showLoginForm');
 
 Route::resource('cart', 'CartController');
 
-Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function() {
+Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::post('login', 'LoginController@loginViaAjax');
     Route::post('register', 'RegisterController@registerViaAjax');
     Route::delete('logout', 'LoginController@logout');
@@ -31,30 +31,24 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function() {
         ->middleware(['auth']);
 });
 
-Route::group(['prefix' => 'me', 'middleware' => ['auth', 'member_only']], function() {
-
+Route::group(['prefix' => 'me', 'middleware' => ['auth', 'member_only']], function () {
     Route::get('/{any?}/{any2?}/{any3?}', 'MeController@index');
-
 });
 
 Route::resource('product', 'ProductController',
-	['only' => ['show']]);
+    ['only' => ['show']]);
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
-
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('login', 'LoginController@showLoginForm');
     Route::post('login', 'LoginController@login');
-    Route::group(['middleware' => ['auth', 'admin_only']], function() {
+    Route::group(['middleware' => ['auth', 'admin_only']], function () {
         Route::delete('logout', 'LoginController@logout');
         Route::get('/{any?}/{any2?}/{any3?}', 'TransactionController@index');
     });
-
 });
-Route::group(['prefix' => 'vendor', 'namespace' => 'Vendor', 'middleware' => ['auth']], function() {
-
+Route::group(['prefix' => 'vendor', 'namespace' => 'Vendor', 'middleware' => ['auth']], function () {
     Route::resource('product', 'ProductController');
     Route::get('/{any?}/{any2?}/{any3?}', 'ProductController@index');
-
 });
 
 

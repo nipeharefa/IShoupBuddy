@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Helpers\Transformers;
+
 use Illuminate\Database\Eloquent\Model;
 
 class CartDetailTransformer extends AbstractTransformer
 {
-    public function transformModel(Model $cart){
-
+    public function transformModel(Model $cart)
+    {
         $arr = [
             "id"            =>  $cart->id,
             "price"         =>  $cart->price,

@@ -62,7 +62,8 @@
             "php artisan optimize"
         ],
         "dep": "vendor/bin/dep",
-        "test": "vendor/bin/phpunit"
+        "test": "vendor/bin/phpunit",
+        "phpcs": "php-cs-fixer --verbose fix --config=.php_cs --allow-risky yes"
     },
     "config": {
         "preferred-install": "dist",

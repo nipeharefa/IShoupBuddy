@@ -66,18 +66,15 @@ class CategoryController extends Controller
     public function destroy(Category $category, Request $request)
     {
         try {
-
             DB::beginTransaction();
 
             $category->delete();
 
             DB::commit();
             return response()->json($category, 200);
-
         } catch (Exception $e) {
             DB::rollback();
             return response()->json($e->getMessage(), 400);
-
         }
     }
 }

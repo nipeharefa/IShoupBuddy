@@ -19,10 +19,10 @@ class ReviewObserver
     public function created(Review $review)
     {
         try {
-
             $review = new ReviewCreated($review);
             event($review);
-        } catch (Exception $e) {}
+        } catch (Exception $e) {
+        }
     }
 
     public function updated(Review $review)
@@ -30,9 +30,7 @@ class ReviewObserver
         try {
             $review = new ReviewUpdated($review);
             event($review);
-
         } catch (Exception $e) {
-
         }
     }
 }

@@ -33,7 +33,8 @@ class CartTest extends TestCase
      *
      * @return void
      */
-    public function setUp() {
+    public function setUp()
+    {
         parent::setUp();
         $this->seed('InsertDefaultCategory');
         $this->generateCart();
@@ -53,11 +54,10 @@ class CartTest extends TestCase
         $this->assertCount(1, Cart::get());
 
         $responseCheckout = $this->json('POST', 'api/transaction', []);
-
     }
 
-    private function generateCart() {
-
+    private function generateCart()
+    {
         $this->category = Category::first();
         $this->vendor = factory(Vendor::class)->create();
 

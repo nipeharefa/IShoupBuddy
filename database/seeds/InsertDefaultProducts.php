@@ -19,8 +19,7 @@ class InsertDefaultProducts extends Seeder
         $data = json_decode($dat, true);
 
 
-        $beforeProduct = collect($data)->map(function($item) use($category) {
-
+        $beforeProduct = collect($data)->map(function ($item) use ($category) {
             return [
                 "name"  =>  $item["name"],
                 "category_id"   =>  $category->id,
@@ -33,7 +32,6 @@ class InsertDefaultProducts extends Seeder
 
 
         foreach ($beforeProduct->toArray() as $key => $value) {
-
             Product::create($value);
         }
 

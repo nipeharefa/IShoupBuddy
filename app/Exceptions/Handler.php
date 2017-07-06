@@ -55,20 +55,18 @@ class Handler extends ExceptionHandler
     {
         // Default response of 400
         $status = 400;
-        if ($exception instanceOf AuthorizationException ) {
+        if ($exception instanceof AuthorizationException) {
 
             // dd($exception);
             if ($request->expectsJson()) {
-
                 $data  = [
                     "message" => $exception->getMessage()
                 ];
-                return response()->json($data,403);
+                return response()->json($data, 403);
             }
         }
 
-        if ($exception instanceof ModelNotFoundException ) {
-
+        if ($exception instanceof ModelNotFoundException) {
             if ($request->expectsJson()) {
                 $reflector = new \ReflectionClass($exception->getModel());
                 $err = [

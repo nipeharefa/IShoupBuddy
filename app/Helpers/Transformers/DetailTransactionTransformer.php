@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use Auth;
 use Log;
 
-class DetailTransactionTransformer extends AbstractTransformer {
-
-    public function transformModel(Model $model){
-
+class DetailTransactionTransformer extends AbstractTransformer
+{
+    public function transformModel(Model $model)
+    {
         $arr = [
             "id"                =>  $model->id,
             "type"              =>  $this->getType($model->transactable_type),
@@ -24,23 +24,23 @@ class DetailTransactionTransformer extends AbstractTransformer {
         return $arr;
     }
 
-    protected function getType($model) {
+    protected function getType($model)
+    {
         $reflector = new \ReflectionClass($model);
         return $reflector->getShortName();
     }
 
-    protected function getLinkAction($model) {
-
+    protected function getLinkAction($model)
+    {
         return [
             "approve"   =>  "/api/admin/transaction/{$model->id}/approve",
             "cancel"    =>  "/api/admin/transaction/{$model->id}/cancel"
         ];
     }
 
-    protected function transformDetail(Model $model) {
-
+    protected function transformDetail(Model $model)
+    {
         if ($this->getType($model->transactable_type) == "Saldo") {
-
             $detail = [
                 "name"  =>  "Penambahan Saldo",
                 "quantity"  => 1,
@@ -56,8 +56,8 @@ class DetailTransactionTransformer extends AbstractTransformer {
         return $model->Detail;
     }
 
-    protected function getStatus($status) {
-
+    protected function getStatus($status)
+    {
         switch ($status) {
             case 0:
                 return "Pending";

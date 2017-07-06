@@ -5,10 +5,10 @@ namespace App\Helpers\Traits;
 use App\Helpers\Sentimen\Sentimen as SentimenFactory;
 use App\Helpers\Sentimen\Stemmer;
 
-trait Sentimen {
-
-    public function score($sentences) {
-
+trait Sentimen
+{
+    public function score($sentences)
+    {
         $sentimen = new SentimenFactory;
         $stemmerFactory = new Stemmer;
         $stemmer  = $stemmerFactory->createStemmer();
@@ -17,8 +17,8 @@ trait Sentimen {
         return $sentimen->score($output);
     }
 
-    public function categorise($sentence) {
-
+    public function categorise($sentence)
+    {
         $scores = $this->score($sentence);
 
         //Classification is the key to the scores array

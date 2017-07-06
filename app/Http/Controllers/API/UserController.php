@@ -137,25 +137,6 @@ class UserController extends Controller implements DefaultAPIResponse
             return $this->onFailure($response, 404);
         }
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
     }
@@ -202,5 +183,10 @@ class UserController extends Controller implements DefaultAPIResponse
         ];
 
         return response()->json($err, 400);
+    }
+
+    public function getWishlisht(User $user, Request $request)
+    {
+        return $user;
     }
 }

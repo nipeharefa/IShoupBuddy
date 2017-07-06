@@ -13,5 +13,4 @@ class TransactionShippment extends Model
     {
         return $this->belongsTo(Transaction::class);
     }
-
 }

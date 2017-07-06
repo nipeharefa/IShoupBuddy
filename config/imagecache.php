@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -9,9 +9,9 @@ return array(
     |
     | Enter the routes name to enable dynamic imagecache manipulation.
     | This handle will define the first part of the URI:
-    | 
+    |
     | {route}/{template}/{filename}
-    | 
+    |
     | Examples: "images", "img/cache"
     |
     */
@@ -23,17 +23,17 @@ return array(
     | Storage paths
     |--------------------------------------------------------------------------
     |
-    | The following paths will be searched for the image filename, submited 
-    | by URI. 
-    | 
+    | The following paths will be searched for the image filename, submited
+    | by URI.
+    |
     | Define as many directories as you like.
     |
     */
     
-    'paths' => array(
+    'paths' => [
         public_path('upload'),
         public_path('images')
-    ),
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ return array(
     |--------------------------------------------------------------------------
     |
     | Here you may specify your own manipulation filter templates.
-    | The keys of this array will define which templates 
+    | The keys of this array will define which templates
     | are available in the URI:
     |
     | {route}/{template}/{filename}
@@ -51,11 +51,11 @@ return array(
     |
     */
    
-    'templates' => array(
+    'templates' => [
         'small' => 'Intervention\Image\Templates\Small',
         'medium' => 'Intervention\Image\Templates\Medium',
         'large' => 'Intervention\Image\Templates\Large',
-    ),
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -68,4 +68,4 @@ return array(
    
     'lifetime' => 43200,
 
-);
+];

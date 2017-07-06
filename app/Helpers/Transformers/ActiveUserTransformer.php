@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Helpers\Transformers;
+
 use Illuminate\Database\Eloquent\Model;
 
-class ActiveUserTransformer extends AbstractTransformer {
-
-    public function transformModel(Model $user){
-
+class ActiveUserTransformer extends AbstractTransformer
+{
+    public function transformModel(Model $user)
+    {
         $saldo = $user->Saldo->nominal ?? null;
 
         $arr = [
@@ -30,8 +31,8 @@ class ActiveUserTransformer extends AbstractTransformer {
         return $arr;
     }
 
-    protected function generateUserPictureLinks($filename) {
-
+    protected function generateUserPictureLinks($filename)
+    {
         $secure = $this->getProduction();
 
         if ($filename) {

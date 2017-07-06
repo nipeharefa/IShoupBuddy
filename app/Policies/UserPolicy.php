@@ -11,7 +11,8 @@ class UserPolicy
     use HandlesAuthorization;
 
 
-    public function updateSendiri(User $user, User $i) {
+    public function updateSendiri(User $user, User $i)
+    {
         return $user->id == $i->id;
     }
 }

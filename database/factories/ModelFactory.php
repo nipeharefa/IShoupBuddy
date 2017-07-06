@@ -37,7 +37,6 @@ $factory->define(App\Models\Vendor::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Models\Category::class, function (Faker\Generator $faker) {
-
     return [
         'name' => $faker->name,
         'description' => $faker->unique()->safeEmail,
@@ -60,7 +59,6 @@ $factory->define(App\Models\Product::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Models\Review::class, function (Faker\Generator $faker) {
-
     return [
         "rating"    =>  $faker->randomFloat(null, 1, 4),
         "body"      =>  "bagus bagus"

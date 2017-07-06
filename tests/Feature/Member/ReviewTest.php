@@ -32,7 +32,8 @@ class ReviewTest extends TestCase
     }
 
 
-    public function test_create_review() {
+    public function test_create_review()
+    {
         Event::fake();
         $user = factory(User::class)->create();
         $category = factory(Category::class)->create();
@@ -63,7 +64,8 @@ class ReviewTest extends TestCase
         $this->assertCount(1, Review::get());
     }
 
-    public function test_delete_review() {
+    public function test_delete_review()
+    {
         Event::fake();
 
         $category = factory(Category::class)->create();

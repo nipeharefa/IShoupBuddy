@@ -4,10 +4,10 @@ namespace App\Helpers\Transformers;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserTransformers extends AbstractTransformer {
-
-    public function transformModel(Model $user){
-
+class UserTransformers extends AbstractTransformer
+{
+    public function transformModel(Model $user)
+    {
         $opts = @$this->options;
 
         $arr = [
@@ -17,11 +17,9 @@ class UserTransformers extends AbstractTransformer {
         ];
 
         if (isset($opts['show_email']) && $opts['show_email']) {
-
             $arr['email']   =  $user->email;
         }
         if (isset($opts['show_saldo']) && $opts['show_saldo']) {
-
             $arr['phone']   =  $user->phone;
         }
 
@@ -36,5 +34,4 @@ class UserTransformers extends AbstractTransformer {
 
         return $arr;
     }
-
 }

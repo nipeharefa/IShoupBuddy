@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProductVendorObserver
 {
-
-    public function saved(ProductVendor $pv) {
+    public function saved(ProductVendor $pv)
+    {
         try {
             $result = $pv->Statistic()->whereDay('created_at', date('d'))->firstOrFail();
             $result->harga = $pv->harga;
