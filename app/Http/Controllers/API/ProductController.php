@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\API;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProduct;
 use App\Models\Product;
 use App\Models\Vendor;
 use App\Models\ProductVendor;
 use App\Helpers\Transformers\ProductTransformer;
-use DB;
 use Auth;
+use DB;
+use Log;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 use Validator;
-use Log;
 
 class ProductController extends Controller
 {
