@@ -71,10 +71,10 @@ Route::group(['namespace' => 'API'], function() {
         Route::resource('product-vendor', 'ProductVendorController',
             ['only' =>  ['index', 'store', 'destroy', 'update']]);
 
+        Route::get('reviewcheck/check','ReviewController@checkReview');
+        
         Route::resource('review', 'ReviewController',
             ['only' =>  ['store', 'update', 'destroy']]);
-
-        Route::get('review/check','ReviewController@checkReview');
 
         Route::resource('saldo', 'SaldoController',
             ['only' =>  ['store', 'show','index']]);

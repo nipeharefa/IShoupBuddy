@@ -74,8 +74,8 @@ class ReviewController extends Controller
 
             if ($request->vendor_id) {
                 $id = $request->vendor_id;
-                $review->whereHas('productvendor', function ($query) use ($id) {
-                    return $query->whereVendortId($id);
+                $review->whereHas('productvendor', function($query) use ($id){
+                    return $query->whereVendorId($id);
                 });
             }
 
@@ -312,20 +312,22 @@ class ReviewController extends Controller
 
     public function checkReview(Request $request)
     {
+        
         $trustedParameters = ['user_id', 'vendor_id', 'product_id'];
 
         $user = Auth::guard('api')->user();
 
+
         try {
 
-            $checkParameter = collect($request->only($trustedParameters))->filter()->count();
-
+            $checkParameter = $request->only($trustedParameters);
             # Search ProductVendor
-            $product_vendor = ProductVendor::whereVendorId($checkParameter->vendor_id)
-                ->whereProductId($checkParameter->product_id)
+            $product_vendor = ProductVendor::whereVendorId($request->vendor_id)
+                ->whereProductId($request->product_id)
                 ->firstOrFail();
 
             $product_vendor_id = $product_vendor->id;
+
 
             $review = Review::whereProductVendorId($product_vendor_id)->whereUserId($user->id)->firstOrFail();
 
@@ -350,7 +352,7 @@ class ReviewController extends Controller
                     "review"    =>  null,
                     "message"   =>  $errMessage
                 ];
-                return response()->json($errResponse, 404);
+                return response()->json($errResponse, 200);
             }
 
             $errResponse = [
@@ -358,7 +360,7 @@ class ReviewController extends Controller
                 "review"    =>  null,
                 "message"   =>  $errMessage
             ];
-            return response()->json($errResponse, 400);
+            return response()->json($errResponse, 200);
         }
     }
 
