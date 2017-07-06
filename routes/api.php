@@ -122,13 +122,5 @@ Route::group(['namespace' => 'API'], function() {
 
         Route::resource('/', 'MeController',
                 ['only' => ['index']]);
-
-        Route::group(['namespace' => 'Me'], function() {
-            Route::resource('transactions', 'TransactionController',
-                ['only' => ['index', 'show']]);
-
-            Route::resource('product_favorite', 'ProductFavoriteController',
-                ['only' => 'index', 'show', 'destroy']);
-        });
     });
 });
