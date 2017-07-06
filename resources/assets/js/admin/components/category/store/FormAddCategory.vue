@@ -43,6 +43,8 @@
 </style>
 
 <script>
+  import { mapActions } from 'vuex'
+
   export default {
     data () {
       return {
@@ -53,6 +55,9 @@
       }
     },
     methods: {
+      ...mapActions([
+        'addCategory'
+      ]),
       generateLinkImage (filename) {
         if (filename) {
           return window.location.origin + '/image/small/' + filename
@@ -88,7 +93,9 @@
       saveCategory () {
         const data = this.category
         this.$http.post('api/admin/category', data).then(response => {
-          console.log(response.data)
+          const data = response.data
+          this.addCategory(data)
+          this.$router.push({name: 'listCategory'})
         })
       }
     }

@@ -6,6 +6,9 @@ export default {
   [INIT_CATEGORY] (state, category) {
     state.category = category
   },
+  [ADD_CATEGORY] (state, category) {
+    state.category.push(category)
+  },
   [DELETE_CATEGORY] (state, indexOf) {
     state.categories.splice(indexOf, 1)
   },
