@@ -16,7 +16,8 @@ class DetailTransformer extends AbstractTransformer
             "harga_string"      =>  $this->formatRupiah($model->harga),
             "total"             =>  $model->total,
             "total_string"      =>  $this->formatRupiah($model->total),
-            "item"              =>  transform($model->ProductVendor)
+            "product_vendor"    =>  transform($model->ProductVendor),
+            "product"           =>  transform($model->ProductVendor->Product),
         ];
 
         return $arr;
