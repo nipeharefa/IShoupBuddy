@@ -33,14 +33,6 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function() {
 
 Route::group(['prefix' => 'me', 'middleware' => ['auth', 'member_only']], function() {
 
-
-    Route::group(['namespace' => 'Me'], function() {
-        Route::resource('transactions', 'TransactionController',
-            ['only' => ['index', 'show']]);
-        Route::resource('product_favorite', 'ProductFavoriteController',
-            ['only' => ['index', 'show']]);
-    });
-
     Route::get('/{any?}/{any2?}/{any3?}', 'MeController@index');
 
 });

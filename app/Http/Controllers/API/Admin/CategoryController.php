@@ -44,4 +44,9 @@ class CategoryController extends BaseCategoryController
 
         return response()->json($category, 200);
     }
+
+    public function destroy(Category $category, Request $request)
+    {
+        return $category;
+    }
 }

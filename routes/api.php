@@ -72,7 +72,7 @@ Route::group(['namespace' => 'API'], function() {
             ['only' =>  ['index', 'store', 'destroy', 'update']]);
 
         Route::get('reviewcheck/check','ReviewController@checkReview');
-        
+
         Route::resource('review', 'ReviewController',
             ['only' =>  ['store', 'update', 'destroy']]);
 
@@ -98,7 +98,7 @@ Route::group(['namespace' => 'API'], function() {
                 ['except'   =>  ['create', 'edit']]);
 
             Route::resource('category', 'CategoryController',
-                ['only' =>  ['index', 'store', 'update']]);
+                ['except'   =>  ['create', 'edit']]);
 
             Route::post('transaction/{transaction}/approve', 'TransactionController@approve');
         });
