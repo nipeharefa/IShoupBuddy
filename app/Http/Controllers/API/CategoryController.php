@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Category;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreCategory;
+use App\Models\Category;
+use DB;
+use Exception;
+use Illuminate\Http\Request;
+use Log;
 
 class CategoryController extends Controller
 {
@@ -86,6 +89,6 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category, Request $request)
     {
-        //
+
     }
 }

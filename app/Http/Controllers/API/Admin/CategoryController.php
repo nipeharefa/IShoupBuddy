@@ -10,8 +10,21 @@ use App\Http\Requests\StoreCategory;
 use DB;
 use Exception;
 
-class CategoryController extends BaseCategoryController
+class CategoryController extends Controller
 {
+    public function index()
+    {
+        $category = Category::orderByDesc('created_at')->get();
+
+        $response = [
+            "status"        =>  null,
+            "categories"    =>  $category,
+            "message"       =>  null
+        ];
+
+        return response()->json($response, 200);
+    }
+
     public function store(StoreCategory $request)
     {
         try {
@@ -41,12 +54,30 @@ class CategoryController extends BaseCategoryController
         $data = $request->only('name');
 
         $category->update($data);
-
         return response()->json($category, 200);
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Category  $category
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Category $category, Request $request)
     {
-        return $category;
+        try {
+
+            DB::beginTransaction();
+
+            $category->delete();
+
+            DB::commit();
+            return response()->json($category, 200);
+
+        } catch (Exception $e) {
+            DB::rollback();
+            return response()->json($e->getMessage(), 400);
+
+        }
     }
 }

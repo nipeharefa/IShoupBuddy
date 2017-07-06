@@ -15,7 +15,7 @@
         <td>{{ item.slug }}</td>
         <td>
           <a class="button is-small is-primary">Edit</a>
-          <a class="button is-small is-danger" @click="deleteC(item, $event)">Hapus</a>
+          <a class="button is-small is-danger" @click="deleteC(item, index, $event)">Hapus</a>
         </td>
       </tr>
     </tbody>
@@ -35,12 +35,14 @@
     },
     methods: {
       ...mapActions(['deleteCategory']),
-      deleteC (item, event) {
+      deleteC (item, index, event) {
         const a = event.target
         const id = item.id
         a.classList.add('is-loading')
 
-        this.$http.delete(`api/admin/categrory/${id}`).then(response => {
+        this.$http.delete(`api/admin/category/${id}`).then(response => {
+          a.classList.remove('is-loading')
+          this.deleteCategory(index)
         }).catch(err => {
           a.classList.remove('is-loading')
         })
