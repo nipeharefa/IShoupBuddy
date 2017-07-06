@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseApiController;
+use App\Models\TransactionShippment;
+use DB;
+use Exception;
+use Carbon\Carbon;
 
-class TransactionShipmentController extends Controller
+class TransactionShipmentController extends BaseApiController
 {
     /**
      * Display a listing of the resource.
@@ -83,7 +87,26 @@ class TransactionShipmentController extends Controller
         //
     }
 
-    public function postAcceptShipment()
+    public function postAcceptShipment(TransactionShippment $id)
     {
+        $this->authorize('update', $id);
+        try {
+
+            return $this->getUser();
+            DB::beginTransaction();
+
+            $id->update(['accepted_at'    =>  Carbon::now()]);
+
+            DB::commit();
+
+            return $id;
+
+
+        } catch (Exception $e) {
+
+            DB::rollback();
+
+            return response()->json(["err" => $e->getMessage()], 400);
+        }
     }
 }

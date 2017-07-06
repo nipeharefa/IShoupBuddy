@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\User;
-use App\TransactionShippment;
+use App\Models\User;
+use App\Models\TransactionShippment;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class TransactionShippmentsPolicy
@@ -42,9 +42,11 @@ class TransactionShippmentsPolicy
      */
     public function update(User $user, TransactionShippment $transactionShippment)
     {
+        // return false;
         if ($user->role === 0) {
             return true;
         }
+
         return $user->id === $transactionShippment->Transaction->User->id;
     }
 

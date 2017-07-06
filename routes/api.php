@@ -83,6 +83,13 @@ Route::group(['namespace' => 'API'], function () {
         Route::resource('transaction', 'TransactionController',
             ['only' =>  ['index', 'store']]);
 
+        Route::post('transaction-shipment/postAcceptShipment/{id}',
+            'TransactionShipmentController@postAcceptShipment');
+
+        Route::resource('transaction-shipment', 'TransactionShipmentController',
+            ['except'   =>  ['create', 'edit']]);
+
+
         Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             Route::resource('product', 'ProductController',
                 ['only' =>  ['index', 'show']]);
@@ -112,7 +119,6 @@ Route::group(['namespace' => 'API'], function () {
         ['only' => ['index', 'show']]);
 
     Route::post('vendor/activate', 'VendorController@activate');
-
 
     Route::group(['prefix' => 'me', 'middleware' => 'auth:api'], function () {
         Route::resource('/', 'MeController',
