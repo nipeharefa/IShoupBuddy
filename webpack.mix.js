@@ -60,6 +60,34 @@ mix.sass('resources/assets/sass/pages/vendor/product/index.scss', 'css/vendor/pr
 
 mix.extract(['vue', 'axios', 'vee-validate'])
 
+mix.webpackConfig({
+    resolve: {
+      alias: {
+        'vue$': 'vue/dist/vue.common.js',
+        guest: path.resolve(__dirname, 'resources/assets/js/guest'),
+        global: path.resolve(__dirname, 'resources/assets/js/global'),
+        member: path.resolve(__dirname, 'resources/assets/js/member'),
+        admin: path.resolve(__dirname, 'resources/assets/js/admin'),
+        vendor: path.resolve(__dirname, 'resources/assets/js/vendor'),
+        adminProduct: path.resolve(__dirname, 'resources/assets/js/admin/components/product'),
+        adminComponents: path.resolve(__dirname, 'resources/assets/js/admin/components'),
+        otherComponents: path.resolve(__dirname, 'resources/assets/js/components'),
+        lib: path.resolve(__dirname, 'resources/assets/js/lib'),
+        designHelper: path.resolve(__dirname, 'resources/assets/sass/core/helpers'),
+        sassBase: path.resolve(__dirname, 'resources/assets/sass/base'),
+        sassComponents: path.resolve(__dirname, 'resources/assets/sass/components'),
+        sassPages: path.resolve(__dirname, 'resources/assets/sass/pages'),
+        'globalVuexConstant$': path.resolve(__dirname, 'resources/assets/js/constant.js'),
+
+        // Globaal Components, Store
+        'mutationsStore$': path.resolve(__dirname, 'resources/assets/js/global/store/mutations.js'),
+        'actionsStore$': path.resolve(__dirname, 'resources/assets/js/global/store/actions.js'),
+        'gettersStore$': path.resolve(__dirname, 'resources/assets/js/global/store/getters.js'),
+        'statesStore$': path.resolve(__dirname, 'resources/assets/js/global/store/states.js')
+      }
+    }
+})
+
 mix.disableNotifications()
 
 mix.sourceMaps(); // Enable sourcemaps
