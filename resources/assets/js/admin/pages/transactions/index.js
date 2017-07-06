@@ -24,6 +24,7 @@ const app = new Vue({
     this.getVendors()
     this.getUsers()
     this.getCategory()
+    this.initActiveUser(window._sharedData.user)
   },
   methods: {
     ...mapActions([
@@ -31,7 +32,8 @@ const app = new Vue({
       'initProducts',
       'initVendors',
       'initUsers',
-      'initCategories'
+      'initCategories',
+      'initActiveUser'
     ]),
     getTransactions () {
       this.$http.get('api/admin/transaction').then(response => {

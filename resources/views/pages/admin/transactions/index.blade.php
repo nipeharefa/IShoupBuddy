@@ -10,6 +10,12 @@
 
 @section('js')
 
+    <script type="text/javascript">
+
+        window._sharedData = {
+            user: {!! $user !!}
+        }
+    </script>
     <script src="{{ mix('js/manifest.js') }}" type="text/javascript"></script>
 
     <script src="{{ mix('js/vendor.js') }}" type="text/javascript"></script>

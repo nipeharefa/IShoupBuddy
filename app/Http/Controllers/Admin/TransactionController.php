@@ -13,9 +13,11 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('pages.admin.transactions.index');
+        $user = $request->user() ?? null;
+        return view('pages.admin.transactions.index')
+            ->with('user', $user);
     }
 
     /**
