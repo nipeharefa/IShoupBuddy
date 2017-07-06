@@ -2,17 +2,58 @@
 
 namespace App\Policies;
 
-use App\Models\User;
+use App\User;
+use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Log;
 
 class UserPolicy
 {
     use HandlesAuthorization;
 
-
-    public function updateSendiri(User $user, User $i)
+    /**
+     * Determine whether the user can view the user.
+     *
+     * @param  \App\User  $user
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function view(User $user, User $user)
     {
-        return $user->id == $i->id;
+        //
+    }
+
+    /**
+     * Determine whether the user can create users.
+     *
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function create(User $user)
+    {
+        //
+    }
+
+    /**
+     * Determine whether the user can update the user.
+     *
+     * @param  \App\User  $user
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function update(User $user, User $user)
+    {
+        //
+    }
+
+    /**
+     * Determine whether the user can delete the user.
+     *
+     * @param  \App\User  $user
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function delete(User $user, User $user)
+    {
+        //
     }
 }

@@ -13,8 +13,8 @@ class AddFieldAcceptedProduct extends Migration
      */
     public function up()
     {
-        Schema::table('transaction_shippments', function($table) {
-           $table->timestamp('accepted_at')->nullable()->after('phone');
+        Schema::table('transaction_shippments', function ($table) {
+            $table->timestamp('accepted_at')->nullable()->after('phone');
         });
     }
 
@@ -25,8 +25,8 @@ class AddFieldAcceptedProduct extends Migration
      */
     public function down()
     {
-        Schema::table('transaction_shippments', function($table) {
-           $table->dropColumn('accepted_at');
+        Schema::table('transaction_shippments', function ($table) {
+            $table->dropColumn('accepted_at');
         });
     }
 }

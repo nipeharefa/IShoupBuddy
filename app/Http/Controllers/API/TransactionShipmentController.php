@@ -91,7 +91,6 @@ class TransactionShipmentController extends BaseApiController
     {
         $this->authorize('update', $id);
         try {
-
             return $this->getUser();
             DB::beginTransaction();
 
@@ -100,10 +99,7 @@ class TransactionShipmentController extends BaseApiController
             DB::commit();
 
             return $id;
-
-
         } catch (Exception $e) {
-
             DB::rollback();
 
             return response()->json(["err" => $e->getMessage()], 400);

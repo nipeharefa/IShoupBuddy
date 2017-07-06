@@ -40,9 +40,9 @@ class User extends Authenticatable
         return (Boolean)$this->Wishlist()->whereProductId($product_id)->count();
     }
 
-    public function isAdmin() :Boolean
+    public function isAdmin() :bool
     {
-        return $this->role == 2;
+        return $this->attributes['role'] === 0;
     }
 
     public function Cart()
