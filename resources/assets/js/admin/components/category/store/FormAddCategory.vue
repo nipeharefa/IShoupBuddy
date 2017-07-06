@@ -26,7 +26,7 @@
       <div class="">
 
         <div class="field">
-          <a class="button is-primary" @click="saveCategory">Simpan</a>
+          <a class="button is-primary" @click="saveCategory($event)">Simpan</a>
         </div>
 
       </div>
@@ -92,10 +92,15 @@
       },
       saveCategory () {
         const data = this.category
+        const a = event.target
+        a.classList.add('is-loading')
         this.$http.post('api/admin/category', data).then(response => {
           const data = response.data
           this.addCategory(data)
           this.$router.push({name: 'listCategory'})
+          a.classList.remove('is-loading')
+        }).catch(err => {
+          a.classList.remove('is-loading')
         })
       }
     }
