@@ -42,14 +42,13 @@ class CompareController extends Controller
                     ];
                 });
 
-            $sorted = collect($hasil)->sortByDesc('kemiripan')->values()->all();
-
-            $firstProduct = collect($sorted)->first();
+            $sorted = collect($hasil)->sortByDesc('kemiripan')->values()
+                ->pluck('id')->all();
 
             $response = [
-            "source"    =>  transform($product),
-            "target"    =>  transform(Product::findOrFail($firstProduct['id']))
-        ];
+                "source"    =>  transform($product),
+                "target"    =>  transform(Product::findOrFail($sorted))
+            ];
 
             return response()->json($response);
         } catch (Exception $e) {
@@ -60,18 +59,7 @@ class CompareController extends Controller
 
             return response()->json($err, 400);
         }
-        $from = [
-            "category_id"       =>  1,
-            "similiartyText"    =>  1,
-        ];
 
-
-        $hasil = Product::get()->map(function ($item) use ($from, $productName) {
-        });
-
-
-
-        // return "Hasil Akhir : " . $this->similarity($from, $target);
     }
 
     /**
