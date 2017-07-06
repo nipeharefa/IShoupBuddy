@@ -352,7 +352,7 @@ class ReviewController extends Controller
                     "review"    =>  null,
                     "message"   =>  $errMessage
                 ];
-                return response()->json($errResponse, 200);
+                return response()->json($errResponse, 404);
             }
 
             $errResponse = [
@@ -360,7 +360,7 @@ class ReviewController extends Controller
                 "review"    =>  null,
                 "message"   =>  $errMessage
             ];
-            return response()->json($errResponse, 200);
+            return response()->json($errResponse, 400);
         }
     }
 
