@@ -19,7 +19,8 @@ class TransactionTransformer extends AbstractTransformer
             "status"            =>  $model->status,
             "status_string"     =>  $this->getStatus($model->status),
             "updated_at"        =>  $model->updated_at->toW3cString(),
-            "links"             =>  $this->getLinkAction($model)
+            "links"             =>  $this->getLinkAction($model),
+            "shipment"          =>  $model->TransactionShippment
         ];
 
         if ($this->isRelationshipLoaded($model, 'Detail')) {
