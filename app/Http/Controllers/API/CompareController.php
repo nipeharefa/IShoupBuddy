@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseApiController;
 use App\Models\Product;
 use Exception;
 use DB;
 
-class CompareController extends Controller
+class CompareController extends BaseApiController
 {
     /**
      * Display a listing of the resource.
@@ -59,7 +59,6 @@ class CompareController extends Controller
 
             return response()->json($err, 400);
         }
-
     }
 
     /**

@@ -7,8 +7,10 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Laravel\Passport\Passport;
 use App\Models\User;
 use App\Models\Product;
+use App\Models\TransactionShippment;
 use App\Policies\UserPolicy;
 use App\Policies\ProductPolicy;
+use App\Policies\TransactionShippmentsPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -20,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         User::class => UserPolicy::class,
         Product::class => ProductPolicy::class,
+        TransactionShippment::class => TransactionShippmentsPolicy::class,
     ];
 
     /**

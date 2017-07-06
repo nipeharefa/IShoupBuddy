@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Helpers\Transformers\TransactionTransformer;
 use App\Models\User;
+use App\Models\TransactionShippment;
 use DB;
 use Exception;
 use Illuminate\Http\Request;
@@ -70,9 +71,17 @@ class TransactionController extends Controller
 
             $saldo = $user->Saldo->nominal ?? 0;
 
+            $lat = $request->lat;
+
+            $lng = $request->lng;
+
+            $shipment = $request->shipment;
+
+            $totalShipment = array_sum($shipment);
+
             $totalBelanja = $cart->sum(function ($item) {
                 return $item->Detail()->sum('price');
-            });
+            }) + $totalShipment;
 
             if ($totalBelanja > $saldo) {
                 throw new Exception("Saldo tidak cukup" . $saldo, 1);
@@ -84,9 +93,10 @@ class TransactionController extends Controller
 
             DB::beginTransaction();
 
-            $currenTransactions = $cart->map(function ($cartItem) use ($user) {
+            $currenTransactions = $cart->map(function ($cartItem, $index) use ($user, $shipment, $lat, $lng) {
+                $shipmentCart = $shipment[$index];
                 $data = [
-                    "nominal"   =>  $cartItem->Detail->sum('price'),
+                    "nominal"   =>  $cartItem->Detail->sum('price') + $shipmentCart,
                     "status"    =>  0,
                     "user_id"   =>  $user->id
                 ];
@@ -94,7 +104,7 @@ class TransactionController extends Controller
 
                 $trans = $user->Transaction()->create($data);
 
-                $cartItem->Detail->each(function ($item) use ($trans) {
+                $cartItem->Detail->each(function ($item, $index) use ($trans) {
                     $transactionDetail = [
                         "product_vendor_id" =>  $item->product_vendor_id,
                         "quantity"          =>  $item->quantity,
@@ -103,7 +113,14 @@ class TransactionController extends Controller
                     ];
                     $trans->Detail()->create($transactionDetail);
                 });
-                $cartItem->delete();
+
+                $fillable = [
+                    'lat'   =>  $lat,
+                    'lng'   =>  $lng,
+                    'price' =>  $shipmentCart
+                ];
+                $trans->TransactionShippment()->create($fillable);
+                // $cartItem->delete();
                 return $trans;
             });
 

@@ -29,4 +29,9 @@ class Transaction extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function TransactionShippment()
+    {
+        return $this->hasOne(TransactionShippment::class);
+    }
 }
