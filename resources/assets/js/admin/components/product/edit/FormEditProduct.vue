@@ -33,7 +33,7 @@
           <span class="select">
             <select name="" v-model="edit.category.id" class="select">
               <option value="">Pilih Kategori</option>
-              <option value="1">Uncategorized</option>
+              <option :value="item.id" v-for="item in categories">{{ item.name }}</option>
             </select>
           </span>
           </p>
@@ -47,7 +47,7 @@
       </div>
 
       <div class="field">
-        <button class="button is-primary" @click="updateProduct">Simpan</button>
+        <button class="button is-primary" @click="updateDataProduct">Simpan</button>
       </div>
 
     </div>
@@ -60,8 +60,9 @@
 
 <script>
   import { alert } from 'notie'
-
   const path = require('path')
+  import iziToast from 'izitoast'
+  import { mapGetters, mapActions } from 'vuex'
 
   export default {
     mounted () {
@@ -73,28 +74,38 @@
         edit: this.$store.state.product
       }
     },
+    computed: {
+      ...mapGetters([
+        'products',
+        'categories'
+      ])
+    },
     methods: {
-      _showNotif () {
-        console.log('asdfsad')
-        alert({
-          type: 1,
-          text: 'Data produk berhasil diperbaharui'
-        })
-      },
-      updateProduct () {
+      ...mapActions(['updateProduct']),
+      updateDataProduct () {
         const data = {
           id: this.edit.id,
-          'picture_url': this.edit.originalImage,
+          'picture_url': this.originalImage,
           name: this.edit.name,
           description: this.edit.description,
           'category_id': this.edit.category.id,
           barcode: this.edit.barcode
         }
+        const idProduct = data.id
         this.$http.put('api/product/' + data.id, data).then(response => {
-          console.log(response.data)
-          this._showNotif()
+          const indexProduct = this.products.findIndex( x => idProduct === x.id)
+          const data = {
+            index: indexProduct,
+            product: response.data.product
+          }
+          this.updateProduct(data)
+          iziToast.success({
+              title: 'Sukses',
+              message: `Data Produk berhasil diperbaharui`,
+              position: 'bottomRight'
+          })
+          this.$router.push({name: 'listProducts'})
         }).catch(err => {
-          this.setOnError(true)
           console.log(err)
         })
       },

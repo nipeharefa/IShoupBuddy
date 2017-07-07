@@ -1,6 +1,7 @@
 import {
   INIT_TRANSACTIONS, INIT_PRODUCTS,
-  INIT_PRODUCT, INIT_ACTIVE_USER
+  INIT_PRODUCT, INIT_ACTIVE_USER,
+  UPDATE_PRODUCT
 } from 'globalVuexConstant'
 
 export const initActiveUser = ({ commit }, user) => {
@@ -17,6 +18,10 @@ export const initProducts = ({ commit }, products) => {
 
 export const initProduct = ({ commit }, product) => {
   commit(INIT_PRODUCT, product)
+}
+
+export const updateProduct = ({ commit }, data) => {
+  commit(UPDATE_PRODUCT, data)
 }
 
 export { setIsActive, setSearchActive } from 'actionsStore'

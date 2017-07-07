@@ -15,14 +15,7 @@
         <td>{{ item.email }}</td>
         <td>{{ item.phone }}</td>
         <td>{{ item.saldo.saldo_string }}</td>
-        <td>
-          <span>
-            <i class="fa fa-lock"></i>
-          </span> |
-          <span>
-            <i class="fa fa-unlock"></i>
-          </span>
-        </td>
+        <td></td>
       </tr>
     </tbody>
   </table>

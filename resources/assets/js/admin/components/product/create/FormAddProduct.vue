@@ -33,7 +33,7 @@
           <span class="select">
             <select name="" v-model="product.category_id" class="select">
               <option value="">Pilih Kategori</option>
-              <option value="1">Uncategorized</option>
+              <option :value="item.id" v-for="item in categories">{{ item.name }}</option>
             </select>
           </span>
           </p>
@@ -113,7 +113,8 @@
     },
     computed: {
       ...mapGetters([
-        'onError'
+        'onError',
+        'categories'
       ])
     },
     methods: {

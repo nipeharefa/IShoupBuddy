@@ -1,6 +1,5 @@
 let mix = require('laravel-mix')
 
-
 // Admin Sass
 
 mix.sass('resources/assets/sass/pages/admin/auth/login.scss', 'css/admin/auth/login.css')
@@ -53,10 +52,15 @@ mix.sass('resources/assets/sass/pages/member/Cart.scss', 'css/member/cart.css')
 mix.js('resources/assets/js/vendor/pages/home/home.js', 'js/vhome.js')
 mix.js('resources/assets/js/vendor/pages/auth/login.js', 'js/vendor_login.js')
 mix.js('resources/assets/js/vendor/pages/product/index.js', 'js/vendor_product_index.js')
+
 // Vendor SASS
 mix.sass('resources/assets/sass/pages/vendor/home.scss', 'css/vendor/home.css')
 mix.sass('resources/assets/sass/pages/vendor/auth/login.scss', 'css/vendor/login.css')
 mix.sass('resources/assets/sass/pages/vendor/product/index.scss', 'css/vendor/product/index.css')
+
+
+// Polifyl
+mix.js('resources/assets/js/polifyls/ArrayFindIndex.js', 'js/polifyls07.js')
 
 mix.extract(['vue', 'axios', 'vee-validate'])
 

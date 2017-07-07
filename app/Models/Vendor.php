@@ -11,6 +11,10 @@ class Vendor extends User
 {
     protected $table = 'users';
 
+    protected $casts = [
+        'confirmed' => 'boolean',
+    ];
+
     protected static function boot()
     {
         parent::boot();

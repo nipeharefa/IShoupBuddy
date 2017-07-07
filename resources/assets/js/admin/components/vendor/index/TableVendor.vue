@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="item in vendors">
+      <tr v-for="(item, index) in vendors">
         <td>{{ item.name }}</td>
         <td>{{ item.email }}</td>
         <td>{{ item.phone }}</td>
@@ -21,7 +21,7 @@
         <td>{{ item.confirmed ? "Aktif" : "Belum Aktif" }}</td>
         <td>
           <a class="is-link"
-            @click="activateVendor(item.id)" v-if="!item.confirmed">Aktifkan</a>
+            @click="activateVendor(item, index)" v-if="!item.confirmed">Aktifkan</a>
         </td>
       </tr>
     </tbody>
@@ -30,7 +30,10 @@
 
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapActions } from 'vuex'
+
+  import iziToast from 'izitoast'
+
   export default {
     data () {
       return {}
@@ -41,10 +44,21 @@
       ])
     },
     methods: {
-      activateVendor (id) {
-        const data = { 'product_id': id }
+      ...mapActions([
+        'confirmVendor'
+      ]),
+      activateVendor (item, index) {
+        console.log(index)
+        const data = { 'product_id': item.id }
+        const vendorName = item.name
         this.$http.post('api/vendor/activate', data).then(response => {
-          console.log(response)
+          iziToast.success({
+              title: 'Sukses',
+              message: `Vendor ${vendorName} berhasil di aktifkan`,
+              position: 'bottomRight'
+          });
+          this.confirmVendor(index)
+
         }).catch(err => err)
       }
     }

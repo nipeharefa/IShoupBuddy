@@ -2,9 +2,12 @@ export const INIT_PROMO = 'INIT_PROMO'
 
 export const INIT_PRODUCTS = 'INIT_PRODUCTS'
 export const INIT_PRODUCT = 'INIT_PRODUCT'
+export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 
 export const INIT_VENDORS = 'INIT_VENDORS'
 export const INIT_VENDOR = 'INIT_VENDOR'
+export const UPDATE_VENDOR = 'UPDATE_VENDOR'
+export const CONFIRM_VENDOR = 'CONFIRM_VENDOR'
 
 export const INIT_USERS = 'INIT_USERS'
 export const INIT_USER = 'INIT_USER'
@@ -30,7 +33,6 @@ export const INIT_ACTIVE_USER = 'INIT_ACTIVE_USER'
 export const SET_ISACTIVE = 'SET_ISACTIVE'
 export const SET_SEARCH_ACTIVE = 'SET_SEARCH_ACTIVE'
 export const SET_ON_ERROR = 'SET_ON_ERROR'
-export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 
 export const INIT_CARTS = 'INIT_CARTS'
 export const ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART'

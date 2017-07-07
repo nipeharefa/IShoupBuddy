@@ -1,7 +1,5 @@
 <template>
-  <div class="ss">
-    <router-link :to="{ name: 'formAddProduct' }" append class="button is-primary">Tambah User</router-link>
-    <br>
+  <div class="dazzle">
     <table-user></table-user>
   </div>
 </template>

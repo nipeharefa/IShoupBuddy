@@ -10,7 +10,7 @@
 
   import  { mapGetters, mapActions } from 'vuex'
   export default {
-    mounted() {
+    created() {
       this.getProduct()
     },
     components: {
@@ -18,7 +18,8 @@
     },
     computed: {
       ...mapGetters([
-        'product'
+        'product',
+        'products',
       ])
     },
     methods: {
@@ -27,9 +28,10 @@
       ]),
       getProduct () {
         const id = this.$route.params.id
-        this.$http.get(`/api/admin/product/${id}`).then(response => {
-          this.initProduct(response.data.product)
-        })
+
+        const indexProduct = this.products.findIndex( x => id == x.id)
+
+        this.initProduct(this.products[indexProduct])
       }
     }
   }
