@@ -6,11 +6,17 @@ import * as actions from './actions'
 import * as getters from './getters'
 import mutations from './mutations'
 
+import review from './modules/review'
+
 import { isActive, searchActive, activeUser, product } from 'statesStore'
 
 Vue.use(Vuex)
 
-const strict = process.env.NODE_ENV !== 'production'
+const strict = false
+
+const modules = {
+  review
+}
 
 const state = {
   activeUser,
@@ -28,7 +34,8 @@ const store = new Vuex.Store({
   mutations,
   actions,
   getters,
-  strict
+  strict,
+  modules
 })
 
 export default store

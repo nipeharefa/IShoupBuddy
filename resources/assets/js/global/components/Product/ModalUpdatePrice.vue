@@ -44,26 +44,38 @@
 
 
 <script>
+  import { mapActions } from 'vuex'
+
   export default {
     props: {
       visible: Boolean,
       hideAction: Function,
-      product: Object
+      product: Object,
+      index: Number
     },
     data () {
       return {
         show: this.visible,
-        newPrice: 0
+        newPrice: 0,
+        hargaPlain: 0
       }
     },
     methods: {
+      ...mapActions([
+        'updateOwnProduct'
+      ]),
       savePrice () {
         const data = {
           price: this.newPrice
         }
         const id = this.product.id
         this.$http.put(`api/product-vendor/${id}`, data).then(response => {
-          this.addedProduct(response.data.product)
+          const updatedData = {
+            index: this.index,
+            product: response.data.product
+          }
+          this.updateOwnProduct(updatedData)
+          this.hideAction(null)
         }).catch(err => err)
       }
     }

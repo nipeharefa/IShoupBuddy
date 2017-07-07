@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\Vendor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Vendor;
+use App\Helpers\Transformers\ReviewTransformer;
 
 class ReviewController extends Controller
 {
@@ -17,7 +18,7 @@ class ReviewController extends Controller
     {
         $vendor  = Vendor::find($request->user()->id);
 
-        return transform($vendor->Review);
+        return ReviewTransformer::transform($vendor->Review);
     }
 
     /**

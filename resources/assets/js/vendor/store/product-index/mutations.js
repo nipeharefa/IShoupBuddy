@@ -18,5 +18,8 @@ export default {
   },
   INIT_OWN_PRODUCT (state, product) {
     state.ownProduct = product
+  },
+  UPDATE_OWN_PRODUCT (state, data) {
+    state.ownProducts[data.index] = data.product
   }
 }

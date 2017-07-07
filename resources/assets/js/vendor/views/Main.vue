@@ -1,6 +1,7 @@
 <template>
   <div>
     <vue-progress-bar></vue-progress-bar>
+    <vendorNavbar />
     <div>
       <section class="section">
         <div class="container">
@@ -24,11 +25,13 @@
 <script>
   const FooterApps = () => import('otherComponents/Footer.vue')
   const VendorSidebar = () => import('global/components/Sidebars/VendorSidebar.vue')
+  const VendorNavbar = () => import('global/components/Navbars/VendorNavbar.vue')
 
   export default {
     components: {
       FooterApps,
-      VendorSidebar
+      VendorSidebar,
+      VendorNavbar
     },
     created () {
       this.$Progress.start()

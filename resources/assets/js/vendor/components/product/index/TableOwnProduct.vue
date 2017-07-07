@@ -12,19 +12,23 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in ownProducts">
+        <tr v-for="(item, index) in ownProducts">
           <td>{{ item.name }}</td>
           <td>{{ item.barcode }}</td>
           <td>{{ item.total_review || 0 }} / {{ item.avg_rating || 0 }}</td>
           <td>{{ item.price_string }}</td>
           <td>
-            <a class="button is-small" @click="showModal(item)">Update Harga</a>
+            <a class="button is-small" @click="showModal(item, index)">Update Harga</a>
           </td>
         </tr>
       </tbody>
     </table>
 
-    <modalUpdatePrice v-if="activeModals" :hideAction="showModal" :product="activeProduct"/>
+    <modalUpdatePrice v-if="activeModals"
+    :hideAction="showModal"
+    :index="index"
+    :product="activeProduct"/>
+
   </div>
 </template>
 
@@ -42,16 +46,17 @@
     data () {
       return {
         activeModals: false,
-        activeProduct: null
+        activeProduct: null,
+        index: null
       }
     },
     components: {
       ModalUpdatePrice
     },
     methods: {
-      showModal (item) {
+      showModal (item, index) {
         this.activeProduct = item
-        console.log('shwmodals')
+        this.index = index
         this.activeModals = !this.activeModals
       }
     }

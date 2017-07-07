@@ -129,7 +129,18 @@ class ProductVendorController extends Controller
 
             DB::beginTransaction();
 
+            $productVendor->update(['harga' =>  $request->price]);
+
             DB::commit();
+
+            $response  = [
+                "status"    =>  "OK",
+                "message"   =>  null,
+                "product"  =>  ProductVendorTransformer::transform($productVendor)
+            ];
+
+            return response()->json($response);
+
         } catch (Exception $e) {
             DB::rollback();
 

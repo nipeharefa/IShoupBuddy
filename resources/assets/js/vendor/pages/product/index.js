@@ -26,13 +26,14 @@ const app = new Vue({
     this.initActiveUser(window._sharedData.user)
     this.getOwnProducts()
     this.getProducts()
-    this.getVendors()
+    this.getReviews()
   },
   methods: {
     ...mapActions([
       'initActiveUser',
       'initProducts',
-      'initOwnProducts'
+      'initOwnProducts',
+      'initReviews'
     ]),
     getProducts () {
       this.$http.get('api/vendor/product').then(response => {
@@ -44,10 +45,10 @@ const app = new Vue({
         this.initOwnProducts(response.data.products)
       })
     },
-    getVendors () {
+    getReviews () {
       this.$http.get('api/vendor/review', []).then(response => {
-        console.log(response.data)
-      }).catch( err => err)
+        this.initReviews(response.data)
+      }).catch(err => err)
     }
   }
 })
