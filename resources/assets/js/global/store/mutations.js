@@ -7,3 +7,7 @@ export const SET_ISACTIVE = (state, status) => {
 export const SET_SEARCH_ACTIVE = (state, status) => {
   state.searchActive = status
 }
+
+export const UPDATE_ACTIVE_USER = (state, user) => {
+  state.activeUser = user
+}

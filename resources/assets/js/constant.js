@@ -8,6 +8,7 @@ export const INIT_VENDOR = 'INIT_VENDOR'
 
 export const INIT_USERS = 'INIT_USERS'
 export const INIT_USER = 'INIT_USER'
+export const UPDATE_ACTIVE_USER = 'UPDATE_ACTIVE_USER'
 
 export const INIT_OWN_PRODUCTS = 'INIT_OWN_PRODUCTS'
 export const INIT_OWN_PRODUCT = 'INIT_OWN_PRODUCT'

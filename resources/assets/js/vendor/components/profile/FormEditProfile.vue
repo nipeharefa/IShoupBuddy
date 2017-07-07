@@ -32,9 +32,9 @@
         </div>
 
         <div class="field containerFormMaps">
-          <maps class="blurOnHover" @mouseover="showCaption"/>
-          <div class="captionOnHover">
-            <p>Klik to Update</p>
+          <maps class="blurOnHover" />
+          <div class="captionMaps">
+            <a @click="showModalMaps">Ganti</a>
           </div>
         </div>
 
@@ -45,9 +45,6 @@
       </div>
       <div class="column">
         <div class="change-image">
-          <!-- <div class="image is-64x64 is-square image-photo">
-            <img :src="profileImage" alt="profile Logo">
-          </div> -->
 
           <figure class="media-left">
             <p class="image is-128x128 image-photo">
@@ -63,10 +60,11 @@
               id="uploadphoto" style="display: none"
               accept="image/*">
           </div>
-
         </div>
 
       </div>
+      <modalPickLocation :isActive.sync="modalShow"
+        :latitude.sync="user.latitude" :longitude.sync="user.longitude"/>
   </div>
 
 </template>
@@ -76,17 +74,29 @@
   .form-update-profile {
     display: flex;
   }
-  .blurOnHover:hover {
-    filter: blur(0.1rem);
-  }
   .containerFormMaps {
     position: relative;
-    .captionOnHover {
-      top: 0;
-      width: 100%;
-      text-align: center;
-      margin-top: 5rem;
+    .blurOnHover {
+      filter: none;
+    }
+    .captionMaps {
+      display: none;
       position: absolute;
+        top: 0;
+        width: 100%;
+        text-align: center;
+        margin-top: 5rem;
+        a {
+          cursor: pointer;
+        }
+    }
+  }
+  .containerFormMaps:hover {
+    .captionMaps {
+      display: block
+    }
+    .blurOnHover {
+      filter: blur(0.1rem);
     }
   }
   .image-photo {
@@ -98,36 +108,46 @@
 </style>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import iziToast from 'izitoast'
 
 const Maps = () => import('global/components/Others/Maps.vue')
+const ModalPickLocation = () => import('global/components/Modals/ModalPickLocation.vue')
 
 export default {
   components: {
-    Maps
+    Maps,
+    ModalPickLocation
   },
   mounted () {
-    const { name, picture_url, email, phone, address } = this.activeUser
+    const { name, picture_url, email, phone, address, latitude, longitude } = this.activeUser
     this.user.name = name
     this.user.picture_url = picture_url
     this.user.email = email
     this.user.phone = phone
     this.user.address = address
+    this.user.latitude = latitude
+    this.user.longitude = longitude
   },
   data () {
     return {
+      modalShow: false,
       user: {
         name: '',
         email: '',
         'picture_url': '',
         address: '',
         phone: '',
-        gender: 0
+        gender: 0,
+        longitude: null,
+        longitude: null
       }
     }
   },
   methods: {
+    ...mapActions([
+      'updateActiveUser'
+    ]),
     upload (e) {
       this.$uploader.nipe(e).then(response => {
         console.log(response)
@@ -155,8 +175,8 @@ export default {
         });
       }).catch(err => err)
     },
-    showCaption () {
-      console.log('asd from bali')
+    showModalMaps () {
+      this.modalShow = true
     }
   },
   computed: {

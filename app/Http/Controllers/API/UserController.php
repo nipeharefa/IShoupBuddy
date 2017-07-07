@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Validator;
 use Hash;
+use App\Helpers\Transformers\ActiveUserTransformer;
 
 class UserController extends Controller implements DefaultAPIResponse
 {
@@ -92,7 +93,7 @@ class UserController extends Controller implements DefaultAPIResponse
         if ($update) {
             $response = [
                 "status"     => "OK",
-                "user"       => $user,
+                "user"       => ActiveUserTransformer::transform($user),
                 "message"    => "Akun telah di update"
             ];
 

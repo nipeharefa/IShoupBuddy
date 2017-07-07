@@ -28,7 +28,8 @@
 @stop
 
 @section('js')
-
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_KEY') }}"
+    async defer></script>
     <script src="{{ mix('/js/manifest.js') }}"></script>
     <script src="{{ mix('/js/vendor.js') }}"></script>
     <script src="{{ mix('/js/vendor_product_index.js') }}" async></script>
