@@ -61,6 +61,11 @@ mix.sass('resources/assets/sass/pages/vendor/product/index.scss', 'css/vendor/pr
 mix.extract(['vue', 'axios', 'vee-validate'])
 
 mix.webpackConfig({
+  devServer: {
+    stats: {
+      chunks: false
+    }
+  },
   output: {
     publicPath: '/'
   },

@@ -8,6 +8,7 @@ set('bin/yarn', function () {
     return (string)run('which yarn');
 });
 desc('Install Yarn packages');
+
 task('yarn:install', function () {
     if (has('previous_release')) {
         if (test('[ -d {{previous_release}}/node_modules ]')) {
@@ -15,6 +16,10 @@ task('yarn:install', function () {
         }
     }
     run("cd {{release_path}} && {{bin/yarn}}");
+});
+
+task('yarn:production', function () {
+    run("cd {{release_path}} && {{bin/yarn}} production-silent");
 });
 // Configure servers
 
@@ -43,6 +48,7 @@ task('deploy', [
     'deploy:update_code',
     'deploy:shared',
     'yarn:install',
+    'yarn:production',
     'deploy:vendors',
     'deploy:writable',
     'artisan:view:clear',
