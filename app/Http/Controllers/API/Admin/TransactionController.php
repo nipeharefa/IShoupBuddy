@@ -108,6 +108,8 @@ class TransactionController extends Controller
     {
         if ($transaction->transactable_type === Saldo::class) {
             return $this->approveSaldo($transaction);
+        }else {
+            return response()->json($this->approveTransaction($transaction), 200);
         }
 
         return;
@@ -116,6 +118,31 @@ class TransactionController extends Controller
     protected function approveTransactionBiasa(Transaction $transaction, Request $request)
     {
         return $transaction;
+    }
+
+    protected function approveTransaction(Transaction $transaction)
+    {
+        try {
+            $saldo = $transaction->Saldo;
+            DB::beginTransaction();
+
+            # Update Transaction to Success
+            $transaction->update(['status' => 1]);
+
+            DB::commit();
+
+            return transform($transaction);
+        } catch (Exception $e) {
+            DB::rollback();
+
+            $err = [
+                "status"    =>  "ERROR",
+                "message"   =>  $e->getMessage()
+
+            ];
+
+            return response()->json($err, 400);
+        }
     }
 
     protected function approveSaldo(Transaction $transaction)
