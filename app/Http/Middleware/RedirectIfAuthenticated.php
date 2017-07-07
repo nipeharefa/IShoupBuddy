@@ -17,8 +17,23 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+        $auth = Auth::guard($guard);
+
+        if ($auth->check()) {
+            $links = '/';
+            switch (request()->user()->role) {
+                case 0:
+                    $links = "/admin/product";
+                    break;
+                case 1:
+                    $links = "/";
+                    break;
+                default:
+                    $links = "/vendor/product";
+                    break;
+            }
+
+            return redirect($links);
         }
 
         return $next($request);

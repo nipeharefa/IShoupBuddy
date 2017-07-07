@@ -64,7 +64,7 @@
         const data = this.login
         const self = this
         this.$http.post('/auth/login', data).then(x => {
-          window.location.assign('/')
+          window.location.assign(x.data.redirect_to)
         }).catch(x => {
           self.onError = true
         })

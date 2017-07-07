@@ -10,4 +10,4 @@ chmod -R 644 /etc/cron.d
 service cron restart
 
 ### Change LatLng
-ALTER TABLE `users` CHANGE `latitude` `latitude` DOUBLE(10,9) NULL DEFAULT NULL
+ALTER TABLE `users` CHANGE `latitude` `latitude` DOUBLE(10,4) NULL DEFAULT NULL

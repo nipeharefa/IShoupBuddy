@@ -1,7 +1,7 @@
 <template>
   <div class="nav-right nav-menu">
       <div class="user_info">
-        <a class="nav-item" href="/me">
+        <a class="nav-item" href="/vendor/product">
           <i class="fa fa-user" aria-hidden="true"></i>
           <span class="user_name">Hi, {{activeUser.name}}</span>
         </a>

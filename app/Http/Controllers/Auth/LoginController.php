@@ -40,13 +40,7 @@ class LoginController extends Controller
 
     public function loginViaAjax(Request $request)
     {
-        $this->validateLogin($request);
-
-        if ($this->attemptLogin($request)) {
-            return response()->json([], 200);
-        }
-
-        return $this->sendFailedLoginResponse($request);
+        return $this->login($request);
     }
 
     public function logout(Request $request)
@@ -62,5 +56,31 @@ class LoginController extends Controller
             return response()->json([], 204);
         }
         return redirect('/');
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        $links = '/';
+
+        switch ($user->role) {
+            case 0:
+                $links = "/admin/product";
+                break;
+            case 1:
+                $links = "/";
+                break;
+            default:
+                $links = "/vendor/product";
+                break;
+        }
+        if ($request->expectsJson()) {
+            return [
+                "message"   =>  "",
+                "status"    =>  "OK",
+                "user"      => $user,
+                "redirect_to"   =>  $links
+            ];
+        }
+        return 1;
     }
 }
