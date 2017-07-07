@@ -31,6 +31,13 @@
           </p>
         </div>
 
+        <div class="field containerFormMaps">
+          <maps class="blurOnHover" @mouseover="showCaption"/>
+          <div class="captionOnHover">
+            <p>Klik to Update</p>
+          </div>
+        </div>
+
         <div class="field has-text-centered">
           <button @click="updateProfile" class="button is-primary is-fullwidth">Update Profile</button>
         </div>
@@ -69,6 +76,19 @@
   .form-update-profile {
     display: flex;
   }
+  .blurOnHover:hover {
+    filter: blur(0.1rem);
+  }
+  .containerFormMaps {
+    position: relative;
+    .captionOnHover {
+      top: 0;
+      width: 100%;
+      text-align: center;
+      margin-top: 5rem;
+      position: absolute;
+    }
+  }
   .image-photo {
     img {
       min-width: 64px;
@@ -79,8 +99,14 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import iziToast from 'izitoast'
+
+const Maps = () => import('global/components/Others/Maps.vue')
 
 export default {
+  components: {
+    Maps
+  },
   mounted () {
     const { name, picture_url, email, phone, address } = this.activeUser
     this.user.name = name
@@ -122,8 +148,15 @@ export default {
       const data = this.user
       const id = this.activeUser.id
       this.$http.post(`api/user`, data).then(response => {
-        console.log(response.data)
+        iziToast.success({
+            title: 'Sukses',
+            message: 'Profile berhasil diperbaharui',
+            position: 'bottomRight'
+        });
       }).catch(err => err)
+    },
+    showCaption () {
+      console.log('asd from bali')
     }
   },
   computed: {

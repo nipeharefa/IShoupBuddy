@@ -18,6 +18,7 @@
     <meta content='notranslate' name='google'>
 
     <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <meta name="google-key" id="google-key" content="{{ env('GOOGLE_KEY') }}" />
 
     <!-- Styles -->
 

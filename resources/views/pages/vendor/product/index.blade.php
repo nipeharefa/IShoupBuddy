@@ -24,6 +24,7 @@
     @endif
 
     <link rel="stylesheet" href="{{ mix('css/vendor/product/index.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.1.1/css/iziToast.min.css">
 @stop
 
 @section('js')

@@ -4,7 +4,6 @@
       General
     </p>
     <ul class="menu-list">
-      <li><a>Dashboard</a></li>
       <li>
         <router-link :to="{ name: 'product-index' }" append>Products</router-link>
       </li>
