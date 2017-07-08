@@ -140,7 +140,6 @@ class ProductVendorController extends Controller
             ];
 
             return response()->json($response);
-
         } catch (Exception $e) {
             DB::rollback();
 

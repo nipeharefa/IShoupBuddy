@@ -25,6 +25,7 @@
         "predis/predis": "^1.1",
         "pusher/pusher-php-server": "^2.6",
         "sastrawi/sastrawi": "^1.2",
+        "sensiolabs/security-checker": "^4.0",
         "sentry/sentry-laravel": "^0.7.0",
         "themsaid/laravel-model-transformers": "^1.0"
     },

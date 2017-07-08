@@ -108,7 +108,7 @@ class TransactionController extends Controller
     {
         if ($transaction->transactable_type === Saldo::class) {
             return $this->approveSaldo($transaction);
-        }else {
+        } else {
             return response()->json($this->approveTransaction($transaction), 200);
         }
 
