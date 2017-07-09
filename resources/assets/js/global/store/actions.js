@@ -9,7 +9,7 @@ export const initActiveUser = ({ commit }, user) => {
   commit(INIT_ACTIVE_USER, user)
 }
 
-export const updateActiveuser = ({ commit }, user)  => {
+export const updateActiveuser = ({ commit }, user) => {
   commit(UPDATE_ACTIVE_USER, user)
 }
 

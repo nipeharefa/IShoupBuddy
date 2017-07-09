@@ -7,11 +7,13 @@ import VeeValidate from 'vee-validate'
 import { sync } from 'vuex-router-sync'
 import { mapActions } from 'vuex'
 import VueEcho from 'lib/echo-pusher-plugin'
+import ImageUploader from 'lib/imageuploader'
 
 Vue.use(VueProgressBar, { color: 'rgb(26, 146, 47)', failedColor: 'red', height: '3px' })
 Vue.use(VueAxios)
 Vue.use(VeeValidate)
 Vue.use(VueEcho)
+Vue.use(ImageUploader)
 
 sync(store, router)
 

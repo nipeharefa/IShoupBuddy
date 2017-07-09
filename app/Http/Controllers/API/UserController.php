@@ -190,4 +190,9 @@ class UserController extends Controller implements DefaultAPIResponse
     {
         return $user;
     }
+
+    public function getUserSaldo(User $user, Request $request)
+    {
+
+    }
 }

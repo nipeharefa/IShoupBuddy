@@ -19,7 +19,9 @@
           <span>{{ activeUser.address}}</span>
         </div>
         <div>
-          <a href="/me/edit" class="button is-primary is-small">Edit Profil</a>
+          <!-- <a href="/me/edit" class="button is-primary is-small">Edit Profil</a> -->
+          <router-link :to="{ name: 'formEditProfile' }"
+            class="button is-primary is-small" append>Edit Profil</router-link>
         </div>
 
       </div>
