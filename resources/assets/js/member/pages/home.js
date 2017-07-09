@@ -8,12 +8,10 @@ Vue.use(VueAxios)
 Vue.use(VueLazyload)
 Vue.use(VueEcho)
 Vue.use(CartCounter)
+
 const App = r => require.ensure([], () => r(require('member/components/home/Home.vue')), 'mem-home')
 
 new Vue({
-  mounted () {
-    console.log(this.$getCartCounter())
-  },
   store,
   render (h) {
     return (

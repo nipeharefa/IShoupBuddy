@@ -59,6 +59,7 @@ Route::group(['namespace' => 'API'], function () {
 
 
         Route::get('user/{user}/carts', 'UserController@getUserCart');
+        Route::get('user/{user}/cartscounter', 'UserController@getUserCartCounter');
         Route::resource('user', 'UserController',
             ['only' => ['index', 'store']]);
 

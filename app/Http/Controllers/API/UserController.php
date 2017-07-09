@@ -236,4 +236,21 @@ class UserController extends Controller implements DefaultAPIResponse
         $carts["item"] = transform($cart->Detail);
         return $carts;
     }
+
+    public function getUserCartCounter(User $user, Request $request)
+    {
+        try {
+
+            $counter = $user->cart->sum(function($item){
+                return count($item->Detail);
+            });
+            $response = [
+                "cart"  =>  $counter
+            ];
+            return response()->json($response, 200);
+
+        } catch (Exception $e) {
+
+        }
+    }
 }

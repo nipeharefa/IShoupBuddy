@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueAxios from 'lib/axios-plugin'
+import CartCounter from 'lib/CartCounter'
 import VueProgressBar from 'vue-progressbar'
 import router from 'member/routers/me'
 import store from 'member/store/me'
@@ -14,6 +15,7 @@ Vue.use(VueAxios)
 Vue.use(VeeValidate)
 Vue.use(VueEcho)
 Vue.use(ImageUploader)
+Vue.use(CartCounter)
 
 sync(store, router)
 

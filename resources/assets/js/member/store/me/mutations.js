@@ -1,5 +1,9 @@
-import { SET_ISACTIVE, SET_SEARCH_ACTIVE, UPDATE_ACTIVE_USER } from 'mutationsStore'
-
+import {
+  SET_ISACTIVE,
+  SET_SEARCH_ACTIVE,
+  UPDATE_ACTIVE_USER,
+  SET_TOTAL_CART
+} from 'mutationsStore'
 export default {
 
   INIT_ACTIVE_USER (state, user) {
@@ -7,5 +11,6 @@ export default {
   },
   SET_ISACTIVE,
   SET_SEARCH_ACTIVE,
-  UPDATE_ACTIVE_USER
+  UPDATE_ACTIVE_USER,
+  SET_TOTAL_CART
 }
