@@ -8,4 +8,8 @@ export const initCarts = ({ commit }, carts) => {
   commit(INIT_CARTS, carts)
 }
 
-export { setIsActive, setSearchActive } from 'actionsStore'
+export {
+  setIsActive,
+  setSearchActive,
+  setTotalCart
+} from 'actionsStore'

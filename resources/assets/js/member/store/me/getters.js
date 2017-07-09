@@ -1,1 +1,6 @@
-export { activeUser, isActive, searchActive } from 'gettersStore'
+export {
+  activeUser,
+  isActive,
+  searchActive,
+  totalCart
+} from 'gettersStore'

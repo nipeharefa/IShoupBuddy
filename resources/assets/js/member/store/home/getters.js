@@ -2,4 +2,8 @@ export const activeUser = state => state.activeUser
 export const products = state => state.products
 export const promo = state => state.promo
 
-export { isActive, searchActive } from 'gettersStore'
+export {
+  isActive,
+  searchActive,
+  totalCart
+} from 'gettersStore'

@@ -1,3 +1,6 @@
-export const activeUser = state => state.activeUser
-
-export { isActive, searchActive } from 'gettersStore'
+export {
+  activeUser,
+  isActive,
+  searchActive,
+  totalCart
+} from 'gettersStore'

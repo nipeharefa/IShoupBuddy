@@ -6,7 +6,7 @@ import * as actions from './actions'
 import * as getters from './getters'
 import mutations from './mutations'
 
-import { isActive, searchActive, activeUser } from 'statesStore'
+import { isActive, searchActive, activeUser, totalCart } from 'statesStore'
 
 Vue.use(Vuex)
 
@@ -15,7 +15,8 @@ const strict = process.env.NODE_ENV !== 'production'
 const state = {
   activeUser,
   isActive,
-  searchActive
+  searchActive,
+  totalCart
 }
 
 const store = new Vuex.Store({

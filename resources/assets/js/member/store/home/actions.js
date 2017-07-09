@@ -10,4 +10,8 @@ export const initPromo = ({ commit }, promo) => {
   commit(INIT_PROMO, promo)
 }
 
-export { setIsActive, setSearchActive } from 'actionsStore'
+export {
+  setIsActive,
+  setSearchActive,
+  setTotalCart
+} from 'actionsStore'

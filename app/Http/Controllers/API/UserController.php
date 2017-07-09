@@ -5,16 +5,19 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Helpers\Traits\ApiResponse;
 use App\Helpers\Contracts\DefaultAPIResponse;
+use App\Helpers\Transformers\ActiveUserTransformer;
+use App\Helpers\Traits\RupiahFormated;
+use App\Models\Cart;
 use App\Models\User;
+use App\Models\Vendor;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Validator;
 use Hash;
-use App\Helpers\Transformers\ActiveUserTransformer;
+use Validator;
 
 class UserController extends Controller implements DefaultAPIResponse
 {
-    use ApiResponse;
+    use ApiResponse, RupiahFormated;
 
     /**
      * Get User Acccount Settings
@@ -192,7 +195,45 @@ class UserController extends Controller implements DefaultAPIResponse
     }
 
     public function getUserSaldo(User $user, Request $request)
-    {
+    {}
 
+    public function getUserCart(User $user, Request $request)
+    {
+        try {
+
+            $carts = $user->Cart()->get()->map(function ($c) {
+                return $this->indexCartResponse($c->Vendor, $c);
+            });
+
+            $totalBelanja = $user->Cart->sum(function ($item) {
+                return $item->Detail()->sum('price');
+            });
+
+            $response = [
+                "carts"         =>  $carts,
+                "message"       =>  null,
+                "status"        =>  "OK",
+                "total"         =>  $totalBelanja,
+                "total_string"  =>  $this->formatRupiah($totalBelanja),
+            ];
+
+            return response()->json($response);
+
+        } catch (Exception $e) {
+
+            $response = [
+                "status"    =>  "ERROR"
+            ];
+
+            return response()->json($response, 400);
+        }
+    }
+
+    public function indexCartResponse(Vendor $vendor, Cart $cart)
+    {
+        $carts = collect($cart)->except('vendor')->toArray();
+        $carts['vendor'] = transform($vendor);
+        $carts["item"] = transform($cart->Detail);
+        return $carts;
     }
 }

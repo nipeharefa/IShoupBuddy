@@ -37,16 +37,8 @@ class ProductController extends Controller
 
         $view->with('title', $product->name);
         $view->with('id', $product->id);
-        $view->with('user', json_encode($user));
+        $view->with('user', $user->toJson());
 
         return $view;
-        // if (Auth::check()) {
-        //     $user = Auth::user();
-        // } else {
-
-        //     $view = view("pages.product.show")
-        // }
-
-        // return $view;
     }
 }

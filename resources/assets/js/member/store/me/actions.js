@@ -4,4 +4,9 @@ export const initActiveUser = ({ commit }, user) => {
   commit(INIT_ACTIVE_USER, user)
 }
 
-export { setIsActive, setSearchActive, updateActiveuser } from 'actionsStore'
+export {
+  setTotalCart,
+  setIsActive,
+  setSearchActive,
+  updateActiveuser
+} from 'actionsStore'

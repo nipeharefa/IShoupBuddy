@@ -58,6 +58,7 @@ Route::group(['namespace' => 'API'], function () {
             ['only' =>  ['index', 'store', 'update', 'destroy']]);
 
 
+        Route::get('user/{user}/carts', 'UserController@getUserCart');
         Route::resource('user', 'UserController',
             ['only' => ['index', 'store']]);
 

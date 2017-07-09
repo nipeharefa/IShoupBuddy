@@ -9,12 +9,15 @@ import mutations from './mutations'
 
 Vue.use(Vuex)
 
+import { isActive, searchActive, totalCart } from 'statesStore'
+
 const strict = process.env.NODE_ENV !== 'production'
 
 const state = {
   activeUser: {},
-  isActive: false,
-  searchActive: false
+  isActive,
+  searchActive,
+  totalCart
 }
 
 const store = new Vuex.Store({

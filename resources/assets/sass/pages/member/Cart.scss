@@ -1,3 +1,27 @@
 @import "node_modules/bulma/bulma";
 @import "~sassComponents/NavbarDesktopDefault";
 @import "./partials/_navbar";
+
+// new 0.4.3 dropdown
+.has-dropdown {
+  .dropdown {
+    display: none;
+    font-size: 0.875rem;
+    left: 0;
+    position: absolute;
+    top: 100%;
+    background-color: $navbar-dropdown-background;
+    border-bottom-left-radius: $navbar-dropdown-radius;
+    border-bottom-right-radius: $navbar-dropdown-radius;
+    border-top: 1px solid $navbar-dropdown-border;
+    box-shadow: 0 8px 8px rgba($black, 0.1);
+
+    .dropdown-item {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+  &:hover .dropdown {
+    display: block;
+  }
+}

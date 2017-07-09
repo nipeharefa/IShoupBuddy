@@ -15,6 +15,7 @@ import { mapActions, mapGetters } from 'vuex'
 new Vue({
   created () {
     this.initDataVuex()
+    this.initActiveUser(window._sharedData.user)
   },
   store,
   computed: {
