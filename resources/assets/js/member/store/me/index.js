@@ -6,12 +6,17 @@ import Vuex from 'vuex'
 import * as actions from './actions'
 import * as getters from './getters'
 import mutations from './mutations'
+import transaction from './transaction'
 
 Vue.use(Vuex)
 
 import { isActive, searchActive, totalCart } from 'statesStore'
 
 const strict = process.env.NODE_ENV !== 'production'
+
+const modules = {
+  transaction
+}
 
 const state = {
   activeUser: {},
@@ -25,7 +30,8 @@ const store = new Vuex.Store({
   mutations,
   actions,
   getters,
-  strict
+  strict,
+  modules
 })
 
 export default store

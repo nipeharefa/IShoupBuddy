@@ -10,11 +10,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in 5">
+        <tr v-for="item in transactions">
           <td class="item-id-transaction">
             <a href="/me/transactions/0000011">00011</a>
           </td>
-          <td>Sayur Putih Pertamax</td>
+          <td>Product Name</td>
           <td>100.000</td>
           <td>
             <span class="tag is-success">
@@ -22,7 +22,31 @@
             </span>
           </td>
         </tr>
+
+        <tr class="no-data" v-if="!transactions">
+          <td colspan="4">Tidak Ada Transaksi</td>
+        </tr>
       </tbody>
     </table>
   </div>
 </template>
+
+<style lang="scss">
+  tr.no-data {
+    td {
+      font-size: 0.85rem;
+      text-align: center;
+    }
+  }
+</style>
+
+<script>
+  import { mapGetters } from 'vuex'
+
+  export default {
+    computed: {
+      ...mapGetters(['transactions'])
+    }
+
+  }
+</script>
