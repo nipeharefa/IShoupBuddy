@@ -54,7 +54,6 @@ task('deploy', [
     'deploy:vendors',
     'deploy:writable',
     'artisan:view:clear',
-    'artisan:config:cache',
     'artisan:route:cache',
     'artisan:optimize',
     'deploy:symlink',
