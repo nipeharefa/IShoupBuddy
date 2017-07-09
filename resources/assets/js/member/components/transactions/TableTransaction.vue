@@ -12,10 +12,12 @@
       <tbody>
         <tr v-for="item in transactions">
           <td class="item-id-transaction">
-            <a href="/me/transactions/0000011">00011</a>
+            <a href="/me/transactions/0000011">{{ item.id }}</a>
           </td>
-          <td>Product Name</td>
-          <td>100.000</td>
+          <td>
+            <span v-for="d in item.detail">{{ d.name }}</span>
+          </td>
+          <td>{{ item.nominal_string }}</td>
           <td>
             <span class="tag is-success">
               <i class="fa fa-check-circle"></i>

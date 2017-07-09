@@ -30,10 +30,17 @@ const app = new Vue({
   },
   methods: {
     ...mapActions([
-      'initActiveUser'
+      'initActiveUser',
+      'initTransactions'
     ]),
     initAllData () {
       this.initActiveUser(window._sharedData.user)
+      this.getTransactions()
+    },
+    getTransactions () {
+      this.$http.get('api/transaction?with=d').then(response => {
+        this.initTransactions(response.data.transactions)
+      }).catch(err => err)
     }
   }
 })
