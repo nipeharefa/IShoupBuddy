@@ -1,7 +1,8 @@
 <template>
   <button class="button is-small b-add-wish" @click="addToWishList">
     <i class="fa" :class="{'fa-heart': product.liked, 'fa-heart-o': !product.liked}"></i>
-    <span>Add To Wish</span>
+    <span v-if="!product.liked">Tambakan ke daftar Favorit</span>
+    <span v-if="product.liked">Hapus dari daftar Favorit</span>
   </button>
 </template>
 
