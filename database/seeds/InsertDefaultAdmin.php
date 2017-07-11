@@ -17,11 +17,11 @@ class InsertDefaultAdmin extends Seeder
         $faker = Faker::create();
 
         $admin =  [
-            'name'              => "Administrator",
-            'email'             => $faker->unique()->safeEmail,
-            'password'          => bcrypt('secret'),
-            'remember_token'    => str_random(10),
-            'role'              => 0,
+            'name'              =>  "Administrator",
+            'email'             =>  $faker->unique()->safeEmail,
+            'password'          =>  bcrypt('secret'),
+            'remember_token'    =>  str_random(10),
+            'role'              =>  0,
             'latitude'          =>  $faker->latitude,
             'longitude'         =>  $faker->longitude
         ];
