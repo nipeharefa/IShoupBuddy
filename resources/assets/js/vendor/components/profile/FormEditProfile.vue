@@ -39,7 +39,7 @@
         </div>
 
         <div class="field has-text-centered">
-          <button @click="updateProfile" class="button is-primary is-fullwidth">Update Profile</button>
+          <button @click="updateProfile($event)" class="button is-primary is-fullwidth">Update Profile</button>
         </div>
 
       </div>
@@ -157,23 +157,30 @@ export default {
     generateLinkPicture () {
       return `/${this.user.picture_url}`
     },
-    updateProfile () {
+    updateProfile (event) {
       this.$validator.validateAll().then(result => {
-        this._updateProfile()
+        this._updateProfile(event)
       }).catch(err => {
         console.log(err)
       })
     },
-    _updateProfile () {
+    _updateProfile (event) {
+      const btn = event.target
       const data = this.user
       const id = this.activeUser.id
+
+      btn.classList.add('is-loading')
+
       this.$http.post(`api/user`, data).then(response => {
         iziToast.success({
             title: 'Sukses',
             message: 'Profile berhasil diperbaharui',
             position: 'bottomRight'
         });
-      }).catch(err => err)
+        btn.classList.remove('is-loading')
+      }).catch(err => {
+        btn.classList.remove('is-loading')
+      })
     },
     showModalMaps () {
       this.modalShow = true
