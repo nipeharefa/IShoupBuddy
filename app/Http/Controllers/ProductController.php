@@ -37,7 +37,7 @@ class ProductController extends Controller
 
         $view->with('title', $product->name);
         $view->with('id', $product->id);
-        $view->with('user', $user->toJson());
+        $view->with('user', $user ? $user->toJson() : json_encode([]));
 
         return $view;
     }

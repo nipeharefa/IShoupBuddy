@@ -11,12 +11,11 @@ div.product-media {
 
   figure {
     display: flex;
+    img {
+      object-fit: scale-down;
+    }
     @include tablet() {
       width: 100% !important;
-
-      object-fit: fill;
-      img {
-      }
     }
   }
 }
