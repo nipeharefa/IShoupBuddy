@@ -25,7 +25,12 @@
 <script>
   import StarRating from 'vue-star-rating'
   export default {
-    props: ['product'],
+    props: {
+      product: {
+        type: Object,
+        required: true
+      }
+    },
     components: {
       StarRating
     },

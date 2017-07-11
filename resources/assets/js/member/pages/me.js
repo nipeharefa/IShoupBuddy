@@ -9,6 +9,7 @@ import { sync } from 'vuex-router-sync'
 import { mapActions } from 'vuex'
 import VueEcho from 'lib/echo-pusher-plugin'
 import ImageUploader from 'lib/imageuploader'
+import VueLazyload from 'vue-lazyload'
 
 Vue.use(VueProgressBar, { color: 'rgb(26, 146, 47)', failedColor: 'red', height: '3px' })
 Vue.use(VueAxios)
@@ -16,6 +17,7 @@ Vue.use(VeeValidate)
 Vue.use(VueEcho)
 Vue.use(ImageUploader)
 Vue.use(CartCounter)
+Vue.use(VueLazyload)
 
 sync(store, router)
 
@@ -31,15 +33,22 @@ const app = new Vue({
   methods: {
     ...mapActions([
       'initActiveUser',
-      'initTransactions'
+      'initTransactions',
+      'initWishlists'
     ]),
     initAllData () {
       this.initActiveUser(window._sharedData.user)
       this.getTransactions()
+      this.getWishlist()
     },
     getTransactions () {
       this.$http.get('api/transaction?with=d').then(response => {
         this.initTransactions(response.data.transactions)
+      }).catch(err => err)
+    },
+    getWishlist () {
+      this.$http.get('api/wishlist').then(response => {
+        this.initWishlists(response.data.wishlist)
       }).catch(err => err)
     }
   }

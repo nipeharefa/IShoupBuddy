@@ -7,6 +7,7 @@ import * as actions from './actions'
 import * as getters from './getters'
 import mutations from './mutations'
 import transaction from './transaction'
+import wishlist from './wishlist'
 
 Vue.use(Vuex)
 
@@ -15,7 +16,8 @@ import { isActive, searchActive, totalCart } from 'statesStore'
 const strict = process.env.NODE_ENV !== 'production'
 
 const modules = {
-  transaction
+  transaction,
+  wishlist
 }
 
 const state = {

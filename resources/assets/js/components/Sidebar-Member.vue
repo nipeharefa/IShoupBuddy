@@ -17,7 +17,7 @@
 
 
         <li>
-          <router-link :to="{ name: 'tableTransaction' }" append>Produk Favorite</router-link>
+          <router-link :to="{ name: 'productFavorite' }" append>Produk Favorite</router-link>
         </li>
 
 		</ul>
