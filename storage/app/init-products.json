@@ -6,5 +6,29 @@
     {
         "name": "Kopiko Caramel Frappe 240ml",
         "picture_url": "skripsi-kopiko-78c-caramel-frappe-240ml.jpg"
+    },
+    {
+        "name": "Hit Semprot Kaleng Natural Fragrance Orange 225ml",
+        "picture_url": "skripsi-hit-semport-kaleng-natural-fragrance-orange-225ml.jpg"
+    },
+    {
+        "name": "Mylanta Antasid Obat Maag 150ml",
+        "picture_url": "skripsi-mylanta-antasid-obat-maag-150ml.jpg",
+        "barcode": "899275051226"
+    },
+    {
+        "name": "Betadine Obat kumur Antiseptik 190ml",
+        "picture_url": "skripsi-betadine-obat-kumur-antiseptik-190ml.jpg",
+        "barcode": "8992843101902"
+    },
+    {
+        "name": "Vaseline Intensive Care 100ml",
+        "picture_url": "skripsi-vaseline-intensive-care-100ml.jpg",
+        "barcode": "8999999003074"
+    },
+    {
+        "name": "Listerine Cool Mint 250ml",
+        "picture_url": "skripsi-Listerine_Antiseptic_Mouthwash_Cool_Mint_250ml.jpg",
+        "barcode": "8992725910332"
     }
 ]
