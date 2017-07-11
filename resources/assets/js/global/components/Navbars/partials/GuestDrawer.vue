@@ -8,12 +8,6 @@
         </a>
       </li>
       <li>
-        <a href="">
-          <i class="fa fa-list"></i>
-          <small>Kategori</small>
-        </a>
-      </li>
-      <li>
         <a href="/help">
           <i class="fa fa-question"></i>
           <small>Bantuan</small>

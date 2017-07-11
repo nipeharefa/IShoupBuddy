@@ -6,7 +6,7 @@
 
 		<section class="section">
       <div class="container">
-        <h3 class="product-list-caption">Promo Produk Terbaru</h3>
+        <h3 class="product-list-caption">Produk Terbaru</h3>
         <listPromo />
         <h3 class="product-list-caption">Produk Lainnya</h3>
         <list-product></list-product>

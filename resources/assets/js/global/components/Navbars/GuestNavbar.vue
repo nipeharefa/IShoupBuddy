@@ -6,9 +6,6 @@
       <a @click="setSearchActive(true)">
         <i class="fa fa-search"></i>
       </a>
-      <a href="/login">
-        <i class="fa fa-sign-in"></i>
-      </a>
       <a>
         <i class="fa fa-shopping-cart"></i>
       </a>

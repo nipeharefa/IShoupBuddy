@@ -12,7 +12,7 @@ class InsertVendorsTableSeeder extends Seeder
      */
     public function run()
     {
-        $count = $this->ask('Jumlah vendor');
+        $count = $this->command->ask('Jumlah vendor');
         factory(Vendor::class)->create();
     }
 }
