@@ -20,7 +20,7 @@
         </div>
 
         <div class="field">
-          <button class="button is-primary is-small" @click="savePrice">Simpan</button>
+          <button class="button is-primary is-small" @click="savePrice($event)">Simpan</button>
         </div>
 
       </div>
@@ -44,7 +44,9 @@
 
 
 <script>
+
   import { mapActions } from 'vuex'
+  import iziToast from 'izitoast'
 
   export default {
     props: {
@@ -64,11 +66,16 @@
       ...mapActions([
         'updateOwnProduct'
       ]),
-      savePrice () {
+      savePrice (event) {
+        const btnUpdate = event.target
+
         const data = {
           price: this.newPrice
         }
+
         const id = this.product.id
+        btnUpdate.classList.add('is-loading')
+
         this.$http.put(`api/product-vendor/${id}`, data).then(response => {
           const updatedData = {
             index: this.index,
@@ -76,7 +83,16 @@
           }
           this.updateOwnProduct(updatedData)
           this.hideAction(null)
-        }).catch(err => err)
+
+          iziToast.success({
+            title: 'Sukses',
+            message: 'Harga berhasil diperbaharui',
+            position: 'bottomRight'
+          });
+          btnUpdate.classList.remove('is-loading')
+        }).catch(err => {
+          btnUpdate.classList.remove('is-loading')
+        })
       }
     }
   }

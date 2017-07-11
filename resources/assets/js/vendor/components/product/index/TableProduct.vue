@@ -25,15 +25,15 @@
       </tbody>
     </table>
     <modalAddProduct v-if="modalShow"
-      :hideAction="showModalAddToMyProduct"
       :data="activeData"
+      :modalShow.sync="modalShow"
       :addedProduct="addedProduct"></modalAddProduct>
+
   </div>
 </template>
 
 <style lang="scss">
   @import "node_modules/izitoast/dist/css/iziToast.min";
-  // @import "node_modules/bulma/bulma";
 </style>
 
 <script>

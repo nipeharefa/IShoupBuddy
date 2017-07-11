@@ -26,12 +26,12 @@
         </div>
 
         <div class="field">
-          <button class="button is-primary" @click="savePrice">Simpan</button>
+          <button class="button is-primary" @click="savePrice($event)">Simpan</button>
         </div>
 
       </div>
     </div>
-    <button class="modal-close" @click="hideAction(false)"></button>
+    <button class="modal-close" @click="hideAction"></button>
   </div>
 </template>
 
@@ -48,16 +48,13 @@
 <script>
   export default {
     props: {
-      hideAction: {
-        type: Function,
-        required: true
-      },
       price: {
         default: 0
       },
       data: Object,
       addData: Function,
-      addedProduct: Function
+      addedProduct: Function,
+      modalShow: Boolean
     },
     data () {
       return {
@@ -66,14 +63,23 @@
       }
     },
     methods: {
-      savePrice () {
+      hideAction () {
+        this.$emit('update:modalShow', false)
+      },
+      savePrice (event) {
+        const a = event.target
         const data = {
           productID: this.dataForm.id,
           price: this.newPrice
         }
+        a.classList.add('is-loading')
         this.$http.post('api/product-vendor', data).then(response => {
+          a.classList.remove('is-loading')
           this.addedProduct(response.data.product)
-        }).catch(err => err)
+          this.hideAction()
+        }).catch(err => {
+          a.classList.remove('is-loading')
+        })
       }
     }
   }
