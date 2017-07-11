@@ -12,6 +12,11 @@
 </div>
 </template>
 
+<style>
+  .swiper-container {
+    width: 100% !important;
+  }
+</style>
 
 <script>
   const ProductCard = () => import('global/components/Others/ProductCard.vue')
