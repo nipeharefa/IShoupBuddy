@@ -99,7 +99,7 @@
               <ul class="list">
                 <li>
                   Produk Favorite
-                  <a href="">1</a>
+                  <a href="">{{ wishlists.length || 0 }}</a>
                 </li>
                 <li>
                   Review
@@ -125,7 +125,8 @@
   export default {
     computed: {
       ...mapGetters([
-        'activeUser'
+        'activeUser',
+        'wishlists'
       ])
     }
   }

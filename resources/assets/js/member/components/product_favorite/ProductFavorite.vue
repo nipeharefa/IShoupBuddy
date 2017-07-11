@@ -2,7 +2,7 @@
   <div>
     <div class="wrapping">
       <div class="nusa" v-for="item in wishlists">
-        <a :href="`/product/${item.id}`">
+        <a :href="`/product/${item.product.id}`">
           <product-card :product="item.product"></product-card>
         </a>
       </div>
