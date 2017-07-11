@@ -62,7 +62,7 @@ mix.sass('resources/assets/sass/pages/vendor/product/index.scss', 'css/vendor/pr
 // Polifyl
 mix.js('resources/assets/js/polifyls/ArrayFindIndex.js', 'js/polifyls07.js')
 
-mix.extract(['vue', 'axios', 'vee-validate'])
+mix.extract(['vue', 'axios', 'vee-validate', 'vue-lazyload', 'vuex'])
 
 mix.webpackConfig({
   devServer: {
