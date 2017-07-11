@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseApiController;
 use App\Helpers\Traits\ApiResponse;
 use App\Helpers\Contracts\DefaultAPIResponse;
 use App\Helpers\Transformers\ActiveUserTransformer;
@@ -10,12 +10,15 @@ use App\Helpers\Traits\RupiahFormated;
 use App\Models\Cart;
 use App\Models\User;
 use App\Models\Vendor;
+use App\Models\Product;
+use DB;
+use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Hash;
 use Validator;
 
-class UserController extends Controller implements DefaultAPIResponse
+class UserController extends BaseApiController implements DefaultAPIResponse
 {
     use ApiResponse, RupiahFormated;
 
@@ -251,6 +254,26 @@ class UserController extends Controller implements DefaultAPIResponse
 
         } catch (Exception $e) {
 
+        }
+    }
+
+    public function unWishProduct(Product $product, Request $request) {
+
+        $user = $this->getUser();
+
+        try {
+            DB::beginTransaction();
+
+            $user->Wishlist()->whereProductId($product->id)->first()->delete();
+
+            DB::commit();
+
+            return response()->json([], 204);
+
+        } catch (Exception $e) {
+
+            DB::rollback();
+            return response()->json($e->getMessage(), 400);
         }
     }
 }

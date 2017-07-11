@@ -15,3 +15,7 @@ export const UPDATE_ACTIVE_USER = (state, user) => {
 export const SET_TOTAL_CART = (state, totalCart) => {
   state.totalCart = totalCart
 }
+
+export const WISH_PRODUCT = (state, liked) => {
+  state.product.liked = liked
+}

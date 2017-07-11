@@ -3,6 +3,7 @@ export const INIT_PROMO = 'INIT_PROMO'
 export const INIT_PRODUCTS = 'INIT_PRODUCTS'
 export const INIT_PRODUCT = 'INIT_PRODUCT'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
+export const WISH_PRODUCT = 'WISH_PRODUCT'
 
 export const INIT_VENDORS = 'INIT_VENDORS'
 export const INIT_VENDOR = 'INIT_VENDOR'

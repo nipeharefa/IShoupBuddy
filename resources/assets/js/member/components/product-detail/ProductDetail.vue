@@ -37,6 +37,7 @@
             <div>
               <span class="product-name">{{ product.name }}</span>
               <ratings :ratings="product.total_rating"></ratings>
+              <wishListButton :productId="product.id" />
               <hr>
             </div>
             <div>
@@ -102,6 +103,7 @@
   const ModalAddToCart = () => import('global/components/Cart/ModalAddProductToCart.vue')
   const ModalsBaru = () => import('global/components/Cart/ModalAddProductToCart.vue')
   const ProductCard = () => import('global/components/Others/ProductCard.vue')
+  const WishListButton = () => import('global/components/Others/WishListButton.vue')
 
   import { mapGetters } from 'vuex'
 
@@ -117,7 +119,8 @@
       Tabs,
       ImageCover,
       ModalAddToCart,
-      ProductCard
+      ProductCard,
+      WishListButton
     },
     computed: {
       ...mapGetters([

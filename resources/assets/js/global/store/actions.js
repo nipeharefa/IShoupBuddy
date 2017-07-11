@@ -3,7 +3,8 @@ import {
   SET_ISACTIVE,
   SET_SEARCH_ACTIVE,
   UPDATE_ACTIVE_USER,
-  SET_TOTAL_CART
+  SET_TOTAL_CART,
+  WISH_PRODUCT
 } from 'globalVuexConstant'
 
 export const initActiveUser = ({ commit }, user) => {
@@ -26,3 +27,6 @@ export const setTotalCart = ({ commit }, total) => {
   commit(SET_TOTAL_CART, total)
 }
 
+export const wishProduct = ({ commit }, liked) => {
+  commit(WISH_PRODUCT, liked)
+}

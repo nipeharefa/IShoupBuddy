@@ -1,9 +1,11 @@
 import {
   SET_ISACTIVE,
   SET_SEARCH_ACTIVE,
-  SET_TOTAL_CART
+  SET_TOTAL_CART,
+  WISH_PRODUCT
 } from 'mutationsStore'
 import { INIT_ACTIVE_USER, INIT_PRODUCT, INIT_RECOMMENDATION_PRODUCTS } from 'globalVuexConstant'
+
 export default {
 
   [INIT_ACTIVE_USER] (state, user) {
@@ -15,6 +17,7 @@ export default {
   SET_ISACTIVE,
   SET_SEARCH_ACTIVE,
   SET_TOTAL_CART,
+  WISH_PRODUCT,
   [INIT_RECOMMENDATION_PRODUCTS] (state, products) {
     state.recommendationProducts = products
   }
