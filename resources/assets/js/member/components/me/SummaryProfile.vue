@@ -112,6 +112,13 @@
   </div>
 </template>
 
+<style lang="scss" scoped>
+  .image-photo {
+    img {
+      object-fit: scale-down !important;
+    }
+  }
+</style>
 
 <script>
   import { mapGetters } from 'vuex'
