@@ -15,9 +15,6 @@
 </style>
 
 <script>
-  /**
-   * Image thumbnail spesific to detail product
-   */
 
   import { mapGetters } from 'vuex'
 
