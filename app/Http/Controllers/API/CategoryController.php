@@ -19,7 +19,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Category::orderByDesc('created_at')->get();
+        $category = Category::orderBy('id', 'asc')->get();
 
         $response = [
             "status"        =>  null,
@@ -78,7 +78,16 @@ class CategoryController extends Controller
      */
     public function update(StoreCategory $request, Category $category)
     {
-        //
+        $category->name = $request->name;
+        $category->save();
+
+          $response = [
+            "status"        =>  null,
+            "categories"    =>  $category,
+            "message"       =>  null
+        ];
+
+        return response()->json($response, 200);
     }
 
     /**

@@ -32,7 +32,7 @@ Route::group(['namespace' => 'API'], function () {
         ['only' => ['show']]);
 
     Route::resource('category', 'CategoryController',
-        ['only' => ['index']]);
+        ['only' => ['index', 'update']]);
 
     Route::resource('promo', 'PromoController',
         ['only' => ['index']]);

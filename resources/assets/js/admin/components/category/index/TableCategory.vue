@@ -14,7 +14,11 @@
         <td>{{ item.name }}</td>
         <td>{{ item.slug }}</td>
         <td>
-          <a class="button is-small is-primary">Edit</a>
+          <router-link
+          :to="{ name: 'formEditCategory', params: { id: item.id }}" append
+          class="button is-small is-primary">
+            Edit
+          </router-link>
           <a class="button is-small is-danger" @click="deleteC(item, index, $event)">Hapus</a>
         </td>
       </tr>
