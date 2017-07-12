@@ -2,10 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 use App\Helpers\Traits\UserTrait;
-use App\Helpers\Traits\ProductTrait;
+use Illuminate\Database\Eloquent\Model;
 
 class Wishlist extends Model
 {

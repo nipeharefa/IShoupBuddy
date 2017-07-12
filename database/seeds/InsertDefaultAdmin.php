@@ -1,9 +1,8 @@
 <?php
 
-use Illuminate\Database\Seeder;
-use Faker\Factory as Faker;
-
 use App\Models\User;
+use Faker\Factory as Faker;
+use Illuminate\Database\Seeder;
 
 class InsertDefaultAdmin extends Seeder
 {
@@ -16,14 +15,14 @@ class InsertDefaultAdmin extends Seeder
     {
         $faker = Faker::create();
 
-        $admin =  [
-            'name'              =>  "Administrator",
-            'email'             =>  $faker->unique()->safeEmail,
-            'password'          =>  bcrypt('secret'),
-            'remember_token'    =>  str_random(10),
-            'role'              =>  0,
-            'latitude'          =>  $faker->latitude,
-            'longitude'         =>  $faker->longitude
+        $admin = [
+            'name'              => 'Administrator',
+            'email'             => $faker->unique()->safeEmail,
+            'password'          => bcrypt('secret'),
+            'remember_token'    => str_random(10),
+            'role'              => 0,
+            'latitude'          => $faker->latitude,
+            'longitude'         => $faker->longitude,
         ];
 
         User::create($admin);

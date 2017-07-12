@@ -20,7 +20,7 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
         'email'             => $faker->unique()->safeEmail,
         'password'          => $password ?: $password = bcrypt('secret'),
         'remember_token'    => str_random(10),
-        'role'              =>  1
+        'role'              => 1,
     ];
 });
 
@@ -28,21 +28,21 @@ $factory->define(App\Models\Vendor::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'name'              => $faker->name,
-        'email'             => $faker->unique()->safeEmail,
-        'password'          => $password ?: $password = bcrypt('secret'),
-        'remember_token'    => str_random(10),
-        'role'              =>  2,
-        'latitude'               =>  $faker->latitude,
-        'longitude'               =>  $faker->longitude,
+        'name'                    => $faker->name,
+        'email'                   => $faker->unique()->safeEmail,
+        'password'                => $password ?: $password = bcrypt('secret'),
+        'remember_token'          => str_random(10),
+        'role'                    => 2,
+        'latitude'                => $faker->latitude,
+        'longitude'               => $faker->longitude,
     ];
 });
 
 $factory->define(App\Models\Category::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
+        'name'        => $faker->name,
         'description' => $faker->unique()->safeEmail,
-        'slug' => $faker->slug
+        'slug'        => $faker->slug,
     ];
 });
 
@@ -51,19 +51,19 @@ $factory->define(App\Models\Product::class, function (Faker\Generator $faker) {
     static $category_id;
 
     return [
-        'name' => $faker->name,
-        "category_id"  =>   $category_id,
-        'slug'  =>  $faker->slug,
-        "description"   =>  $faker->text,
-        "barcode"   =>  $faker->isbn13,
-        "picture_url"   =>  "lorem.png"
+        'name'          => $faker->name,
+        'category_id'   => $category_id,
+        'slug'          => $faker->slug,
+        'description'   => $faker->text,
+        'barcode'       => $faker->isbn13,
+        'picture_url'   => 'lorem.png',
     ];
 });
 
 $factory->define(App\Models\Review::class, function (Faker\Generator $faker) {
     return [
-        "rating"    =>  $faker->randomFloat(null, 1, 4),
-        "body"      =>  "bagus bagus"
+        'rating'    => $faker->randomFloat(null, 1, 4),
+        'body'      => 'bagus bagus',
     ];
 });
 
@@ -72,9 +72,9 @@ $factory->define(App\Models\ProductVendor::class, function (Faker\Generator $fak
     static $product_id;
 
     return [
-        "vendor_id"  =>   $vendor_id,
-        "product_id"    =>  $product_id,
-        "harga" =>  10000,
-        "status"    =>  0
+        'vendor_id'     => $vendor_id,
+        'product_id'    => $product_id,
+        'harga'         => 10000,
+        'status'        => 0,
     ];
 });

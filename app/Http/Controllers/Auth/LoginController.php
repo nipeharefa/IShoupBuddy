@@ -51,10 +51,10 @@ class LoginController extends Controller
 
         $request->session()->regenerate();
 
-
         if ($request->expectsJson()) {
             return response()->json([], 204);
         }
+
         return redirect('/');
     }
 
@@ -64,23 +64,24 @@ class LoginController extends Controller
 
         switch ($user->role) {
             case 0:
-                $links = "/admin/product";
+                $links = '/admin/product';
                 break;
             case 1:
-                $links = "/";
+                $links = '/';
                 break;
             default:
-                $links = "/vendor/product";
+                $links = '/vendor/product';
                 break;
         }
         if ($request->expectsJson()) {
             return [
-                "message"   =>  "",
-                "status"    =>  "OK",
-                "user"      => $user,
-                "redirect_to"   =>  $links
+                'message'       => '',
+                'status'        => 'OK',
+                'user'          => $user,
+                'redirect_to'   => $links,
             ];
         }
+
         return 1;
     }
 }

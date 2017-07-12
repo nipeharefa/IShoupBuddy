@@ -1,10 +1,9 @@
 <?php
 
-
 namespace App\Helpers\Sentimen;
 
-use Sastrawi\Stemmer\StemmerFactory;
 use Cache;
+use Sastrawi\Stemmer\StemmerFactory;
 
 class Stemmer extends StemmerFactory
 {

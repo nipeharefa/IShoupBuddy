@@ -24,7 +24,7 @@ class StoreTransaction extends FormRequest
     public function rules()
     {
         return [
-            'cart_id'   =>  'required|array'
+            'cart_id'   => 'required|array',
         ];
     }
 }

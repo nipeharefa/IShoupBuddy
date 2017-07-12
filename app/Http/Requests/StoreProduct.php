@@ -24,11 +24,11 @@ class StoreProduct extends FormRequest
     public function rules()
     {
         return [
-            "picture_url"   =>  "required",
-            "name"          =>  "required",
-            "description"   =>  "required",
-            "barcode"       =>  "required|numeric",
-            "category_id"   =>  "required"
+            'picture_url'   => 'required',
+            'name'          => 'required',
+            'description'   => 'required',
+            'barcode'       => 'required|numeric',
+            'category_id'   => 'required',
         ];
     }
 }

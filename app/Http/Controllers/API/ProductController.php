@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\Transformers\ProductTransformer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProduct;
 use App\Models\Product;
-use App\Models\Vendor;
 use App\Models\ProductVendor;
-use App\Helpers\Transformers\ProductTransformer;
+use App\Models\Vendor;
 use Auth;
 use DB;
-use Log;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
-use Validator;
 
 class ProductController extends Controller
 {
@@ -23,6 +21,7 @@ class ProductController extends Controller
     {
         $this->product = $product;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +30,6 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $product = Product::orderByDesc('created_at');
-
 
         if (!$request->query('without_filter')) {
             $product->whereHas('productvendor', function ($pv) {
@@ -56,7 +54,7 @@ class ProductController extends Controller
         }
 
         if ($request->query('with')) {
-            $with = explode(",", $request->query('with'));
+            $with = explode(',', $request->query('with'));
 
             $product = $product->with(['Review']);
         }
@@ -64,9 +62,9 @@ class ProductController extends Controller
         $options = [];
 
         $data = [
-            "status"    =>  "OK",
-            "products"  =>  ProductTransformer::transform($product->get(), $options),
-            "message"   =>  null
+            'status'    => 'OK',
+            'products'  => ProductTransformer::transform($product->get(), $options),
+            'message'   => null,
         ];
 
         return response()->json($data, 200);
@@ -85,7 +83,8 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StoreProduct $request)
@@ -95,7 +94,6 @@ class ProductController extends Controller
         $user = $request->user();
         $data = $request->toArray();
 
-
         $data['slug'] = str_slug($request->name);
 
         try {
@@ -103,9 +101,9 @@ class ProductController extends Controller
 
             if (Product::whereBarcode($request->barcode)->count()) {
                 $err = [
-                    "status"    =>  "OK",
-                    "product"   =>  null,
-                    "message"   =>  "Duplicate"
+                    'status'    => 'OK',
+                    'product'   => null,
+                    'message'   => 'Duplicate',
                 ];
 
                 return response()->json($err, 409);
@@ -119,9 +117,9 @@ class ProductController extends Controller
             DB::rollback();
 
             $err = [
-                "status"    =>  "OK",
-                "product"   =>  null,
-                "message"   =>  $e->getMessage()
+                'status'    => 'OK',
+                'product'   => null,
+                'message'   => $e->getMessage(),
             ];
 
             return response()->json($err, 400);
@@ -133,25 +131,25 @@ class ProductController extends Controller
         $vendor = Vendor::find($user);
 
         $arr = [
-            'product_id'    =>  $product_id,
-            'harga'         =>  $data['price'],
-            'status'        =>  true
+            'product_id'    => $product_id,
+            'harga'         => $data['price'],
+            'status'        => true,
         ];
 
-
-        return $vendor->ProductVendor()->updateOrCreate(["product_id" => $product_id, "vendor_id" => $vendor->id], $arr);
+        return $vendor->ProductVendor()->updateOrCreate(['product_id' => $product_id, 'vendor_id' => $vendor->id], $arr);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Product $product, Request $request)
     {
         if ($request->query('with')) {
-            $with = explode(",", $request->query('with'));
+            $with = explode(',', $request->query('with'));
             foreach ($with as $key => $value) {
                 switch ($value) {
                     case 'review':
@@ -163,9 +161,9 @@ class ProductController extends Controller
             }
         }
         $response = [
-            "status"    =>  "OK",
-            "product"   =>  ProductTransformer::transform($product),
-            "message"   =>  null
+            'status'    => 'OK',
+            'product'   => ProductTransformer::transform($product),
+            'message'   => null,
         ];
 
         return response()->json($response, 200);
@@ -174,7 +172,8 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -185,8 +184,9 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Product $product)
@@ -198,9 +198,9 @@ class ProductController extends Controller
 
             $product->update($data);
             $response = [
-                "status"    =>  "OK",
-                "product"   =>  ProductTransformer::transform($product),
-                "message"   =>  null
+                'status'    => 'OK',
+                'product'   => ProductTransformer::transform($product),
+                'message'   => null,
             ];
 
             DB::commit();
@@ -210,10 +210,11 @@ class ProductController extends Controller
             DB::rollback();
 
             $err = [
-                "status"    =>  "ERROR",
-                "product"   =>  null,
-                "message"   =>  $e->getMessage()
+                'status'    => 'ERROR',
+                'product'   => null,
+                'message'   => $e->getMessage(),
             ];
+
             return response()->json($err, 400);
         }
     }
@@ -221,7 +222,8 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -235,17 +237,17 @@ class ProductController extends Controller
             $product = Product::whereBarcode($barcode)->firstOrFail();
 
             $response = [
-                "status"    =>  "OK",
-                "product"   =>  ProductTransformer::transform($product),
-                "message"   =>  null
+                'status'    => 'OK',
+                'product'   => ProductTransformer::transform($product),
+                'message'   => null,
             ];
 
             return response()->json($response, 200);
         } catch (ModelNotFoundException $e) {
             $err = [
-                "status"    =>  "OK",
-                "product"   =>  null,
-                "message"   =>  "Produk tidak ditemukan"
+                'status'    => 'OK',
+                'product'   => null,
+                'message'   => 'Produk tidak ditemukan',
             ];
 
             return response()->json($err, 404);

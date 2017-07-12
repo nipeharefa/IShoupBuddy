@@ -2,16 +2,16 @@
 
 namespace App\Observers;
 
-use App\Models\Saldo;
-use Exception;
 use App\Events\SaldoNominalUpdated;
+use App\Models\Saldo;
 
 class SaldoObserver
 {
     /**
      * Listen to the User created event.
      *
-     * @param  User  $user
+     * @param User $user
+     *
      * @return void
      */
     public function saved(Saldo $saldo)

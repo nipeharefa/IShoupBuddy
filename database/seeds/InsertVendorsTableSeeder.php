@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Models\Vendor;
+use Illuminate\Database\Seeder;
 
 class InsertVendorsTableSeeder extends Seeder
 {
