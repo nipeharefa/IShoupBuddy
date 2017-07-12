@@ -11,7 +11,6 @@ class ProductVendor extends Model
 
     protected $fillable = ['product_id', 'vendor_id', 'harga', 'status'];
 
-
     public function Product()
     {
         return $this->belongsTo(Product::class);

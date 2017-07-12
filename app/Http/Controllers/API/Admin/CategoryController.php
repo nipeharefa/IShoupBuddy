@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\API\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\API\CategoryController as BaseCategoryController;
-use App\Models\Category;
 use App\Http\Requests\StoreCategory;
+use App\Models\Category;
 use DB;
 use Exception;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -17,9 +16,9 @@ class CategoryController extends Controller
         $category = Category::orderByDesc('created_at')->get();
 
         $response = [
-            "status"        =>  null,
-            "categories"    =>  $category,
-            "message"       =>  null
+            'status'        => null,
+            'categories'    => $category,
+            'message'       => null,
         ];
 
         return response()->json($response, 200);
@@ -42,7 +41,7 @@ class CategoryController extends Controller
             DB::rollback();
 
             $err = [
-                "message"   =>  $e->getMessage()
+                'message'   => $e->getMessage(),
             ];
 
             return response()->json($err, 400);
@@ -54,13 +53,15 @@ class CategoryController extends Controller
         $data = $request->only('name');
 
         $category->update($data);
+
         return response()->json($category, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
+     * @param \App\Models\Category $category
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Category $category, Request $request)
@@ -71,9 +72,11 @@ class CategoryController extends Controller
             $category->delete();
 
             DB::commit();
+
             return response()->json($category, 200);
         } catch (Exception $e) {
             DB::rollback();
+
             return response()->json($e->getMessage(), 400);
         }
     }

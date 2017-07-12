@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\ProductVendor;
-use Illuminate\Http\Request;
-use App\Models\Vendor;
-use App\Models\Product;
-use App\Http\Controllers\Controller;
-use App\Helpers\Transformers\ProductVendorTransformer;
 use App\Helpers\Transformers\ProductTransformer;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Helpers\Transformers\ProductVendorTransformer;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProductVendor;
+use App\Models\Product;
+use App\Models\ProductVendor;
+use App\Models\Vendor;
 use DB;
 use Exception;
-use App\Http\Requests\StoreProductVendor;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 
 class ProductVendorController extends Controller
 {
@@ -25,10 +25,10 @@ class ProductVendorController extends Controller
     {
         $vendor = Vendor::find($request->user()->id);
 
-        $data  = [
-            "status"    =>  "OK",
-            "message"   =>  null,
-            "products"  =>  ProductVendorTransformer::transform($vendor->ProductVendor)
+        $data = [
+            'status'    => 'OK',
+            'message'   => null,
+            'products'  => ProductVendorTransformer::transform($vendor->ProductVendor),
         ];
 
         return response()->json($data, 200);
@@ -47,23 +47,23 @@ class ProductVendorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StoreProductVendor $request)
     {
         try {
             $data = [
-                "product_id"    =>  $request->productID,
-                "harga"         =>  $request->price,
-                "status"        =>  $request->status ?? 1
+                'product_id'    => $request->productID,
+                'harga'         => $request->price,
+                'status'        => $request->status ?? 1,
             ];
 
             $vendor = Vendor::find($request->user()->id);
 
-
             $firstParam = [
-                "product_id"    =>  $request->productID
+                'product_id'    => $request->productID,
             ];
 
             DB::beginTransaction();
@@ -72,9 +72,9 @@ class ProductVendorController extends Controller
             $productInstance = Product::find($request->productID);
 
             $response = [
-                "status"    =>  "created",
-                "product"   =>  ProductTransformer::transform($productInstance),
-                "message"   =>  null
+                'status'    => 'created',
+                'product'   => ProductTransformer::transform($productInstance),
+                'message'   => null,
             ];
 
             DB::commit();
@@ -84,9 +84,9 @@ class ProductVendorController extends Controller
             DB::rollback();
 
             $err = [
-                "message"   =>  $e->getMessage(),
-                "product"   =>  null,
-                "status"    =>  "ERROR"
+                'message'   => $e->getMessage(),
+                'product'   => null,
+                'status'    => 'ERROR',
             ];
 
             return response()->json($err, 400);
@@ -96,7 +96,8 @@ class ProductVendorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ProductVendor  $productVendor
+     * @param \App\ProductVendor $productVendor
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(ProductVendor $productVendor)
@@ -107,7 +108,8 @@ class ProductVendorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ProductVendor  $productVendor
+     * @param \App\ProductVendor $productVendor
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(ProductVendor $productVendor)
@@ -118,8 +120,9 @@ class ProductVendorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ProductVendor  $productVendor
+     * @param \Illuminate\Http\Request $request
+     * @param \App\ProductVendor       $productVendor
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, ProductVendor $productVendor)
@@ -133,10 +136,10 @@ class ProductVendorController extends Controller
 
             DB::commit();
 
-            $response  = [
-                "status"    =>  "OK",
-                "message"   =>  null,
-                "product"  =>  ProductVendorTransformer::transform($productVendor)
+            $response = [
+                'status'    => 'OK',
+                'message'   => null,
+                'product'   => ProductVendorTransformer::transform($productVendor),
             ];
 
             return response()->json($response);
@@ -144,8 +147,8 @@ class ProductVendorController extends Controller
             DB::rollback();
 
             $err = [
-                "message"   =>  $e->getMessage(),
-                "status"    =>  "ERROR"
+                'message'   => $e->getMessage(),
+                'status'    => 'ERROR',
             ];
 
             return response()->json($err, 400);
@@ -155,7 +158,8 @@ class ProductVendorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ProductVendor  $productVendor
+     * @param \App\ProductVendor $productVendor
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($productVendor, Request $request)
@@ -178,9 +182,9 @@ class ProductVendorController extends Controller
             $result = $productVendor->restore();
 
             $response = [
-                "status"    =>  "OK",
-                "product"   =>  $result,
-                "message"   =>  null
+                'status'    => 'OK',
+                'product'   => $result,
+                'message'   => null,
             ];
 
             DB::commit();
@@ -190,10 +194,11 @@ class ProductVendorController extends Controller
             DB::rollback();
 
             $response = [
-                "status"    =>  "OK",
-                "product"   =>  $e->getMessage(),
-                "message"   =>  null
+                'status'    => 'OK',
+                'product'   => $e->getMessage(),
+                'message'   => null,
             ];
+
             return response()->json($response, 400);
         }
     }

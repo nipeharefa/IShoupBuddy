@@ -2,14 +2,14 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Schema;
 use App\Models\ProductVendor;
 use App\Models\Review;
 use App\Models\Saldo;
 use App\Observers\ProductVendorObserver;
 use App\Observers\ReviewObserver;
 use App\Observers\SaldoObserver;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {

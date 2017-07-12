@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\BaseApiController;
 use App\Models\Product;
 use Exception;
-use DB;
+use Illuminate\Http\Request;
 
 class CompareController extends BaseApiController
 {
@@ -20,8 +19,8 @@ class CompareController extends BaseApiController
         try {
             $product = Product::findOrFail($request->product_id);
             $from = [
-                "category_id"       =>  $product->category_id,
-                "similiartyText"    =>  100,
+                'category_id'       => $product->category_id,
+                'similiartyText'    => 100,
             ];
 
             $productName = $this->_cleanString($product->name);
@@ -30,15 +29,15 @@ class CompareController extends BaseApiController
                 ->map(function ($item) use ($from, $productName) {
                     similar_text($productName, $this->_cleanString($item->name), $percent);
                     $target = [
-                        "category_id"       =>  $item->category_id,
-                        "similiartyText"    =>  $percent,
+                        'category_id'       => $item->category_id,
+                        'similiartyText'    => $percent,
                     ];
 
                     return [
-                        "id"        =>  $item->id,
-                        "name"      =>  $item->name,
-                        "nameSimilarity"    =>  $percent,
-                        "kemiripan"    =>  ($this->similarity($from, $target) * 100)
+                        'id'                => $item->id,
+                        'name'              => $item->name,
+                        'nameSimilarity'    => $percent,
+                        'kemiripan'         => ($this->similarity($from, $target) * 100),
                     ];
                 });
 
@@ -46,15 +45,15 @@ class CompareController extends BaseApiController
                 ->pluck('id')->all();
 
             $response = [
-                "source"    =>  transform($product),
-                "target"    =>  transform(Product::findOrFail($sorted))
+                'source'    => transform($product),
+                'target'    => transform(Product::findOrFail($sorted)),
             ];
 
             return response()->json($response);
         } catch (Exception $e) {
             $err = [
-                "message"   =>  $e->getMessage(),
-                "status"    =>  "ERROR"
+                'message'   => $e->getMessage(),
+                'status'    => 'ERROR',
             ];
 
             return response()->json($err, 400);
@@ -74,7 +73,8 @@ class CompareController extends BaseApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -85,7 +85,8 @@ class CompareController extends BaseApiController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -96,7 +97,8 @@ class CompareController extends BaseApiController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -107,8 +109,9 @@ class CompareController extends BaseApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -119,7 +122,8 @@ class CompareController extends BaseApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -131,6 +135,7 @@ class CompareController extends BaseApiController
     {
         return $this->_dotProduct($vec1, $vec2) / ($this->_absVector($vec1) * $this->_absVector($vec2));
     }
+
     protected function _dotProduct(array $vec1, array $vec2)
     {
         $result = 0;
@@ -156,21 +161,22 @@ class CompareController extends BaseApiController
 
         return sqrt($result);
     }
+
     private function _cleanString($string)
     {
         $diac =
-                /* A */ chr(192) . chr(193) . chr(194) . chr(195) . chr(196) . chr(197) .
-                /* a */ chr(224) . chr(225) . chr(226) . chr(227) . chr(228) . chr(229) .
-                /* O */ chr(210) . chr(211) . chr(212) . chr(213) . chr(214) . chr(216) .
-                /* o */ chr(242) . chr(243) . chr(244) . chr(245) . chr(246) . chr(248) .
-                /* E */ chr(200) . chr(201) . chr(202) . chr(203) .
-                /* e */ chr(232) . chr(233) . chr(234) . chr(235) .
-                /* Cc */ chr(199) . chr(231) .
-                /* I */ chr(204) . chr(205) . chr(206) . chr(207) .
-                /* i */ chr(236) . chr(237) . chr(238) . chr(239) .
-                /* U */ chr(217) . chr(218) . chr(219) . chr(220) .
-                /* u */ chr(249) . chr(250) . chr(251) . chr(252) .
-                /* yNn */ chr(255) . chr(209) . chr(241);
+                /* A */ chr(192).chr(193).chr(194).chr(195).chr(196).chr(197).
+                /* a */ chr(224).chr(225).chr(226).chr(227).chr(228).chr(229).
+                /* O */ chr(210).chr(211).chr(212).chr(213).chr(214).chr(216).
+                /* o */ chr(242).chr(243).chr(244).chr(245).chr(246).chr(248).
+                /* E */ chr(200).chr(201).chr(202).chr(203).
+                /* e */ chr(232).chr(233).chr(234).chr(235).
+                /* Cc */ chr(199).chr(231).
+                /* I */ chr(204).chr(205).chr(206).chr(207).
+                /* i */ chr(236).chr(237).chr(238).chr(239).
+                /* U */ chr(217).chr(218).chr(219).chr(220).
+                /* u */ chr(249).chr(250).chr(251).chr(252).
+                /* yNn */ chr(255).chr(209).chr(241);
 
         return strtolower(strtr($string, $diac, 'AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn'));
     }

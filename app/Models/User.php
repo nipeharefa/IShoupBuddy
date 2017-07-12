@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
@@ -17,7 +17,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password', 'phone', 'confirmed',
-        'role', 'picture_url', 'address', "latitude", "longitude"
+        'role', 'picture_url', 'address', 'latitude', 'longitude',
     ];
 
     /**
@@ -29,7 +29,6 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
     public function Wishlist()
     {
         return $this->hasMany(Wishlist::class);
@@ -37,7 +36,7 @@ class User extends Authenticatable
 
     public function wished($product_id)
     {
-        return (Boolean)$this->Wishlist()->whereProductId($product_id)->count();
+        return (bool) $this->Wishlist()->whereProductId($product_id)->count();
     }
 
     public function isAdmin() :bool
@@ -49,7 +48,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Cart::class, 'identify_id');
     }
-
 
     public function Review()
     {

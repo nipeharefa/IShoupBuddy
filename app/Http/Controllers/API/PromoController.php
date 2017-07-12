@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
-use Illuminate\Http\Request;
+use App\Helpers\Transformers\ProductTransformer;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-use App\Helpers\Transformers\ProductTransformer;
+use Illuminate\Http\Request;
 
 class PromoController extends Controller
 {
@@ -18,7 +18,6 @@ class PromoController extends Controller
     {
         $product = Product::orderByDesc('created_at')->limit(4);
 
-
         if (!$request->query('without_filter')) {
             $product->whereHas('productvendor', function ($pv) {
                 return $pv;
@@ -26,9 +25,9 @@ class PromoController extends Controller
         }
 
         $data = [
-            "status"    =>  "OK",
-            "promo"  =>  ProductTransformer::transform($product->get()),
-            "message"   =>  null
+            'status'    => 'OK',
+            'promo'     => ProductTransformer::transform($product->get()),
+            'message'   => null,
         ];
 
         return response()->json($data, 200);
@@ -47,7 +46,8 @@ class PromoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -58,7 +58,8 @@ class PromoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -69,7 +70,8 @@ class PromoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -80,8 +82,9 @@ class PromoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -92,7 +95,8 @@ class PromoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

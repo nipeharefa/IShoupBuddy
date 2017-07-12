@@ -9,12 +9,12 @@ class CartDetailTransformer extends AbstractTransformer
     public function transformModel(Model $cart)
     {
         $arr = [
-            "id"            =>  $cart->id,
-            "price"         =>  $cart->price,
-            "price_string"  =>  $this->formatRupiah($cart->total),
-            "product"       =>  collect(transform($cart->ProductVendor->Product))
+            'id'            => $cart->id,
+            'price'         => $cart->price,
+            'price_string'  => $this->formatRupiah($cart->total),
+            'product'       => collect(transform($cart->ProductVendor->Product))
                                 ->except(['vendors']),
-            "quantity"      =>  $cart->quantity
+            'quantity'      => $cart->quantity,
         ];
 
         return $arr;

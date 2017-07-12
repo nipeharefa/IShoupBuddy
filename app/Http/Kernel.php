@@ -52,8 +52,8 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class
-        ]
+            \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
+        ],
     ];
 
     /**
@@ -64,13 +64,13 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
-        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        'can' => \Illuminate\Auth\Middleware\Authorize::class,
+        'auth'        => \Illuminate\Auth\Middleware\Authenticate::class,
+        'auth.basic'  => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'bindings'    => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        'can'         => \Illuminate\Auth\Middleware\Authorize::class,
         'member_only' => \App\Http\Middleware\MemberOnly::class,
-        'admin_only' => \App\Http\Middleware\AdminOnly::class,
-        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'admin_only'  => \App\Http\Middleware\AdminOnly::class,
+        'guest'       => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'throttle'    => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     ];
 }

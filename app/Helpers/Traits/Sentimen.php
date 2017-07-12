@@ -9,10 +9,10 @@ trait Sentimen
 {
     public function score($sentences)
     {
-        $sentimen = new SentimenFactory;
-        $stemmerFactory = new Stemmer;
-        $stemmer  = $stemmerFactory->createStemmer();
-        $output   = $stemmer->stem($sentences);
+        $sentimen = new SentimenFactory();
+        $stemmerFactory = new Stemmer();
+        $stemmer = $stemmerFactory->createStemmer();
+        $output = $stemmer->stem($sentences);
 
         return $sentimen->score($output);
     }

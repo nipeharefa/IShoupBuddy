@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\API\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Vendor;
+use Illuminate\Http\Request;
 
 class VendorController extends Controller
 {
@@ -16,8 +16,8 @@ class VendorController extends Controller
     public function index()
     {
         $response = [
-            "message"   => null,
-            "vendors"   =>  Vendor::all()
+            'message'   => null,
+            'vendors'   => Vendor::all(),
         ];
 
         return response()->json($response, 200);
@@ -36,7 +36,8 @@ class VendorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -47,7 +48,8 @@ class VendorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -58,7 +60,8 @@ class VendorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -69,8 +72,9 @@ class VendorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -81,7 +85,8 @@ class VendorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

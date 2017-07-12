@@ -1,11 +1,11 @@
 <?php
+
 namespace Deployer;
 
 require 'recipe/laravel.php';
 
-
 set('bin/yarn', function () {
-    return (string)run('which yarn');
+    return (string) run('which yarn');
 });
 desc('Install Yarn packages');
 
@@ -15,11 +15,11 @@ task('yarn:install', function () {
             run('cp -R {{previous_release}}/node_modules {{release_path}}');
         }
     }
-    run("cd {{release_path}} && {{bin/yarn}}");
+    run('cd {{release_path}} && {{bin/yarn}}');
 });
 
 task('yarn:production', function () {
-    run("cd {{release_path}} && {{bin/yarn}} production-silent");
+    run('cd {{release_path}} && {{bin/yarn}} production-silent');
 });
 // Configure servers
 

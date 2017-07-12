@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
+use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -43,7 +43,8 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -52,23 +53,24 @@ class RegisterController extends Controller
             'name'      => 'required|max:255',
             'email'     => 'required|email|max:255|unique:users',
             'password'  => 'required',
-            'phone'     => 'required'
+            'phone'     => 'required',
         ]);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
+     *
      * @return User
      */
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'name'     => $data['name'],
+            'email'    => $data['email'],
             'password' => bcrypt($data['password']),
-            'phone' => $data['phone']
+            'phone'    => $data['phone'],
         ]);
     }
 
@@ -80,11 +82,12 @@ class RegisterController extends Controller
     protected function registered(Request $request, $user)
     {
         $response = [
-            "status"    =>  "OK",
-            "link"      =>  url('/'),
-            "user"      =>  $user,
-            "message"   =>  ""
+            'status'    => 'OK',
+            'link'      => url('/'),
+            'user'      => $user,
+            'message'   => '',
         ];
+
         return response()->json($response, 201);
     }
 }

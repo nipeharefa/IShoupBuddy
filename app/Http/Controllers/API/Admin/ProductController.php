@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\API\Admin;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Helpers\Transformers\ProductTransformer;
+use App\Http\Controllers\Controller;
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -21,9 +21,9 @@ class ProductController extends Controller
         $options = [];
 
         $data = [
-            "status"    =>  "OK",
-            "products"  =>  ProductTransformer::transform($product->get(), $options),
-            "message"   =>  null
+            'status'    => 'OK',
+            'products'  => ProductTransformer::transform($product->get(), $options),
+            'message'   => null,
         ];
 
         return response()->json($data, 200);
@@ -42,7 +42,8 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -53,7 +54,8 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Product $product, Request $request)
@@ -61,9 +63,9 @@ class ProductController extends Controller
         $options = [];
 
         $data = [
-            "status"    =>  "OK",
-            "product"  =>  ProductTransformer::transform($product, $options),
-            "message"   =>  null
+            'status'    => 'OK',
+            'product'   => ProductTransformer::transform($product, $options),
+            'message'   => null,
         ];
 
         return response()->json($data);
@@ -72,7 +74,8 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -83,8 +86,9 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -95,7 +99,8 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 use App\Helpers\Traits\UserTrait;
+use Illuminate\Database\Eloquent\Model;
 
 class Review extends Model
 {

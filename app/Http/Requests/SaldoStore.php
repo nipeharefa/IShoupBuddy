@@ -24,7 +24,7 @@ class SaldoStore extends FormRequest
     public function rules()
     {
         return [
-            'nominal'   =>  'required|numeric|min:10000'
+            'nominal'   => 'required|numeric|min:10000',
         ];
     }
 }

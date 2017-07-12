@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\API;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\CartDetail;
 use App\Models\Vendor;
 use DB;
 use Exception;
+use Illuminate\Http\Request;
 
 class CartDetailController extends Controller
 {
@@ -35,7 +35,8 @@ class CartDetailController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -46,7 +47,8 @@ class CartDetailController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -56,7 +58,8 @@ class CartDetailController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -67,8 +70,9 @@ class CartDetailController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Cart $cart, CartDetail $id)
@@ -78,18 +82,17 @@ class CartDetailController extends Controller
 
             $cartDetail = $id;
 
-            $data['quantity']  = $request->quantity ?? $cartDetail->quantity;
-            $data['price']  = $data['quantity'] * $cartDetail->ProductVendor->harga;
+            $data['quantity'] = $request->quantity ?? $cartDetail->quantity;
+            $data['price'] = $data['quantity'] * $cartDetail->ProductVendor->harga;
 
             $cartDetail->update($data);
-
 
             DB::commit();
 
             $response = [
-                "cart"      =>  $this->cartResponse($cart->Vendor, $cart),
-                "message"   =>  null,
-                "status"    =>  "OK"
+                'cart'      => $this->cartResponse($cart->Vendor, $cart),
+                'message'   => null,
+                'status'    => 'OK',
             ];
 
             return response()->json($response, 200);
@@ -97,8 +100,8 @@ class CartDetailController extends Controller
             DB::rollback();
 
             $response = [
-                "status"    =>  "ERROR",
-                "message"   =>  "Something wrong"
+                'status'    => 'ERROR',
+                'message'   => 'Something wrong',
             ];
 
             return response()->json($response, 400);
@@ -108,7 +111,8 @@ class CartDetailController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, Cart $cart, CartDetail $id)
@@ -125,8 +129,8 @@ class CartDetailController extends Controller
             DB::rollback();
 
             $response = [
-                "status"    =>  "ERROR",
-                "message"   =>  "Something wrong"
+                'status'    => 'ERROR',
+                'message'   => 'Something wrong',
             ];
 
             return response()->json($response, 400);
@@ -135,8 +139,9 @@ class CartDetailController extends Controller
 
     protected function cartResponse(Vendor $vendor, Cart $cart)
     {
-        $vendor["vendor"] = transform($vendor);
-        $vendor["item"] = $cart->Detail;
+        $vendor['vendor'] = transform($vendor);
+        $vendor['item'] = $cart->Detail;
+
         return $vendor;
     }
 }

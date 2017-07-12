@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,14 +12,12 @@ use Illuminate\Http\Request;
 |
  */
 
-
 Route::post('image', 'ImageController@store');
 
 Route::group(['prefix' => 'oauth', 'namespace' => 'Auth'], function () {
     Route::post('login', 'PassportAuthController@login');
     Route::post('register', 'PassportAuthController@register');
 });
-
 
 Route::group(['namespace' => 'API'], function () {
     Route::resource('geo', 'GeoLocationController');
@@ -43,7 +40,7 @@ Route::group(['namespace' => 'API'], function () {
         ['only' => ['index', 'show']]);
 
     Route::resource('recommendation', 'RecommendationController',
-        ['only' =>  ['index']]);
+        ['only' => ['index']]);
 
     Route::resource('review', 'ReviewController',
         ['only' => ['index', 'show']]);
@@ -55,8 +52,7 @@ Route::group(['namespace' => 'API'], function () {
         Route::put('cart/{cart}/detail/{id}', 'CartDetailController@update');
         Route::delete('cart/{cart}/detail/{id}', 'CartDetailController@destroy');
         Route::resource('cart', 'CartController',
-            ['only' =>  ['index', 'store', 'update', 'destroy']]);
-
+            ['only' => ['index', 'store', 'update', 'destroy']]);
 
         Route::get('user/{user}/carts', 'UserController@getUserCart');
         Route::get('user/{user}/cartscounter', 'UserController@getUserCartCounter');
@@ -71,40 +67,39 @@ Route::group(['namespace' => 'API'], function () {
             ['only' => ['store', 'update']]);
 
         Route::resource('product-vendor', 'ProductVendorController',
-            ['only' =>  ['index', 'store', 'destroy', 'update']]);
+            ['only' => ['index', 'store', 'destroy', 'update']]);
 
         Route::get('reviewcheck/check', 'ReviewController@checkReview');
 
         Route::resource('review', 'ReviewController',
-            ['only' =>  ['store', 'update', 'destroy']]);
+            ['only' => ['store', 'update', 'destroy']]);
 
         Route::resource('saldo', 'SaldoController',
-            ['only' =>  ['store', 'show','index']]);
+            ['only' => ['store', 'show', 'index']]);
 
         Route::post('product-vendor/restore/{id}', 'ProductVendorController@restore');
 
         Route::resource('transaction', 'TransactionController',
-            ['only' =>  ['index', 'store']]);
+            ['only' => ['index', 'store']]);
 
         Route::post('transaction-shipment/postAcceptShipment/{id}',
             'TransactionShipmentController@postAcceptShipment');
 
         Route::resource('transaction-shipment', 'TransactionShipmentController',
-            ['except'   =>  ['create', 'edit']]);
-
+            ['except'   => ['create', 'edit']]);
 
         Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
             Route::resource('product', 'ProductController',
-                ['only' =>  ['index', 'show']]);
+                ['only' => ['index', 'show']]);
 
             Route::resource('vendor', 'VendorController',
-                ['only' =>  ['index', 'show']]);
+                ['only' => ['index', 'show']]);
 
             Route::resource('user', 'UserController',
-                ['only' =>  ['index', 'show']]);
+                ['only' => ['index', 'show']]);
 
             Route::resource('transaction', 'TransactionController',
-                ['except'   =>  ['create', 'edit']]);
+                ['except'   => ['create', 'edit']]);
 
             Route::resource('category', 'CategoryController');
 

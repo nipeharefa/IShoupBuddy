@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,27 +24,27 @@ class HomeController extends Controller
     {
         $user = $request->user() ?? null;
 
-        $js     = mix('js/home.js');
-        $css    = mix('css/guest/home.css');
+        $js = mix('js/home.js');
+        $css = mix('css/guest/home.css');
 
         $view = view('pages.home.index');
 
         if ($user) {
             switch ($user->role) {
                 case 0:
-                    # admin
+                    // admin
                     $js = mix('js/ahome.js');
                     $css = mix('css/admin/home/index.css');
                     break;
                 case 1:
-                    # Member
-                    $js     = mix('js/mhome.js');
-                    $css    = mix('css/member/home.css');
+                    // Member
+                    $js = mix('js/mhome.js');
+                    $css = mix('css/member/home.css');
                     break;
                 default:
-                    # Vendor
+                    // Vendor
                     $js = mix('js/vhome.js');
-                    $css    = mix('css/vendor/home.css');
+                    $css = mix('css/vendor/home.css');
                     break;
             }
         }

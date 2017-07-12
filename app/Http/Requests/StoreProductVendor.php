@@ -24,8 +24,8 @@ class StoreProductVendor extends FormRequest
     public function rules()
     {
         return [
-            'productID' =>  'required',
-            'price'     =>  'required|numeric|min:100'
+            'productID' => 'required',
+            'price'     => 'required|numeric|min:100',
         ];
     }
 }

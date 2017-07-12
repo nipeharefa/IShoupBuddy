@@ -5,10 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategory;
 use App\Models\Category;
-use DB;
-use Exception;
 use Illuminate\Http\Request;
-use Log;
 
 class CategoryController extends Controller
 {
@@ -22,9 +19,9 @@ class CategoryController extends Controller
         $category = Category::orderBy('id', 'asc')->get();
 
         $response = [
-            "status"        =>  null,
-            "categories"    =>  $category,
-            "message"       =>  null
+            'status'        => null,
+            'categories'    => $category,
+            'message'       => null,
         ];
 
         return response()->json($response, 200);
@@ -43,14 +40,16 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param \App\Models\Category $category
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category)
@@ -61,7 +60,8 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param \App\Models\Category $category
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
@@ -72,8 +72,9 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Category     $category
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(StoreCategory $request, Category $category)
@@ -93,7 +94,8 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
+     * @param \App\Models\Category $category
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Category $category, Request $request)
