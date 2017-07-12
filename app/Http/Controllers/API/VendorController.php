@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Vendor;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Helpers\Transformers\VendorTransformer;
+use App\Http\Controllers\Controller;
+use App\Models\Vendor;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 
 class VendorController extends Controller
 {
@@ -18,9 +18,9 @@ class VendorController extends Controller
     public function index(Request $request)
     {
         $data = [
-            "status"    =>  "OK",
-            "vendors"   =>  VendorTransformer::transform(Vendor::get()),
-            'message'   =>  null
+            'status'    => 'OK',
+            'vendors'   => VendorTransformer::transform(Vendor::get()),
+            'message'   => null,
         ];
 
         return response()->json($data, 200);
@@ -39,7 +39,8 @@ class VendorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -50,7 +51,8 @@ class VendorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Vendor  $vendor
+     * @param \App\Models\Vendor $vendor
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($vendor)
@@ -58,17 +60,17 @@ class VendorController extends Controller
         try {
             $result = Vendor::findOrFail($vendor);
             $response = [
-                "status"    =>  "OK",
-                "vendor"    =>  VendorTransformer::transform($result),
-                "message"   =>  null
+                'status'    => 'OK',
+                'vendor'    => VendorTransformer::transform($result),
+                'message'   => null,
             ];
 
             return response()->json($response, 200);
         } catch (ModelNotFoundException $e) {
             $response = [
-                "status"    =>  "OK",
-                "vendor"    =>  null,
-                "message"   =>  "Vendor tidak ditemukan"
+                'status'    => 'OK',
+                'vendor'    => null,
+                'message'   => 'Vendor tidak ditemukan',
             ];
 
             return response()->json($response, 404);
@@ -78,7 +80,8 @@ class VendorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Vendor  $vendor
+     * @param \App\Models\Vendor $vendor
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Vendor $vendor)
@@ -89,8 +92,9 @@ class VendorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Vendor  $vendor
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Vendor       $vendor
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Vendor $vendor)
@@ -101,7 +105,8 @@ class VendorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Vendor  $vendor
+     * @param \App\Models\Vendor $vendor
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Vendor $vendor)
@@ -117,9 +122,9 @@ class VendorController extends Controller
         $vendor->save();
 
         $response = [
-            "status"    =>  "OK",
-            "vendor"    =>  $vendor,
-            "message"   =>  null
+            'status'    => 'OK',
+            'vendor'    => $vendor,
+            'message'   => null,
         ];
 
         return response()->json($response, 200);

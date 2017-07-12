@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginVendorController extends Controller
 {
@@ -28,7 +28,7 @@ class LoginVendorController extends Controller
             $user = User::where('email', $request->email)->firstOrFail();
 
             if (!$user->confirmed) {
-                throw new ModelNotFoundException("Error Processing Request", 1);
+                throw new ModelNotFoundException('Error Processing Request', 1);
             }
 
             if ($this->attemptLogin($request)) {
@@ -46,9 +46,10 @@ class LoginVendorController extends Controller
             return $this->sendFailedLoginResponse($request);
         } catch (ModelNotFoundException $e) {
             $err = [
-                "status"    =>  "OK",
-                "message"   =>  "Invalid Login"
+                'status'    => 'OK',
+                'message'   => 'Invalid Login',
             ];
+
             return response()->json($err, 401);
         }
     }
@@ -56,20 +57,22 @@ class LoginVendorController extends Controller
     protected function authenticated(Request $request, $user)
     {
         $data = [
-            "err"   =>  "OK",
-            "user"  =>  "user",
-            "message"   =>  null
+            'err'       => 'OK',
+            'user'      => 'user',
+            'message'   => null,
         ];
+
         return response()->json($data, 200);
     }
 
     protected function sendFailedLoginResponse(Request $request)
     {
         $data = [
-            "err"       =>  "OK",
-            "user"      =>  null,
-            "message"   =>  "Invalid Login"
+            'err'       => 'OK',
+            'user'      => null,
+            'message'   => 'Invalid Login',
         ];
+
         return response()->json($data, 401);
     }
 
@@ -77,6 +80,7 @@ class LoginVendorController extends Controller
     {
         $data = $request->only($this->username(), 'password');
         $data['role'] = 2;
+
         return $data;
     }
 

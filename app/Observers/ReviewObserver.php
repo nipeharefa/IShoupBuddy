@@ -2,18 +2,18 @@
 
 namespace App\Observers;
 
-use App\Models\Review;
 use App\Events\ReviewCreated;
 use App\Events\ReviewUpdated;
+use App\Models\Review;
 use Exception;
-use Log;
 
 class ReviewObserver
 {
     /**
      * Listen to the User created event.
      *
-     * @param  User  $user
+     * @param User $user
+     *
      * @return void
      */
     public function created(Review $review)

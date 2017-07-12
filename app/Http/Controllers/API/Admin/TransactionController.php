@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers\API\Admin;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\Transaction;
-use App\Models\Saldo;
-use App\Models\User;
-use Auth;
-use App\Helpers\Transformers\TransactionTransformer;
 use App\Helpers\Transformers\DetailTransactionTransformer;
+use App\Helpers\Transformers\TransactionTransformer;
+use App\Http\Controllers\Controller;
+use App\Models\Saldo;
+use App\Models\Transaction;
 use DB;
 use Exception;
+use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
@@ -22,11 +20,11 @@ class TransactionController extends Controller
      */
     public function index(Request $request)
     {
-        $transaction  = Transaction::orderByDesc('updated_at')->get();
+        $transaction = Transaction::orderByDesc('updated_at')->get();
         $response = [
-            "transactions"  =>  TransactionTransformer::transform($transaction),
-            "message"   =>  null,
-            "status"    =>  "OK"
+            'transactions'  => TransactionTransformer::transform($transaction),
+            'message'       => null,
+            'status'        => 'OK',
         ];
 
         return response()->json($response, 200);
@@ -45,7 +43,8 @@ class TransactionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -56,15 +55,16 @@ class TransactionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Transaction $transaction)
     {
         $response = [
-            "status"    =>  "OK",
-            "message"   =>  null,
-            "transaction"   =>  DetailTransactionTransformer::transform($transaction)
+            'status'        => 'OK',
+            'message'       => null,
+            'transaction'   => DetailTransactionTransformer::transform($transaction),
         ];
 
         return response()->json($response);
@@ -73,7 +73,8 @@ class TransactionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -84,8 +85,9 @@ class TransactionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -96,7 +98,8 @@ class TransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -111,8 +114,6 @@ class TransactionController extends Controller
         } else {
             return response()->json($this->approveTransaction($transaction), 200);
         }
-
-        return;
     }
 
     protected function approveTransactionBiasa(Transaction $transaction, Request $request)
@@ -126,7 +127,7 @@ class TransactionController extends Controller
             $saldo = $transaction->Saldo;
             DB::beginTransaction();
 
-            # Update Transaction to Success
+            // Update Transaction to Success
             $transaction->update(['status' => 1]);
 
             DB::commit();
@@ -136,8 +137,8 @@ class TransactionController extends Controller
             DB::rollback();
 
             $err = [
-                "status"    =>  "ERROR",
-                "message"   =>  $e->getMessage()
+                'status'    => 'ERROR',
+                'message'   => $e->getMessage(),
 
             ];
 
@@ -151,10 +152,10 @@ class TransactionController extends Controller
             $saldo = $transaction->Saldo;
             DB::beginTransaction();
 
-            # Update Transaction to Success
+            // Update Transaction to Success
             $transaction->update(['status' => 1]);
 
-            # Update saldo
+            // Update saldo
             $saldo->nominal += $transaction->nominal;
             $saldo->save();
             DB::commit();
@@ -164,8 +165,8 @@ class TransactionController extends Controller
             DB::rollback();
 
             $err = [
-                "status"    =>  "ERROR",
-                "message"   =>  $e->getMessage()
+                'status'    => 'ERROR',
+                'message'   => $e->getMessage(),
 
             ];
 
@@ -176,6 +177,7 @@ class TransactionController extends Controller
     protected function getType($model)
     {
         $reflector = new \ReflectionClass($model);
+
         return $reflector->getShortName();
     }
 }

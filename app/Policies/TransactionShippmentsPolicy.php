@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Models\TransactionShippment;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class TransactionShippmentsPolicy
@@ -20,8 +20,9 @@ class TransactionShippmentsPolicy
     /**
      * Determine whether the user can view the transactionShippment.
      *
-     * @param  \App\User  $user
-     * @param  \App\TransactionShippment  $transactionShippment
+     * @param \App\User                 $user
+     * @param \App\TransactionShippment $transactionShippment
+     *
      * @return mixed
      */
     public function view(User $user, TransactionShippment $transactionShippment)
@@ -32,7 +33,8 @@ class TransactionShippmentsPolicy
     /**
      * Determine whether the user can create transactionShippments.
      *
-     * @param  \App\User  $user
+     * @param \App\User $user
+     *
      * @return mixed
      */
     public function create(User $user)
@@ -43,8 +45,9 @@ class TransactionShippmentsPolicy
     /**
      * Determine whether the user can update the transactionShippment.
      *
-     * @param  \App\User  $user
-     * @param  \App\TransactionShippment  $transactionShippment
+     * @param \App\User                 $user
+     * @param \App\TransactionShippment $transactionShippment
+     *
      * @return mixed
      */
     public function update(User $user, TransactionShippment $transactionShippment)
@@ -60,8 +63,9 @@ class TransactionShippmentsPolicy
     /**
      * Determine whether the user can delete the transactionShippment.
      *
-     * @param  \App\User  $user
-     * @param  \App\TransactionShippment  $transactionShippment
+     * @param \App\User                 $user
+     * @param \App\TransactionShippment $transactionShippment
+     *
      * @return mixed
      */
     public function delete(User $user, TransactionShippment $transactionShippment)

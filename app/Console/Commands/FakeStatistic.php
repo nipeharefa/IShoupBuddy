@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\Models\ProductVendor;
 use App\Models\PriceStatistic;
-use Log;
+use App\Models\ProductVendor;
 use Carbon\Carbon;
+use Illuminate\Console\Command;
+use Log;
 
 class FakeStatistic extends Command
 {
@@ -58,7 +58,7 @@ class FakeStatistic extends Command
         $carbon = Carbon::now();
         Log::info('BEGIN');
 
-        for ($i=1; $i <=$totalDays ; $i++) {
+        for ($i = 1; $i <= $totalDays; $i++) {
             $d = $carbon->toDateString();
             $p = $pv->Statistic()->whereDate('updated_at', '=', $d)->first();
 

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -16,8 +15,8 @@ class SearchController extends Controller
     {
         $user = $request->user() ?? null;
 
-        $js     = mix('js/search_result.js');
-        $css    = mix('css/guest/search_result.css');
+        $js = mix('js/search_result.js');
+        $css = mix('css/guest/search_result.css');
 
         $view = view('pages.search.index');
 
@@ -26,16 +25,16 @@ class SearchController extends Controller
         if ($user) {
             switch ($user->role) {
                 case 0:
-                    # admin
+                    // admin
                     $js = mix('js/asearch.js');
                     break;
                 case 1:
-                    # Member
-                    $js     = mix('js/msearch.js');
-                    $css    = mix('css/member/search.css');
+                    // Member
+                    $js = mix('js/msearch.js');
+                    $css = mix('css/member/search.css');
                     break;
                 default:
-                    # Vendor
+                    // Vendor
                     $js = mix('js/vhome.js');
                     break;
             }
@@ -61,7 +60,8 @@ class SearchController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -72,7 +72,8 @@ class SearchController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -83,7 +84,8 @@ class SearchController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -94,8 +96,9 @@ class SearchController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -106,7 +109,8 @@ class SearchController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

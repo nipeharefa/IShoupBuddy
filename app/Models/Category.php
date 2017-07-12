@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
@@ -12,9 +12,10 @@ class Category extends Model
     protected $fillable = ['name', 'slug', 'description', 'picture_url'];
 
     protected $hidden = [
-        "created_at",
-        "updated_at"
+        'created_at',
+        'updated_at',
     ];
+
     public function Product()
     {
         return $this->hasMany(Product::class);
@@ -24,8 +25,8 @@ class Category extends Model
     {
         return [
             'slug' => [
-                'source' => 'name'
-            ]
+                'source' => 'name',
+            ],
         ];
     }
 }

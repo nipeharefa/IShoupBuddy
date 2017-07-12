@@ -2,11 +2,10 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use Log;
 use App\Models\ProductVendor;
-use App\Models\PriceStatistic;
+use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Log;
 
 class UpdateProductVendorPrice extends Command
 {
@@ -47,6 +46,7 @@ class UpdateProductVendorPrice extends Command
                 $result->harga = $pv->harga;
                 $result->save();
                 Log::info('Product Price Update');
+
                 return;
             } catch (ModelNotFoundException $e) {
                 $pv->Statistic()->create(['harga' => $pv->harga]);

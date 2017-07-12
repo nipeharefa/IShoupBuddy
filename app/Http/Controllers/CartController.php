@@ -13,26 +13,25 @@ class CartController extends Controller
      */
     public function index(Request $request)
     {
-        $title = "Cart";
+        $title = 'Cart';
 
         $user = $request->user() ?? null;
-        $js     = mix('js/home.js');
-        $css    = mix('css/guest/home.css');
+        $js = mix('js/home.js');
+        $css = mix('css/guest/home.css');
 
         $view = view('pages.cart.index');
-
 
         $user = $request->user() ?? null;
 
         if ($user->role) {
             switch ($user->role) {
                 case 1:
-                    # Member
-                    $js     = mix('js/m-cart.js');
-                    $css    = mix('css/member/cart.css');
+                    // Member
+                    $js = mix('js/m-cart.js');
+                    $css = mix('css/member/cart.css');
                     break;
                 default:
-                    # Vendor
+                    // Vendor
                     $js = mix('js/cart.js');
                     $css = mix('css/cart.css');
                     break;
@@ -58,7 +57,8 @@ class CartController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -69,7 +69,8 @@ class CartController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -80,7 +81,8 @@ class CartController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -91,8 +93,9 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -103,7 +106,8 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

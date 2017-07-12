@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
+use Illuminate\Http\Request;
 
 class GeoLocationController extends Controller
 {
@@ -31,28 +31,28 @@ class GeoLocationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         // return $request->all();
         $data = [
-            "origin"            => "{$request->origin_lat},%20{$request->origin_lng}",
-            "destination"       => "{$request->dest_lat}, {$request->dest_lng}",
-            "departure_time"    =>  "now",
-            "key"               =>  "AIzaSyBcg3GPJhuPxVF5AthpRuiJEFaSt6spA30",
+            'origin'            => "{$request->origin_lat},%20{$request->origin_lng}",
+            'destination'       => "{$request->dest_lat}, {$request->dest_lng}",
+            'departure_time'    => 'now',
+            'key'               => 'AIzaSyBcg3GPJhuPxVF5AthpRuiJEFaSt6spA30',
         ];
 
-        $client = new Client;
+        $client = new Client();
         $res = $client->request('GET',
             'https://maps.googleapis.com/maps/api/directions/json',
-            ['query' =>
-                [
-                    "destination"       => "{$request->origin_lat}, {$request->origin_lng}",
-                    "origin"           =>  "{$request->dest_lat}, {$request->dest_lng}",
-                    "departure_time"    =>  "now",
-                    "key"               =>  "AIzaSyBcg3GPJhuPxVF5AthpRuiJEFaSt6spA30",
+            ['query' => [
+                    'destination'       => "{$request->origin_lat}, {$request->origin_lng}",
+                    'origin'            => "{$request->dest_lat}, {$request->dest_lng}",
+                    'departure_time'    => 'now',
+                    'key'               => 'AIzaSyBcg3GPJhuPxVF5AthpRuiJEFaSt6spA30',
                 ],
             ]);
 
@@ -65,7 +65,8 @@ class GeoLocationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -76,7 +77,8 @@ class GeoLocationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -87,8 +89,9 @@ class GeoLocationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -99,7 +102,8 @@ class GeoLocationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

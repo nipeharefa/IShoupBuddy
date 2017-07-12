@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\BaseApiController;
 use App\Models\TransactionShippment;
+use Carbon\Carbon;
 use DB;
 use Exception;
-use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class TransactionShipmentController extends BaseApiController
 {
@@ -34,7 +34,8 @@ class TransactionShipmentController extends BaseApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -45,7 +46,8 @@ class TransactionShipmentController extends BaseApiController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -56,7 +58,8 @@ class TransactionShipmentController extends BaseApiController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -67,8 +70,9 @@ class TransactionShipmentController extends BaseApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -79,7 +83,8 @@ class TransactionShipmentController extends BaseApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -102,7 +107,7 @@ class TransactionShipmentController extends BaseApiController
         } catch (Exception $e) {
             DB::rollback();
 
-            return response()->json(["err" => $e->getMessage()], 400);
+            return response()->json(['err' => $e->getMessage()], 400);
         }
     }
 }

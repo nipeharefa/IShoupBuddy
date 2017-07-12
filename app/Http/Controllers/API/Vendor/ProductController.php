@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\API\Vendor;
 
-use Illuminate\Http\Request;
+use App\Helpers\Transformers\ProductVendorTransformer;
 use App\Http\Controllers\Controller;
-use DB;
-use Exception;
 use App\Models\Product;
 use App\Models\Vendor;
-use App\Helpers\Transformers\ProductVendorTransformer;
+use Exception;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -26,28 +25,28 @@ class ProductController extends Controller
         try {
             $vendor = Vendor::find($user->id);
 
-            if ($request->type == "own") {
+            if ($request->type == 'own') {
                 $product = $vendor->ProductVendor->transform(function ($item) {
                     return ProductVendorTransformer::transform($item);
                 });
             } else {
                 $options = [
-                    "markUsed"      =>  true,
-                    "vendor"        =>  $vendor
+                    'markUsed'      => true,
+                    'vendor'        => $vendor,
                 ];
                 $product = transform(Product::orderBy('name')->get(), $options);
             }
 
             $response = [
-                "products"  =>  $product,
-                "message"   =>  null,
-                "status"    =>  "OK"
+                'products'  => $product,
+                'message'   => null,
+                'status'    => 'OK',
             ];
 
             return response()->json($response);
         } catch (Exception $e) {
             $err = [
-                "message"   =>  $e->getMessage()
+                'message'   => $e->getMessage(),
             ];
 
             return response()->json($err, 400);
@@ -67,7 +66,8 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -78,7 +78,8 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -89,7 +90,8 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -100,8 +102,9 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -112,7 +115,8 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -123,9 +127,9 @@ class ProductController extends Controller
     protected function transformOwnProduct($pv)
     {
         return [
-            "id"    =>  $pv->id,
-            "product"   =>  $pv->Product,
-            "harga" =>  $pv->harga
+            'id'        => $pv->id,
+            'product'   => $pv->Product,
+            'harga'     => $pv->harga,
         ];
     }
 }

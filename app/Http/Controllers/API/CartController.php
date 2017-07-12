@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use App\Helpers\Traits\RupiahFormated;
-use App\Helpers\Transformers\CartTransformer;
+use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\CartDetail;
 use App\Models\ProductVendor;
 use App\Models\Vendor;
 use DB;
-use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Http\Request;
 use Validator;
 
 class CartController extends Controller
 {
     use RupiahFormated;
+
     /**
      * Display a listing of the resource.
      *
@@ -25,8 +25,7 @@ class CartController extends Controller
     public function index(Request $request)
     {
         try {
-            $user =  $request->user();
-
+            $user = $request->user();
 
             $carts = $user->Cart()->get()->map(function ($c) {
                 return $this->indexCartResponse($c->Vendor, $c);
@@ -37,11 +36,11 @@ class CartController extends Controller
             });
 
             $response = [
-                "carts"         =>  $carts,
-                "message"       =>  null,
-                "status"        =>  "OK",
-                "total"         =>  $totalBelanja,
-                "total_string"  =>  $this->formatRupiah($totalBelanja),
+                'carts'         => $carts,
+                'message'       => null,
+                'status'        => 'OK',
+                'total'         => $totalBelanja,
+                'total_string'  => $this->formatRupiah($totalBelanja),
             ];
 
             return response()->json($response);
@@ -63,14 +62,15 @@ class CartController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         Validator::make($request->all(), [
-                'product_vendor_id' =>  'required',
-                'quantity'          =>  'nullable|numeric'
+                'product_vendor_id' => 'required',
+                'quantity'          => 'nullable|numeric',
             ])->validate();
 
         $user = $request->user();
@@ -81,31 +81,30 @@ class CartController extends Controller
             $productVendor = ProductVendor::findOrFail($request->product_vendor_id);
 
             $dataCart = [
-                "vendor_id"   =>  $productVendor->Vendor->id,
+                'vendor_id'   => $productVendor->Vendor->id,
             ];
 
-            # Create Cart vendor
+            // Create Cart vendor
 
             $cart = $user->Cart()->updateOrCreate($dataCart);
 
             $dataCartDetails = [
-                "quantity"  =>  $request->quantity ?? 1,
-                "price"     =>  $request->quantity * $productVendor->harga
+                'quantity'  => $request->quantity ?? 1,
+                'price'     => $request->quantity * $productVendor->harga,
             ];
 
             $cartDetails = $cart->Detail()->updateOrCreate([
-                    "cart_id"   =>  $cart->id,
-                    "product_vendor_id" =>  $productVendor->id
+                    'cart_id'           => $cart->id,
+                    'product_vendor_id' => $productVendor->id,
                 ],
             $dataCartDetails);
-
 
             $carts = $this->cartResponse($productVendor->Vendor, $cart);
 
             $response = [
-                "cart"      =>  $carts,
-                "message"   =>  "Added",
-                "status"    =>  "OK"
+                'cart'      => $carts,
+                'message'   => 'Added',
+                'status'    => 'OK',
             ];
 
             DB::commit();
@@ -115,9 +114,9 @@ class CartController extends Controller
             DB::rollback();
 
             $err = [
-                "status"    =>  "ERROR",
-                "cart"      =>  null,
-                "message"  =>   $e->getMessage()
+                'status'    => 'ERROR',
+                'cart'      => null,
+                'message'   => $e->getMessage(),
             ];
 
             return response()->json($err, 400);
@@ -127,7 +126,8 @@ class CartController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -138,7 +138,8 @@ class CartController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -149,8 +150,9 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -161,9 +163,8 @@ class CartController extends Controller
             DB::beginTransaction();
 
             Validator::make($request->all(), [
-                'quantity'      =>  'nullable|numeric'
+                'quantity'      => 'nullable|numeric',
             ])->validate();
-
 
             $data = collect($request->only('quantity'))->filter()->toArray();
 
@@ -173,9 +174,9 @@ class CartController extends Controller
             DB::commit();
 
             $response = [
-                "status"    =>  "OK",
-                "cart"      =>  CartDetailTransformer::transform($cart),
-                "messaage"  =>  "updated"
+                'status'    => 'OK',
+                'cart'      => CartDetailTransformer::transform($cart),
+                'messaage'  => 'updated',
             ];
 
             return response()->json($response);
@@ -183,9 +184,9 @@ class CartController extends Controller
             DB::rollback();
 
             $err = [
-                "status"    =>  "ERROR",
-                "message"   =>  $e->getMessage(),
-                "cart"      =>  null
+                'status'    => 'ERROR',
+                'message'   => $e->getMessage(),
+                'cart'      => null,
             ];
 
             return response()->json($err, 400);
@@ -195,7 +196,8 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id, Request $request)
@@ -208,8 +210,8 @@ class CartController extends Controller
             $user->Cart()->findOrFail($id)->delete();
 
             $response = [
-                "status"    =>  "OK",
-                "message"   =>  "Deleted"
+                'status'    => 'OK',
+                'message'   => 'Deleted',
             ];
             DB::commit();
 
@@ -218,8 +220,8 @@ class CartController extends Controller
             DB::rollback();
 
             $response = [
-                "status"    =>  "ERROR",
-                "message"   =>  "Something wrong"
+                'status'    => 'ERROR',
+                'message'   => 'Something wrong',
             ];
 
             return response()->json($response, 400);
@@ -230,14 +232,15 @@ class CartController extends Controller
     {
         $carts = collect($cart)->except('vendor')->toArray();
         $carts['vendor'] = transform($vendor);
-        $carts["item"] = transform($cart->Detail);
+        $carts['item'] = transform($cart->Detail);
+
         return $carts;
     }
 
     protected function cartResponse(Vendor $vendor, Cart $cart)
     {
-        $vendor["vendor"] = transform($vendor);
-        $vendor["item"] = $cart->Detail;
+        $vendor['vendor'] = transform($vendor);
+        $vendor['item'] = $cart->Detail;
 
         return $vendor;
     }

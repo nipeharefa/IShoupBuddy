@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Storage;
-use Image;
-use Illuminate\Http\Response as IlluminateResponse;
 use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response as IlluminateResponse;
+use Image;
 use Log;
+use Storage;
 
 class ImageController extends Controller
 {
@@ -18,18 +18,18 @@ class ImageController extends Controller
         $path = $request->image->storeAs('original', "{$filename}.jpg", 'public');
 
         $data = [
-            "status"    =>  "OK",
-            "image"     =>  "{$filename}.jpg",
-            "links"     =>  [
+            'status'    => 'OK',
+            'image'     => "{$filename}.jpg",
+            'links'     => [
 
-                "small" =>  url('image/small', "{$filename}.jpg"),
-                "medium" =>  url('image/medium', "{$filename}.jpg"),
-                "large" =>  url('image/large', "{$filename}.jpg")
+                'small'  => url('image/small', "{$filename}.jpg"),
+                'medium' => url('image/medium', "{$filename}.jpg"),
+                'large'  => url('image/large', "{$filename}.jpg"),
             ],
-            "message"   =>  null
+            'message'   => null,
         ];
 
-        # Send to Queue Delete
+        // Send to Queue Delete
 
         return response()->json($data, 201);
     }
@@ -65,7 +65,7 @@ class ImageController extends Controller
                         $h = 600;
                         break;
                     default:
-                        # original size
+                        // original size
                         break;
                 }
 
@@ -102,10 +102,10 @@ class ImageController extends Controller
         $status_code = $not_modified ? 304 : 200;
 
         return new IlluminateResponse($content, $status_code, [
-            'Content-Type' => $mime,
-            'Cache-Control' => 'max-age='.(config('imagecache.lifetime')*60).', public',
-            'Etag' => md5($content),
-            'Expires' => gmdate('D, d M Y H:i:s \G\M\T', time() + 86400 * 365)
+            'Content-Type'  => $mime,
+            'Cache-Control' => 'max-age='.(config('imagecache.lifetime') * 60).', public',
+            'Etag'          => md5($content),
+            'Expires'       => gmdate('D, d M Y H:i:s \G\M\T', time() + 86400 * 365),
         ]);
     }
 }

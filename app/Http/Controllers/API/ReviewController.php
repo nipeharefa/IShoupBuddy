@@ -2,25 +2,24 @@
 
 namespace App\Http\Controllers\API;
 
-use Illuminate\Http\Request;
 use App\Helpers\Exceptions\GetReviewException;
-use App\Http\Controllers\Controller;
-use App\Helpers\Sentimen\Stemmer;
 use App\Helpers\Sentimen\Sentimen;
 use App\Helpers\Traits\Sentimen as SentimenTrait;
 use App\Helpers\Transformers\ReviewTransformer;
+use App\Http\Controllers\Controller;
 use App\Models\ProductVendor;
 use App\Models\Review;
 use Auth;
 use DB;
-use Illuminate\Contracts\Validation\Validator as ValidatorContracts;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 use Validator;
 
 class ReviewController extends Controller
 {
     use SentimenTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -38,7 +37,7 @@ class ReviewController extends Controller
             $youReview = null;
 
             if (!$checkParameter) {
-                throw new GetReviewException("Error Processing Request", 1);
+                throw new GetReviewException('Error Processing Request', 1);
             }
 
             $review = Review::orderByDesc('created_at');
@@ -64,7 +63,6 @@ class ReviewController extends Controller
                 }
             }
 
-
             if ($request->product_id) {
                 $id = $request->product_id;
                 $review->whereHas('productvendor', function ($query) use ($id) {
@@ -89,36 +87,37 @@ class ReviewController extends Controller
                     $reviewTransform = $reviewTransform->groupBy('product.id');
                     break;
                 default:
-                    # code...
+                    // code...
                     break;
             }
 
             $summaryAvg = [
-                "pos"   => collect($reviewTransform)->avg('sentimen.pos'),
-                "neg"   =>  collect($reviewTransform)->avg('sentimen.neg'),
-                "neu"   =>  collect($reviewTransform)->avg('sentimen.neu')
+                'pos'   => collect($reviewTransform)->avg('sentimen.pos'),
+                'neg'   => collect($reviewTransform)->avg('sentimen.neg'),
+                'neu'   => collect($reviewTransform)->avg('sentimen.neu'),
             ];
 
             $response = [
-                "status"        =>  "OK",
-                "message"       =>  null,
-                "reviews"       =>  $reviewTransform,
-                "total_reviews" =>  $total_reviews,
-                "summary"       =>  array_search(max($summaryAvg), $summaryAvg, true),
-                "youReview"     =>  $youReview ? ReviewTransformer::transform($youReview) : new \stdClass
+                'status'        => 'OK',
+                'message'       => null,
+                'reviews'       => $reviewTransform,
+                'total_reviews' => $total_reviews,
+                'summary'       => array_search(max($summaryAvg), $summaryAvg, true),
+                'youReview'     => $youReview ? ReviewTransformer::transform($youReview) : new \stdClass(),
             ];
 
             return response()->json($response, 200);
         } catch (Exception $e) {
             if ($e instanceof GetReviewException) {
                 $err = [
-                    "status"        =>  "OK",
-                    "message"       =>  null,
-                    "reviews"       =>  "Check Parameter"
+                    'status'        => 'OK',
+                    'message'       => null,
+                    'reviews'       => 'Check Parameter',
                 ];
 
                 return response()->json($err, 400);
             }
+
             return $e->getMessage();
         }
     }
@@ -136,16 +135,17 @@ class ReviewController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'product_id'    =>  'required',
-            'vendor_id'     =>  'required',
-            'rating'        =>  'required',
-            'body'          =>  'required'
+            'product_id'    => 'required',
+            'vendor_id'     => 'required',
+            'rating'        => 'required',
+            'body'          => 'required',
         ]);
 
         $validator->validate();
@@ -154,7 +154,7 @@ class ReviewController extends Controller
 
         try {
 
-            # Search ProductVendor
+            // Search ProductVendor
             $product_vendor = ProductVendor::whereVendorId($request->vendor_id)
                 ->whereProductId($request->product_id)
                 ->firstOrFail();
@@ -163,19 +163,18 @@ class ReviewController extends Controller
 
             DB::beginTransaction();
 
-            $data =  [
-                "rating"            =>  $request->rating,
-                "body"              =>  $request->body,
-                "product_vendor_id" =>  $product_vendor_id
+            $data = [
+                'rating'            => $request->rating,
+                'body'              => $request->body,
+                'product_vendor_id' => $product_vendor_id,
             ];
 
             $result = $user->Review()->updateOrCreate(['product_vendor_id' => $product_vendor_id], $data);
 
-
             $response = [
-                "status"    =>  "OK",
-                "review"    =>  ReviewTransformer::transform($result),
-                "message"   =>  null,
+                'status'    => 'OK',
+                'review'    => ReviewTransformer::transform($result),
+                'message'   => null,
             ];
             DB::commit();
 
@@ -186,14 +185,15 @@ class ReviewController extends Controller
             $errMessage = $e->getMessage();
 
             if ($e instanceof ModelNotFoundException) {
-                $errMessage = "Terjadi kesalahan, mohon periksa product_id dan vendor_id";
+                $errMessage = 'Terjadi kesalahan, mohon periksa product_id dan vendor_id';
             }
 
             $errResponse = [
-                "status"    =>  "ERROR",
-                "review"    =>  null,
-                "message"   =>  $errMessage
+                'status'    => 'ERROR',
+                'review'    => null,
+                'message'   => $errMessage,
             ];
+
             return response()->json($errResponse, 400);
         }
 
@@ -203,7 +203,8 @@ class ReviewController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -214,7 +215,8 @@ class ReviewController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -225,8 +227,9 @@ class ReviewController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -245,18 +248,18 @@ class ReviewController extends Controller
 
             DB::beginTransaction();
 
-            $data =  [
-                "rating"            =>  $request->rating,
-                "body"              =>  $request->body,
-                "product_vendor_id" =>  $product_vendor_id
+            $data = [
+                'rating'            => $request->rating,
+                'body'              => $request->body,
+                'product_vendor_id' => $product_vendor_id,
             ];
 
             $review->update($data);
 
             $response = [
-                "status"    =>  "OK",
-                "review"    =>  ReviewTransformer::transform($review),
-                "message"   =>  null,
+                'status'    => 'OK',
+                'review'    => ReviewTransformer::transform($review),
+                'message'   => null,
             ];
 
             DB::commit();
@@ -266,9 +269,9 @@ class ReviewController extends Controller
             DB::rollback();
 
             $err = [
-                "status"    =>  "ERROR",
-                "message"   =>  $e->getMessage(),
-                "review"    =>  null
+                'status'    => 'ERROR',
+                'message'   => $e->getMessage(),
+                'review'    => null,
             ];
 
             return response()->json($err, 400);
@@ -278,7 +281,8 @@ class ReviewController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id, Request $request)
@@ -293,8 +297,8 @@ class ReviewController extends Controller
             DB::commit();
 
             $response = [
-                "status"    =>  "OK",
-                "message"   =>  "deleted"
+                'status'    => 'OK',
+                'message'   => 'deleted',
             ];
 
             return response()->json($response, 204);
@@ -302,8 +306,8 @@ class ReviewController extends Controller
             DB::rollback();
 
             $err = [
-                "status"   =>  "ERROR",
-                "message"   =>  "Something Wrong"
+                'status'    => 'ERROR',
+                'message'   => 'Something Wrong',
             ];
 
             return response()->json($err, 400);
@@ -316,23 +320,21 @@ class ReviewController extends Controller
 
         $user = Auth::guard('api')->user();
 
-
         try {
             $checkParameter = $request->only($trustedParameters);
-            # Search ProductVendor
+            // Search ProductVendor
             $product_vendor = ProductVendor::whereVendorId($request->vendor_id)
                 ->whereProductId($request->product_id)
                 ->firstOrFail();
 
             $product_vendor_id = $product_vendor->id;
 
-
             $review = Review::whereProductVendorId($product_vendor_id)->whereUserId($user->id)->firstOrFail();
 
             $response = [
-                "status"    =>  "OK",
-                "review"    =>  ReviewTransformer::transform($review),
-                "message"   =>  null,
+                'status'    => 'OK',
+                'review'    => ReviewTransformer::transform($review),
+                'message'   => null,
             ];
 
             return response()->json($response, 200);
@@ -343,18 +345,20 @@ class ReviewController extends Controller
 
             if ($e instanceof ModelNotFoundException) {
                 $errResponse = [
-                    "status"    =>  "ERROR",
-                    "review"    =>  null,
-                    "message"   =>  $errMessage
+                    'status'    => 'ERROR',
+                    'review'    => null,
+                    'message'   => $errMessage,
                 ];
+
                 return response()->json($errResponse, 404);
             }
 
             $errResponse = [
-                "status"    =>  "ERROR",
-                "review"    =>  null,
-                "message"   =>  $errMessage
+                'status'    => 'ERROR',
+                'review'    => null,
+                'message'   => $errMessage,
             ];
+
             return response()->json($errResponse, 400);
         }
     }
@@ -362,10 +366,10 @@ class ReviewController extends Controller
     protected function validator(array $data)
     {
         $validator = Validator::make($data, [
-            'product_id'    =>  'required',
-            'vendor_id'     =>  'required',
-            'rating'        =>  'required',
-            'body'          =>  'required'
+            'product_id'    => 'required',
+            'vendor_id'     => 'required',
+            'rating'        => 'required',
+            'body'          => 'required',
         ]);
 
         return $validator->validate();

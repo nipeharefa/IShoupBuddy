@@ -51,5 +51,4 @@ Route::group(['prefix' => 'vendor', 'namespace' => 'Vendor', 'middleware' => ['a
     Route::get('/{any?}/{any2?}/{any3?}', 'ProductController@index');
 });
 
-
 Route::get('image/{ratio}/{filename}', 'ImageController@renderImage');

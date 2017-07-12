@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Validator;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Validator;
 
 class RegisterVendorController extends Controller
 {
@@ -13,7 +13,6 @@ class RegisterVendorController extends Controller
     {
         $this->middleware('guest');
     }
-
 
     public function register(Request $request)
     {
@@ -28,9 +27,9 @@ class RegisterVendorController extends Controller
         $user = $this->create($data);
 
         $response = [
-            "status"    =>  "OK",
-            "user"      =>  $user,
-            "message"   =>  null
+            'status'    => 'OK',
+            'user'      => $user,
+            'message'   => null,
         ];
 
         return response()->json($response, 201);
@@ -39,10 +38,10 @@ class RegisterVendorController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-                'name'      =>  'required',
-                'email'     =>  'required',
-                'password'  =>  'required',
-                'phone'     =>  'required'
+                'name'      => 'required',
+                'email'     => 'required',
+                'password'  => 'required',
+                'phone'     => 'required',
             ]);
     }
 
@@ -54,12 +53,12 @@ class RegisterVendorController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name'      =>  $data['name'],
-            'email'     =>  $data['email'],
-            'password'  =>  bcrypt($data['password']),
-            'phone'     =>  $data['phone'],
-            'confirmed' =>  false,
-            'role'      =>  2
+            'name'      => $data['name'],
+            'email'     => $data['email'],
+            'password'  => bcrypt($data['password']),
+            'phone'     => $data['phone'],
+            'confirmed' => false,
+            'role'      => 2,
         ]);
     }
 }

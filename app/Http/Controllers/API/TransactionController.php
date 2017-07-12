@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use App\Helpers\Transformers\TransactionTransformer;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreTransaction;
 use App\Models\User;
-use App\Models\TransactionShippment;
 use DB;
 use Exception;
 use Illuminate\Http\Request;
 use Log;
-use App\Http\Requests\StoreTransaction;
 
 class TransactionController extends Controller
 {
@@ -21,7 +20,7 @@ class TransactionController extends Controller
      */
     public function index(Request $request)
     {
-        $with = explode(",", $request->with);
+        $with = explode(',', $request->with);
 
         $user = $request->user();
         $trans = $user->Transaction;
@@ -37,9 +36,9 @@ class TransactionController extends Controller
         });
 
         $response = [
-            "message"   =>  null,
-            "status"    =>  "OK",
-            "transactions" => TransactionTransformer::transform($trans)
+            'message'      => null,
+            'status'       => 'OK',
+            'transactions' => TransactionTransformer::transform($trans),
         ];
 
         return response()->json($response, 200);
@@ -58,12 +57,13 @@ class TransactionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StoreTransaction $request)
     {
-        $user  = $request->user();
+        $user = $request->user();
         try {
             $cartID = $request->cart_id;
 
@@ -84,11 +84,11 @@ class TransactionController extends Controller
             }) + $totalShipment;
 
             if ($totalBelanja > $saldo) {
-                throw new Exception("Saldo tidak cukup" . $saldo, 1);
+                throw new Exception('Saldo tidak cukup'.$saldo, 1);
             }
 
             if (!$cart->count()) {
-                throw new Exception("Cart null", 2011);
+                throw new Exception('Cart null', 2011);
             }
 
             DB::beginTransaction();
@@ -96,28 +96,27 @@ class TransactionController extends Controller
             $currenTransactions = $cart->map(function ($cartItem, $index) use ($user, $shipment, $lat, $lng) {
                 $shipmentCart = $shipment[$index];
                 $data = [
-                    "nominal"   =>  $cartItem->Detail->sum('price') + $shipmentCart,
-                    "status"    =>  0,
-                    "user_id"   =>  $user->id
+                    'nominal'   => $cartItem->Detail->sum('price') + $shipmentCart,
+                    'status'    => 0,
+                    'user_id'   => $user->id,
                 ];
-
 
                 $trans = $user->Transaction()->create($data);
 
                 $cartItem->Detail->each(function ($item, $index) use ($trans) {
                     $transactionDetail = [
-                        "product_vendor_id" =>  $item->product_vendor_id,
-                        "quantity"          =>  $item->quantity,
-                        "harga"             =>  $item->ProductVendor->harga,
-                        "total"             =>  $item->price
+                        'product_vendor_id' => $item->product_vendor_id,
+                        'quantity'          => $item->quantity,
+                        'harga'             => $item->ProductVendor->harga,
+                        'total'             => $item->price,
                     ];
                     $trans->Detail()->create($transactionDetail);
                 });
 
                 $fillable = [
-                    'lat'   =>  $lat,
-                    'lng'   =>  $lng,
-                    'price' =>  $shipmentCart
+                    'lat'   => $lat,
+                    'lng'   => $lng,
+                    'price' => $shipmentCart,
                 ];
                 $trans->TransactionShippment()->create($fillable);
                 // $cartItem->delete();
@@ -135,7 +134,7 @@ class TransactionController extends Controller
             Log::info($e->getMessage());
 
             $err = [
-                "message"   =>  $e->getMessage()
+                'message'   => $e->getMessage(),
             ];
 
             return response()->json($err, 400);
@@ -145,7 +144,8 @@ class TransactionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -156,7 +156,8 @@ class TransactionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -167,8 +168,9 @@ class TransactionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -179,7 +181,8 @@ class TransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, $id)
@@ -192,7 +195,7 @@ class TransactionController extends Controller
             $user->Cart()->findOrFail($id);
 
             $response = [
-                "message"   =>  null
+                'message'   => null,
             ];
 
             DB::commit();
@@ -202,7 +205,7 @@ class TransactionController extends Controller
             DB::rollback();
 
             $err = [
-                "message"   =>  $e->getMessage()
+                'message'   => $e->getMessage(),
             ];
 
             return response()->json($err, 400);
@@ -213,11 +216,11 @@ class TransactionController extends Controller
     {
         $userSaldo = $user->Saldo;
 
-        $hasUnPaid =  $userSaldo->transaction()->create([
-            'nominal' => $nominal,
-            'user_id' => $user->id,
-            'status' => true,
-            "debit_credit"  =>  1
+        $hasUnPaid = $userSaldo->transaction()->create([
+            'nominal'       => $nominal,
+            'user_id'       => $user->id,
+            'status'        => true,
+            'debit_credit'  => 1,
         ]);
 
         $userSaldo->nominal -= $nominal;

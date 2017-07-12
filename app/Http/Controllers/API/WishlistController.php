@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
-use Illuminate\Http\Request;
+use App\Helpers\Transformers\WishlistTransformer;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-use App\Helpers\Transformers\WishlistTransformer;
-use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 use Validator;
 
 class WishlistController extends Controller
@@ -22,9 +22,9 @@ class WishlistController extends Controller
         $user = $request->user();
 
         $data = [
-            "status"    =>  "OK",
-            "wishlist"  =>  WishlistTransformer::transform($user->Wishlist),
-            "message"   =>  null
+            'status'    => 'OK',
+            'wishlist'  => WishlistTransformer::transform($user->Wishlist),
+            'message'   => null,
         ];
 
         return response()->json($data, 200);
@@ -43,7 +43,8 @@ class WishlistController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -51,7 +52,7 @@ class WishlistController extends Controller
         $user = $request->user();
 
         $validator = Validator::make($request->toArray(), [
-            'product_id'    =>  'required'
+            'product_id'    => 'required',
         ]);
 
         $validator->validate();
@@ -61,26 +62,26 @@ class WishlistController extends Controller
 
             $wish = $user->Wishlist()->updateOrCreate(['product_id' => $request->product_id]);
 
-            $response  = [
-                "status"    =>  "OK",
-                "wishlist"  =>  $wish,
-                "message"   =>  null
+            $response = [
+                'status'    => 'OK',
+                'wishlist'  => $wish,
+                'message'   => null,
             ];
 
             return response()->json($response, 201);
         } catch (QueryException $e) {
             $err = [
-                "status"    =>  "ERROR",
-                "wishlist"  =>  null,
-                "message"   =>  "Terjadi kesalahan saat menyimpan data wishlist."
+                'status'    => 'ERROR',
+                'wishlist'  => null,
+                'message'   => 'Terjadi kesalahan saat menyimpan data wishlist.',
             ];
 
             return response()->json($err, 500);
         } catch (ModelNotFoundException $e) {
             $err = [
-                "status"    =>  "ERROR",
-                "wishlist"  =>  null,
-                "message"   =>  "Data product tidak ditemukan"
+                'status'    => 'ERROR',
+                'wishlist'  => null,
+                'message'   => 'Data product tidak ditemukan',
             ];
 
             return response()->json($err, 400);
@@ -90,7 +91,8 @@ class WishlistController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -101,7 +103,8 @@ class WishlistController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -112,8 +115,9 @@ class WishlistController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -124,7 +128,8 @@ class WishlistController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id, Request $request)
@@ -134,9 +139,9 @@ class WishlistController extends Controller
         $deleted = $user->Wishlist()->delete($id);
 
         $response = [
-            "status"    =>  "OK",
-            "wish"      =>  null,
-            "message"      =>  "Berhasil dihapus",
+            'status'       => 'OK',
+            'wish'         => null,
+            'message'      => 'Berhasil dihapus',
         ];
 
         return response()->json($response, 204);

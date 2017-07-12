@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Models\Category;
+use Illuminate\Database\Seeder;
 
 class InsertDefaultCategory extends Seeder
 {
@@ -13,8 +13,8 @@ class InsertDefaultCategory extends Seeder
     public function run()
     {
         $data = [
-            "name"      =>  "Uncategorized",
-            "slug"      => str_slug("Uncategorized")
+            'name'      => 'Uncategorized',
+            'slug'      => str_slug('Uncategorized'),
         ];
 
         Category::create($data);

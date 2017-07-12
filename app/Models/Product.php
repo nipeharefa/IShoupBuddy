@@ -8,7 +8,6 @@ class Product extends Model
 {
     protected $fillable = ['name', 'category_id', 'description', 'slug', 'barcode', 'picture_url'];
 
-
     public function Category()
     {
         return $this->belongsTo(Category::class);
@@ -18,6 +17,7 @@ class Product extends Model
     {
         return $this->hasMany(ProductVendor::class);
     }
+
     public function ProductVendorTrashed()
     {
         return $this->ProductVendor()->withTrashed();
