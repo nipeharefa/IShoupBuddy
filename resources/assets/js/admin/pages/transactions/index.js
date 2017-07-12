@@ -58,7 +58,10 @@ const app = new Vue({
     },
     getCategory () {
       this.$http.get('api/admin/category').then(response => {
-        this.initCategories(response.data.categories)
+        const category = response.data.categories.sort((a, b) => {
+          return a.id - b.id
+        })
+        this.initCategories(category)
       })
     }
   }
