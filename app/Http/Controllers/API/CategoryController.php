@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Category::orderBy('id', 'asc')->get();
+        $category = Category::all();
 
         $response = [
             'status'        => null,
