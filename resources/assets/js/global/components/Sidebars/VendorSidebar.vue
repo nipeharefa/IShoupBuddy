@@ -5,6 +5,9 @@
     </p>
     <ul class="menu-list">
       <li>
+        <router-link :to="{ name: 'dashboard' }" append>Dashboard</router-link>
+      </li>
+      <li>
         <router-link :to="{ name: 'product-index' }" append>Products</router-link>
       </li>
       <li>

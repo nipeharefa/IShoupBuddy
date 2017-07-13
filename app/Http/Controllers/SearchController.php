@@ -21,6 +21,7 @@ class SearchController extends Controller
         $view = view('pages.search.index');
 
         $q = $request->q;
+        $category_id = $request->category_id ?? null;
 
         if ($user) {
             switch ($user->role) {
@@ -43,6 +44,7 @@ class SearchController extends Controller
         }
 
         return $view->with('keyword', $q)
+                    ->with('category_id', $category_id)
                     ->with('js', $js)
                     ->with('css', $css);
     }

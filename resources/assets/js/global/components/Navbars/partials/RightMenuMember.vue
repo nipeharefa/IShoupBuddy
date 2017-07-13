@@ -17,23 +17,6 @@
 </template>
 
 <style lang="scss" scoped>
-  // .punya {
-  //   .dropdown {
-  //     position: absolute;
-  //     background: #8c3737;
-  //     z-index: 102;
-  //     bottom: -35px;
-  //     direction: rtl;
-  //     padding: 14px;
-  //     margin-left: 12px;
-  //     display: none;
-  //   }
-  //   &:hover {
-  //     .dropdown {
-  //       display: block !important;
-  //     }
-  //   }
-  // }
   .cart-icon-wrapper {
     position: relative;
     .cart-counter {

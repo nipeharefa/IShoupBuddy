@@ -51,6 +51,14 @@ export default {
       }
       return []
     },
+    statsResult () {
+      if (this.stats) {
+        return this.stats.map(x => {
+          return x.value
+        })
+      }
+      return []
+    },
     dataCollection () {
       return {
         labels: this.label,

@@ -5,8 +5,10 @@ namespace App\Http\Controllers\API;
 use App\Helpers\Transformers\VendorTransformer;
 use App\Http\Controllers\Controller;
 use App\Models\Vendor;
+use App\Models\Transaction;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class VendorController extends Controller
 {
@@ -132,6 +134,49 @@ class VendorController extends Controller
 
     public function getVendorTransactions(Vendor $vendor, Request $request)
     {
-        return $vendor->Transaction()->get()->groupBy('transaction_id');
+        $range = $request->range ?? 7;
+
+        $labels = array();
+        $transactionCounter = array();
+
+        for ($i=0; $i <7 ; $i++) {
+            $date = Carbon::now()->subDays($i)->toDateString();
+            array_push($labels, $date);
+
+            $transactions = Transaction::whereHas('Detail', function($item) use($vendor) {
+                return $item->whereHas('ProductVendor', function($item) use($vendor) {
+                    return $item->where('vendor_id', $vendor->id);
+                });
+            })->whereDate('created_at', $date)->count();
+
+            // $transaction = Transaction::whereDate('created_at', $date)
+            array_push($transactionCounter, $transactions);
+        }
+
+
+        // $to = Carbon::now();
+        // $from = Carbon::now()->subDay()
+        //     ->startOfWeek();
+
+        // $transactions = Transaction::whereBetween('created_at', [$from, $to])->get();
+        // return $transactions;
+
+        // $transactions = Transaction::whereHas('Detail', function($item) use($vendor)  {
+        //     return $item->whereHas('ProductVendor', function($item) use($vendor) {
+        //         return $item->where('vendor_id', $vendor->id);
+        //     });
+        // })->whereBetween('created_at', [$from, $to])->get()
+        // ->groupBy(function($data){
+        //     return Carbon::parse($data->created_at)->toDateString(); // grouping by years
+        // });
+
+        $response = [
+            "status"        =>  "OK",
+            "label"         =>  $labels,
+            "transactions"  =>  $transactionCounter,
+            "message"       =>  null
+        ];
+        return $response;
+
     }
 }

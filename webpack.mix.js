@@ -102,7 +102,7 @@ mix.webpackConfig({
 
 mix.disableNotifications()
 
-mix.sourceMaps(); // Enable sourcemaps
+// mix.sourceMaps(); // Enable sourcemaps
 
 if (mix.config.inProduction) {
   mix.version()

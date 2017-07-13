@@ -51,7 +51,7 @@ class PriceStatisticController extends Controller
         } catch (ModelNotFoundException $e) {
             $response = [
                 'status'    => 'OK',
-                'message'   => null,
+                'message'   => $e->getMessage(),
                 'statistic' => [],
             ];
 

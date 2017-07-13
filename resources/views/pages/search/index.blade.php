@@ -22,6 +22,7 @@
 
     <script type="text/javascript">
         window.katakunci = "{{ $keyword }}"
+        window.category_id = "{{ $category_id }}"
     </script>
 
     @if (isset($user))

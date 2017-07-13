@@ -27,7 +27,8 @@
         "sastrawi/sastrawi": "^1.2",
         "sensiolabs/security-checker": "^4.0",
         "sentry/sentry-laravel": "^0.7.0",
-        "themsaid/laravel-model-transformers": "^1.0"
+        "themsaid/laravel-model-transformers": "^1.0",
+        "znck/belongs-to-through": "^2.3"
     },
     "require-dev": {
         "deployer/recipes": "^4.0",

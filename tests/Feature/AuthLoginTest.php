@@ -6,6 +6,10 @@ use Tests\TestCase;
 
 class AuthLoginTest extends TestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+    }
     /**
      * A basic test example.
      *
