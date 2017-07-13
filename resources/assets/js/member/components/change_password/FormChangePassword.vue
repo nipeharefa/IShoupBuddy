@@ -1,8 +1,16 @@
 <template>
   <div>
+    <nav class="breadcrumb">
+      <ul>
+        <li><a href="/">Halaman Depan</a></li>
+        <router-link :to="{ name: 'summaryProfile' }" append>
+          {{ activeUser.name }}
+        </router-link>
+        <li class="is-active"><a>Tukar Password</a></li>
+      </ul>
+    </nav>
     <div class="columns">
       <div class="column is-half">
-
         <div class="field">
           <label class="label">Password Lama</label>
           <p class="control">
@@ -42,6 +50,8 @@
 
 <script>
   import iziToast from 'izitoast'
+  import { mapGetters } from 'vuex'
+
   export default {
     data () {
       return {
@@ -51,6 +61,9 @@
           'password_confirmation': ''
         }
       }
+    },
+    computed: {
+      ...mapGetters(['activeUser'])
     },
     methods: {
       validate () {

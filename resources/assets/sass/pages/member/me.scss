@@ -119,3 +119,56 @@ div.user-detail-profile {
     }
   }
 }
+
+.breadwrapper {
+  margin-bottom: 1rem;
+}
+
+.summary-profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom-color: #fafafa;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.order-teaser {
+  display: flex;
+  flex-direction: column;
+  min-height: 100px;
+  margin-bottom: 1rem;
+  border: 1px solid #fafafa;
+  .order-teaser__header {
+    background: #fafafa !important;
+    width: 100%;
+    padding: 1rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    span {
+      font-size: 14px;
+    }
+  }
+  .order-teaser__body {
+    display: flex;
+    flex-wrap: wrap;
+    .order-teaser__product {
+      display: flex;
+      flex-direction: row;
+      padding: 1.5rem 0;
+      .order-product-teaser__img {
+        img {
+          width: 75px;
+          height: 75px;
+        }
+      }
+      .order-product-teaser__body {
+        .order-product-teaser__title {
+          font-size: 0.85rem;
+        }
+      }
+    }
+  }
+}

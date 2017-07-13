@@ -1,54 +1,45 @@
 <template>
   <div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th><abbr title="Position">ID</abbr></th>
-          <th><abbr title="Position">Nama Produk</abbr></th>
-          <th><abbr title="Position">Nominal</abbr></th>
-          <th><abbr title="Position">Status</abbr></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in transactions">
-          <td class="item-id-transaction">
-            <a href="/me/transactions/0000011">{{ item.id }}</a>
-          </td>
-          <td>
-            <span v-for="d in item.detail">{{ d.name }}</span>
-          </td>
-          <td>{{ item.nominal_string }}</td>
-          <td>
-            <span class="tag is-success">
-              <i class="fa fa-check-circle"></i>
-            </span>
-          </td>
-        </tr>
-
-        <tr class="no-data" v-if="!transactions">
-          <td colspan="4">Tidak Ada Transaksi</td>
-        </tr>
-      </tbody>
-    </table>
+    <nav class="breadcrumb breadwrapper">
+      <ul>
+        <li><a href="/">Halaman Depan</a></li>
+        <li>
+          <router-link :to="{ name: 'summaryProfile' }" append>
+            {{ activeUser.name }}
+          </router-link>
+        </li>
+        <li class="is-active"><a>Transaksi</a></li>
+      </ul>
+    </nav>
+    <div class="columns">
+      <div class="column">
+        <div class="order-teaser" v-for="item in transactions">
+          <div class="order-teaser__header">
+            <span>Pesanan <a>#{{ item.id }}</a></span>
+            <span>Dipesan pada {{ item.updated_at }}</span>
+          </div>
+          <div class="order-teaser__body columns">
+            <div class="order-teaser__product column is-half" v-for="product in item.detail">
+              <a class="order-product-teaser__img">
+                <img :src="product.product.picture_url.small" alt="">
+              </a>
+              <div class="order-product-teaser__body">
+                <a href="" class="order-product-teaser__title">{{ product.name }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
-
-<style lang="scss">
-  tr.no-data {
-    td {
-      font-size: 0.85rem;
-      text-align: center;
-    }
-  }
-</style>
 
 <script>
   import { mapGetters } from 'vuex'
 
   export default {
     computed: {
-      ...mapGetters(['transactions'])
+      ...mapGetters(['transactions', 'activeUser'])
     }
-
   }
 </script>

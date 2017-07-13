@@ -21,15 +21,6 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-  .wrap-breadcrumb {
-    margin-bottom: 1rem;
-    nav {
-      font-size: 0.85rem !important;
-    }
-  }
-</style>
-
 <script>
   import { mapGetters } from 'vuex'
 

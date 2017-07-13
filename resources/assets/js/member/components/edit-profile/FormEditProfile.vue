@@ -1,5 +1,16 @@
 <template>
   <div class="form-edit-profile-wrapper">
+    <nav class="breadcrumb">
+      <ul>
+        <li><a href="/">Halaman Depan</a></li>
+        <li>
+          <router-link :to="{ name: 'summaryProfile' }" append>
+            {{ activeUser.name }}
+          </router-link>
+        </li>
+        <li class="is-active"><a>Edit Profil</a></li>
+      </ul>
+    </nav>
     <div class="columns">
       <div class="column is-half">
 
