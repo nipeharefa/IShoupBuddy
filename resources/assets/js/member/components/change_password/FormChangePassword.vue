@@ -3,9 +3,11 @@
     <nav class="breadcrumb">
       <ul>
         <li><a href="/">Halaman Depan</a></li>
-        <router-link :to="{ name: 'summaryProfile' }" append>
-          {{ activeUser.name }}
-        </router-link>
+        <li>
+          <router-link :to="{ name: 'summaryProfile' }" append>
+            {{ activeUser.name }}
+          </router-link>
+        </li>
         <li class="is-active"><a>Tukar Password</a></li>
       </ul>
     </nav>
