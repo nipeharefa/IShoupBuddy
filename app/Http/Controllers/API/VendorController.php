@@ -129,4 +129,9 @@ class VendorController extends Controller
 
         return response()->json($response, 200);
     }
+
+    public function getVendorTransactions(Vendor $vendor, Request $request)
+    {
+        return $vendor->Transaction()->get()->groupBy('transaction_id');
+    }
 }

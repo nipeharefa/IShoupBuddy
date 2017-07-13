@@ -117,6 +117,8 @@ Route::group(['namespace' => 'API'], function () {
         ['only' => ['index', 'show']]);
 
     Route::post('vendor/activate', 'VendorController@activate');
+    Route::get('vendor/{vendor}/transactions',
+        'VendorController@getVendorTransactions');
 
     Route::group(['prefix' => 'me', 'middleware' => 'auth:api'], function () {
         Route::resource('/', 'MeController',

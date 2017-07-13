@@ -30,4 +30,9 @@ class Vendor extends User
     {
         return $this->hasManyThrough(Review::class, ProductVendor::class);
     }
+
+    public function Transaction()
+    {
+        return $this->hasManyThrough(TransactionDetail::class, ProductVendor::class);
+    }
 }
