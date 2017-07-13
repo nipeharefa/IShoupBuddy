@@ -9,7 +9,8 @@ const strict = false
 const namespaced = false
 
 const state = {
-  transactions: null
+  transactions: null,
+  transaction: null
 }
 
 export default {

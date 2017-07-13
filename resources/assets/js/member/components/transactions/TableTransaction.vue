@@ -15,7 +15,12 @@
       <div class="column">
         <div class="order-teaser" v-for="item in transactions">
           <div class="order-teaser__header">
-            <span>Pesanan <a>#{{ item.id }}</a></span>
+            <span>
+              Pesanan
+              <router-link :to="{ name: 'detailTransaction', params: { id: item.id } }" append>
+                  #{{ item.id }}
+              </router-link>
+            </span>
             <span>Dipesan pada {{ item.updated_at }}</span>
           </div>
           <div class="order-teaser__body columns">

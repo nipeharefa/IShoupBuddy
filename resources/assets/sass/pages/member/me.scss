@@ -172,3 +172,37 @@ div.user-detail-profile {
     }
   }
 }
+
+
+// Transation Detail
+
+.order_details__section {
+  border: 1px solid #fafafa;
+  padding: 1rem 5px;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.order_detais__product {
+  border: 1px solid #fafafa;
+  margin-bottom: 1rem;
+  padding: 1rem 0;
+  .order_details__product-header {
+    padding: 1rem;
+    border-bottom: 1px solid #fafafa;
+  }
+  .order_details__product-body {
+    .order_details__product-details {
+      display: flex;
+      img {
+        width: 75px;
+        height: 75px;
+      }
+    }
+  }
+}
+.order_details__shipping {
+  .order_details__user {
+    font-size: 0.85rem;
+  }
+}
