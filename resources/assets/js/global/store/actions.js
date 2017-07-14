@@ -4,7 +4,9 @@ import {
   SET_SEARCH_ACTIVE,
   UPDATE_ACTIVE_USER,
   SET_TOTAL_CART,
-  WISH_PRODUCT
+  WISH_PRODUCT,
+  INIT_REVIEWS,
+  INIT_REVIEW
 } from 'globalVuexConstant'
 
 export const initActiveUser = ({ commit }, user) => {
@@ -29,4 +31,12 @@ export const setTotalCart = ({ commit }, total) => {
 
 export const wishProduct = ({ commit }, liked) => {
   commit(WISH_PRODUCT, liked)
+}
+
+export const initReviews = ({ commit }, reviews) => {
+  commit(INIT_REVIEWS, reviews)
+}
+
+export const initReview = ({ commit }, review) => {
+  commit(INIT_REVIEW, review)
 }

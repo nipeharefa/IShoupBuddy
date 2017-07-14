@@ -92,6 +92,9 @@ Route::group(['namespace' => 'API'], function () {
             Route::resource('product', 'ProductController',
                 ['only' => ['index', 'show']]);
 
+            Route::resource('review', 'ReviewController',
+                ['only' => ['index', 'show']]);
+
             Route::resource('vendor', 'VendorController',
                 ['only' => ['index', 'show']]);
 

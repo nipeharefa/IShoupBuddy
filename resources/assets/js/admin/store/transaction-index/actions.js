@@ -24,4 +24,4 @@ export const updateProduct = ({ commit }, data) => {
   commit(UPDATE_PRODUCT, data)
 }
 
-export { setIsActive, setSearchActive } from 'actionsStore'
+export { setIsActive, setSearchActive, initReviews, initReview } from 'actionsStore'

@@ -18,3 +18,39 @@ table {
     overflow-x: auto;
   }
 }
+
+.review-details__wrapper {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #fafafa;
+  border-radius: 10px;
+
+  .review-user-image__wrapper {
+    .user__image {
+      width: 75px;
+    }
+  }
+
+  .review-user-body__wrapper {
+    padding: 0 1rem;
+    width: 100%;
+    p.review-user-name {
+      font-size: 0.85rem;
+      span.reviewedFromNow {
+        font-size: 0.7rem;
+        font-style: italic;
+      }
+    }
+    span.review-details__caption {
+      font-size: 0.7rem;
+      font-style: italic;
+      a {
+        font-size: 0.85rem !important;
+      }
+    }
+    p.review-details__text {
+      padding: 1rem;
+      background: #fafafa;
+    }
+  }
+}

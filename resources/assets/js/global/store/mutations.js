@@ -19,3 +19,11 @@ export const SET_TOTAL_CART = (state, totalCart) => {
 export const WISH_PRODUCT = (state, liked) => {
   state.product.liked = liked
 }
+
+export const INIT_REVIEWS = (state, reviews) => {
+  state.reviews = reviews
+}
+
+export const INIT_REVIEW = (state, review) => {
+  state.review = review
+}
