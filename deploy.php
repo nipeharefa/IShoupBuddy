@@ -34,6 +34,7 @@ set('http_user', 'root');
 add('shared_files',
     ['.env', 'resources/assets/js/lib/pusher-conf.js']
 );
+set('default_timeout', 720);
 // add('shared_dirs', []);
 // add('writable_dirs', []);
 inventory('hosts.yml');
