@@ -153,7 +153,7 @@ class Sentimen
                     ) {
                     if (isset($this->dictionary[$token][$class])) {
                         //Set count equal to it
-                            $count = $this->dictionary[$token][$class];
+                        $count = $this->dictionary[$token][$class];
                         Log::info('__COUNT__DICT : '.$count);
                     } else {
                         $count = 0;

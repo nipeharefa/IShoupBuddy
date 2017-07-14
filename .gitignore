@@ -12,3 +12,4 @@ public/js
 public/css
 .php_cs.cache
 .ssh
+clover.xml
