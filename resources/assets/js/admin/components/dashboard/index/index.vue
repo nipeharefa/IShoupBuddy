@@ -28,25 +28,18 @@
       </div>
     </div>
 
-    <section class="recent-review__section">
-      <div class="recent-review__head">
-        <p>Recent Review</p>
-      </div>
-      <div class="recent-review__body">
-        <table class="recent-revie__table">
-          <thead>
-            <td>Tanggal</td>
-            <td>Deskripsi</td>
-          </thead>
-          <tbody>
-            <tr v-for="item in reviews">
-              <td>{{ item.date }}</td>
-              <td>{{ item.user.name }} memberi review ke produk {{ item.product.name }}</td>
-            </tr>
-          </tbody>
-        </table>
+    <section class="recent-topup-product__section">
+      <div class="columns">
+        <div class="column is-half">
+          <requestTopup />
+        </div>
+        <div class="column is-half">
+          <productReview />
+        </div>
       </div>
     </section>
+
+    <recentReview />
 
   </div>
 </template>
@@ -61,13 +54,25 @@
       font-size: 0.8rem;
     }
   }
+  .recent-topup-product__section {
+    min-height: 4rem;
+    margin: 1rem 0;
+  }
 </style>
 
 <script>
   import { mapGetters } from 'vuex'
 
-  export default {
+  const RecentReview = () => import('./RecentReview.vue')
+  const RequestTopup = () => import('./RequestTopup.vue')
+  const ProductReview = () => import('./ProductReview.vue')
 
+  export default {
+    components: {
+      RecentReview,
+      RequestTopup,
+      ProductReview
+    },
     computed: {
       ...mapGetters([
         'products',
