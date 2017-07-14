@@ -3,7 +3,7 @@
     <div class="column is-one-quarter">
       <div>
         <figure class="image is-4by3">
-          <img :src="generateLinkImage(product.picture_url) || 'http://bulma.io/images/placeholders/256x256.png'">
+          <img :src="generateLinkImage(product.picture_url) || 'http://bulma.io/images/placeholders/256x256.png'" class="product__image">
         </figure>
         <label for="uploadFile" class="upload_label">
           <span>{{ this.product.picture_url ? "Ganti Foto Produk" : "Unggah Foto Produk"}}</span>
@@ -61,7 +61,7 @@
       </div>
 
       <div class="field">
-        <button class="button is-primary" @click="saveProduct">Simpan</button>
+        <button class="button is-primary" @click="saveProduct($event)">Simpan</button>
       </div>
 
     </div>
@@ -77,9 +77,13 @@
       font-size: 0.85rem;
     }
   }
+  .product__image {
+    object-fit: scale-down;
+  }
 </style>
 
 <script>
+  import iziToast from 'izitoast'
   import { mapGetters, mapActions } from 'vuex'
 
   export default {
@@ -153,14 +157,22 @@
 
         console.log(fileName)
       },
-      saveProduct () {
+      saveProduct (event) {
         const data = this.product
+        const a = event.target
+        a.classList.add('is-loading')
         this.$http.post('api/product', data).then(response => {
-          console.log(response.data)
-          // window.location.assign('/admin/product')
+          a.classList.remove('is-loading')
+          iziToast.success({
+              title: 'Sukses',
+              message: `Produk berhasil di tambahkan`,
+              position: 'bottomRight'
+          })
+          this.$router.push({name: 'listProducts'})
         }).catch(err => {
           this.setOnError(true)
           console.log(err)
+          a.classList.remove('is-loading')
         })
         console.log('Ready to Post')
       }

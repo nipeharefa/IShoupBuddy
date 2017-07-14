@@ -28,6 +28,26 @@
       </div>
     </div>
 
+    <section class="recent-review__section">
+      <div class="recent-review__head">
+        <p>Recent Review</p>
+      </div>
+      <div class="recent-review__body">
+        <table class="recent-revie__table">
+          <thead>
+            <td>Tanggal</td>
+            <td>Deskripsi</td>
+          </thead>
+          <tbody>
+            <tr v-for="item in reviews">
+              <td>{{ item.date }}</td>
+              <td>{{ item.user.name }} memberi review ke produk {{ item.product.name }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
   </div>
 </template>
 
@@ -53,7 +73,8 @@
         'products',
         'vendors',
         'users',
-        'categories'
+        'categories',
+        'reviews'
       ])
     }
   }
