@@ -39,7 +39,7 @@
     methods: {
       logout () {
         this.$http.delete('admin/logout').then(response => {
-          window.location.assign('/admin/login')
+          window.location.assign('/')
         }).catch(err => err)
       }
     }

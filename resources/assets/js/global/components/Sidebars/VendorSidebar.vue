@@ -35,7 +35,7 @@
     methods: {
       logout () {
         this.$http.delete('auth/vendor/logout').then(response => {
-          window.location.assign('/login')
+          window.location.assign('/')
         }).catch(err => err)
       }
     }
