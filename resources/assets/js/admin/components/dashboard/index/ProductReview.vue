@@ -14,3 +14,12 @@
     </div>
   </div>
 </template>
+
+
+<style lang="scss" scoped>
+  .product-review__head {
+    b {
+      font-size: 0.85rem
+    }
+  }
+</style>

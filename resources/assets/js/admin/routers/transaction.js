@@ -8,6 +8,7 @@ const FormAddProduct = () => System.import('adminProduct/create/FormAddProduct.v
 const ProductIndex = () => import('adminComponents/product/index/ProductIndex.vue')
 const ProductEdit = () => import('adminComponents/product/edit/ProductEdit.vue')
 const UserIndex = () => import('adminComponents/users/index/UserIndex.vue')
+const UserShow = () => import('adminComponents/users/show/Show.vue')
 const Reviewindex = () => import('adminComponents/reviews/index/index.vue')
 const Dashboard = () => import('adminComponents/dashboard/index/index.vue')
 const CategoryIndex = () => import('adminComponents/category/index/index.vue')
@@ -27,6 +28,7 @@ const router = new Router({
     { name: 'listProducts', path: '/admin/product', component: ProductIndex, title: 'Vendor' },
     { name: 'formEditProduct', path: '/admin/product/:id/edit', component: ProductEdit },
     { name: 'listUser', path: '/admin/users', component: UserIndex },
+    { name: 'showUser', path: '/admin/users/:id', component: UserShow },
     { name: 'listReview', path: '/admin/reviews', component: Reviewindex },
     { name: 'dashboard', path: '/admin/', component: Dashboard },
     { name: 'listCategory', path: '/admin/category', component: CategoryIndex },

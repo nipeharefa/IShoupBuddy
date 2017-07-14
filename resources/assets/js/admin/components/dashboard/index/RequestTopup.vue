@@ -15,6 +15,13 @@
   </div>
 </template>
 
+<style lang="scss" scoped>
+  .request-topup__head {
+    b {
+      font-size: 0.85rem
+    }
+  }
+</style>
 
 <script>
   export default {

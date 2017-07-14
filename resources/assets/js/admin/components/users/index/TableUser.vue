@@ -11,7 +11,11 @@
     </thead>
     <tbody>
       <tr v-for="item in users">
-        <td>{{ item.name }}</td>
+        <td>
+          <router-link :to="{ name: 'showUser', params: { id: item.id } }" append>
+            {{ item.name }}
+          </router-link>
+        </td>
         <td>{{ item.email }}</td>
         <td>{{ item.phone }}</td>
         <td>{{ item.saldo.saldo_string }}</td>

@@ -1,6 +1,17 @@
 <template>
   <div>
 
+    <nav class="breadcrumb">
+      <ul>
+        <li><a href="/">Halaman Depan</a></li>
+        <li>
+          <router-link :to="{ name: 'dashboard' }" append class="is-active">
+            Administrator
+          </router-link>
+        </li>
+      </ul>
+    </nav>
+
     <div class="columns">
       <div class="column">
         <div class="container-info">
