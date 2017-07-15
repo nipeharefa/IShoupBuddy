@@ -1,6 +1,7 @@
 language: php
 
 php:
+  - 7.0
   - 7.1
 
 env:
@@ -27,7 +28,7 @@ cache:
   yarn: true
 
 script:
-  - vendor/bin/phpunit
+  - composer test
 
 after_success:
     - bash <(curl -s https://codecov.io/bash)
