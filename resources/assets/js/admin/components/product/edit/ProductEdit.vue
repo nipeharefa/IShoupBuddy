@@ -1,5 +1,21 @@
 <template>
   <div>
+    <nav class="breadcrumb">
+      <ul>
+        <li><a href="/">Halaman Depan</a></li>
+        <li>
+          <router-link :to="{ name: 'dashboard' }" append>
+            Administrator
+          </router-link>
+        </li>
+        <li>
+           <router-link :to="{ name: 'listProducts' }" append>
+            Produk
+          </router-link>
+        </li>
+        <li class="is-active"><a>{{ product.name }}</a></li>
+      </ul>
+    </nav>
     <formEditProduct v-if="product" :product="product"/>
   </div>
 </template>

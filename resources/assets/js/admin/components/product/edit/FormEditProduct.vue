@@ -56,6 +56,9 @@
 
 <style lang="scss" scoped>
   @import "~sassPages/admin/product/edit";
+  img {
+    object-fit: scale-down;
+  }
 </style>
 
 <script>

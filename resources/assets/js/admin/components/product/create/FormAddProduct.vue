@@ -1,69 +1,87 @@
 <template>
-  <div class="f_add_product">
-    <div class="column is-one-quarter">
-      <div>
-        <figure class="image is-4by3">
-          <img :src="generateLinkImage(product.picture_url) || 'http://bulma.io/images/placeholders/256x256.png'" class="product__image">
-        </figure>
-        <label for="uploadFile" class="upload_label">
-          <span>{{ this.product.picture_url ? "Ganti Foto Produk" : "Unggah Foto Produk"}}</span>
-          <input type="file" id="uploadFile" class="input uploadFile" @change="_uploadImage">
-        </label>
+  <div>
+    <nav class="breadcrumb">
+      <ul>
+        <li><a href="/">Halaman Depan</a></li>
+        <li>
+          <router-link :to="{ name: 'dashboard' }" append>
+            Administrator
+          </router-link>
+        </li>
+        <li>
+           <router-link :to="{ name: 'listProducts' }" append>
+            Produk
+          </router-link>
+        </li>
+        <li class="is-active"><a>Tambah Produk</a></li>
+      </ul>
+    </nav>
+    <div class="f_add_product">
+      <div class="column is-one-quarter">
+        <div>
+          <figure class="image is-4by3">
+            <img :src="generateLinkImage(product.picture_url) || 'http://bulma.io/images/placeholders/256x256.png'" class="product__image">
+          </figure>
+          <label for="uploadFile" class="upload_label">
+            <span>{{ this.product.picture_url ? "Ganti Foto Produk" : "Unggah Foto Produk"}}</span>
+            <input type="file" id="uploadFile" class="input uploadFile" @change="_uploadImage">
+          </label>
+        </div>
       </div>
-    </div>
-    <div class="column is-half">
+      <div class="column is-half">
 
-      <div class="field">
-        <label class="label">Nama Produk</label>
-        <p class="control">
-          <input type="text" class="input"  placeholder="Nama Produk" v-model="product.name"/>
-        </p>
-      </div>
-
-      <div class="field">
-        <label class="label">Barcode</label>
-        <p class="control">
-            <input type="text" class="input"  placeholder="Barcode" v-model="product.barcode"/>
+        <div class="field">
+          <label class="label">Nama Produk</label>
+          <p class="control">
+            <input type="text" class="input"  placeholder="Nama Produk" v-model="product.name"/>
           </p>
-      </div>
+        </div>
 
-      <div class="field">
-        <label class="label">Kategori</label>
-        <p class="control">
-          <span class="select">
-            <select name="" v-model="product.category_id" class="select">
-              <option value="">Pilih Kategori</option>
-              <option :value="item.id" v-for="item in categories">{{ item.name }}</option>
-            </select>
-          </span>
+        <div class="field">
+          <label class="label">Barcode</label>
+          <p class="control">
+              <input type="text" class="input"  placeholder="Barcode" v-model="product.barcode"/>
+            </p>
+        </div>
+
+        <div class="field">
+          <label class="label">Kategori</label>
+          <p class="control">
+            <span class="select">
+              <select name="" v-model="product.category_id" class="select">
+                <option value="">Pilih Kategori</option>
+                <option :value="item.id" v-for="item in categories">{{ item.name }}</option>
+              </select>
+            </span>
+            </p>
+        </div>
+
+        <div class="field">
+          <label class="label">Deskripsi</label>
+          <p class="control">
+            <textarea class="textarea" placeholder="Deskripsi produk" v-model="product.description"></textarea>
           </p>
-      </div>
+        </div>
 
-      <div class="field">
-        <label class="label">Deskripsi</label>
-        <p class="control">
-          <textarea class="textarea" placeholder="Deskripsi produk" v-model="product.description"></textarea>
-        </p>
-      </div>
+        <div class="field attributesSelector" v-for="item in product.attributes">
+          <select name="" id="" class="input" v-model="item.id">
+            <option value="">Pilih</option>
+            <option :value="item.id" v-for="item in attributeRule">{{ item.value }}</option>
+          </select>
+          <input type="text" class="input" v-model="item.value">
+        </div>
 
-      <div class="field attributesSelector" v-for="item in product.attributes">
-        <select name="" id="" class="input" v-model="item.id">
-          <option value="">Pilih</option>
-          <option :value="item.id" v-for="item in attributeRule">{{ item.value }}</option>
-        </select>
-        <input type="text" class="input" v-model="item.value">
-      </div>
+        <div class="field">
+          <a @click="addAttribute">
+            <i class="fa fa-plus"></i>
+          </a>
+        </div>
 
-      <div class="field">
-        <a @click="addAttribute">
-          <i class="fa fa-plus"></i>
-        </a>
-      </div>
+        <div class="field">
+          <button class="button is-primary" @click="saveProduct($event)">Simpan</button>
+        </div>
 
-      <div class="field">
-        <button class="button is-primary" @click="saveProduct($event)">Simpan</button>
       </div>
-
     </div>
   </div>
 </template>
