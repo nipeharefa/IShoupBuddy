@@ -1,44 +1,57 @@
 <template>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>ID Transaksi</th>
-        <th>User</th>
-        <th>Nominal</th>
-        <th>Type</th>
-        <th>Status</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="item in transactions">
-        <td>
-          <router-link
-          :to="{ name: 'detailTransaction', params: { id: item.id }}" append>
-            #{{ item.id }}
+  <div>
+    <nav class="breadcrumb">
+      <ul>
+        <li><a href="/">Halaman Depan</a></li>
+        <li>
+          <router-link :to="{ name: 'dashboard' }" append>
+            Administrator
           </router-link>
-        </td>
-        <td>
-          {{ item.user.id }}
-        </td>
-        <td>
-          {{ item.nominal_string }}
-        </td>
-        <td>
-          {{ item.type }}
-        </td>
-        <td>
-          {{ item.status_string }}
-        </td>
-        <td>
-          <a class="button is-small is-primary" @click="approve(item)"
-          :disabled="item.status === 1 ? 'disabled' : false">Approve</a>
-          <a class="button is-small is-danger"
-          :disabled="item.status === 1 ? 'disabled' : false">Cancel</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        </li>
+        <li class="is-active"><a>Transaction</a></li>
+      </ul>
+    </nav>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID Transaksi</th>
+          <th>User</th>
+          <th>Nominal</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in transactions">
+          <td>
+            <router-link
+            :to="{ name: 'detailTransaction', params: { id: item.id }}" append>
+              #{{ item.id }}
+            </router-link>
+          </td>
+          <td>
+            {{ item.user.id }}
+          </td>
+          <td>
+            {{ item.nominal_string }}
+          </td>
+          <td>
+            {{ item.type }}
+          </td>
+          <td>
+            {{ item.status_string }}
+          </td>
+          <td>
+            <a class="button is-small is-primary" @click="approve(item)"
+            :disabled="item.status === 1 ? 'disabled' : false">Approve</a>
+            <a class="button is-small is-danger"
+            :disabled="item.status === 1 ? 'disabled' : false">Cancel</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 

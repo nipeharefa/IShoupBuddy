@@ -17,6 +17,7 @@ class UserControllerTest extends TestCase
     public function testExample()
     {
         $response = $this->json('GET', 'api/user');
-        $this->assertEquals(401, $response->getStatusCode());
+        dd($response->getContent());
+        // $this->assertEquals(401, $response->getStatusCode());
     }
 }
