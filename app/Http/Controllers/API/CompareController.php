@@ -180,4 +180,31 @@ class CompareController extends BaseApiController
 
         return strtolower(strtr($string, $diac, 'AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn'));
     }
+
+    public function compare()
+    {
+        $score = array();
+
+        $P = array();
+        $P['sets'] = array();
+
+        $dataTest = [
+            "150ml"
+        ];
+
+        $dataTrain = [
+            1 => [
+                "150ml"
+            ]
+        ];
+
+        foreach ($dataTrain as $index => $arr) {
+
+            foreach ($dataTest as $key => $cArr) {
+                # code...
+            }
+        }
+
+        return;
+    }
 }
