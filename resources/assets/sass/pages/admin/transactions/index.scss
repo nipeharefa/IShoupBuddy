@@ -54,3 +54,22 @@ table {
     }
   }
 }
+
+// User SHow
+
+.user-informations__body {
+  display: flex;
+  margin-top: 2rem;
+  .user-profie__image {
+    img {
+      object-fit: scale-down;
+      width: 80px;
+    }
+  }
+  .user_informations__right {
+    margin-left: 1rem;
+  }
+}
+.user-reviews {
+  margin-top: 2rem;
+}

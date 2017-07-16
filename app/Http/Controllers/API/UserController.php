@@ -6,6 +6,7 @@ use App\Helpers\Contracts\DefaultAPIResponse;
 use App\Helpers\Traits\ApiResponse;
 use App\Helpers\Traits\RupiahFormated;
 use App\Helpers\Transformers\ActiveUserTransformer;
+use App\Helpers\Transformers\ReviewTransformer;
 use App\Http\Controllers\BaseApiController;
 use App\Models\Cart;
 use App\Models\Product;
@@ -269,5 +270,22 @@ class UserController extends BaseApiController implements DefaultAPIResponse
 
             return response()->json($e->getMessage(), 400);
         }
+    }
+
+
+    public function getReviewAction(User $user, Request $request)
+    {
+        $response = [
+            "reviews"   =>  ReviewTransformer::transform($user->Review),
+            "status"    =>  "OK",
+            "message"   =>  null
+        ];
+
+        return response()->json($response);
+    }
+
+    public function getTotalReview(User $user, Request $request)
+    {
+        return $user->Review()->count();
     }
 }
