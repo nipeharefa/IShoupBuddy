@@ -13,6 +13,7 @@
         "cviebrock/eloquent-sluggable": "^4.2",
         "deployer/deployer": "^5.1",
         "doctrine/dbal": "^2.5",
+        "fieg/knn": "^1.0",
         "guzzlehttp/guzzle": "^6.2",
         "intervention/image": "^2.3",
         "intervention/imagecache": "^2.3",
