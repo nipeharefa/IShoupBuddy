@@ -31,6 +31,9 @@ class ProductController extends Controller
     {
         $product = Product::orderByDesc('created_at');
 
+        $perPage = $request->perpage ?? 10;
+        $page = $request->page ?? 1;
+
         if (!$request->query('without_filter')) {
             $product->whereHas('productvendor', function ($pv) {
                 return $pv;
@@ -61,10 +64,15 @@ class ProductController extends Controller
 
         $options = [];
 
+        $pagination = $product->simplePaginate($perPage, ['*'], 'page', $page);
+        // dd();
         $data = [
             'status'    => 'OK',
-            'products'  => ProductTransformer::transform($product->get(), $options),
+            'products'  => ProductTransformer::transform($pagination->getCollection(), $options),
             'message'   => null,
+            'link'      => [
+                "next"  =>  $pagination->nextPageUrl()
+            ]
         ];
 
         return response()->json($data, 200);

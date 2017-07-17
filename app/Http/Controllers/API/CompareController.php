@@ -198,7 +198,11 @@ class CompareController extends BaseApiController
             ]
         ];
 
+        $score = array();
+
         foreach ($dataTrain as $index => $arr) {
+
+            $scores[$index] = 1;
 
             foreach ($dataTest as $key => $cArr) {
                 # code...
