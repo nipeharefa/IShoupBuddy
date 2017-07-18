@@ -73,15 +73,14 @@ class LoginController extends Controller
                 $links = '/vendor/product';
                 break;
         }
-        if ($request->expectsJson()) {
-            return [
-                'message'       => '',
-                'status'        => 'OK',
-                'user'          => $user,
-                'redirect_to'   => $links,
-            ];
-        }
 
-        return 1;
+        $data =  [
+            'message'       => '',
+            'status'        => 'OK',
+            'user'          => $user,
+            'redirect_to'   => $links,
+        ];
+
+        return response()->json($data);
     }
 }

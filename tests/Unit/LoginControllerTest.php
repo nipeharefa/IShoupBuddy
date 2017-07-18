@@ -11,6 +11,12 @@ class LoginControllerTest extends TestCase
 {
     use DatabaseMigrations;
 
+    public function setUp()
+    {
+        parent::setUp();
+        $this->seed('UserTableSeeder');
+    }
+
     public function testGuestCanVisitLoginPage()
     {
         $response = $this->get('login');
@@ -19,7 +25,6 @@ class LoginControllerTest extends TestCase
 
     public function testAuthUserCantVisitLoginPage()
     {
-        $this->seed('UserTableSeeder');
         $user = User::find(1);
         $this->actingAs($user);
         $response = $this->get('login');
@@ -28,21 +33,20 @@ class LoginControllerTest extends TestCase
 
     public function testUserLogin()
     {
-        $this->seed('UserTableSeeder');
         $user = User::find(1);
 
         $data = [
             "email"     =>  $user->email,
             "password"  =>  "secret"
         ];
-        $response = $this->post('auth/login', $data);
-        $this->assertEquals(200, $response->getStatusCode());
+        $response = $this->json('POST', 'auth/login', $data);
         $this->assertTrue($this->isAuthenticated());
+        $response->assertStatus(200);
+        $response->assertJsonStructure(['message', 'status', 'user', 'redirect_to']);
     }
 
     public function testUserLogoutWithJson()
     {
-        $this->seed('UserTableSeeder');
         $user = User::find(1);
 
         $this->actingAs($user);
@@ -51,9 +55,40 @@ class LoginControllerTest extends TestCase
         $this->assertFalse($this->isAuthenticated());
     }
 
+    public function testAdminLogin()
+    {
+        $a = $this->seed('InsertDefaultAdmin');
+        $admin = User::whereRole(0)->first();
+        $data = [
+            "email"     =>  $admin->email,
+            "password"  =>  "secret"
+        ];
+        $response = $this->json('POST', 'auth/login', $data);
+        $this->assertTrue($this->isAuthenticated());
+        $response->assertStatus(200);
+
+        $content = json_decode($response->getContent(), true);
+        $this->assertEquals('/admin/product', $content['redirect_to']);
+    }
+
+    public function testVendorLogin()
+    {
+        $this->seed('InsertVendorsTableSeeder');
+        $vendor = User::whereRole(2)->first();
+        $data = [
+            "email"     =>  $vendor->email,
+            "password"  =>  "secret"
+        ];
+        $response = $this->json('POST', 'auth/login', $data);
+        $this->assertTrue($this->isAuthenticated());
+        $response->assertStatus(200);
+
+        $content = json_decode($response->getContent(), true);
+        $this->assertEquals('/vendor/product', $content['redirect_to']);
+    }
+
     public function testUserLogout()
     {
-        $this->seed('UserTableSeeder');
         $user = User::find(1);
 
         $this->actingAs($user);
