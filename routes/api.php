@@ -69,6 +69,9 @@ Route::group(['namespace' => 'API'], function () {
         Route::resource('product', 'ProductController',
             ['only' => ['store', 'update']]);
 
+        Route::resource('report', 'ReportController',
+            ['only' =>  ['store', 'update', 'destroy']]);
+
         Route::resource('product-vendor', 'ProductVendorController',
             ['only' => ['index', 'store', 'destroy', 'update']]);
 
