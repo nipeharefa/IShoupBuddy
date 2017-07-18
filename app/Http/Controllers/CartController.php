@@ -23,7 +23,7 @@ class CartController extends Controller
 
         $user = $request->user() ?? null;
 
-        if ($user->role) {
+        if ($user) {
             switch ($user->role) {
                 case 1:
                     // Member
@@ -36,6 +36,8 @@ class CartController extends Controller
                     $css = mix('css/cart.css');
                     break;
             }
+        } else {
+            return redirect('login');
         }
 
         return $view->with('title', $title)
