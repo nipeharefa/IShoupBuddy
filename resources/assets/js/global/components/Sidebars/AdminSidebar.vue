@@ -20,6 +20,9 @@
         <router-link :to="{ name: 'listTransaction' }" append>Transactions</router-link>
       </li>
       <li>
+        <router-link :to="{ name: 'listTopup' }" append>Top Up</router-link>
+      </li>
+      <li>
         <router-link :to="{ name: 'listUser' }" append>Users</router-link>
       </li>
       <li>

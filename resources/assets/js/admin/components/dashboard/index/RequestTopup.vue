@@ -10,6 +10,13 @@
           <td>Nama User</td>
           <td>Nominal</td>
         </thead>
+        <tbody>
+          <tr v-for="(item, $index) in topup">
+            <td>{{ $index + 1 }}</td>
+            <td>{{ item.user.name }}</td>
+            <td>{{ item.nominal_string }}</td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </div>
@@ -24,7 +31,23 @@
 </style>
 
 <script>
-  export default {
+  import { mapGetters } from 'vuex'
 
+  export default {
+    computed: {
+      ...mapGetters([
+        'transactions'
+      ]),
+      topup () {
+        if (this.transactions) {
+          const transSaldo =  this.transactions.filter(x => {
+            return x.type === "Saldo"
+          })
+
+          return transSaldo.slice(1,5)
+        }
+        return null;
+      }
+    }
   }
 </script>

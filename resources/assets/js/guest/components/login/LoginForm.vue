@@ -69,7 +69,6 @@
         self.onError = false
         a.classList.add('is-loading')
         this.$http.post('/auth/login', data).then(x => {
-          a.classList.remove('is-loading')
           window.location.assign(x.data.redirect_to)
         }).catch(x => {
           a.classList.remove('is-loading')
