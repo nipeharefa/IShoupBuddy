@@ -20,10 +20,6 @@ class InsertDefaultProducts extends Seeder
         $dat = Storage::get('init-products.json');
         $data = json_decode($dat, true);
 
-        DB::statement('SET foreign_key_checks=0');
-        Product::truncate();
-        DB::statement('SET foreign_key_checks=1');
-
         $beforeProduct = collect($data)->map(function ($item) use ($category, $faker) {
             return [
                 'name'          => $item['name'],
