@@ -20,6 +20,7 @@ before_script:
   - composer install --no-interaction
   - composer du
   - php artisan key:generate
+  - php artisan migrate
   - php artisan passport:install
   - yarn
   - cp resources/assets/js/lib/pusher-conf.js.example resources/assets/js/lib/pusher-conf.js
