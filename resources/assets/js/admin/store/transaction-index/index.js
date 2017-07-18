@@ -7,7 +7,7 @@ import mutations from './mutations'
 import vendor from './modules/vendor'
 import user from './modules/user'
 import category from './modules/category'
-import { isActive, searchActive, activeUser, reviews, review } from 'statesStore'
+import { isActive, searchActive, activeUser, reviews, review, reportReviews } from 'statesStore'
 Vue.use(Vuex)
 
 const strict = false
@@ -27,7 +27,8 @@ const state = {
   searchActive,
   activeUser,
   reviews,
-  review
+  review,
+  reportReviews
 }
 
 const store = new Vuex.Store({

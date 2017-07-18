@@ -8,6 +8,7 @@ use App\Http\Controllers\BaseApiController;
 use Exception;
 use DB;
 use Validator;
+use App\Helpers\Transformers\ReviewTransformer;
 
 class ReportController extends BaseApiController
 {
@@ -18,7 +19,16 @@ class ReportController extends BaseApiController
      */
     public function index()
     {
-        //
+        $mapReportReview = Report::get()->map(function($item){
+            return $item->Review;
+        });
+        $reports = ReviewTransformer::transform($mapReportReview);
+
+        $data = [
+            "reports"   =>  $reports
+        ];
+
+        return response()->json($data, 200);
     }
 
     /**

@@ -1,10 +1,11 @@
-import { SET_ISACTIVE, SET_SEARCH_ACTIVE, INIT_REVIEWS, INIT_REVIEW } from 'mutationsStore'
+import { SET_ISACTIVE, SET_SEARCH_ACTIVE, INIT_REVIEWS, INIT_REVIEW, INIT_REPORT_REVIEWS } from 'mutationsStore'
 
 export default {
   SET_ISACTIVE,
   SET_SEARCH_ACTIVE,
   INIT_REVIEWS,
   INIT_REVIEW,
+  INIT_REPORT_REVIEWS,
   INIT_ACTIVE_USER (state, user) {
     state.activeUser = user
   },

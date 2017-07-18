@@ -27,3 +27,7 @@ export const INIT_REVIEWS = (state, reviews) => {
 export const INIT_REVIEW = (state, review) => {
   state.review = review
 }
+
+export const INIT_REPORT_REVIEWS = (state, reports) => {
+  state.reportReviews = reports
+}

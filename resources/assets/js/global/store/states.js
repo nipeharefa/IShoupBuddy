@@ -5,3 +5,5 @@ export const product = null
 export const totalCart = 0
 export const reviews = null
 export const review = null
+export const reportReviews = null
+export const reportReview = null

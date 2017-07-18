@@ -26,6 +26,7 @@ const app = new Vue({
     this.getCategory()
     this.initActiveUser(window._sharedData.user)
     this.getReview()
+    this.getReportReview()
   },
   methods: {
     ...mapActions([
@@ -35,7 +36,8 @@ const app = new Vue({
       'initUsers',
       'initCategories',
       'initActiveUser',
-      'initReviews'
+      'initReviews',
+      'initReportReviews'
     ]),
     getTransactions () {
       this.$http.get('api/admin/transaction').then(response => {
@@ -68,8 +70,13 @@ const app = new Vue({
     },
     getReview () {
       this.$http.get('api/admin/review').then(response => {
-        console.log(response.data)
         this.initReviews(response.data.reviews)
+      }).catch(err => err)
+    },
+    getReportReview () {
+      this.$http.get('api/report').then(response => {
+        console.log(response.data)
+        this.initReportReviews(response.data.reports)
       }).catch(err => err)
     }
   }
