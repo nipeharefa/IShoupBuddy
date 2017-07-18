@@ -7,8 +7,8 @@ php:
 env:
   - TRAVIS_NODE_VERSION="7"
 
-services:
-  - mysql
+addons:
+  mariadb: '10.0'
 
 sudo: required
 
