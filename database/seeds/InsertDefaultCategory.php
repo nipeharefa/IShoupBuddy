@@ -17,6 +17,9 @@ class InsertDefaultCategory extends Seeder
             'slug'      => str_slug('Uncategorized'),
         ];
 
+        DB::statement('SET foreign_key_checks=0');
         Category::create($data);
+        DB::statement('SET foreign_key_checks=1');
+
     }
 }
