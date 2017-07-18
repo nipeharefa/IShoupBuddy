@@ -16,8 +16,10 @@ class UserControllerTest extends TestCase
      */
     public function testExample()
     {
+        $this->seed('UserTableSeeder');
+        $user = User::find(1);
+        $this->actingAs($user);
         $response = $this->json('GET', 'api/user');
-        dd($response->getContent());
-        // $this->assertEquals(401, $response->getStatusCode());
+        $this->assertEquals(200, $response->getStatusCode());
     }
 }
