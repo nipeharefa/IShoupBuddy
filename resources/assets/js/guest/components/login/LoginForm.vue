@@ -22,7 +22,7 @@
 		<div class="field is-grouped">
 
 		  <p class="control">
-		    <button class="button is-primary" @click="doLogin">Login</button>
+		    <button class="button is-primary" @click="doLogin($event)">Login</button>
 		  </p>
 
 		  <p class="control control-button-forgot-password">
@@ -53,19 +53,26 @@
       closeNotification () {
         this.onError = false
       },
-      doLogin () {
+      doLogin (event) {
         this.$validator.validateAll().then(result => {
-          this._doLogin()
+          if (result) {
+            this._doLogin(event)
+          }
         }).catch(err => {
           return err
         })
       },
-      _doLogin () {
+      _doLogin (event) {
         const data = this.login
         const self = this
+        const a = event.target
+        self.onError = false
+        a.classList.add('is-loading')
         this.$http.post('/auth/login', data).then(x => {
+          a.classList.remove('is-loading')
           window.location.assign(x.data.redirect_to)
         }).catch(x => {
+          a.classList.remove('is-loading')
           self.onError = true
         })
       }
