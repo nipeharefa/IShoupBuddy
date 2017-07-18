@@ -31,6 +31,12 @@ class ReviewController extends Controller
 
         $user = Auth::guard('api')->user();
 
+        $sortBy = $request->sortBy ?? "created_at";
+        $sortOrder = "desc";
+
+        $perPage = $request->perpage ?? 10;
+        $page = $request->page ?? 1;
+
         try {
             $checkParameter = collect($request->only($trustedParameters))->filter()->count();
 
@@ -40,7 +46,17 @@ class ReviewController extends Controller
                 throw new GetReviewException('Error Processing Request', 1);
             }
 
-            $review = Review::orderByDesc('created_at');
+            switch ($request->order) {
+                case 'rate_high':
+                    $review = Review::orderBy('rating', 'desc');
+                    break;
+                case 'rate_low':
+                    $review = Review::orderBy('rating', 'asc');
+                    break;
+                default:
+                    $review = Review::orderBy('created_at', 'desc');
+                    break;
+            }
 
             if ($request->user_id) {
                 $review->whereUserId($request->user_id);
@@ -103,10 +119,10 @@ class ReviewController extends Controller
                 'reviews'       => $reviewTransform,
                 'total_reviews' => $total_reviews,
                 'summary'       => array_search(max($summaryAvg), $summaryAvg, true),
-                'youReview'     => $youReview ? ReviewTransformer::transform($youReview) : new \stdClass(),
             ];
 
             return response()->json($response, 200);
+
         } catch (Exception $e) {
             if ($e instanceof GetReviewException) {
                 $err = [

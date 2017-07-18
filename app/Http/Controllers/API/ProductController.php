@@ -64,14 +64,15 @@ class ProductController extends Controller
 
         $options = [];
 
-        $pagination = $product->simplePaginate($perPage, ['*'], 'page', $page);
+        $pagination = $product->paginate($perPage, ['*'], 'page', $page);
         // dd();
         $data = [
             'status'    => 'OK',
             'products'  => ProductTransformer::transform($pagination->getCollection(), $options),
             'message'   => null,
             'link'      => [
-                "next"  =>  $pagination->nextPageUrl()
+                "next"  =>  $pagination->nextPageUrl(),
+                "total" =>  $pagination->lastPage()
             ]
         ];
 
@@ -168,6 +169,7 @@ class ProductController extends Controller
                 }
             }
         }
+
         $response = [
             'status'    => 'OK',
             'product'   => ProductTransformer::transform($product),

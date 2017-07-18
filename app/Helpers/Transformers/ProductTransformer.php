@@ -43,6 +43,7 @@ class ProductTransformer extends AbstractTransformer
         ];
 
         if ($this->isRelationshipLoaded($product, 'Review')) {
+
             $arr['review'] = ReviewTransformer::transform($product->Review) ?? null;
         }
 
