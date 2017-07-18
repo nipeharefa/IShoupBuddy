@@ -17,5 +17,7 @@ class InsertDefaultCategory extends Seeder
             'slug'      => str_slug('Uncategorized'),
         ];
 
+        Category::create($data);
+
     }
 }
