@@ -7,6 +7,9 @@ php:
 env:
   - TRAVIS_NODE_VERSION="7"
 
+services:
+  - mysql
+
 sudo: required
 
 before_script:
@@ -16,11 +19,13 @@ before_script:
   - sudo apt-get update -qq
   - sudo apt-get install -y -qq yarn
   - cp .env.travis .env
+  - mysql -u root -e 'create database homestead;'
   - composer self-update
-  - composer install --no-interaction
-  - composer du
+  - composer install --dev --prefer-source --no-interaction
   - php artisan key:generate
   - php artisan migrate
+  - composer dump-autoload
+  - php artisan db:seed
   - php artisan passport:install
   - yarn
   - cp resources/assets/js/lib/pusher-conf.js.example resources/assets/js/lib/pusher-conf.js
