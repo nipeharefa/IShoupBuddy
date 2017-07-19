@@ -131,3 +131,19 @@ canvas#line-chart {
     }
   }
 }
+
+
+//
+.review__rating {
+  display: flex;
+  margin-bottom: 1rem;
+  .rating_summary {
+    padding: 1rem;
+    text-align: center;
+    .rating_summary__small {
+      span {
+        font-size: 0.75rem;
+      }
+    }
+  }
+}
