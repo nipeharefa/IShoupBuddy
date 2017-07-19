@@ -37,6 +37,7 @@ Route::group(['namespace' => 'API'], function () {
     Route::resource('promo', 'PromoController',
         ['only' => ['index']]);
 
+    Route::get('product/{product}/group-rating', 'ProductController@getGroupRating');
     Route::get('product/barcode/{barcode}', 'ProductController@barcode');
 
     Route::resource('product', 'ProductController',

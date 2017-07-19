@@ -5,14 +5,14 @@
         <h1 class="title is-3">4.5</h1>
       </div>
       <div class="rating_summary__small">
-        <span>20 Reviews</span>
+        <span>{{ totalRating }} Reviews</span>
       </div>
     </div>
     <div class="rating_detail">
       <ul>
-        <li v-for="item in 5">
-          <span>{{ rating }}</span>
-          <span>( 5 Review )</span>
+        <li v-for="item in 5" v-if="ratingGroup">
+          <span>{{ item }}</span>
+          <span>( {{ ratingGroup[item] }} Review )</span>
         </li>
       </ul>
     </div>
@@ -24,6 +24,12 @@
   export default {
     props: {
       rating: {
+        required: true
+      },
+      ratingGroup: {
+        required: true
+      },
+      totalRating: {
         required: true
       }
     }

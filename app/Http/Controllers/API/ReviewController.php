@@ -118,6 +118,7 @@ class ReviewController extends Controller
                 'message'       => null,
                 'reviews'       => $reviewTransform,
                 'total_reviews' => $total_reviews,
+                'average_review' => Review::avg('rating'),
                 'summary'       => array_search(max($summaryAvg), $summaryAvg, true),
             ];
 

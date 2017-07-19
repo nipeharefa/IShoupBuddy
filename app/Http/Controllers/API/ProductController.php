@@ -14,6 +14,7 @@ use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class ProductController extends Controller
 {
@@ -229,18 +230,6 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
     public function barcode($barcode)
     {
         try {
@@ -278,5 +267,23 @@ class ProductController extends Controller
         }
 
         return false;
+    }
+
+    public function getGroupRating(Product $product)
+    {
+
+        $arr =  $product->Review->groupBy(function($item){
+            return strval(round($item->rating));
+        })->map(function($item){
+            return count($item);
+        })->toArray();
+        $arr = Arr::wrap($arr);
+        for ($i=1; $i <=5 ; $i++) {
+            if (!array_key_exists($i, $arr)) {
+                $arr[$i] = 0;
+            }
+        }
+
+        return response()->json($arr,200);
     }
 }
