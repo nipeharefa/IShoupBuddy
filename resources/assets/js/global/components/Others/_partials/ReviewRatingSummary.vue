@@ -2,7 +2,7 @@
   <section class="review__rating">
     <div class="rating_summary">
       <div class="rating_summary__title">
-        <h1 class="title is-3">4.5</h1>
+        <h1 class="title is-3">{{ avgerageRating }}</h1>
       </div>
       <div class="rating_summary__small">
         <span>{{ totalRating }} Reviews</span>
@@ -30,6 +30,9 @@
         required: true
       },
       totalRating: {
+        required: true
+      },
+      avgerageRating: {
         required: true
       }
     }

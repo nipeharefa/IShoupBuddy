@@ -1,6 +1,7 @@
 <template>
   <div>
-    <reviewRatingSummary :rating="rating" :ratingGroup="ratingArray" :totalRating="totalRating" />
+    <reviewRatingSummary :rating="rating" :ratingGroup="ratingArray"
+      :totalRating="totalRating" :avgerageRating="avgerageRating" />
     <reviewList :reviews="reviews" />
   </div>
 </template>
@@ -28,6 +29,9 @@
       },
       totalRating () {
         return this.product.total_rating
+      },
+      avgerageRating () {
+        return this.produc.avg_rating
       }
     },
     components: {
