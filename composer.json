@@ -67,6 +67,7 @@
         ],
         "dep": "vendor/bin/dep",
         "test": "vendor/bin/phpunit",
+        "cc": "php artisan cache:clear",
         "phpcs": "php-cs-fixer --verbose fix --config=.php_cs --allow-risky yes"
     },
     "config": {
