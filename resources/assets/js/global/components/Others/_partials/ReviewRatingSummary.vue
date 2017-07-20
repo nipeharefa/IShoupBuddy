@@ -23,9 +23,6 @@
 <script>
   export default {
     props: {
-      rating: {
-        required: true
-      },
       ratingGroup: {
         required: true
       },
