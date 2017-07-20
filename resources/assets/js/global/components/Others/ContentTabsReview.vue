@@ -21,9 +21,6 @@
       ...mapGetters([
         'product'
       ]),
-      rating () {
-        return 4.5.toFixed(1,1)
-      },
       productId () {
         return this.product.id
       },
@@ -31,7 +28,10 @@
         return this.product.total_rating
       },
       avgerageRating () {
-        return this.product.avg_rating.toFixed(1,1)
+        if (this.product.avg_rating) {
+          return this.product.avg_rating.toFixed(1,1)
+        }
+        return 0
       }
     },
     components: {

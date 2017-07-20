@@ -27,6 +27,7 @@
             "user": {!! $user !!}
         }
     </script>
+
     <script src="{{ mix('js/manifest.js') }}"></script>
 
     @if (env('APP_ENV') == "production")
@@ -37,6 +38,7 @@
     @endif
 
     <script src="{{ mix('js/vendor.js') }}"></script>
+    <script src="{{ mix('js/polifyls07.js') }}"></script>
 
     @if (isset($js))
         <script src="{{ $js }}" type="text/javascript" async></script>
