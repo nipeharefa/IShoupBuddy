@@ -1,4 +1,4 @@
-import { SET_ISACTIVE, SET_SEARCH_ACTIVE } from 'mutationsStore'
+import { SET_ISACTIVE, SET_SEARCH_ACTIVE, INIT_CATEGORIES } from 'mutationsStore'
 export default {
 
   INIT_PROMO (state, promo) {
@@ -8,5 +8,6 @@ export default {
     state.products = products
   },
   SET_ISACTIVE,
-  SET_SEARCH_ACTIVE
+  SET_SEARCH_ACTIVE,
+  INIT_CATEGORIES
 }

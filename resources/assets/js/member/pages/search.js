@@ -15,12 +15,19 @@ Vue.use(CartCounter)
 new Vue({
   created () {
     this.initActiveUser(window._sharedData.user)
+    this.getCategories()
   },
   store,
   methods: {
     ...mapActions([
-      'initActiveUser'
-    ])
+      'initActiveUser',
+      'initCategories'
+    ]),
+    getCategories () {
+      this.$http.get('api/category').then(response => {
+        this.initCategories(response.data.categories)
+      }).catch(err => err)
+    }
   },
   render (h) {
     return (

@@ -16,11 +16,13 @@ new Vue({
   methods: {
     ...mapActions([
       'initProduct',
-      'initRecommendationProducts'
+      'initRecommendationProducts',
+      'initCategories'
     ]),
     initDataVuex () {
       this.getProductDetail()
       this.getRecomendationProducts()
+      this.getCategories()
     },
     getProductDetail () {
       const id = window._sharedData.product_id
@@ -32,6 +34,11 @@ new Vue({
       this.$http.get('api/recommendation').then(response => {
         this.initRecommendationProducts(response.data.products)
       })
+    },
+    getCategories () {
+      this.$http.get('api/category').then(response => {
+        this.initCategories(response.data.categories)
+      }).catch(err => err)
     }
   },
   computed: {

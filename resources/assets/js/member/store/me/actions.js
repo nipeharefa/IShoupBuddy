@@ -8,5 +8,6 @@ export {
   setTotalCart,
   setIsActive,
   setSearchActive,
-  updateActiveuser
+  updateActiveuser,
+  initCategories
 } from 'actionsStore'

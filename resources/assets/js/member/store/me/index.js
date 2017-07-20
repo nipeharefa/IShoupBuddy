@@ -11,7 +11,7 @@ import wishlist from './wishlist'
 
 Vue.use(Vuex)
 
-import { isActive, searchActive, totalCart } from 'statesStore'
+import { isActive, searchActive, totalCart, categories } from 'statesStore'
 
 const strict = process.env.NODE_ENV !== 'production'
 
@@ -24,7 +24,8 @@ const state = {
   activeUser: {},
   isActive,
   searchActive,
-  totalCart
+  totalCart,
+  categories
 }
 
 const store = new Vuex.Store({

@@ -7,3 +7,4 @@ export const reviews = null
 export const review = null
 export const reportReviews = null
 export const reportReview = null
+export const categories = null

@@ -17,6 +17,7 @@ new Vue({
   created () {
     this.initActiveUser(window._sharedData.user)
     this.getCarts()
+    this.getCategories()
   },
   computed: {
     ...mapGetters(['activeUser'])
@@ -24,14 +25,21 @@ new Vue({
   methods: {
     ...mapActions([
       'initActiveUser',
-      'initCarts'
+      'initCarts',
+      'initCategories'
     ]),
     getCarts () {
       const userid = this.activeUser.id
       this.$http.get(`api/user/${userid}/carts`).then(response => {
         this.initCarts(response.data)
       })
+    },
+    getCategories () {
+      this.$http.get('api/category').then(response => {
+        this.initCategories(response.data.categories)
+      }).catch(err => err)
     }
+
   },
   render (h) {
     return (

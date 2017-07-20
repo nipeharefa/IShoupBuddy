@@ -1,4 +1,4 @@
-import { SET_ISACTIVE, SET_SEARCH_ACTIVE, SET_TOTAL_CART } from 'mutationsStore'
+import { SET_ISACTIVE, SET_SEARCH_ACTIVE, SET_TOTAL_CART, INIT_CATEGORIES } from 'mutationsStore'
 
 export default {
 
@@ -13,5 +13,6 @@ export default {
   },
   SET_ISACTIVE,
   SET_SEARCH_ACTIVE,
-  SET_TOTAL_CART
+  SET_TOTAL_CART,
+  INIT_CATEGORIES
 }

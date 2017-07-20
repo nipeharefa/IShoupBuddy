@@ -7,5 +7,6 @@ export const initActiveUser = ({ commit }, user) => {
 export {
   setIsActive,
   setSearchActive,
-  setTotalCart
+  setTotalCart,
+  initCategories
 } from 'actionsStore'

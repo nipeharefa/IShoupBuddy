@@ -4,5 +4,6 @@ export const recommendation = state => state.recommendationProducts
 export {
   isActive,
   searchActive,
-  totalCart
+  totalCart,
+  categories
 } from 'gettersStore'

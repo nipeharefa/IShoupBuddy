@@ -2,5 +2,6 @@ export {
   activeUser,
   isActive,
   searchActive,
-  totalCart
+  totalCart,
+  categories
 } from 'gettersStore'

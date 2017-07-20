@@ -2,6 +2,7 @@
   <navbar :navClass="'nav'" :navClassC="'container'">
     <hamburger></hamburger>
     <logo></logo>
+
     <div slot="right-icon" class="guest-icon-navbar-right is-hidden-desktop">
       <a @click="setSearchActive(true)">
         <i class="fa fa-search"></i>

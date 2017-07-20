@@ -11,5 +11,6 @@ export const initCarts = ({ commit }, carts) => {
 export {
   setIsActive,
   setSearchActive,
-  setTotalCart
+  setTotalCart,
+  initCategories
 } from 'actionsStore'

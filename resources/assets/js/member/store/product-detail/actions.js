@@ -11,4 +11,4 @@ export const initRecommendationProducts = ({ commit }, products) => {
   commit(INIT_RECOMMENDATION_PRODUCTS, products)
 }
 
-export { setIsActive, setSearchActive, setTotalCart, wishProduct } from 'actionsStore'
+export { setIsActive, setSearchActive, setTotalCart, wishProduct, initCategories } from 'actionsStore'

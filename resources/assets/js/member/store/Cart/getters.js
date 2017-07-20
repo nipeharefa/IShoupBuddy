@@ -6,5 +6,6 @@ export const cartsTotalString = state => state.carts.total_string
 export {
   isActive,
   searchActive,
-  totalCart
+  totalCart,
+  categories
 } from 'gettersStore'

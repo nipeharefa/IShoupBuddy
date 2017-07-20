@@ -7,4 +7,4 @@ export const initProducts = ({ commit }, products) => {
   commit(INIT_PRODUCTS, products)
 }
 
-export { setIsActive, setSearchActive } from 'actionsStore'
+export { setIsActive, setSearchActive, initCategories } from 'actionsStore'

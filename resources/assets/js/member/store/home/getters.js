@@ -5,5 +5,6 @@ export const promo = state => state.promo
 export {
   isActive,
   searchActive,
-  totalCart
+  totalCart,
+  categories
 } from 'gettersStore'

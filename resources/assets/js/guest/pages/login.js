@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import VueAxios from 'lib/axios-plugin'
 import VeeValidate from 'vee-validate'
+import GetCategory from 'lib/GetCategory'
+import store from 'guest/store/search/'
 
 Vue.use(VueAxios)
 Vue.use(VeeValidate)
-
-import store from 'guest/store/home/'
+Vue.use(GetCategory)
 
 import App from 'guest/components/login/Login.vue'
 

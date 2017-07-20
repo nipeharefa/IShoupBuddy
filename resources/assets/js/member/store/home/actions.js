@@ -13,5 +13,6 @@ export const initPromo = ({ commit }, promo) => {
 export {
   setIsActive,
   setSearchActive,
-  setTotalCart
+  setTotalCart,
+  initCategories
 } from 'actionsStore'

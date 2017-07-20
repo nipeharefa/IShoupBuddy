@@ -18,6 +18,7 @@ new Vue({
   created () {
     this.initDataVuex()
     this.initActiveUser(window._sharedData.user)
+    this.getCategories()
   },
   store,
   computed: {
@@ -29,7 +30,8 @@ new Vue({
     ...mapActions([
       'initProduct',
       'initRecommendationProducts',
-      'initActiveUser'
+      'initActiveUser',
+      'initCategories'
     ]),
     initDataVuex () {
       this.getProductDetail()
@@ -46,6 +48,11 @@ new Vue({
       this.$http.get('api/recommendation').then(response => {
         this.initRecommendationProducts(response.data.products)
       })
+    },
+    getCategories () {
+      this.$http.get('api/category').then(response => {
+        this.initCategories(response.data.categories)
+      }).catch(err => err)
     }
   },
   render (h) {

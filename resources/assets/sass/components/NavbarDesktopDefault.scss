@@ -36,6 +36,7 @@
     .nav-left {
       display: flex;
       justify-content: center;
+      flex: 1 !important;
     }
 
     .nav-right {
@@ -51,6 +52,6 @@
     }
   }
   .akumaubelanja {
-    width: 20rem !important;
+    width: 17rem !important;
   }
 }

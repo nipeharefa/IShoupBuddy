@@ -7,7 +7,8 @@ import {
   WISH_PRODUCT,
   INIT_REVIEWS,
   INIT_REVIEW,
-  INIT_REPORT_REVIEWS
+  INIT_REPORT_REVIEWS,
+  INIT_CATEGORIES
 } from 'globalVuexConstant'
 
 export const initActiveUser = ({ commit }, user) => {
@@ -44,4 +45,8 @@ export const initReview = ({ commit }, review) => {
 
 export const initReportReviews = ({ commit }, reports) => {
   commit(INIT_REPORT_REVIEWS, reports)
+}
+
+export const initCategories = ({ commit }, categories) => {
+  commit(INIT_CATEGORIES, categories)
 }

@@ -1,4 +1,4 @@
-import { SET_TOTAL_CART } from 'mutationsStore'
+import { SET_TOTAL_CART, INIT_CATEGORIES } from 'mutationsStore'
 export default {
 
   INIT_ACTIVE_USER (state, user) {
@@ -7,5 +7,6 @@ export default {
   INIT_CARTS (state, carts) {
     state.carts = carts
   },
-  SET_TOTAL_CART
+  SET_TOTAL_CART,
+  INIT_CATEGORIES
 }

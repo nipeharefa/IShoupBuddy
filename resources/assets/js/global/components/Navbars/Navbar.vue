@@ -13,6 +13,7 @@
       <div :class="navClassC">
         <hamburger></hamburger>
         <logo></logo>
+        <navbarDropdownCategory />
         <searchBox></searchBox>
         <slot name="right-icon"></slot>
         <slot name="desktop-nav"></slot>
@@ -33,6 +34,7 @@
   const Hamburger = () => import('./partials/Hamburger.vue')
   const Logo = () => import('./partials/Logo.vue')
   const SearchBox = () => import('./partials/SearchBox.vue')
+  const NavbarDropdownCategory = () => import('./partials/NavbarDropdownCategory.vue')
 
   export default {
     props: {
@@ -46,7 +48,8 @@
     components: {
       Hamburger,
       Logo,
-      SearchBox
+      SearchBox,
+      NavbarDropdownCategory
     },
     computed: {
       ...mapGetters([

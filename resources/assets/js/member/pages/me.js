@@ -34,12 +34,14 @@ const app = new Vue({
     ...mapActions([
       'initActiveUser',
       'initTransactions',
-      'initWishlists'
+      'initWishlists',
+      'initCategories'
     ]),
     initAllData () {
       this.initActiveUser(window._sharedData.user)
       this.getTransactions()
       this.getWishlist()
+      this.getCategories()
     },
     getTransactions () {
       this.$http.get('api/transaction?with=d').then(response => {
@@ -49,6 +51,11 @@ const app = new Vue({
     getWishlist () {
       this.$http.get('api/wishlist').then(response => {
         this.initWishlists(response.data.wishlist)
+      }).catch(err => err)
+    },
+    getCategories () {
+      this.$http.get('api/category').then(response => {
+        this.initCategories(response.data.categories)
       }).catch(err => err)
     }
   }
