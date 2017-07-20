@@ -146,4 +146,21 @@ canvas#line-chart {
       }
     }
   }
+  .rating_detail {
+    display: flex;
+    width: 100%;
+    ul {
+      width: 100%;
+      li {
+        display: flex;
+        progress {
+          width: 40%;
+          margin: 0 1rem;
+        }
+        span {
+          font-size: 0.85rem;
+        }
+      }
+    }
+  }
 }

@@ -12,6 +12,8 @@
       <ul>
         <li v-for="item in 5" v-if="ratingGroup">
           <span>{{ item }}</span>
+          <progress class="progress is-success"
+          :value="ratingGroup[item]" :max="totalRating"></progress>
           <span>( {{ ratingGroup[item] }} Review )</span>
         </li>
       </ul>
