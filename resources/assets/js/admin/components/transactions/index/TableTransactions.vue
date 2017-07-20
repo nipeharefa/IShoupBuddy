@@ -23,7 +23,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in transactions">
+        <tr v-for="item in transactionsSorted">
           <td>
             <router-link
             :to="{ name: 'detailTransaction', params: { id: item.id }}" append>
@@ -61,7 +61,24 @@
     computed: {
       ...mapGetters([
         'transactions'
-      ])
+      ]),
+      transactionsSorted () {
+        const sortedProduct =  this.transactions.sort( (a,b) => {
+          var nameA = a.total_review
+          var nameB = b.total_review
+          if (nameA > nameB) {
+            return -1;
+          }
+          if (nameA < nameB) {
+            return 1;
+          }
+
+          // names must be equal
+          return 0;
+        })
+
+        return sortedProduct
+      }
     },
     methods: {
       approve (item) {
