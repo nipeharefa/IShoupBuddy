@@ -46,6 +46,7 @@
 
 
 <script>
+  import iziToast from 'izitoast'
   export default {
     props: {
       price: {
@@ -77,6 +78,12 @@
           a.classList.remove('is-loading')
           this.addedProduct(response.data.product)
           this.hideAction()
+          iziToast.success({
+            title: 'Sukses',
+            message: 'Produk berhasil ditambahkan',
+            position: 'bottomRight'
+          })
+          this.$router.push({name: 'product-index'})
         }).catch(err => {
           a.classList.remove('is-loading')
         })
