@@ -40,6 +40,8 @@ Route::group(['namespace' => 'API'], function () {
     Route::get('product/{product}/group-rating', 'ProductController@getGroupRating');
     Route::get('product/barcode/{barcode}', 'ProductController@barcode');
 
+    Route::get('product/newest', 'ProductController@getNewestProduct');
+    Route::get('product/trending', 'ProductController@getProductTrending');
     Route::resource('product', 'ProductController',
         ['only' => ['index', 'show']]);
 

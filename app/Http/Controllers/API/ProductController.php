@@ -286,4 +286,50 @@ class ProductController extends Controller
 
         return response()->json($arr,200);
     }
+
+
+    public function getNewestProduct(Request $request) {
+
+        $perPage = $request->perpage ?? 10;
+        $page = $request->page ?? 1;
+
+        $product = Product::orderByDesc('created_at');
+
+        $pagination = $product->paginate($perPage, ['*'], 'page', $page);
+
+        $repsonse = [
+            "messge"        =>  null,
+            "products"      =>  ProductTransformer::transform($pagination->getCollection()),
+            "pagination"    =>  [
+                "prev"  =>  $pagination->previousPageUrl(),
+                "next"  =>  $pagination->nextPageUrl(),
+                "total" =>  $pagination->lastPage()
+            ]
+        ];
+
+        return response()->json($repsonse);
+
+    }
+
+    public function getProductTrending(Request $request) {
+
+        $product = Product::withCount('Review')->orderBy('review_count', 'desc');
+
+        $perPage = $request->perpage ?? 10;
+        $page = $request->page ?? 1;
+
+        $pagination = $product->paginate($perPage, ['*'], 'page', $page);
+
+        $repsonse = [
+            "messge"        =>  null,
+            "products"      =>  ProductTransformer::transform($pagination->getCollection()),
+            "pagination"    =>  [
+                "prev"  =>  $pagination->previousPageUrl(),
+                "next"  =>  $pagination->nextPageUrl(),
+                "total" =>  $pagination->lastPage()
+            ]
+        ];
+
+        return response()->json($repsonse);
+    }
 }
