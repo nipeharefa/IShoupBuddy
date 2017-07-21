@@ -291,7 +291,9 @@ class ProductController extends Controller
         $perPage = $request->perpage ?? 10;
         $page = $request->page ?? 1;
 
-        $product = Product::orderByDesc('created_at');
+        $product = Product::whereHas('productvendor', function ($pv) {
+                return $pv;
+            })->orderByDesc('created_at');
 
         $pagination = $product->paginate($perPage, ['*'], 'page', $page);
 
@@ -310,7 +312,11 @@ class ProductController extends Controller
 
     public function getProductTrending(Request $request)
     {
-        $product = Product::withCount('Review')->orderBy('review_count', 'desc');
+
+        $product = Product::withCount('Review')
+            ->whereHas('productvendor', function ($pv) {
+                return $pv;
+            })->orderBy('review_count', 'desc');
 
         $perPage = $request->perpage ?? 10;
         $page = $request->page ?? 1;
