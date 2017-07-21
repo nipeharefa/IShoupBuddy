@@ -180,4 +180,26 @@ class TransactionController extends Controller
 
         return $reflector->getShortName();
     }
+
+    public function cancelTopUp(Transaction $transaction)
+    {
+         try {
+            DB::beginTransaction();
+            // Update Transaction to Success
+            $transaction->update(['status' => 4]);
+            DB::commit();
+
+            return transform($transaction);
+        } catch (Exception $e) {
+            DB::rollback();
+
+            $err = [
+                'status'    => 'ERROR',
+                'message'   => $e->getMessage(),
+
+            ];
+
+            return response()->json($err, 400);
+        }
+    }
 }

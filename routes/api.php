@@ -121,6 +121,7 @@ Route::group(['namespace' => 'API'], function () {
             Route::resource('category', 'CategoryController');
 
             Route::post('transaction/{transaction}/approve', 'TransactionController@approve');
+            Route::post('transaction/{transaction}/cancel', 'TransactionController@cancelTopUp');
         });
 
         Route::group(['namespace' => 'Vendor', 'prefix' => 'vendor'], function () {

@@ -17,7 +17,7 @@
             <a class="button is-small is-primary" @click="approve(item, $event)"
             :disabled="item.status === 1 ? 'disabled' : false">Approve</a>
             <a class="button is-small is-danger"
-            :disabled="cancelState(item) ? 'disabled' : false">Cancel</a>
+            :disabled="cancelState(item) ? 'disabled' : false" @click="cancelTopUp(item, $event)">Cancel</a>
           </td>
           <td>{{ item.status_string }}</td>
         </tr>
@@ -38,7 +38,7 @@
     },
     methods: {
       cancelState (item) {
-        if (item.status === 0 || item.status === 4) {
+        if (item.status === 1 || item.status === 4) {
           return true
         }
         return false
@@ -66,6 +66,29 @@
           btnUpdate.classList.remove('is-loading')
         })
       },
+      cancelTopUp(item, event) {
+        if (item.status === 1 || item.status === 4) {
+          return false
+        }
+        const btnUpdate = event.target
+        btnUpdate.classList.add('is-loading')
+        this.$http.post(`api/admin/transaction/${item.id}/cancel`).then(response => {
+          iziToast.success({
+            title: 'Sukses',
+            message: 'Topup dibatalkan',
+            position: 'bottomRight'
+          })
+          btnUpdate.classList.remove('is-loading')
+          item.status = 4
+        }).catch(err => {
+          iziToast.error({
+            title: 'Error',
+            message: 'Terjadi Kesalahan',
+            position: 'bottomRight'
+          })
+          btnUpdate.classList.remove('is-loading')
+        })
+      }
     }
   }
 </script>
