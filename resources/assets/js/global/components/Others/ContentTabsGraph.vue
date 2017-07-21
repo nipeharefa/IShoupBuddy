@@ -43,6 +43,9 @@
         const index = this.product.vendors.findIndex( x => idSelected === x.vendor.id)
         this.vendorNameSelected = this.product.vendors[index]['vendor']['name']
       },
+      getAll () {
+
+      }
     },
     data () {
       return {

@@ -63,11 +63,13 @@
 <script>
 
   import accounting from 'accounting-js'
+  import { mapActions, mapGetters } from 'vuex'
 
   export default {
     mounted () {},
     props: ['product', 'show', 'product_vendor'],
     methods: {
+      ...mapActions(['setTotalCart']),
       addToCart (event) {
         const btnUpdate = event.target
         const data = {
@@ -85,6 +87,13 @@
       hideModals () {
         this.$emit('update:show', false)
         this.onSuccess = false
+        this.updateTotalCart()
+      },
+      updateTotalCart () {
+        const id = this.activeUser.id
+        this.$http.get(`/api/user/${id}/cartscounter`).then(response => {
+          this.setTotalCart(response.data.cart)
+        }).catch(err => err)
       },
       add (param1) {
         if (param1) {
@@ -96,6 +105,7 @@
       }
     },
     computed: {
+      ...mapGetters(['activeUser']),
       quas: {
         get () {
           return this.quantity

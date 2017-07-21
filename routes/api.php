@@ -52,6 +52,7 @@ Route::group(['namespace' => 'API'], function () {
     Route::resource('review', 'ReviewController',
         ['only' => ['index', 'show']]);
 
+    Route::get('statistic/all', 'PriceStatisticController@all');
     Route::resource('statistic', 'PriceStatisticController',
         ['only' => ['index', 'show']]);
 
