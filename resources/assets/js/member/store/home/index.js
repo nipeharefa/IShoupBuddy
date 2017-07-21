@@ -10,7 +10,7 @@ import { isActive, searchActive, activeUser, totalCart, categories } from 'state
 
 Vue.use(Vuex)
 
-const strict = process.env.NODE_ENV !== 'production'
+const strict = false
 
 const state = {
   activeUser,

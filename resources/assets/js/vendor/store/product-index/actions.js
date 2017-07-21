@@ -28,4 +28,4 @@ export const updateOwnProduct = ({ commit }, data) => {
   commit(UPDATE_OWN_PRODUCT, data)
 }
 
-export { setIsActive, setSearchActive, updateActiveUser } from 'actionsStore'
+export { setIsActive, setSearchActive, updateActiveUser, initCategories } from 'actionsStore'

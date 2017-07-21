@@ -7,4 +7,4 @@ export const ownProduct = state => state.ownProduct
 
 export const promo = state => state.promo
 
-export { isActive, searchActive } from 'gettersStore'
+export { isActive, searchActive, categories } from 'gettersStore'

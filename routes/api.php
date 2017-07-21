@@ -127,6 +127,7 @@ Route::group(['namespace' => 'API'], function () {
             Route::resource('product', 'ProductController');
             Route::resource('review', 'ReviewController',
                 ['except' => ['create', 'edit']]);
+            Route::resource('sales', 'SaleController');
         });
     });
 

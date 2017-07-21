@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ac95d5cfdfa6af938b8c136989eb0297",
+    "content-hash": "2c49e2769ac11a190c2e804a6eb625a3",
     "packages": [
         {
             "name": "alexpechkarev/geometry-library",
@@ -2572,6 +2572,46 @@
                 "debugbar"
             ],
             "time": "2017-01-05T08:46:19+00:00"
+        },
+        {
+            "name": "mistic100/randomcolor",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mistic100/RandomColor.php.git",
+                "reference": "a0cfb1322c2184bcc0bd177c77658a0b750cc33e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mistic100/RandomColor.php/zipball/a0cfb1322c2184bcc0bd177c77658a0b750cc33e",
+                "reference": "a0cfb1322c2184bcc0bd177c77658a0b750cc33e",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Colors\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Damien \"Mistic\" Sorel",
+                    "email": "contact@git.strangeplanet.fr",
+                    "homepage": "http://www.strangeplanet.fr"
+                }
+            ],
+            "description": "Generate attractive random colors",
+            "homepage": "https://github.com/mistic100/RandomColor.php",
+            "keywords": [
+                "color",
+                "generator",
+                "random"
+            ],
+            "time": "2015-09-30T18:54:16+00:00"
         },
         {
             "name": "monolog/monolog",

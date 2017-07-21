@@ -30,4 +30,9 @@ class ProductVendor extends Model
     {
         return $this->hasMany(Review::class);
     }
+
+    public function TransactionDetail()
+    {
+        return $this->hasMany(TransactionDetail::class);
+    }
 }

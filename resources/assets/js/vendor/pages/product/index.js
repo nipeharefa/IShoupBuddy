@@ -27,12 +27,14 @@ const app = new Vue({
     this.getOwnProducts()
     this.getProducts()
     this.getReviews()
+    this.getCategories()
   },
   methods: {
     ...mapActions([
       'initActiveUser',
       'initProducts',
       'initOwnProducts',
+      'initCategories',
       'initReviews'
     ]),
     getProducts () {
@@ -48,6 +50,11 @@ const app = new Vue({
     getReviews () {
       this.$http.get('api/vendor/review', []).then(response => {
         this.initReviews(response.data)
+      }).catch(err => err)
+    },
+    getCategories () {
+      this.$http.get('api/category').then(response => {
+        this.initCategories(response.data.categories)
       }).catch(err => err)
     }
   }

@@ -1,8 +1,10 @@
 <template>
   <div>
     <div class="columns">
-      <chart :chartData="dataCollection"
-    :options="{responsive: true, maintainAspectRatio: false}" />
+      <div class="column">
+        <chart :chartData="dataCollection"
+        :options="{responsive: true, maintainAspectRatio: false}" v-if="dataCollection" />
+      </div>
 
     </div>
   </div>
@@ -17,47 +19,32 @@
 
   export default {
     mounted () {
-      this.getStats()
+      this.getStats(),
+      this.getSales()
     },
     components: {
       Chart
     },
     data () {
       return {
-        stats: null
+        stats: null,
+        dataCollection: null
       }
     },
     computed: {
-      ...mapGetters(['activeUser']),
-      label () {
-        if (this.stats) {
-          return this.stats.label
-        }
-        return []
-      },
-      statistic () {
-        if (this.stats) {
-          return this.stats.transactions
-        }
-        return []
-      },
-      dataCollection () {
-        return {
-          labels: this.label,
-          datasets: [
-            {
-              label: 'Products',
-              data: this.statistic
-            }
-          ]
-        }
-      }
+      ...mapGetters(['activeUser'])
     },
     methods: {
       getStats () {
         this.$http.get(`api/vendor/${this.activeUser.id}/transactions`).then(response => {
           console.log(response.data)
           this.stats = response.data
+        })
+      },
+      getSales () {
+        this.$http.get(`api/vendor/sales`).then(response => {
+          console.log(response.data)
+          this.dataCollection = response.data.sales
         })
       }
     }

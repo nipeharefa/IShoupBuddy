@@ -1,7 +1,8 @@
 import {
   SET_ISACTIVE,
   SET_SEARCH_ACTIVE,
-  UPDATE_ACTIVE_USER
+  UPDATE_ACTIVE_USER,
+  INIT_CATEGORIES
 } from 'mutationsStore'
 
 export default {
@@ -18,6 +19,7 @@ export default {
   SET_ISACTIVE,
   SET_SEARCH_ACTIVE,
   UPDATE_ACTIVE_USER,
+  INIT_CATEGORIES,
   INIT_OWN_PRODUCTS (state, products) {
     state.ownProducts = products
   },

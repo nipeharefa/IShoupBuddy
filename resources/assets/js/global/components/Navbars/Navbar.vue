@@ -13,7 +13,7 @@
       <div :class="navClassC">
         <hamburger></hamburger>
         <logo></logo>
-        <navbarDropdownCategory />
+        <navbarDropdownCategory :categories="categories"/>
         <searchBox></searchBox>
         <slot name="right-icon"></slot>
         <slot name="desktop-nav"></slot>
@@ -54,7 +54,8 @@
     computed: {
       ...mapGetters([
         'isActive',
-        'activeUser'
+        'activeUser',
+        'categories'
       ])
     }
   }
