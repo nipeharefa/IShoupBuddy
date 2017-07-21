@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Models\Vendor;
 use Log;
 use Colors\RandomColor;
+use App\Models\ProductVendor;
 
 class SaleController extends BaseApiController
 {
@@ -29,7 +30,7 @@ class SaleController extends BaseApiController
             array_push($labels, $carbon->format('d/m/y'));
         }
 
-        array_reverse($labels);
+        $labels = array_reverse($labels);
 
         $stats = $vendor->ProductVendor->map(function($item) use ($range){
 
@@ -46,7 +47,7 @@ class SaleController extends BaseApiController
                 $carbon->subDays(1);
                 array_push($c, $a);
             }
-            $data['data'] = $c;
+            $data['data'] = array_reverse($c);
             return $data;
 
         });
@@ -91,7 +92,40 @@ class SaleController extends BaseApiController
      */
     public function show($id)
     {
-        //
+        $item = ProductVendor::find($id);
+        $range = $request->range ?? 7;
+        $carbon = Carbon::now();
+        $labels = [];
+        for ($i = 1; $i <= $range; $i++) {
+            $carbon->subDays(1);
+            array_push($labels, $carbon->format('d/m/y'));
+        }
+
+
+        $data['label'] = $item->Product->name;
+        $data['id'] = $item->id;
+        $data['backgroundColor'] = RandomColor::one(['format' => 'hex', 'luminosity' => 'random']);
+        $c = [];
+        $carbon = Carbon::now();
+        for ($i = 1; $i <= $range; $i++) {
+
+            $a = $item->TransactionDetail()
+                ->whereDate('created_at', $carbon->toDateString())
+                ->count();
+            $carbon->subDays(1);
+            array_push($c, $a);
+        }
+        $data['data'] = array_reverse($c);
+
+        $response = [
+            "sales" =>  [
+                "labels"   =>  $labels,
+                "datasets" =>  [$data]
+            ]
+        ];
+
+        return response()->json($response);
+
     }
 
     /**

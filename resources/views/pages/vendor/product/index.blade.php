@@ -18,9 +18,9 @@
     </script>
 
     @if (env('APP_ENV') == "production")
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.3/css/bulma.min.css">
     @else
-        <link rel="stylesheet" href="{{ asset('local/bulma/bulma.min.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.3/css/bulma.min.css">
     @endif
 
     <link rel="stylesheet" href="{{ mix('css/vendor/product/index.css') }}">

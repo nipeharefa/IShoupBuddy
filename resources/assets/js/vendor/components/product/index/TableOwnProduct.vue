@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <table class="table">
       <thead>
         <tr>
@@ -19,6 +18,7 @@
           <td>{{ item.price_string }}</td>
           <td>
             <a class="button is-small" @click="showModal(item, index)">Update Harga</a>
+            <a class="button is-small" @click="showModalTransaction(item, index)">Statistic</a>
           </td>
         </tr>
       </tbody>
@@ -29,6 +29,8 @@
     :index="index"
     :product="activeProduct"/>
 
+    <modalTransaction v-if="onShowStatistic" :index="index"
+    :product="activeProduct" :show.sync="onShowStatistic" />
   </div>
 </template>
 
@@ -36,6 +38,7 @@
 <script>
   import { mapGetters } from 'vuex'
   import ModalUpdatePrice from 'global/components/Product/ModalUpdatePrice.vue'
+  const ModalTransaction = () => import('./ModalTransaction.vue')
   export default {
     props: ['role'],
     computed: {
@@ -47,17 +50,24 @@
       return {
         activeModals: false,
         activeProduct: null,
-        index: null
+        index: null,
+        onShowStatistic: false,
       }
     },
     components: {
-      ModalUpdatePrice
+      ModalUpdatePrice,
+      ModalTransaction
     },
     methods: {
       showModal (item, index) {
         this.activeProduct = item
         this.index = index
         this.activeModals = !this.activeModals
+      },
+      showModalTransaction(item, index) {
+        this.activeProduct = item
+        this.index = index
+        this.onShowStatistic = !this.onShowStatistic
       }
     }
   }

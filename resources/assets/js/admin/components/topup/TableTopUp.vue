@@ -16,6 +16,8 @@
           <td>
             <a class="button is-small is-primary" @click="approve(item, $event)"
             :disabled="item.status === 1 ? 'disabled' : false">Approve</a>
+            <a class="button is-small is-danger"
+            :disabled="cancelState(item) ? 'disabled' : false">Cancel</a>
           </td>
           <td>{{ item.status_string }}</td>
         </tr>
@@ -35,6 +37,12 @@
       }
     },
     methods: {
+      cancelState (item) {
+        if (item.status === 0 || item.status === 4) {
+          return true
+        }
+        return false
+      },
       approve (item, event) {
         if (item.status === 1) {
           return;
