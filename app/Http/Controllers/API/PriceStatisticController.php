@@ -8,6 +8,7 @@ use App\Models\ProductVendor;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Validator;
+use Carbon\Carbon;
 
 class PriceStatisticController extends Controller
 {
@@ -77,21 +78,29 @@ class PriceStatisticController extends Controller
 
         }
 
-         $productVendor = ProductVendor::where('product_id', $request->product_id)
-                ->get()->transform(function($item) use ($range) {
+         $productVendor = ProductVendor::where('product_id', $request->product_id);
 
-                    $data = $item->Statistic()->select('harga')
-                                    ->orderByDesc('updated_at')
-                                    ->take($range)->get()->reverse()->flatten();
-                    return [
-                        'label' =>  $item->Vendor->name,
-                        "data" =>  collect($data)->map(function($item){
-                            return $item->harga;
-                        })
-                    ];
-                });
+         if ($request->vendor_id) {
+             $productVendor = $productVendor->where('vendor_id', $request->vendor_id);
+         }
+        $datasets = $productVendor->get()->transform(function($item) use ($range) {
+            $data = $item->Statistic()->select('harga')
+                            ->orderByDesc('updated_at')
+                            ->take($range)->get()->reverse()->flatten();
+            return [
+                'label' =>  $item->Vendor->name,
+                "data" =>  collect($data)->map(function($item){
+                    return $item->harga;
+                })
+            ];
+        });
 
-         return $productVendor;
+         $response = [
+            "labels"        =>  $this->generateLabels($range),
+            "datasets"    =>  $datasets
+         ];
+
+         return response()->json($response);
     }
 
     protected function transformDate($c) {
@@ -101,5 +110,22 @@ class PriceStatisticController extends Controller
 
     protected function transformHarga($c) {
 
+    }
+
+    protected function generateLabels($range) {
+        $carbon = Carbon::now();
+        $labels = [];
+        for ($i = 1; $i <= $range; $i++) {
+            $carbon->subDays(1);
+            array_push($labels, $carbon->format('d/m/y'));
+        }
+        return array_reverse($labels);
+    }
+
+    protected function generateColorGraph()
+    {
+        $rand = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f');
+        $color = '#'.$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)];
+        return $color;
     }
 }

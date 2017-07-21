@@ -3,8 +3,8 @@
     <div class="columns">
       <div class="column is-3">
         <div class="select">
-          <select v-model="vendorSelected" @change="getStats">
-            <option value="">Pilih Vendor</option>
+          <select v-model="vendorSelected" @change="getAll">
+            <option value="">Semua Vendor</option>
             <option v-for="item in vendors" :value="item.vendor.id">{{ item.vendor.name }}</option>
           </select>
         </div>
@@ -15,7 +15,7 @@
         <chart-child
           :chartData="dataCollection"
           :data="dataCollection"
-          :options="{responsive: true, maintainAspectRatio: false}">
+          :options="{responsive: true, maintainAspectRatio: false}" v-if="dataCollection">
         </chart-child>
       </div>
     </div>
@@ -29,7 +29,9 @@
   import moment from 'moment'
 
   export default {
-    created () {},
+    created () {
+      this.getAll()
+    },
     methods: {
       getStats () {
         const idSelected = this.vendorSelected
@@ -44,14 +46,19 @@
         this.vendorNameSelected = this.product.vendors[index]['vendor']['name']
       },
       getAll () {
-
+        const vendor = this.vendorSelected
+        this.$http.get(`api/statistic/all?&product_id=${this.product.id}&vendor_id=${vendor}`).then(response => {
+          console.log(response.data)
+          this.dataCollection = response.data
+        }).catch(err => err)
       }
     },
     data () {
       return {
         vendorSelected: "",
         stats: null,
-        vendorNameSelected: ""
+        vendorNameSelected: "",
+        dataCollection: null
       }
     },
     computed: {
@@ -78,17 +85,17 @@
         }
         return null
       },
-      dataCollection () {
-        return {
-          labels: this.label,
-          datasets: [
-            {
-              label: this.vendorNameSelected,
-              data: this.statsResult
-            }
-          ]
-        }
-      }
+      // dataCollection () {
+      //   return {
+      //     labels: this.label,
+      //     datasets: [
+      //       {
+      //         label: this.vendorNameSelected,
+      //         data: this.statsResult
+      //       }
+      //     ]
+      //   }
+      // }
     },
     components: {
       ChartChild

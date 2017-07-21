@@ -1437,7 +1437,7 @@ charenc@~0.0.1:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/charenc/-/charenc-0.0.2.tgz#c0a1d2f3a7092e03774bfa83f14c0fc5790a8667"
 
-chart.js@^2.5.0:
+chart.js@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-2.6.0.tgz#308f9a4b0bfed5a154c14f5deb1d9470d22abe71"
   dependencies:
@@ -7443,7 +7443,7 @@ vue-bulma-collapse@^1.0.3:
   dependencies:
     animejs "1"
 
-vue-chartjs@^2.6.0:
+vue-chartjs@^2.7.1:
   version "2.7.1"
   resolved "https://registry.yarnpkg.com/vue-chartjs/-/vue-chartjs-2.7.1.tgz#4e8a01168f10bf747630930c3f9f1130fd00694a"
   dependencies:
