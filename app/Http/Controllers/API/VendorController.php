@@ -4,11 +4,11 @@ namespace App\Http\Controllers\API;
 
 use App\Helpers\Transformers\VendorTransformer;
 use App\Http\Controllers\Controller;
-use App\Models\Vendor;
 use App\Models\Transaction;
+use App\Models\Vendor;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 
 class VendorController extends Controller
 {
@@ -136,15 +136,15 @@ class VendorController extends Controller
     {
         $range = $request->range ?? 7;
 
-        $labels = array();
-        $transactionCounter = array();
+        $labels = [];
+        $transactionCounter = [];
 
-        for ($i=0; $i <7 ; $i++) {
+        for ($i = 0; $i < 7; $i++) {
             $date = Carbon::now()->subDays($i)->toDateString();
             array_push($labels, $date);
 
-            $transactions = Transaction::whereHas('Detail', function($item) use($vendor) {
-                return $item->whereHas('ProductVendor', function($item) use($vendor) {
+            $transactions = Transaction::whereHas('Detail', function ($item) use ($vendor) {
+                return $item->whereHas('ProductVendor', function ($item) use ($vendor) {
                     return $item->where('vendor_id', $vendor->id);
                 });
             })->whereDate('created_at', $date)->count();
@@ -152,7 +152,6 @@ class VendorController extends Controller
             // $transaction = Transaction::whereDate('created_at', $date)
             array_push($transactionCounter, $transactions);
         }
-
 
         // $to = Carbon::now();
         // $from = Carbon::now()->subDay()
@@ -171,12 +170,12 @@ class VendorController extends Controller
         // });
 
         $response = [
-            "status"        =>  "OK",
-            "label"         =>  $labels,
-            "transactions"  =>  $transactionCounter,
-            "message"       =>  null
+            'status'        => 'OK',
+            'label'         => $labels,
+            'transactions'  => $transactionCounter,
+            'message'       => null,
         ];
-        return $response;
 
+        return $response;
     }
 }

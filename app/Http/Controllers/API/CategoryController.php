@@ -82,10 +82,10 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->save();
 
-          $response = [
-            "status"        =>  null,
-            "categories"    =>  $category,
-            "message"       =>  null
+        $response = [
+            'status'        => null,
+            'categories'    => $category,
+            'message'       => null,
         ];
 
         return response()->json($response, 200);

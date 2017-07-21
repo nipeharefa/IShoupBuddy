@@ -18,6 +18,5 @@ class InsertDefaultCategory extends Seeder
         ];
 
         Category::create($data);
-
     }
 }

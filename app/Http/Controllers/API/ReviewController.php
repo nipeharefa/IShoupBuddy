@@ -31,8 +31,8 @@ class ReviewController extends Controller
 
         $user = Auth::guard('api')->user();
 
-        $sortBy = $request->sortBy ?? "created_at";
-        $sortOrder = "desc";
+        $sortBy = $request->sortBy ?? 'created_at';
+        $sortOrder = 'desc';
 
         $perPage = $request->perpage ?? 10;
         $page = $request->page ?? 1;
@@ -114,16 +114,15 @@ class ReviewController extends Controller
             ];
 
             $response = [
-                'status'        => 'OK',
-                'message'       => null,
-                'reviews'       => $reviewTransform,
-                'total_reviews' => $total_reviews,
+                'status'         => 'OK',
+                'message'        => null,
+                'reviews'        => $reviewTransform,
+                'total_reviews'  => $total_reviews,
                 'average_review' => Review::avg('rating'),
-                'summary'       => array_search(max($summaryAvg), $summaryAvg, true),
+                'summary'        => array_search(max($summaryAvg), $summaryAvg, true),
             ];
 
             return response()->json($response, 200);
-
         } catch (Exception $e) {
             if ($e instanceof GetReviewException) {
                 $err = [

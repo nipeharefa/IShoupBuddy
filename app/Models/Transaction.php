@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Helpers\Traits\UserTrait;
 use Illuminate\Database\Eloquent\Model;
-use \Znck\Eloquent\Traits\BelongsToThrough;
 
 class Transaction extends Model
 {

@@ -20,7 +20,7 @@ class SearchController extends Controller
 
         $view = view('pages.search.index');
 
-        # example.com/search?q=jasdfk&category_id=123
+        // example.com/search?q=jasdfk&category_id=123
         $q = $request->q;
         $category_id = $request->category_id ?? null;
 

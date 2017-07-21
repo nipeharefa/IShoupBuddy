@@ -14,7 +14,7 @@ class UserTransformers extends AbstractTransformer
             'id'             => $user->id,
             'name'           => $user->name,
             'picture_url'    => $user->picture_url,
-            "picture_urls"  =>  $this->generateUserPictureLinks($user->picture_url)
+            'picture_urls'   => $this->generateUserPictureLinks($user->picture_url),
         ];
 
         if (isset($opts['show_email']) && $opts['show_email']) {
