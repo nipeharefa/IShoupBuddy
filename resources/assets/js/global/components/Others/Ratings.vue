@@ -1,17 +1,61 @@
 <template>
 	<div class="rating">
 		<star-rating :rating="ratings" :star-size="20" :read-only="true" :showRating="false"></star-rating>
-		<p>({{ ratings }} Ulasan)</p>
+		<p class="total_reviewers">({{ ratings }} Ulasan)</p>
+    <span class="tag is-small" :class="classRating" title="Hasil Sentimen">
+      {{ ratingString }}
+    </span>
 	</div>
 </template>
 
+<style lang="scss" scoped>
+  .total_reviewers {
+    padding: 0 0.5rem;
+  }
+</style>
 
 <script>
 import StarRating from 'vue-star-rating'
+import { mapGetters } from 'vuex'
+
 export default {
   props: {
     ratings: {
       default: 0
+    }
+  },
+  computed: {
+    ...mapGetters(['product']),
+    ratingString () {
+      if (this.product) {
+        switch(this.product.summary_string) {
+          case 'pos':
+            return "Positif"
+            break
+          case 'neg':
+            return "Negatif"
+            break
+          default:
+            return "Netral"
+            break
+        }
+      }
+      return "Unknown"
+    },
+    classRating () {
+      if (this.product) {
+        switch(this.product.summary_string) {
+          case 'pos':
+            return 'is-success'
+            break
+          case 'neg':
+            return 'is-danger'
+            break
+          default:
+            return 'is-info'
+            break
+        }
+      }
     }
   },
   components: {

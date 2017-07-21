@@ -24,6 +24,7 @@
   }
 
   div.rating {
+    margin: 0.7rem 0;
     p {
       font-size: $size-7;
     }
@@ -163,4 +164,7 @@ canvas#line-chart {
       }
     }
   }
+}
+.cart-success {
+  text-align: center;
 }

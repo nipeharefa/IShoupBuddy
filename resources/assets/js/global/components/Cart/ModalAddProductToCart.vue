@@ -1,13 +1,13 @@
 <template>
   <div class="modal modal-product-to-cart" :class="{'is-active': show}">
-    <div class="modal-background"></div>
+    <div class="modal-background" @click="hideModals"></div>
     <div class="modal-card">
     <header class="modal-card-head">
       <!-- <p class="modal-card-title">Modal title</p> -->
       <button class="delete" @click="hideModals"></button>
     </header>
       <section class="modal-card-body">
-        <div class="c_info">
+        <div class="c_info" v-if="!onSuccess">
 
           <div class="c_info_vendor">
            <p>Nama Vendor</p>
@@ -37,16 +37,22 @@
                   </p>
                 </div>
                 <span class="total">
-                  Rp. {{ total }}
+                  {{ total }}
                 </span>
               </div>
             </div>
           </div>
 
         </div>
+
+        <div class="cart-success" v-if="onSuccess">
+          <h1><b>{{ product.name }}</b> berhasil ditambahkan ke keranjang belanja</h1>
+          <a href="/cart" class="is-small">Lihat Keranjang Belanja</a>
+        </div>
       </section>
       <footer class="modal-card-foot">
-        <a class="button is-danger" @click="addToCart">Tambahakan ke Keranjang Belanja</a>
+        <a class="button is-danger" @click="addToCart($event)" v-if="!onSuccess">Tambhakan ke Keranjang Belanja</a>
+        <a class="button is-danger" @click="hideModals" v-if="onSuccess">Tutup</a>
         <!-- <a class="button">Cancel</a> -->
       </footer>
     </div>
@@ -56,22 +62,29 @@
 
 <script>
 
+  import accounting from 'accounting-js'
+
   export default {
     mounted () {},
     props: ['product', 'show', 'product_vendor'],
     methods: {
-      addToCart () {
+      addToCart (event) {
+        const btnUpdate = event.target
         const data = {
           'product_vendor_id': this.product_vendor.id,
           'quantity': this.quantity
         }
-        console.log(data)
+        btnUpdate.classList.add('is-loading')
         this.$http.post('api/cart', data).then(response => {
-          console.log(response.data)
-        }).catch(err => err)
+          btnUpdate.classList.remove('is-loading')
+          this.onSuccess = true
+        }).catch(err => {
+          btnUpdate.classList.remove('is-loading')
+        })
       },
       hideModals () {
         this.$emit('update:show', false)
+        this.onSuccess = false
       },
       add (param1) {
         if (param1) {
@@ -97,12 +110,18 @@
         }
       },
       total () {
-        return this.quas * this.product_vendor.price
+        const t =  this.quas * this.product_vendor.price
+        return accounting.formatMoney(t, {
+          symbol: 'Rp ',
+          thousand: '.',
+          precision: 0
+        })
       }
     },
     data () {
       return {
-        quantity: 1
+        quantity: 1,
+        onSuccess: false
       }
     }
   }

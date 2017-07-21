@@ -32,6 +32,7 @@
     "vue": "^2.2.6"
   },
   "dependencies": {
+    "accounting-js": "^1.1.1",
     "babel-jest": "^20.0.3",
     "bulma": "^0.4.3",
     "chart.js": "^2.5.0",

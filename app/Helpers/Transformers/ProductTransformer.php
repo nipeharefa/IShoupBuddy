@@ -91,6 +91,7 @@ class ProductTransformer extends AbstractTransformer
 
         Log::info($count);
         $arr['summary'] = ['mean' => $summaryAvg, 'count' =>  $count];
+        $arr['summary_string'] = collect($summaryAvg)->sort()->reverse()->keys()->first();
 
         return $arr;
     }
