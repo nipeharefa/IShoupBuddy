@@ -6,6 +6,7 @@
         <td>Pengguna</td>
         <td>Nominal</td>
         <td>Status</td>
+        <td>Keterangan</td>
       </thead>
       <tbody>
         <tr v-for="item in topup">
@@ -16,6 +17,7 @@
             <a class="button is-small is-primary" @click="approve(item, $event)"
             :disabled="item.status === 1 ? 'disabled' : false">Approve</a>
           </td>
+          <td>{{ item.status_string }}</td>
         </tr>
       </tbody>
     </table>

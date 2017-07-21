@@ -77,7 +77,9 @@
           return 0;
         })
 
-        return sortedProduct
+        return sortedProduct.filter(x => {
+          return x.type === "User"
+        })
       }
     },
     methods: {

@@ -92,6 +92,7 @@ Route::group(['namespace' => 'API'], function () {
 
         Route::post('product-vendor/restore/{id}', 'ProductVendorController@restore');
 
+        Route::post('transaction/{transaction}/upload', 'TransactionController@uploadPhotoTopup');
         Route::resource('transaction', 'TransactionController',
             ['only' => ['index', 'store']]);
 

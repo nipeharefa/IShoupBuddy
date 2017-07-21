@@ -6,6 +6,9 @@ use App\Helpers\Transformers\TransactionTransformer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTransaction;
 use App\Models\User;
+use App\Models\Transaction;
+use App\Models\Saldo;
+use Carbon\Carbon;
 use DB;
 use Exception;
 use Illuminate\Http\Request;
@@ -225,5 +228,26 @@ class TransactionController extends Controller
 
         $userSaldo->nominal -= $nominal;
         $userSaldo->save();
+    }
+
+    public function uploadPhotoTopup(Transaction $transaction, Request $request)
+    {
+        if (!$transaction->type === Saldo::class) {
+            return response()->json([], 400);
+        }
+        $datetime = Carbon::now()->timestamp;
+        $filename = "{$transaction->id}_{$datetime}";
+
+        $path = $request->image->storeAs('original', "{$filename}.jpg", 'public');
+
+        $transaction->attachments = $filename .".jpg";
+        $transaction->status = 3;
+        $transaction->save();
+
+        $response = [
+            "transaction"   =>  TransactionTransformer::transform($transaction)
+        ];
+
+        return response()->json($response);
     }
 }

@@ -19,6 +19,7 @@ class TransactionTransformer extends AbstractTransformer
             'updated_at'        => $model->updated_at->toW3cString(),
             'links'             => $this->getLinkAction($model),
             'shipment'          => $model->TransactionShippment,
+            "attachments"       => $this->generateUserPictureLinks($model->attachments)
         ];
 
         if ($this->isRelationshipLoaded($model, 'Detail')) {
@@ -51,6 +52,9 @@ class TransactionTransformer extends AbstractTransformer
                 break;
             case 1:
                 return 'Success';
+                break;
+            case 3:
+                return 'Attachment Uploaded';
                 break;
             default:
                 return 'Fail / Cancel';
