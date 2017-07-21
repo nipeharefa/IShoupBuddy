@@ -272,13 +272,12 @@ class UserController extends BaseApiController implements DefaultAPIResponse
         }
     }
 
-
     public function getReviewAction(User $user, Request $request)
     {
         $response = [
-            "reviews"   =>  ReviewTransformer::transform($user->Review),
-            "status"    =>  "OK",
-            "message"   =>  null
+            'reviews'   => ReviewTransformer::transform($user->Review),
+            'status'    => 'OK',
+            'message'   => null,
         ];
 
         return response()->json($response);

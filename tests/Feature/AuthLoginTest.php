@@ -10,6 +10,7 @@ class AuthLoginTest extends TestCase
     {
         parent::setUp();
     }
+
     /**
      * A basic test example.
      *

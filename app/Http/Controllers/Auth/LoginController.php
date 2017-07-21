@@ -74,7 +74,7 @@ class LoginController extends Controller
                 break;
         }
 
-        $data =  [
+        $data = [
             'message'       => '',
             'status'        => 'OK',
             'user'          => $user,

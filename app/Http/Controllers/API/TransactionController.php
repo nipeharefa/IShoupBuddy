@@ -5,9 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Helpers\Transformers\TransactionTransformer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTransaction;
-use App\Models\User;
-use App\Models\Transaction;
 use App\Models\Saldo;
+use App\Models\Transaction;
+use App\Models\User;
 use Carbon\Carbon;
 use DB;
 use Exception;
@@ -240,12 +240,12 @@ class TransactionController extends Controller
 
         $path = $request->image->storeAs('original', "{$filename}.jpg", 'public');
 
-        $transaction->attachments = $filename .".jpg";
+        $transaction->attachments = $filename.'.jpg';
         $transaction->status = 3;
         $transaction->save();
 
         $response = [
-            "transaction"   =>  TransactionTransformer::transform($transaction)
+            'transaction'   => TransactionTransformer::transform($transaction),
         ];
 
         return response()->json($response);

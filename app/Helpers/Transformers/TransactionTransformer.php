@@ -19,7 +19,7 @@ class TransactionTransformer extends AbstractTransformer
             'updated_at'        => $model->updated_at->toW3cString(),
             'links'             => $this->getLinkAction($model),
             'shipment'          => $model->TransactionShippment,
-            "attachments"       => $this->generateUserPictureLinks($model->attachments)
+            'attachments'       => $this->generateUserPictureLinks($model->attachments),
         ];
 
         if ($this->isRelationshipLoaded($model, 'Detail')) {

@@ -46,7 +46,7 @@ Route::group(['namespace' => 'API'], function () {
         ['only' => ['index', 'show']]);
 
     Route::resource('report', 'ReportController',
-            ['only' =>  ['index']]);
+            ['only' => ['index']]);
 
     Route::resource('recommendation', 'RecommendationController',
         ['only' => ['index']]);
@@ -77,7 +77,7 @@ Route::group(['namespace' => 'API'], function () {
             ['only' => ['store', 'update']]);
 
         Route::resource('report', 'ReportController',
-            ['only' =>  ['store', 'update', 'destroy']]);
+            ['only' => ['store', 'update', 'destroy']]);
 
         Route::resource('product-vendor', 'ProductVendorController',
             ['only' => ['index', 'store', 'destroy', 'update']]);

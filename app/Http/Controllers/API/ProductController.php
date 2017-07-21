@@ -72,9 +72,9 @@ class ProductController extends Controller
             'products'  => ProductTransformer::transform($pagination->getCollection(), $options),
             'message'   => null,
             'link'      => [
-                "next"  =>  $pagination->nextPageUrl(),
-                "total" =>  $pagination->lastPage()
-            ]
+                'next'  => $pagination->nextPageUrl(),
+                'total' => $pagination->lastPage(),
+            ],
         ];
 
         return response()->json($data, 200);
@@ -271,25 +271,23 @@ class ProductController extends Controller
 
     public function getGroupRating(Product $product)
     {
-
-        $arr =  $product->Review->groupBy(function($item){
+        $arr = $product->Review->groupBy(function ($item) {
             return strval(round($item->rating));
-        })->map(function($item){
+        })->map(function ($item) {
             return count($item);
         })->toArray();
         $arr = Arr::wrap($arr);
-        for ($i=1; $i <=5 ; $i++) {
+        for ($i = 1; $i <= 5; $i++) {
             if (!array_key_exists($i, $arr)) {
                 $arr[$i] = 0;
             }
         }
 
-        return response()->json($arr,200);
+        return response()->json($arr, 200);
     }
 
-
-    public function getNewestProduct(Request $request) {
-
+    public function getNewestProduct(Request $request)
+    {
         $perPage = $request->perpage ?? 10;
         $page = $request->page ?? 1;
 
@@ -298,21 +296,20 @@ class ProductController extends Controller
         $pagination = $product->paginate($perPage, ['*'], 'page', $page);
 
         $repsonse = [
-            "messge"        =>  null,
-            "products"      =>  ProductTransformer::transform($pagination->getCollection()),
-            "pagination"    =>  [
-                "prev"  =>  $pagination->previousPageUrl(),
-                "next"  =>  $pagination->nextPageUrl(),
-                "total" =>  $pagination->lastPage()
-            ]
+            'messge'        => null,
+            'products'      => ProductTransformer::transform($pagination->getCollection()),
+            'pagination'    => [
+                'prev'  => $pagination->previousPageUrl(),
+                'next'  => $pagination->nextPageUrl(),
+                'total' => $pagination->lastPage(),
+            ],
         ];
 
         return response()->json($repsonse);
-
     }
 
-    public function getProductTrending(Request $request) {
-
+    public function getProductTrending(Request $request)
+    {
         $product = Product::withCount('Review')->orderBy('review_count', 'desc');
 
         $perPage = $request->perpage ?? 10;
@@ -321,13 +318,13 @@ class ProductController extends Controller
         $pagination = $product->paginate($perPage, ['*'], 'page', $page);
 
         $repsonse = [
-            "messge"        =>  null,
-            "products"      =>  ProductTransformer::transform($pagination->getCollection()),
-            "pagination"    =>  [
-                "prev"  =>  $pagination->previousPageUrl(),
-                "next"  =>  $pagination->nextPageUrl(),
-                "total" =>  $pagination->lastPage()
-            ]
+            'messge'        => null,
+            'products'      => ProductTransformer::transform($pagination->getCollection()),
+            'pagination'    => [
+                'prev'  => $pagination->previousPageUrl(),
+                'next'  => $pagination->nextPageUrl(),
+                'total' => $pagination->lastPage(),
+            ],
         ];
 
         return response()->json($repsonse);

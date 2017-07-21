@@ -2,10 +2,9 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\TestCase;
 
 class RegisterControllerTest extends TestCase
 {
@@ -20,10 +19,10 @@ class RegisterControllerTest extends TestCase
     public function testPostValidRegister()
     {
         $data = [
-            "name"      =>  "Foo",
-            "email"     =>  "foo@bar.com",
-            "password"  =>  "foo",
-            "phone"     =>  "082275121178"
+            'name'      => 'Foo',
+            'email'     => 'foo@bar.com',
+            'password'  => 'foo',
+            'phone'     => '082275121178',
         ];
 
         $response = $this->json('POST', 'auth/register', $data);

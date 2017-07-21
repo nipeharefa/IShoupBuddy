@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Report;
-use Illuminate\Http\Request;
-use App\Http\Controllers\BaseApiController;
-use Exception;
-use DB;
-use Validator;
 use App\Helpers\Transformers\ReviewTransformer;
+use App\Http\Controllers\BaseApiController;
+use App\Models\Report;
+use Exception;
+use Illuminate\Http\Request;
+use Validator;
 
 class ReportController extends BaseApiController
 {
@@ -19,13 +18,13 @@ class ReportController extends BaseApiController
      */
     public function index()
     {
-        $mapReportReview = Report::get()->map(function($item){
+        $mapReportReview = Report::get()->map(function ($item) {
             return $item->Review;
         });
         $reports = ReviewTransformer::transform($mapReportReview);
 
         $data = [
-            "reports"   =>  $reports
+            'reports'   => $reports,
         ];
 
         return response()->json($data, 200);
@@ -44,39 +43,37 @@ class ReportController extends BaseApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-            'review_id' =>  'required'
+        $validator = Validator::make($request->all(), [
+            'review_id' => 'required',
         ]);
 
         $validator->validate();
 
         try {
-
             $data = [
-                "user_id"   =>  $this->getUser()->id,
-                "review_id" =>  $request->review_id
+                'user_id'   => $this->getUser()->id,
+                'review_id' => $request->review_id,
             ];
 
             $report = Report::updateOrCreate($data);
 
             return response()->json($report, 201);
-
         } catch (Exception $e) {
-
             return response()->json($e->getMessage(), 400);
         }
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Report  $report
+     * @param \App\Report $report
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Report $report)
@@ -87,8 +84,9 @@ class ReportController extends BaseApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Report  $report
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Report              $report
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Report $report)
@@ -99,7 +97,8 @@ class ReportController extends BaseApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Report  $report
+     * @param \App\Report $report
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Report $report)

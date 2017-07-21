@@ -183,32 +183,29 @@ class CompareController extends BaseApiController
 
     public function compare()
     {
-        $score = array();
+        $score = [];
 
-        $P = array();
-        $P['sets'] = array();
+        $P = [];
+        $P['sets'] = [];
 
         $dataTest = [
-            "150ml"
+            '150ml',
         ];
 
         $dataTrain = [
             1 => [
-                "150ml"
-            ]
+                '150ml',
+            ],
         ];
 
-        $score = array();
+        $score = [];
 
         foreach ($dataTrain as $index => $arr) {
-
             $scores[$index] = 1;
 
             foreach ($dataTest as $key => $cArr) {
-                # code...
+                // code...
             }
         }
-
-        return;
     }
 }

@@ -2,10 +2,9 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\TestCase;
 
 class LoginControllerTest extends TestCase
 {
@@ -36,8 +35,8 @@ class LoginControllerTest extends TestCase
         $user = User::find(1);
 
         $data = [
-            "email"     =>  $user->email,
-            "password"  =>  "secret"
+            'email'     => $user->email,
+            'password'  => 'secret',
         ];
         $response = $this->json('POST', 'auth/login', $data);
         $this->assertTrue($this->isAuthenticated());
@@ -60,8 +59,8 @@ class LoginControllerTest extends TestCase
         $a = $this->seed('InsertDefaultAdmin');
         $admin = User::whereRole(0)->first();
         $data = [
-            "email"     =>  $admin->email,
-            "password"  =>  "secret"
+            'email'     => $admin->email,
+            'password'  => 'secret',
         ];
         $response = $this->json('POST', 'auth/login', $data);
         $this->assertTrue($this->isAuthenticated());
@@ -76,8 +75,8 @@ class LoginControllerTest extends TestCase
         $this->seed('InsertVendorsTableSeeder');
         $vendor = User::whereRole(2)->first();
         $data = [
-            "email"     =>  $vendor->email,
-            "password"  =>  "secret"
+            'email'     => $vendor->email,
+            'password'  => 'secret',
         ];
         $response = $this->json('POST', 'auth/login', $data);
         $this->assertTrue($this->isAuthenticated());
