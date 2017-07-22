@@ -110,7 +110,8 @@ if (mix.config.inProduction) {
 
 mix.browserSync({
   open: false,
-  proxy: 'skripsi.home.dev'
+  proxy: 'skripsi.home.dev',
+  reloadDelay: 2000
 });
 
 mix.options({
