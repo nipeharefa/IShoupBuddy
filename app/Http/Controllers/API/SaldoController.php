@@ -9,6 +9,7 @@ use App\Models\Saldo;
 use DB;
 use Exception;
 use Illuminate\Http\Request;
+use App\Helpers\Transformers\TransactionTransformer;
 
 class SaldoController extends Controller
 {
@@ -38,7 +39,7 @@ class SaldoController extends Controller
 
     protected function getHistorySaldo(Saldo $saldo)
     {
-        return transform($saldo->Transaction);
+        return TransactionTransformer::transform($saldo->Transaction);
     }
 
     /**
