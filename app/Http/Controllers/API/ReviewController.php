@@ -54,7 +54,7 @@ class ReviewController extends Controller
                     $review = Review::orderBy('rating', 'asc');
                     break;
                 default:
-                    $review = Review::orderBy('created_at', 'desc');
+                    $review = Review::orderBy('updated_at', 'desc');
                     break;
             }
 
@@ -62,7 +62,7 @@ class ReviewController extends Controller
                 $review->whereUserId($request->user_id);
             } else {
                 if ($user && $request->user_id != $user->id) {
-                    $review->where('user_id', '!=', $user->id);
+                    // $review->where('user_id', '!=', $user->id);
 
                     $id = $user->id;
                     $product_id = $request->product_id ?? null;
