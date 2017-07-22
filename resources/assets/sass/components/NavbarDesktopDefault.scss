@@ -1,57 +1,57 @@
-.mosqito {
-  display: flex;
-  background-color: darken($primary, 4%);
-
-  .container {
-
-    display: flex;
-
-    ul {
-
-      justify-content: flex-end;
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-
-      li {
-        font-size: $size-7;
-        padding: 0 1rem;
-        a {
-          color: #fff;
-          font-family: $family-sans-serif;
-        }
-      }
-
+div.navbar-wrapper {
+  // Overwrite Navbar Bckground
+  background-color: $primary;
+  nav.navbar {
+    background-color: $primary;
+    // Overwrite Navbar Burger
+    div.navbar-burger {
+      margin-left: 0 !important;
+      background-color: $primary;
     }
-
   }
 
-}
-.nav {
-  background: $primary;
-
-  @include desktop() {
-    height: 4.5rem !important;
-
-    .nav-left {
-      display: flex;
-      justify-content: center;
-      flex: 1 !important;
-    }
-
-    .nav-right {
-      display: flex;
-      justify-content: left;
-
-      i {
-        font-size: 1.5rem !important;
-        &.white {
-          color: #fff !important;
-        }
+  // Overwrite Color Down Arrow
+  .has-dropdown {
+    a.navbar-link {
+      color: findColorInvert($primary);
+      &:after {
+        // border: 1px solid white !important;
+        border-bottom: 1px solid findColorInvert($primary);
+        border-left: 1px solid findColorInvert($primary);
       }
     }
   }
-  .akumaubelanja {
-    width: 17rem !important;
+
+  // Overide SearchBox
+  .long-searchbox {
+    width: 20rem !important;
+  }
+
+  .dropdown-category {
+    margin: 0 1rem;
+  }
+
+  // No Effect when hover navbar-item
+  .no-hover-change {
+    color: white;
+    &:hover {
+      background: none;
+    }
+  }
+  .link-no-hover-change {
+    background: none;
+  }
+
+  // Add Custome Class righ dropdown
+  .dropdown-right {
+    right: 0;
+    left: initial;
+  }
+
+  span.navbar-user-fullname {
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    width: 8rem;
   }
 }

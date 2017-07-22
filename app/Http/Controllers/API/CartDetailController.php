@@ -144,4 +144,11 @@ class CartDetailController extends Controller
 
         return $vendor;
     }
+
+    public function updateQuantity(CartDetail $id, Request $request)
+    {
+        $id->quantity = $request->quantity;
+        $id->save();
+        return $id;
+    }
 }

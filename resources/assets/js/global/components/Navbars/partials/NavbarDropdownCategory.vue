@@ -1,10 +1,11 @@
 <template>
-  <div class="navbar-item has-dropdown is-hoverable">
-    <a class="navbar-link  is-active" href="/documentation/overview/start/">
+  <div class="navbar-item has-dropdown is-hoverable dropdown-category no-hover-change">
+    <a class="navbar-link" href="#">
       Kategori
     </a>
     <div class="navbar-dropdown ">
-      <a class="navbar-item " href="/documentation/overview/start/" v-for="item in categoriesSorted">
+      <a class="navbar-item " href="/search"
+      v-for="item in categories" v-if="categories">
         {{ item.name }}
       </a>
     </div>

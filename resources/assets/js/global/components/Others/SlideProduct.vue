@@ -1,22 +1,18 @@
 <template>
-  <div class="swiper-container">
-    <div class="swiper-wrapper">
-      <div class="nusa swiper-slide" v-for="item in products">
-        <a :href="`/product/${item.id}`" class="alinkto">
-          <product-card :product="item"></product-card>
-        </a>
+  <div>
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="nusa swiper-slide" v-for="item in products">
+          <a :href="`/product/${item.id}`" class="alinkto">
+            <product-card :product="item"></product-card>
+          </a>
+        </div>
       </div>
     </div>
     <div class="swiper-button-prev"></div>
     <div class="swiper-button-next"></div>
-</div>
+  </div>
 </template>
-
-<style>
-  .swiper-container {
-    width: 100% !important;
-  }
-</style>
 
 <script>
   const ProductCard = () => import('global/components/Others/ProductCard.vue')
