@@ -26,7 +26,7 @@
           Produk Favorit
         </a>
         <hr class="navbar-divider">
-        <a class="navbar-item " href="#">
+        <a class="navbar-item " href="#" @click="logout">
           Logout
         </a>
       </div>
@@ -43,6 +43,17 @@
       ...mapGetters([
         'activeUser'
       ])
+    },
+    methods: {
+      logout () {
+        console.log('logout')
+        this.$http.delete('auth/logout').then(response => {
+          window.location.assign('/')
+          console.log(response)
+        }).catch(err => {
+          console.log(err)
+        })
+      }
     }
   }
 </script>
