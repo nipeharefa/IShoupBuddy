@@ -9,9 +9,8 @@
       <section class="modal-card-body">
         <div class="c_info" v-if="!onSuccess">
 
-          <div class="c_info_vendor">
-           <p>Nama Vendor</p>
-           <p>DKI Jakarta</p>
+          <div class="c_info_vendor" v-if="product_vendor.vendor">
+           <p>{{ product_vendor.vendor.name }}</p>
           </div>
           <div class="c_info_product">
             <div class="c_product_image">
@@ -51,7 +50,7 @@
         </div>
       </section>
       <footer class="modal-card-foot">
-        <a class="button is-danger" @click="addToCart($event)" v-if="!onSuccess">Tambhakan ke Keranjang Belanja</a>
+        <a class="button is-danger" @click="addToCart($event)" v-if="!onSuccess">Tambahkan ke Keranjang Belanja</a>
         <a class="button is-danger" @click="hideModals" v-if="onSuccess">Tutup</a>
         <!-- <a class="button">Cancel</a> -->
       </footer>
