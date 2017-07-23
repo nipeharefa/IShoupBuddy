@@ -11,7 +11,7 @@
 
         <div class="columns">
           <div class="column is-two-thirds">
-            <panelCart v-for="(item, $index) in carts" :cart="item" :cartIndex="$index" :Key="item.id"/>
+            <panelCart v-for="(item, $index) in carts" :Key="item.id" :cart="item" :cartIndex="$index"></panelCart>
           </div>
           <totalBelanja :cartsTotalString="cartsTotalString" />
         </div>
