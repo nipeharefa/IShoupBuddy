@@ -1,7 +1,10 @@
 <template>
   <div class="column">
     <div class="total-cart">
-      <span class="title is-4 cart-total">{{ cartsTotalString }}</span>
+      <span class="title is-4 cart-total">
+        {{ test() }}
+        <span>{{ belanja.total_string }}</span>
+      </span>
       <span class="cart-lbl">Total Belanja</span>
     </div>
   </div>
@@ -9,10 +12,26 @@
 
 
 <script>
+  import { mapGetters } from 'vuex'
   export default {
-    props: {
-      cartsTotalString: {
-        required: true
+    data () {
+      return {
+        belanja: {
+          total_string: "Rp. 0"
+        }
+      }
+    },
+    computed: {
+      ...mapGetters(['carts', 'cartChecked']),
+      async totalBelanja() {
+        return await this.$http.post('api/cart/getSubTotal', {arrayIds: this.cartChecked});
+      }
+    },
+    methods: {
+      test() {
+        this.totalBelanja.then(response => {
+          this.belanja = response.data
+        })
       }
     }
   }

@@ -45,7 +45,7 @@
 
 <script>
   import accounting from 'accounting-js'
-  import { mapActions } from 'vuex'
+  import { mapGetters, mapActions } from 'vuex'
 
   export default {
     props: {
@@ -56,8 +56,11 @@
         required: true
       }
     },
+    computed: {
+      ...mapGetters(['cartChecked'])
+    },
     methods: {
-      ...mapActions(['updateBaru']),
+      ...mapActions(['updateBaru', 'updateCartChecked']),
       formattingPrice (price) {
         return accounting.formatMoney(price, {
           symbol: 'Rp ',
@@ -72,7 +75,7 @@
         const cartIndex = this.cartIndex
         const quantity = item.quantity + 1
         const id = item.id
-
+        const self = this
         this.$http.patch(`api/cart-detail/${id}`, {quantity}).then(response => {
           const update = {
             cartIndex,
@@ -80,6 +83,7 @@
             quantity: response.data.quantity
           }
           this.updateBaru(update)
+          self.updateCartChecked(self.cartChecked)
         })
       },
       subQuantity (idItem, item) {
@@ -106,6 +110,7 @@
             quantity: response.data.quantity
           }
           this.updateBaru(update)
+          this.updateCartChecked(this.cartChecked)
         })
         return
       },

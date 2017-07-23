@@ -131,9 +131,7 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
-    }
+    {}
 
     /**
      * Show the form for editing the specified resource.
@@ -243,5 +241,19 @@ class CartController extends Controller
         $vendor['item'] = $cart->Detail;
 
         return $vendor;
+    }
+
+    public function getSubTotalCart(Request $request)
+    {
+        $totalBelanja = Cart::find($request->arrayIds)->sum(function ($item) {
+                return $item->Detail()->sum('price');
+        });
+
+        $response = [
+            'total'         => $totalBelanja,
+            'total_string'  => $this->formatRupiah($totalBelanja)
+        ];
+
+        return response()->json($response);
     }
 }

@@ -148,6 +148,7 @@ class CartDetailController extends Controller
     public function updateQuantity(CartDetail $id, Request $request)
     {
         $id->quantity = $request->quantity;
+        $id->price = $request->quantity * $id->ProductVendor->harga;
         $id->save();
         return $id;
     }

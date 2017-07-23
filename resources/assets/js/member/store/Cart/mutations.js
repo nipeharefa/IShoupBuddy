@@ -1,5 +1,5 @@
 import { SET_TOTAL_CART, INIT_CATEGORIES } from 'mutationsStore'
-import { UPDATE_QUANTITY } from 'globalVuexConstant'
+import { UPDATE_QUANTITY, UDPATE_CART_CHECKED } from 'globalVuexConstant'
 export default {
 
   INIT_ACTIVE_USER (state, user) {
@@ -12,6 +12,9 @@ export default {
   INIT_CATEGORIES,
   [UPDATE_QUANTITY] (state, obj) {
     state.carts.carts[obj.cartIndex]['item'][obj.itemIndex]['quantity'] = obj.quantity
+  },
+  [UDPATE_CART_CHECKED] (state, checked) {
+    state.cartChecked = checked
   }
 
 }
