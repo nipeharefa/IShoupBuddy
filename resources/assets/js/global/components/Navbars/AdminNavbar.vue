@@ -1,39 +1,19 @@
 <template>
-  <navbar :navClass="'nav nav-model-classic'" :navClassC="'container wrapper-new-nav'">
-    <hamburger></hamburger>
-    <logo></logo>
-    <div slot="right-icon" class="icon-right-wrapper is-hidden-desktop">
-      <a @click="setSearchActive(true)">
-        <i class="fa fa-search"></i>
-      </a>
-      <a href="/admin">
-        <i class="fa fa-user" aria-hidden="true"></i>
-      </a>
-    </div>
-    <div slot="mobile-left-drawer" class="container-menu-touch is-hidden-desktop" v-if="isActive">
-      <drawer-member></drawer-member>
-      <div @click="setIsActive(false)" style="width: 20%"></div>
-    </div>
-    <right-search slot="search"></right-search>
-    <right-menu-item slot="rightmenu"></right-menu-item>
+  <navbar>
+    <rightMenuAdmin slot="navbar-end"/>
   </navbar>
 </template>
 
 <script>
-
-  const DrawerMember = () => import('./partials/DrawerMember.vue')
-  const RightSearch = () => import('./partials/RightSearch.vue')
   const Navbar = () => import('./Navbar.vue')
-  const RightMenuItem = () => import('./partials/RightMenuAdmin.vue')
+  const RightMenuAdmin = () => import('./partials/RightMenuAdmin.vue')
 
   import { mapGetters, mapActions } from 'vuex'
 
   export default {
     components: {
       Navbar,
-      DrawerMember,
-      RightSearch,
-      RightMenuItem
+      RightMenuAdmin
     },
     computed: {
       ...mapGetters([

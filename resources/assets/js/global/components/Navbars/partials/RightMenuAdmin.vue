@@ -1,11 +1,20 @@
 <template>
-  <div class="nav-right nav-menu">
-      <div class="user_info">
-        <a class="nav-item" href="/admin">
-          <i class="fa fa-user" aria-hidden="true"></i>
+  <div class="navbar-end">
+
+    <div class="navbar-item has-dropdown is-hoverable">
+      <a class="navbar-link link-no-hover-change" href="/me">
+        <span class="navbar-user-fullname">
+          Hi, {{ activeUser.name }}
+        </span>
+      </a>
+
+      <div class="navbar-dropdown dropdown-right">
+        <a class="navbar-item " href="#" @click="logout">
+          Logout
         </a>
-        <span>Hi</span>
       </div>
+    </div>
+
   </div>
 </template>
 
@@ -16,9 +25,17 @@
     computed: {
       ...mapGetters([
         'activeUser'
-      ]),
-      guest () {
-        return this.activeUser === null
+      ])
+    },
+    methods: {
+      logout () {
+        console.log('logout')
+        this.$http.delete('auth/logout').then(response => {
+          window.location.assign('/')
+          console.log(response)
+        }).catch(err => {
+          console.log(err)
+        })
       }
     }
   }
