@@ -2,18 +2,23 @@
 
   &.swiper-slide {
     margin-top: 10px;
-    &.swiper-slide-active {
-      margin-left: 10px;
-    }
-    @include touch() {
+    @include mobile() {
       width: calc(100% / 1) !important;
+    };
+    @include tablet() {
+      width: calc(100% / 2) !important;
     };
     @include widescreen() {
       width: calc(100% / 4) !important;
+      .swiper-slide-active {
+        margin-left: 10px;
+      }
     };
-
     @include desktop() {
       width: calc(100% / 5) !important;
+      .swiper-slide-active {
+        margin-left: 10px;
+      }
     };
   }
 
@@ -43,13 +48,16 @@
   }
 }
 
-.swiper-button-next {
-  position: absolute;
-  top: 15%;
-  right: -55px;
-}
-.swiper-button-prev {
-  position: absolute;
-  top: 15%;
-  left: -55px;
+
+@include desktop() {
+  .swiper-button-next {
+    position: absolute;
+    top: 15%;
+    right: -55px;
+  }
+  .swiper-button-prev {
+    position: absolute;
+    top: 15%;
+    left: -55px;
+  }
 }

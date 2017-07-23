@@ -122,7 +122,7 @@ class TransactionController extends Controller
                     'price' => $shipmentCart,
                 ];
                 $trans->TransactionShippment()->create($fillable);
-                // $cartItem->delete();
+                $cartItem->delete();
                 return $trans;
             });
 

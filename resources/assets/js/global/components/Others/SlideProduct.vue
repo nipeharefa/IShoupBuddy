@@ -1,16 +1,12 @@
 <template>
-  <div>
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        <div class="nusa swiper-slide" v-for="item in products">
-          <a :href="`/product/${item.id}`" class="alinkto">
-            <product-card :product="item"></product-card>
-          </a>
-        </div>
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="nusa swiper-slide" v-for="item in products">
+        <a :href="`/product/${item.id}`" class="alinkto">
+          <product-card :product="item"></product-card>
+        </a>
       </div>
     </div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
   </div>
 </template>
 
@@ -44,22 +40,7 @@
         this.swiper = new Swiper ('.swiper-container', {
           nextButton: '.swiper-button-next',
           prevButton: '.swiper-button-prev',
-          slidesPerView: 4,
-          spaceBetween: 10,
-          breakpoints: {
-              320: {
-                slidesPerView: 1,
-                spaceBetween: 10
-              },
-              480: {
-                slidesPerView: 1,
-                spaceBetween: 10
-              },
-              640: {
-                slidesPerView: 3,
-                spaceBetween: 10
-              }
-            }
+          slidesPerView: 5,
         })
       }
     }

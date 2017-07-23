@@ -10,7 +10,7 @@
         <h3>{{ product.name }}</h3>
       </div>
       <div class="harga">
-        <span>Rp. {{ product.minimum_price }}</span>
+        <span>Rp. {{ product.minimum_price_string }}</span>
       </div>
       <div>
           <star-rating :rating="product.avg_rating"
