@@ -13,21 +13,23 @@ mix.js('resources/assets/js/admin/pages/auth/login.js', 'js/a-auth-login.js')
 mix.js('resources/assets/js/admin/pages/home/home.js', 'js/ahome.js')
 mix.js('resources/assets/js/admin/pages/transactions/index.js', 'js/a-transactions-index.js')
 
-// Guest JS
+// Guest SASS
 
 mix.sass('resources/assets/sass/pages/guest/home.scss', 'css/guest')
 mix.sass('resources/assets/sass/pages/guest/product_detail.scss', 'css/guest')
 mix.sass('resources/assets/sass/pages/guest/login.scss', 'css/guest')
 mix.sass('resources/assets/sass/pages/guest/register.scss', 'css/guest')
 mix.sass('resources/assets/sass/pages/guest/search_result.scss', 'css/guest')
+mix.sass('resources/assets/sass/pages/guest/show-category-product.scss', 'css/g-show-category-product.css')
 
-// Guest SASS
+// Guest JS
 
 mix.js('resources/assets/js/guest/pages/home.js', 'js/home.js')
 mix.js('resources/assets/js/guest/pages/product_detail.js', 'js/product_detail.js')
 mix.js('resources/assets/js/guest/pages/login.js', 'js/login_default.js')
 mix.js('resources/assets/js/guest/pages/register.js', 'js/register.js')
 mix.js('resources/assets/js/guest/pages/search_result.js', 'js/search_result.js')
+mix.js('resources/assets/js/guest/pages/g-show-category-product.js', 'js/g-show-category-product.js')
 
 
 // Member JS

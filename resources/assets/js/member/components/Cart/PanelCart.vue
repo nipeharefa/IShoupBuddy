@@ -2,7 +2,7 @@
   <nav class="panel">
     <p class="panel-heading">
       <label class="checkbox">
-        <input type="checkbox" v-model="checked" :value="cart.id" @change="eventCheckedChanges">
+        <input type="checkbox" :value="cart.id" @change="eventCheckedChanges(cart.id)">
         <i class="fa fa-building"></i>
         <span>{{ cart.vendor.name }}</span>
       </label>
@@ -29,18 +29,27 @@
     components: {
       PanelDetail
     },
+    computed: {
+      ...mapGetters(['cartChecked'])
+    },
     data () {
       return {
         checked: []
       }
     },
-    computed: {
-      ...mapGetters(['cartChecked'])
-    },
     methods: {
       ...mapActions(['updateCartChecked']),
-      eventCheckedChanges () {
-        this.updateCartChecked(this.checked)
+      eventCheckedChanges (id) {
+        console.log(this.cartChecked)
+        const c = this.cartChecked.findIndex( x => {
+          return x === id
+        })
+
+        console.log(id)
+        const a = this.cartChecked.push(id)
+        // this.updateCartChecked(a)\
+        console.log(a)
+        return
       }
     }
   }

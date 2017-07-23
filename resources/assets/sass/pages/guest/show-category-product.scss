@@ -1,0 +1,32 @@
+@import "node_modules/bulma/bulma";
+@import "~sassComponents/NavbarDesktopDefault";
+@import "~sassComponents/ProductCardContainer";
+@import "~sassComponents/ProductCard";
+
+.caption-head {
+  display: flex;
+
+}
+
+.column {
+  &.wrapping {
+    display: flex;
+    flex-wrap: wrap !important;
+    flex-direction: row !important;
+  }
+}
+
+// Custome Link
+
+.category-name {
+  margin: 1rem 0;
+  span {
+    font-size: 0.85rem;
+  }
+  a {
+    font-size: 1rem;
+    &:before, &:after {
+      content: "\201D";
+    }
+  }
+}

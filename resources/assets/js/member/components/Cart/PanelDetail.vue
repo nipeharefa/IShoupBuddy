@@ -16,7 +16,7 @@
             <p class="product-name">{{ product.product.name }}</p>
           </div>
           <div class="subtotal">
-            <span>{{ formattingPrice(product.price * product.quantity) }}</span>
+            <span>{{ formattingPrice(product.satuan * product.quantity) }}</span>
             <i class="fa fa-trash" @click="deleteItem(item.id, product.id)"></i>
           </div>
         </div>

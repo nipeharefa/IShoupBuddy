@@ -4,7 +4,7 @@
       Kategori
     </a>
     <div class="navbar-dropdown ">
-      <a class="navbar-item " href="/search"
+      <a class="navbar-item " :href="`/c/${item.slug}`"
       v-for="item in categories" v-if="categories">
         {{ item.name }}
       </a>

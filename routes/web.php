@@ -12,12 +12,14 @@
 */
 
 Route::get('/', 'HomeController@index');
+Route::get('c/{slug}', 'CategoryController@getCategoryProduct');
 Route::get('home', 'HomeController@index');
 Route::get('search', 'SearchController@index');
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm');
 Route::get('vendor/login', 'Auth\LoginVendorController@showLoginForm');
-
+Route::resource('product', 'ProductController',
+    ['only' => ['show']]);
 Route::resource('cart', 'CartController');
 
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
@@ -34,9 +36,6 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
 Route::group(['prefix' => 'me', 'middleware' => ['auth', 'member_only']], function () {
     Route::get('/{any?}/{any2?}/{any3?}', 'MeController@index');
 });
-
-Route::resource('product', 'ProductController',
-    ['only' => ['show']]);
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('login', 'LoginController@showLoginForm');
