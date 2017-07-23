@@ -20,6 +20,7 @@ class TransactionTransformer extends AbstractTransformer
             'links'             => $this->getLinkAction($model),
             'shipment'          => $model->TransactionShippment,
             'attachments'       => $this->generateUserPictureLinks($model->attachments),
+            'debit_credit'      => $model->debit_credit
         ];
 
         if ($this->isRelationshipLoaded($model, 'Detail')) {

@@ -27,7 +27,7 @@
       topup () {
         if (this.transactions) {
           return this.transactions.filter(x => {
-            return x.type === "Saldo"
+            return x.type === "Saldo" && x.debit_credit === 0
           })
         }
         return null;
