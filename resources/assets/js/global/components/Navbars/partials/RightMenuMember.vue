@@ -1,6 +1,13 @@
 <template>
   <div class="navbar-end">
-    <a class="navbar-item no-hover-change" href="/cart" title="Kerangjang Belanja">
+
+    <a class="navbar-item no-hover-change" href="/me/topup" title="Saldo">
+      <span class="icon" style="color: #fff;">
+        <i class="fa fa-money"></i>
+      </span>
+    </a>
+
+    <a class="navbar-item no-hover-change" href="/cart" title="Keranjang Belanja">
       <span class="icon" style="color: #fff;">
         <i class="fa fa-shopping-cart"></i>
       </span>
@@ -11,8 +18,8 @@
       </span>
     </a>
 
-    <div class="navbar-item has-dropdown is-hoverable">
-      <a class="navbar-link link-no-hover-change" href="/me">
+    <div class="navbar-item has-dropdown is-hoverable ">
+      <a class="navbar-link no-hover-change" href="/me">
         <span class="navbar-user-fullname">
           Hi, {{ activeUser.name }}
         </span>

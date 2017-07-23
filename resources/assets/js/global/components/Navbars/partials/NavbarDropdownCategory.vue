@@ -1,6 +1,6 @@
 <template>
   <div class="navbar-item has-dropdown is-hoverable dropdown-category no-hover-change">
-    <a class="navbar-link" href="#">
+    <a class="navbar-link no-hover-change" href="#">
       Kategori
     </a>
     <div class="navbar-dropdown ">

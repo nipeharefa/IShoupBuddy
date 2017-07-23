@@ -40,6 +40,7 @@ mix.js('resources/assets/js/member/pages/me.js', 'js/me.js')
 mix.js('resources/assets/js/member/pages/edit_profile.js', 'js/edit_profile.js')
 mix.js('resources/assets/js/member/pages/search.js', 'js/msearch.js')
 mix.js('resources/assets/js/member/pages/Cart.js', 'js/m-cart.js')
+mix.js('resources/assets/js/member/pages/m-show-category-product.js', 'js/m-show-category-product.js')
 
 
 // Member SASS

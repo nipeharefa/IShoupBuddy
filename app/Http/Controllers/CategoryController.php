@@ -38,13 +38,13 @@ class CategoryController extends Controller
                         break;
                     case 1:
                         // Member
-                        $js = mix('js/mhome.js');
-                        $css = mix('css/member/home.css');
+                        $js = mix('js/m-show-category-product.js');
+                        $css = mix('css/g-show-category-product.css');
                         break;
                     default:
                         // Vendor
-                        $js = mix('js/vhome.js');
-                        $css = mix('css/vendor/home.css');
+                        $js = mix('js/v-show-category-product.js');
+                        $css = mix('css/g-show-category-product.css');
                         break;
                 }
             }

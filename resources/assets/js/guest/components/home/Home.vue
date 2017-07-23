@@ -56,17 +56,17 @@
         'initPromo',
         'initProducts'
       ]),
-      getPromo() {
-        this.$http.get('api/promo').then(response => {
-          const promo = response.data.promo
-          this.initPromo(promo)
+      getProducts() {
+        this.$http.get('api/product?perpage=50').then(response => {
+          this.initProducts(response.data.products)
+        }).catch(err => {
+          this.initProducts([])
         })
       },
-      getProducts() {
-        this.$http.get('api/product').then(response => {
-          const products = response.data.products
-
-          this.initProducts(products)
+      getPromo() {
+        this.$http.get('api/product/newest?perpage=10&page=1').then(response => {
+          const promo = response.data.products
+          this.initPromo(promo)
         })
       }
     }

@@ -48,15 +48,15 @@
         'initPromo'
       ]),
       getProducts() {
-        this.$http.get('api/product').then(response => {
+        this.$http.get('api/product?perpage=50').then(response => {
           this.initProducts(response.data.products)
         }).catch(err => {
           this.initProducts([])
         })
       },
       getPromo() {
-        this.$http.get('api/promo').then(response => {
-          const promo = response.data.promo
+        this.$http.get('api/product/newest?perpage=10&page=1').then(response => {
+          const promo = response.data.products
           this.initPromo(promo)
         })
       }

@@ -8,7 +8,7 @@
             <span></span>
             <span></span>
           </div>
-          <a class="navbar-item" href="/">
+          <a class="navbar-item no-hover-change" href="/">
             <img src="/img/logo/logo-store-64.png" alt="logo" class="logo-inline">
           </a>
         </div>

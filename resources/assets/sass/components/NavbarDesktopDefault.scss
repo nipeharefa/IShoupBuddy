@@ -36,6 +36,9 @@ div.navbar-wrapper {
     color: white;
     &:hover {
       background: none;
+      a.navbar-link {
+        background: none;
+      }
     }
   }
   .link-no-hover-change {
