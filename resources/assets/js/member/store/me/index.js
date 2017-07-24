@@ -8,6 +8,7 @@ import * as getters from './getters'
 import mutations from './mutations'
 import transaction from './transaction'
 import wishlist from './wishlist'
+import saldo from './saldo'
 
 Vue.use(Vuex)
 
@@ -17,7 +18,8 @@ const strict = process.env.NODE_ENV !== 'production'
 
 const modules = {
   transaction,
-  wishlist
+  wishlist,
+  saldo
 }
 
 const state = {

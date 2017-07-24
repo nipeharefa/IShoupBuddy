@@ -10,6 +10,7 @@ const TableTransaction = () => import('member/components/transactions/TableTrans
 const DetailTransaction = () => import('member/components/show_transaction/ShowTransaction.vue')
 const FormEditProfile = () => import('member/components/edit-profile/FormEditProfile.vue')
 const ProductFavorite = () => import('member/components/product_favorite/ProductFavorite.vue')
+const TableSaldo = () => import('member/components/Saldo/Saldo.vue')
 
 const router = new Router({
   base: '/me',
@@ -20,7 +21,8 @@ const router = new Router({
     { name: 'detailTransaction', path: '/transactions/:id', component: DetailTransaction },
     { name: 'tableTransaction', path: '/transactions', component: TableTransaction },
     { name: 'formEditProfile', path: '/edit', component: FormEditProfile },
-    { name: 'productFavorite', path: '/wishlist', component: ProductFavorite }
+    { name: 'productFavorite', path: '/wishlist', component: ProductFavorite },
+    { name: 'tableSaldo', path: '/saldo', component: TableSaldo }
   ]
 })
 

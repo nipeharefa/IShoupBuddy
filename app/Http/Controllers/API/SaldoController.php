@@ -84,6 +84,7 @@ class SaldoController extends Controller
                 'status'    => 'OK',
                 'message'   => null,
                 'saldo'     => $this->transformUnPaind($hasUnPaid),
+                "trnsaction"    =>  TransactionTransformer::transform($hasUnPaid)
             ];
 
             DB::commit();

@@ -26,6 +26,8 @@ Route::group(['namespace' => 'API'], function () {
     Route::post('user/change_password', 'UserController@change_password')
         ->middleware('auth:api');
 
+    Route::get('user/{user}/transactions', 'UserController@getUserTransactions');
+    Route::get('user/{user}/saldo/transactions', 'UserController@getUserSaldoTransactions');
     Route::get('user/{user}/review/total', 'UserController@getTotalReview');
     Route::get('user/{user}/review', 'UserController@getReviewAction');
     Route::resource('user', 'UserController',

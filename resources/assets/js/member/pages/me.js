@@ -35,18 +35,15 @@ const app = new Vue({
       'initActiveUser',
       'initTransactions',
       'initWishlists',
-      'initCategories'
+      'initCategories',
+      'initSaldoTransactions'
     ]),
     initAllData () {
       this.initActiveUser(window._sharedData.user)
       this.getTransactions()
       this.getWishlist()
       this.getCategories()
-    },
-    getTransactions () {
-      this.$http.get('api/transaction?with=d').then(response => {
-        this.initTransactions(response.data.transactions)
-      }).catch(err => err)
+      this.getSaldoTransactions()
     },
     getWishlist () {
       this.$http.get('api/wishlist').then(response => {
@@ -56,6 +53,18 @@ const app = new Vue({
     getCategories () {
       this.$http.get('api/category').then(response => {
         this.initCategories(response.data.categories)
+      }).catch(err => err)
+    },
+    getTransactions () {
+      const id = window._sharedData.user.id
+      this.$http.get(`api/user/${id}/transactions`).then(response => {
+        console.log(response.data)
+      }).catch(err => err)
+    },
+    getSaldoTransactions () {
+      const id = window._sharedData.user.id
+      this.$http.get(`api/user/${id}/saldo/transactions`).then(response => {
+        this.initSaldoTransactions(response.data)
       }).catch(err => err)
     }
   }

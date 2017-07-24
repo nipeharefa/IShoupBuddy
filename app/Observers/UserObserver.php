@@ -15,7 +15,7 @@ class UserObserver
      */
     public function created(User $user)
     {
-        //
+        $user->Saldo()->create(['nominal' => 0]);
     }
 
     /**

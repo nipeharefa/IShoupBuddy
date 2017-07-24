@@ -7,6 +7,7 @@ use App\Helpers\Traits\ApiResponse;
 use App\Helpers\Traits\RupiahFormated;
 use App\Helpers\Transformers\ActiveUserTransformer;
 use App\Helpers\Transformers\ReviewTransformer;
+use App\Helpers\Transformers\TransactionTransformer;
 use App\Http\Controllers\BaseApiController;
 use App\Models\Cart;
 use App\Models\Product;
@@ -286,5 +287,15 @@ class UserController extends BaseApiController implements DefaultAPIResponse
     public function getTotalReview(User $user, Request $request)
     {
         return $user->Review()->count();
+    }
+
+    public function getUserTransactions(User $user, Request $request)
+    {
+        return $user->Transaction;
+    }
+
+    public function getUserSaldoTransactions(User $user, Request $request)
+    {
+        return TransactionTransformer::transform($user->Saldo->Transaction);
     }
 }
