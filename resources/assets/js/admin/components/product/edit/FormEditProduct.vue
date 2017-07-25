@@ -47,6 +47,39 @@
       </div>
 
       <div class="field">
+          <label for="" class="label">Brand</label>
+          <p class="control">
+            <span class="select">
+              <select name="" id="" class="select" v-model="edit.attributes.brand">
+                <option :value="item.value" v-for="item in fixtures.brand">{{ item.brand }}</option>
+              </select>
+            </span>
+          </p>
+        </div>
+
+        <div class="field">
+          <label for="" class="label">Sifat</label>
+          <p class="control">
+            <span class="select">
+              <select name="" id="" class="select" v-model="edit.attributes.sifat">
+                <option :value="item.value" v-for="item in fixtures.sifat">{{ item.brand }}</option>
+              </select>
+            </span>
+          </p>
+        </div>
+
+      <div class="field">
+          <label for="" class="label">Pemakaian</label>
+          <p class="control">
+            <span class="select">
+              <select name="" id="" class="select" v-model="edit.attributes.pemakaian">
+                <option :value="item.value" v-for="item in fixtures.pemakaian">{{ item.brand }}</option>
+              </select>
+            </span>
+          </p>
+        </div>
+
+      <div class="field">
         <button class="button is-primary" @click="updateDataProduct">Simpan</button>
       </div>
 
@@ -67,14 +100,26 @@
   import iziToast from 'izitoast'
   import { mapGetters, mapActions } from 'vuex'
 
+  import brand from 'admin/json/brand.json'
+  import sifat from 'admin/json/sifat.json'
+  import pemakaian from 'admin/json/pemakaian.json'
+
   export default {
     mounted () {
       this.originalImage = path.basename(this.edit.picture_url.medium)
+      this.fixtures.brand = brand
+      this.fixtures.sifat = sifat
+      this.fixtures.pemakaian = pemakaian
     },
     data () {
       return {
         originalImage: '',
-        edit: this.$store.state.product
+        edit: this.$store.state.product,
+        fixtures: {
+          brand: null,
+          sifat: null,
+          pemakaian: null
+        }
       }
     },
     computed: {
@@ -92,7 +137,8 @@
           name: this.edit.name,
           description: this.edit.description,
           'category_id': this.edit.category.id,
-          barcode: this.edit.barcode
+          barcode: this.edit.barcode,
+          attributes: this.edit.attributes
         }
         const idProduct = data.id
         this.$http.put('api/product/' + data.id, data).then(response => {

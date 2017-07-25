@@ -105,6 +105,7 @@ class ProductController extends Controller
         $data = $request->toArray();
 
         $data['slug'] = str_slug($request->name);
+        $data['attributes'] = serialize($data['attributes']);
 
         try {
             DB::beginTransaction();
@@ -122,7 +123,8 @@ class ProductController extends Controller
 
             DB::commit();
 
-            return $product;
+            return ProductTransformer::transform($product, 201);
+
         } catch (QueryException $e) {
             DB::rollback();
 
@@ -206,7 +208,7 @@ class ProductController extends Controller
 
         try {
             DB::beginTransaction();
-
+            $data['attributes'] = serialize($data['attributes']);
             $product->update($data);
             $response = [
                 'status'    => 'OK',

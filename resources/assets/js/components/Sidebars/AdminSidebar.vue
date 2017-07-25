@@ -5,25 +5,25 @@
     </p>
     <ul class="menu-list">
       <li>
-        <router-link :to="{ name: 'listCategory' }" append>Category</router-link>
+        <router-link :to="{ name: 'listCategory' }" append>Kategory</router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'listProducts' }" append>Products</router-link>
+        <router-link :to="{ name: 'listProducts' }" append>Produk</router-link>
       </li>
       <li>
         <router-link :to="{ name: 'listProducts' }" append>Review</router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'listTransaction' }" append>Transactions</router-link>
+        <router-link :to="{ name: 'listTransaction' }" append>Transaksi</router-link>
       </li>
       <li>
         <router-link :to="{ name: 'listTransaction' }" append>Konfirmasi PopUp</router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'listUser' }" append>Users</router-link>
+        <router-link :to="{ name: 'listUser' }" append>Pengguna</router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'listVendor' }" append>Vendors</router-link>
+        <router-link :to="{ name: 'listVendor' }" append>Vendor</router-link>
       </li>
     </ul>
     <p class="menu-label">

@@ -18,6 +18,12 @@ class ProductTransformer extends AbstractTransformer
 
         $options = @$this->options;
 
+        $defaultSerializer = [
+            "brand" =>  0,
+            "sifat" =>  0,
+            "pemakaian" =>  0
+        ];
+
         $arr = [
             'id'            => $product->id,
             'name'          => $product->name,
@@ -40,6 +46,7 @@ class ProductTransformer extends AbstractTransformer
             'minumumPrice'         => $product->ProductVendor()->min('harga'),
             'liked'                => false,
             'recentReview'         => [],
+            'attributes'           => $product->attributes ? unserialize($product->attributes) : $defaultSerializer
         ];
 
         if ($this->isRelationshipLoaded($product, 'Review')) {

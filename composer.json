@@ -30,15 +30,15 @@
         "laravel/tinker": "~1.0",
         "league/glide-laravel": "^1.0",
         "mistic100/randomcolor": "^1.0",
+        "php-ai/php-ml": "^0.4.1",
         "predis/predis": "^1.1",
         "pusher/pusher-php-server": "^2.6",
         "sastrawi/sastrawi": "^1.2",
         "sensiolabs/security-checker": "^4.0",
         "sentry/sentry-laravel": "^0.7.0",
-        "stevenmaguire/uber-php": "^1.0",
+        "stevenmaguire/uber-php": "dev-master",
         "themsaid/laravel-model-transformers": "^1.0",
-        "znck/belongs-to-through": "^2.3",
-        "stevenmaguire/uber-php": "dev-master"
+        "znck/belongs-to-through": "^2.3"
     },
     "require-dev": {
         "deployer/recipes": "^4.0",

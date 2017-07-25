@@ -63,18 +63,37 @@
           </p>
         </div>
 
-        <div class="field attributesSelector" v-for="item in product.attributes">
-          <select name="" id="" class="input" v-model="item.id">
-            <option value="">Pilih</option>
-            <option :value="item.id" v-for="item in attributeRule">{{ item.value }}</option>
-          </select>
-          <input type="text" class="input" v-model="item.value">
+        <div class="field">
+          <label for="" class="label">Brand</label>
+          <p class="control">
+            <span class="select">
+              <select name="" id="" class="select" v-model="product.attributes.brand">
+                <option :value="item.value" v-for="item in fixtures.brand">{{ item.brand }}</option>
+              </select>
+            </span>
+          </p>
         </div>
 
         <div class="field">
-          <a @click="addAttribute">
-            <i class="fa fa-plus"></i>
-          </a>
+          <label for="" class="label">Sifat</label>
+          <p class="control">
+            <span class="select">
+              <select name="" id="" class="select" v-model="product.attributes.sifat">
+                <option :value="item.value" v-for="item in fixtures.sifat">{{ item.brand }}</option>
+              </select>
+            </span>
+          </p>
+        </div>
+
+        <div class="field">
+          <label for="" class="label">Pemakaian</label>
+          <p class="control">
+            <span class="select">
+              <select name="" id="" class="select" v-model="product.attributes.pemakaian">
+                <option :value="item.value" v-for="item in fixtures.pemakaian">{{ item.brand }}</option>
+              </select>
+            </span>
+          </p>
         </div>
 
         <div class="field">
@@ -104,7 +123,16 @@
   import iziToast from 'izitoast'
   import { mapGetters, mapActions } from 'vuex'
 
+  import brand from 'admin/json/brand.json'
+  import sifat from 'admin/json/sifat.json'
+  import pemakaian from 'admin/json/pemakaian.json'
+
   export default {
+    mounted () {
+      this.fixtures.brand = brand
+      this.fixtures.sifat = sifat
+      this.fixtures.pemakaian = pemakaian
+    },
     data () {
       return {
         product: {
@@ -113,24 +141,18 @@
           description: '-',
           'category_id': '',
           barcode: '',
-          attributes: [
-            {
-              id: '',
-              value: ''
-            }
-          ]
+          attributes: {
+            brand: 1,
+            sifat: 1,
+            pemakaian: 1
+          }
         },
         onProcess: false,
-        attributeRule: [
-          {
-            'id': 1,
-            'value': 'Kapasitas (ml)'
-          },
-          {
-            'id': 2,
-            'value': 'Input Voltage (v)'
-          }
-        ]
+        fixtures: {
+          brand: null,
+          sifat: null,
+          pemakaian: null
+        },
       }
     },
     computed: {
