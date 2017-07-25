@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2c49e2769ac11a190c2e804a6eb625a3",
+    "content-hash": "3bda276bb4ec9bcd9849a9ba9df67597",
     "packages": [
         {
             "name": "alexpechkarev/geometry-library",
@@ -3592,6 +3592,67 @@
             "time": "2017-04-21T17:44:27+00:00"
         },
         {
+            "name": "stevenmaguire/uber-php",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nipeharefa/uber-php.git",
+                "reference": "18d276265675a7d0a1a8c35289354758258d9863"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nipeharefa/uber-php/zipball/18d276265675a7d0a1a8c35289354758258d9863",
+                "reference": "18d276265675a7d0a1a8c35289354758258d9863",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.2",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~2.0"
+            },
+            "suggest": {
+                "stevenmaguire/oauth2-uber": "Making it simple to integrate your application with Uber using OAuth 2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Stevenmaguire\\Uber\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Stevenmaguire\\Uber\\Test\\": "tests/src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Steven Maguire",
+                    "email": "stevenmaguire@gmail.com",
+                    "homepage": "http://stevenmaguire.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A php client for consuming the Uber API",
+            "homepage": "http://github.com/stevenmaguire/uber-php",
+            "keywords": [
+                "api",
+                "oauth2",
+                "php",
+                "uber"
+            ],
+            "support": {
+                "source": "https://github.com/nipeharefa/uber-php/tree/master"
+            },
+            "time": "2017-07-24T18:39:10+00:00"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v5.4.8",
             "source": {
@@ -6413,7 +6474,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "stevenmaguire/uber-php": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

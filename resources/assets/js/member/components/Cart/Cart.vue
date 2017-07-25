@@ -1,18 +1,85 @@
 <template>
   <div>
-    <p>Maintenis</p>
-    <input type="checkbox" name="" id="" value="1" v-model="cartChecked">
-    <input type="checkbox" name="" id="" value="2" v-model="cartChecked">
+    <section id="navbar">
+      <navbar />
+    </section>
+    <section class="section">
+      <div class="container">
+        <div class="columns">
+          <div class="column">
+            <breadCrumb></breadCrumb>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column is-half">
+
+            <nav class="panel" v-for="(item, $index) in carts">
+              <p class="panel-heading">
+                <input type="checkbox" :value="item.id" v-model="a"> {{ item.vendor.name }}
+              </p>
+
+              <panel-detail :cartItem="item.item" :cartIndex="$index"></panel-detail>
+
+            </nav>
+
+          </div>
+          <!-- End Detail -->
+          <!-- Start Total Belanja -->
+          <div class="column is-half">
+            <total-belanja :cartChecked="a" :totalString="totalString" :total="total"></total-belanja>
+          </div>
+          <!-- End Total Belanja -->
+        </div>
+      </div>
+    </section>
+    <div id="footer-apps">
+      <footer-apps></footer-apps>
+    </div>
   </div>
 </template>
 
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapStates } from 'vuex'
+  const PanelCart = () => import('./PanelCart.vue')
+  const PanelDetail = () => import('./PanelDetail.vue')
+  const FooterApps = () => import('otherComponents/Footer.vue')
+  const TotalBelanja = () => import('./TotalBelanja.vue')
+  const Navbar = () => import('global/components/Navbars/MemberNavbar.vue')
+  const BreadCrumb = () => import('./Breadcrumb.vue')
+
   export default {
     data () {
       return {
-        cartChecked: []
+        a: this.$store.state.cartChecked,
+        totalString: "Rp. 0",
+        total: 0
+      }
+    },
+    components: {
+      Navbar,
+      PanelDetail,
+      FooterApps,
+      TotalBelanja,
+      BreadCrumb
+    },
+    computed: {
+      ...mapGetters(['cartChecked', 'carts'])
+    },
+    methods: {
+      updateDonk (a) {
+        console.log(a)
+      },
+      getSubTotal (a) {
+        this.$http.post('api/cart/getSubTotal', {arrayIds: a}).then(response => {
+          this.total = response.data.total
+          this.totalString = response.data.total_string
+        })
+      }
+    },
+    watch :{
+      a (a,b) {
+        this.getSubTotal(a)
       }
     }
   }

@@ -61,6 +61,7 @@ Route::group(['namespace' => 'API'], function () {
         ['only' => ['index', 'show']]);
 
     Route::group(['middleware' => 'auth:api'], function () {
+        Route::resource('checkout', 'CheckoutController');
         Route::post('cart/getSubTotal', 'CartController@getSubTotalCart');
         Route::put('cart/{cart}/detail/{id}', 'CartDetailController@update');
         Route::delete('cart/{cart}/detail/{id}', 'CartDetailController@destroy');

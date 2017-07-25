@@ -15,10 +15,6 @@
           <div class="product-name">
             <p class="product-name">{{ product.product.name }}</p>
           </div>
-          <div class="subtotal">
-            <span>{{ formattingPrice(product.satuan * product.quantity) }}</span>
-            <i class="fa fa-trash" @click="deleteItem(item.id, product.id)"></i>
-          </div>
         </div>
 
         <div class="quantity-control">
@@ -34,6 +30,12 @@
               <button class="button is-small" @click="addQuantity(product.id, product)">+</button>
             </p>
           </div>
+          <div class="subtotal__container">
+            <div class="subtotal__wrapper">
+              <span class="subtotal__caption">Total</span>
+              <span class="subtotal-text">{{ formattingPrice(product.satuan * product.quantity) }}</span>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -42,6 +44,19 @@
   </div>
 </template>
 
+<style lang="scss" scoped>
+  .subtotal__container {
+    font-size: 0.85rem;
+    .subtotal__wrapper,
+    .subtotal__jarak,
+    .subtotal__est_time {
+      display: flex;
+    }
+  }
+  .subtotal__caption {
+    flex: 0.6
+  }
+</style>
 
 <script>
   import accounting from 'accounting-js'

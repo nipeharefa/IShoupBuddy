@@ -2,7 +2,7 @@
 
 @section('content')
     <div id="app"></div>
-    <meta name="_dota2" content="Dazzle">
+    <meta name="_dota2" content="Rubick">
 @stop
 
 @section('title')
@@ -19,6 +19,7 @@
 
 @stop
 
+
 @section('js')
 
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_KEY') }}"
@@ -27,7 +28,8 @@
     <script type="text/javascript">
 
         window._sharedData = {
-            user: {!! $user ?? "null" !!}
+            user: {!! $user ?? "null" !!},
+            cartData: {!! $cart_data ?? null !!}
         }
     </script>
 
@@ -35,9 +37,9 @@
 
     @if (env('APP_ENV') == "production")
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js"></script>
+        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.min.js"></script> --}}
     @else
-        <script src="{{ asset('local/swiper/swiper.min.js') }}"></script>
+        {{-- <script src="{{ asset('local/swiper/swiper.min.js') }}"></script> --}}
     @endif
 
     <script src="{{ mix('js/vendor.js') }}"></script>

@@ -58,6 +58,9 @@
 
 <script>
   import accounting from 'accounting-js'
+  import { mapActions } from 'vuex'
+  import iziToast from 'izitoast'
+
   export default {
     props: {
       show: {
@@ -80,6 +83,7 @@
       }
     },
     methods: {
+      ...mapActions(['addSaldoTransaction']),
       hide () {
         this.$emit('update:show', false)
       },
@@ -93,6 +97,12 @@
         this.$http.post('api/saldo', data).then(response => {
           console.log(response.data)
           btn.classList.remove('is-loading')
+          this.addSaldoTransaction(response.data.transaction)
+          iziToast.success({
+            title: 'Sukses',
+            message: 'Permintaan Pemabahan Saldo berhasil',
+            position: 'bottomRight'
+          });
         }).catch(err => {
           btn.classList.remove('is-loading')
         })

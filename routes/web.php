@@ -21,6 +21,7 @@ Route::get('vendor/login', 'Auth\LoginVendorController@showLoginForm');
 Route::resource('product', 'ProductController',
     ['only' => ['show']]);
 Route::resource('cart', 'CartController');
+Route::resource('checkout', 'CheckoutController');
 
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::post('login', 'LoginController@loginViaAjax');

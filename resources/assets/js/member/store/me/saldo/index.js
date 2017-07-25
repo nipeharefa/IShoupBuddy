@@ -10,7 +10,8 @@ const namespaced = false
 
 const state = {
   saldo: null,
-  history: null
+  history: null,
+  historyDetail: null
 }
 
 export default {

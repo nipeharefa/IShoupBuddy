@@ -13,15 +13,21 @@
     <div class="saldo_body">
       <table class="table">
         <thead>
+          <td>Id</td>
           <td>Waktu</td>
           <td>Nominal</td>
           <td>Status</td>
         </thead>
         <tbody>
-          <tr>
-            <td>17 Juli 2017 09.52 WIB</td>
-            <td>Rp. 10.000</td>
-            <td>Sukses</td>
+          <tr v-for="item in saldoTransactions">
+            <td>
+              <router-link :to="{ name: 'detailSaldo', params: { id: item.id } }" append>
+                  #{{ item.id }}
+              </router-link>
+            </td>
+            <td>{{ item.updated_at }}</td>
+            <td>{{ item.nominal_string }}</td>
+            <td>{{ item.status_string }}</td>
           </tr>
         </tbody>
       </table>
@@ -40,6 +46,8 @@
 
 <script>
   const ModalAddSaldo = () => import('./ModalAddSaldo.vue')
+  import { mapGetters } from 'vuex'
+
   export default {
     components: {
       ModalAddSaldo
@@ -48,6 +56,9 @@
       return {
         show: false
       }
+    },
+    computed: {
+      ...mapGetters(['saldoTransactions'])
     },
     methods: {
       showSaldoModal () {
