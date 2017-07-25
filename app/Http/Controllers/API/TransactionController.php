@@ -87,7 +87,7 @@ class TransactionController extends Controller
             }) + $totalShipment;
 
             if ($totalBelanja > $saldo) {
-                throw new Exception('Saldo tidak cukup'.$saldo, 1);
+                throw new Exception('Saldo tidak cukup', 1);
             }
 
             if (!$cart->count()) {

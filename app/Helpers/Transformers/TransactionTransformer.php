@@ -17,6 +17,7 @@ class TransactionTransformer extends AbstractTransformer
             'status'            => $model->status,
             'status_string'     => $this->getStatus($model->status),
             'updated_at'        => $model->updated_at->toW3cString(),
+            'updated_at_string' => $model->updated_at->toDateTimeString(),
             'links'             => $this->getLinkAction($model),
             'shipment'          => $model->TransactionShippment,
             'attachments'       => $this->generateUserPictureLinks($model->attachments),

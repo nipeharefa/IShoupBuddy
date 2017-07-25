@@ -8,11 +8,11 @@
           <router-link :to="{ name: 'summaryProfile' }" append>Dashboard</router-link>
         </li>
         <li>
-          <router-link :to="{ name: 'formChangePassword' }" append>Change Password</router-link>
+          <router-link :to="{ name: 'formChangePassword' }" append>Tukar Password</router-link>
         </li>
 
         <li>
-          <router-link :to="{ name: 'tableTransaction' }" append>Transactions</router-link>
+          <router-link :to="{ name: 'tableTransaction' }" append>Transaksi</router-link>
         </li>
         <li>
           <router-link :to="{ name: 'tableSaldo' }" append>Saldo</router-link>

@@ -12,6 +12,7 @@ export default {
   INIT_CATEGORIES,
   [UPDATE_QUANTITY] (state, obj) {
     state.carts.carts[obj.cartIndex]['item'][obj.itemIndex]['quantity'] = obj.quantity
+    state.keyUpdater = Math.random()
   },
   [UDPATE_CART_CHECKED] (state, checked) {
     state.cartChecked = checked

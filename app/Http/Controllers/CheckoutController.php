@@ -7,6 +7,8 @@ use App\Models\Cart;
 use App\Models\Vendor;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request as GR;
+use Carbon\Carbon;
+use Cache;
 
 class CheckoutController extends Controller
 {
@@ -27,13 +29,15 @@ class CheckoutController extends Controller
         $key = "user_{$user->id}_cart";
         $value = $request->session()->get($key);
 
+        $value = unserialize($value);
+
         $shipment = $value['shipment'];
         $uLat = $shipment["lat"];
         $uLng = $shipment["lng"];
 
-        $carts = Cart::find($value['cart'])->map(function($item) use ($shipment) {
-            return $this->indexCartResponse($item->Vendor, $item, $shipment);
-        });
+        $carts = Cache::get($value['cacheKey']);
+
+        $carts = unserialize($carts);
 
          if ($user) {
             switch ($user->role) {
@@ -55,10 +59,16 @@ class CheckoutController extends Controller
             }
         }
 
+        $data = [
+            "carts" =>  $carts,
+            "total" => collect($carts)->sum('total'),
+            "shipment"  =>  $shipment
+        ];
+
         return $view->with('user', $user)
                     ->with('js', $js)
                     ->with('css', $css)
-                    ->with('cart_data', $carts);
+                    ->with('cart_data', json_encode($data));
     }
 
     /**
@@ -79,7 +89,38 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = $request->user();
+        $key = "user_{$user->id}_cart";
+        $cacheKey = str_random(20);
+        // $data = $request->all();
+        // session([ $key => $data]);
+
+        // $request->session()->get($key);
+        $data = $request->all();
+        $data['cacheKey'] = $cacheKey;
+        $serialize = serialize($data);
+
+        session([$key => $serialize]);
+
+        $shipment = $data['shipment'];
+        $uLat = $shipment["lat"];
+        $uLng = $shipment["lng"];
+
+        $carts = Cart::find($data['cart'])->map(function($item) use ($shipment) {
+            return $this->indexCartResponse($item->Vendor, $item, $shipment);
+        });
+
+        $expiresAt = Carbon::now()->addMinutes(1000);
+        Cache::put($cacheKey, serialize($carts), $expiresAt);
+
+        $response = [
+            "redirectTo"    =>  url('/checkout'),
+            "cacheKey"      =>  str_random(20),
+            "data"          =>  $request->all()
+        ];
+
+
+        return response()->json($response);
     }
 
     /**
@@ -122,9 +163,11 @@ class CheckoutController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        $user = $request->user();
+        $key = "user_{$user->id}_cart";
+        $request->session()->forget($key);
     }
 
     public function getCheckoutSession(Request $request) {

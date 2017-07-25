@@ -20,7 +20,8 @@ const state = {
   totalCart,
   cartCounter: 0,
   categories,
-  cartChecked: []
+  cartChecked: [],
+  keyUpdater: null
 }
 
 const store = new Vuex.Store({

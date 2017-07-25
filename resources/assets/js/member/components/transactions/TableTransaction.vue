@@ -21,7 +21,7 @@
                   #{{ item.id }}
               </router-link>
             </span>
-            <span>Dipesan pada {{ item.updated_at }}</span>
+            <span>Dipesan pada {{ item.updated_at_string }}</span>
           </div>
           <div class="order-teaser__body columns">
             <div class="order-teaser__product column is-half" v-for="product in item.detail">

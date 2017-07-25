@@ -291,7 +291,7 @@ class UserController extends BaseApiController implements DefaultAPIResponse
 
     public function getUserTransactions(User $user, Request $request)
     {
-        return $user->Transaction;
+        return TransactionTransformer::transform($user->Transaction()->orderByDesc('id')->get());
     }
 
     public function getUserSaldoTransactions(User $user, Request $request)

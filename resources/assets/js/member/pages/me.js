@@ -58,7 +58,7 @@ const app = new Vue({
     getTransactions () {
       const id = window._sharedData.user.id
       this.$http.get(`api/user/${id}/transactions`).then(response => {
-        console.log(response.data)
+        this.initTransactions(response.data)
       }).catch(err => err)
     },
     getSaldoTransactions () {

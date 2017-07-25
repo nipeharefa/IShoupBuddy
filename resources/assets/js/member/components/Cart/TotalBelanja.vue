@@ -7,9 +7,13 @@
     <div class="cart-total__body"></div>
     <div class="shipment-address">
       <div class="field">
-        <label for="">Alamat Pengiriman</label>
-        <textarea class="input shipment-address__textarea" v-model="shipmentAddress" v-if=""></textarea>
-        <button class="button is-small is-primary button-pick__maps" @click="showPickMaps">Pilih Lokasi</button>
+        <p v-if="invalidAddress" class="invalidAddress__text">Lokasi Pengiriman belum ditentukan</p>
+
+        <small v-if="!invalidAddress">Barang akan dikirimkan ke : </small>
+        <mapsPengiriman v-if="!invalidAddress" :latitude="shipment.lat" :longitude="shipment.lng" />
+        <button class="button is-small is-primary button-pick__maps" @click="showPickMaps">
+          {{ pickMapsString }}
+        </button>
       </div>
     </div>
     <div class="button-payment">
@@ -32,9 +36,7 @@
       height: 4rem;
     }
   }
-  .button-pick__maps {
-    margin: 1rem 0;
-  }
+  .button-pick__maps {}
 
   .cart-total__head {
     display: flex;
@@ -45,11 +47,16 @@
       font-size: 2rem;
     }
   }
+  .invalidAddress__text {
+    font-size: 0.85rem;
+    margin-top: 1rem;
+  }
 </style>
 
 <script>
   import { mapGetters } from 'vuex'
   const ModalPickLocation = () => import('global/components/Modals/ModalPickLocation.vue')
+  const MapsPengiriman = () => import('./MapsPengiriman.vue')
 
   export default {
     props: {
@@ -69,11 +76,18 @@
         return this.cartChecked.length > 0
       },
       invalidAddress () {
-        return this.shipment.lat === null || this.shipment.lng
+        return this.shipment.lat === null || this.shipment.lng === null
+      },
+      pickMapsString () {
+        if (this.invalidAddress) {
+          return "Pilih Lokasi"
+        }
+        return "Ganti Lokasi"
       }
     },
     components: {
-      ModalPickLocation
+      ModalPickLocation,
+      MapsPengiriman
     },
     mounted () {
       this.shipment.lat = this.activeUser.latitude
@@ -90,13 +104,19 @@
       }
     },
     methods: {
-      checkout () {
+      checkout ($event) {
+        const btn = $event.target
+        btn.classList.add('is-loading')
         const data = {
           cart: this.cartChecked,
           shipment: this.shipment
         }
         this.$http.post('checkout', data).then(response => {
           console.log(response)
+          btn.classList.remove('is-loading')
+          window.location.assign('/checkout')
+        }).catch(err => {
+          btn.classList.remove('is-loading')
         })
       },
       showPickMaps () {

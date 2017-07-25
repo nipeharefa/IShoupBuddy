@@ -49,6 +49,14 @@
   const BreadCrumb = () => import('./Breadcrumb.vue')
 
   export default {
+    mounted () {
+      this.$store.watch( state => {
+        return state.keyUpdater
+      }, (x) => {
+        console.log(x)
+        this.getSubTotal(this.a)
+      })
+    },
     data () {
       return {
         a: this.$store.state.cartChecked,
