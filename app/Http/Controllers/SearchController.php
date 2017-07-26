@@ -28,7 +28,8 @@ class SearchController extends Controller
             switch ($user->role) {
                 case 0:
                     // admin
-                    $js = mix('js/asearch.js');
+                    $js = mix('js/a-search.js');
+                    $css = mix('css/member/search.css');
                     break;
                 case 1:
                     // Member
@@ -37,7 +38,8 @@ class SearchController extends Controller
                     break;
                 default:
                     // Vendor
-                    $js = mix('js/vhome.js');
+                    $js = mix('js/v-search.js');
+                    $css = mix('css/member/search.css');
                     break;
             }
 

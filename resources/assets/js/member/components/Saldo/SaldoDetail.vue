@@ -53,11 +53,6 @@
         </div>
       </div>
     </div>
-    <div class="column is-half">
-      <div class="rekening">
-        <b>Detail Transfer</b>
-      </div>
-    </div>
   </div>
 </template>
 

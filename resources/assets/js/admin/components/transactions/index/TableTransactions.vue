@@ -42,12 +42,6 @@
           <td>
             {{ item.status_string }}
           </td>
-          <td>
-            <a class="button is-small is-primary" @click="approve(item)"
-            :disabled="item.status === 1 ? 'disabled' : false">Approve</a>
-            <a class="button is-small is-danger"
-            :disabled="item.status === 1 ? 'disabled' : false">Cancel</a>
-          </td>
         </tr>
       </tbody>
     </table>

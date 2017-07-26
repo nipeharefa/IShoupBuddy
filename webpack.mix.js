@@ -13,6 +13,8 @@ mix.js('resources/assets/js/admin/pages/auth/login.js', 'js/a-auth-login.js')
 mix.js('resources/assets/js/admin/pages/home/home.js', 'js/ahome.js')
 mix.js('resources/assets/js/admin/pages/transactions/index.js', 'js/a-transactions-index.js')
 mix.js('resources/assets/js/admin/pages/home/product-detail.js', 'js/a-product_detail.js')
+mix.js('resources/assets/js/admin/pages/home/a-show-category-product.js', 'js/a-show-category-product.js')
+mix.js('resources/assets/js/admin/pages/home/search.js', 'js/a-search.js')
 
 // Guest SASS
 
@@ -63,6 +65,8 @@ mix.js('resources/assets/js/vendor/pages/home/home.js', 'js/vhome.js')
 mix.js('resources/assets/js/vendor/pages/auth/login.js', 'js/vendor_login.js')
 mix.js('resources/assets/js/vendor/pages/product/index.js', 'js/vendor_product_index.js')
 mix.js('resources/assets/js/vendor/pages/home/product-detail.js', 'js/v-product_detail.js')
+mix.js('resources/assets/js/vendor/pages/home/v-show-category-product.js', 'js/v-show-category-product.js')
+mix.js('resources/assets/js/vendor/pages/home/search.js', 'js/v-search.js')
 
 // Vendor SASS
 mix.sass('resources/assets/sass/pages/vendor/home.scss', 'css/vendor/home.css')

@@ -34,7 +34,7 @@ class CategoryController extends Controller
                     case 0:
                         // admin
                         $js = mix('js/a-show-category-product.js');
-                        $css = mix('css/admin/home/index.css');
+                        $css = mix('css/g-show-category-product.css');
                         break;
                     case 1:
                         // Member

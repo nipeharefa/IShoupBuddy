@@ -10,7 +10,7 @@ Vue.use(VueEcho)
 Vue.use(CartCounter)
 import store from 'member/store/show-category-product/'
 
-const App = r => require.ensure([], () => r(require('admin/components/Category/ShowCategoryProduct.vue')), 'show-category-product')
+const App = r => require.ensure([], () => r(require('vendor/components/Category/ShowCategoryProduct.vue')), 'show-category-product')
 
 new Vue({
   created () {
