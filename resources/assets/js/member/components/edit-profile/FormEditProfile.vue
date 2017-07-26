@@ -184,16 +184,20 @@ export default {
     generateLinkPicture () {
       return `/${this.user.picture_url}`
     },
-    updateProfile () {
+    updateProfile ($event) {
       this.$validator.validateAll().then(result => {
-        this._updateProfile()
+        this._updateProfile($event)
       }).catch(err => {
         console.log(err)
       })
     },
-    _updateProfile () {
+    _updateProfile ($event) {
       const data = this.user
       const id = this.activeUser.id
+
+      const btn = event.target
+      btn.classList.add('is-loading')
+
       this.$http.post(`api/user`, data).then(response => {
         iziToast.success({
             title: 'Sukses',
@@ -201,7 +205,10 @@ export default {
             position: 'bottomRight'
         });
         this.initActiveUser(response.data.user)
-      }).catch(err => err)
+        btn.classList.remove('is-loading')
+      }).catch(err => {
+        btn.classList.remove('is-loading')
+      })
     }
   },
   computed: {

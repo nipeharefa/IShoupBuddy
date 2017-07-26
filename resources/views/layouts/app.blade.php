@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', 'Laravel')</title>
+    <title>@yield('title', 'Shoubud.xyz:Situs Review Produk Supermarket')</title>
     <link href='/manifest.json' rel='manifest'>
     <meta content='yes' name='mobile-web-app-capable'>
     <meta content='#00d1b2' name='theme-color'>
@@ -16,8 +16,6 @@
     <meta content='black' name='apple-mobile-web-app-status-bar-style'>
     <meta content='#00d1b2' name='msapplication-navbutton-color'>
     <meta content='notranslate' name='google'>
-
-    <script async src="https://cdn.ampproject.org/v0.js"></script>
     <meta name="google-key" id="google-key" content="{{ env('GOOGLE_KEY') }}" />
 
     <!-- Styles -->

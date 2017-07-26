@@ -51,6 +51,7 @@ class HomeController extends Controller
 
         return $view->with('user', $user)
                     ->with('js', $js)
+                    ->with('title', 'Shoubud.xyz:Situs Review Produk Supermarket')
                     ->with('css', $css);
     }
 }
