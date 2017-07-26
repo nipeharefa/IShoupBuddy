@@ -5,7 +5,9 @@
     </div>
     <section class="section">
       <div class="container">
+        <h3 class="product-list-caption">Produk Terbaru</h3>
         <list-promo></list-promo>
+        <h3 class="product-list-caption">Produk Lainnya</h3>
         <list-product></list-product>
       </div>
     </section>
@@ -49,15 +51,15 @@
         'initPromo'
       ]),
       getProducts() {
-        this.$http.get('api/product').then(response => {
+        this.$http.get('api/product?perpage=50').then(response => {
           this.initProducts(response.data.products)
         }).catch(err => {
           this.initProducts([])
         })
       },
       getPromo() {
-        this.$http.get('api/promo').then(response => {
-          const promo = response.data.promo
+        this.$http.get('api/product/newest?perpage=10&page=1').then(response => {
+          const promo = response.data.products
           this.initPromo(promo)
         })
       }

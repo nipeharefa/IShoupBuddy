@@ -21,8 +21,16 @@ class ProductController extends Controller
 
         if ($user) {
             switch ($user->role) {
+                case 0:
+                    $view->with('js', mix('js/a-product_detail.js'));
+                    $view->with('css', mix('css/member/product-detail.css'));
+                    break;
                 case 1:
                     $view->with('js', mix('js/mproduct-detail.js'));
+                    $view->with('css', mix('css/member/product-detail.css'));
+                    break;
+                case 2:
+                    $view->with('js', mix('js/v-product_detail.js'));
                     $view->with('css', mix('css/member/product-detail.css'));
                     break;
 
