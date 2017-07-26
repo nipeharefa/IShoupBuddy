@@ -2,7 +2,7 @@
   <div>
     <nav class="breadcrumb breadwrapper">
       <ul>
-        <li><a>Halaman Depan</a></li>
+        <li><a href="/">Halaman Depan</a></li>
         <li class="is-active"><a>{{ activeUser.name }}</a></li>
       </ul>
     </nav>

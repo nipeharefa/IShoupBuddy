@@ -58,21 +58,25 @@ export default {
     }
   },
   methods: {
-    doRegister () {
+    doRegister ($event) {
       this.$validator.validateAll().then(result => {
-        this._register()
+        this._register($event)
       }).catch(err => {
         console.log(err)
       })
     },
-    _register () {
+    _register ($event) {
       const data = this.register
       const self = this
+      const btn = event.target
+      btn.classList.add('is-loading')
       this.$http.post('/auth/register', data)
         .then(response => {
           window.location.assign(response.data.link)
+          btn.classList.remove('is-loading')
         }).catch(x => {
           self.onError = true
+          btn.classList.remove('is-loading')
         })
     },
     hideErrorNotification () {
