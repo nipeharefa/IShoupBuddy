@@ -47,7 +47,8 @@
       <div class="transaksi-control">
         <div class="field">
           <p class="control">
-            <button class="button is-small is-danger" v-if="canCancel">Batalkan</button>
+            <button class="button is-small is-danger" v-if="canCancel" @click="cancel">Batalkan</button>
+            <span class="label is-danger" v-if="!canCancel">Transaksi ini dibatalkan</span>
           </p>
         </div>
       </div>
@@ -89,13 +90,15 @@
 
 <script>
   import { mapActions, mapGetters } from 'vuex'
+  import iziToast from 'izitoast'
   export default {
     created() {
       this.getTransaction()
     },
     data () {
       return {
-        uploading: false
+        uploading: false,
+        indexTransaction: null
       }
     },
     computed: {
@@ -105,7 +108,7 @@
       ]),
       canCancel () {
         const t = this.saldoTransactionsDetail
-        if (t && t.status === 1) {
+        if ((t && t.status === 1) || t.status === 4) {
           return false
         }
         return true
@@ -116,6 +119,7 @@
       getTransaction () {
         const id = this.$route.params.id
         const indexCategory = this.saldoTransactions.findIndex( x => id == x.id)
+        this.indexTransaction = indexCategory
         this.initSaldoTransactionsDetail(this.saldoTransactions[indexCategory])
       },
       browseFile () {
@@ -143,6 +147,30 @@
           this.updateAttachmentTransactionDetail(response.data.transaction.attachments)
         }).catch(error => {
           return error
+        })
+      },
+      cancel ($event) {
+        const t = this.saldoTransactionsDetail
+        const btn = $event.target
+        btn.classList.add('is-loading')
+
+        this.$http.post(`api/admin/transaction/${t.id}/cancel`).then(response => {
+          console.log(response)
+          iziToast.success({
+            title: 'Sukses',
+            message: 'Transaksi Berhasil di batalkan',
+            position: 'bottomRight'
+          });
+          btn.classList.remove('is-loading')
+          this.initSaldoTransactionsDetail(response.data)
+          this.saldoTransactions[this.indexTransaction] = response.data
+        }).catch( err => {
+          btn.classList.remove('is-loading')
+          iziToast.error({
+            title: 'Error',
+            message: err.response.data,
+            position: 'bottomRight'
+          });
         })
       }
     }
