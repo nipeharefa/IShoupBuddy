@@ -16,23 +16,31 @@
               </p>
               <panel-detail :cartItem="item.item" :cartIndex="$index"></panel-detail>
               <div class="shipment">
-                <div class="sub_total">
-                  <span>Sub Total : </span>
-                  <span>{{ formattingPrice(item.sub_total) }}</span>
-                </div>
-                <div class="rate">
-                  <span>{{ formattingPrice(item.shipment.low_rates) }}</span>
-                </div>
-                <div class="total">
-                  <span>Total : </span>
-                  <span>{{ formattingPrice(item.total) }}</span>
-                </div>
-                <div class="distance">
-                  <span>{{ item.shipment.distance / 1000 }} Km</span>
-                </div>
-                <div class="duration">
-                  <span>{{ item.shipment.duration }}</span>
-                </div>
+                <label for="" class="label">Informasi Pengiriman</label>
+                <table class="table is-bordered">
+                  <tbody>
+                    <tr>
+                      <td class="key-ship">Sub Total</td>
+                      <td>{{ formattingPrice(item.sub_total) }}</td>
+                    </tr>
+                    <tr>
+                      <td class="key-ship">Biaya Pengiriman</td>
+                      <td>{{ formattingPrice(item.shipment.low_rates) }}</td>
+                    </tr>
+                    <tr>
+                      <td class="key-ship">Jarak</td>
+                      <td>{{ item.shipment.distance / 1000 }} Km</td>
+                    </tr>
+                    <tr>
+                      <td class="key-ship">Durasi Pengiriman</td>
+                      <td>{{ (item.shipment.duration / 60).toFixed(0) }} Menit</td>
+                    </tr>
+                    <tr>
+                      <td class="key-ship">Total</td>
+                      <td>{{ formattingPrice(item.total) }}</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
 
             </nav>
@@ -50,6 +58,19 @@
   </div>
 </template>
 
+
+
+<style lang="scss" scoped>
+  .shipment {
+    margin: 1rem 0 0 0;
+    .table {
+      font-size: 0.85rem;
+      .key-ship {
+        font-weight: bolder;
+      }
+    }
+  }
+</style>
 
 <script>
   import accounting from 'accounting-js'

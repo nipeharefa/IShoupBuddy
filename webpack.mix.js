@@ -93,6 +93,8 @@ mix.webpackConfig({
       designHelper: path.resolve(__dirname, 'resources/assets/sass/core/helpers'),
       sassBase: path.resolve(__dirname, 'resources/assets/sass/base'),
       sassComponents: path.resolve(__dirname, 'resources/assets/sass/components'),
+      sassComponents: path.resolve(__dirname, 'resources/assets/sass/components'),
+      sassExtentions: path.resolve(__dirname, 'resources/assets/sass/extentions'),
       sassPages: path.resolve(__dirname, 'resources/assets/sass/pages'),
       'globalVuexConstant$': path.resolve(__dirname, 'resources/assets/js/constant.js'),
 

@@ -10,7 +10,10 @@
             <breadCrumb></breadCrumb>
           </div>
         </div>
-        <div class="columns">
+        <div class="columns" v-if="!cartsNotNull">
+          <div class="column">Kosong</div>
+        </div>
+        <div class="columns" v-if="cartsNotNull">
           <div class="column is-half">
 
             <nav class="panel" v-for="(item, $index) in carts">
@@ -72,7 +75,13 @@
       BreadCrumb
     },
     computed: {
-      ...mapGetters(['cartChecked', 'carts'])
+      ...mapGetters(['cartChecked', 'carts']),
+      cartsNotNull () {
+        if (this.carts) {
+          return this.carts.length > 0
+        }
+        return false
+      }
     },
     methods: {
       updateDonk (a) {

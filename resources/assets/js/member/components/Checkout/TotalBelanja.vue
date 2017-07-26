@@ -24,6 +24,10 @@
       font-size: 2rem;
     }
   }
+  .checkout_action {
+    margin: 1rem 0;
+    text-align: center;
+  }
 </style>
 
 <script>
@@ -56,7 +60,7 @@
       }
     },
     computed: {
-      ...mapGetters(['carts', 'cartsTotal']),
+      ...mapGetters(['carts', 'cartsTotal', 'activeUser']),
       totalString () {
         return this.formattingPrice(this.cartsTotal)
       }
@@ -72,6 +76,18 @@
       hideNotification () {
         this.onError = false
       },
+      clearSession (btn) {
+        const id = this.activeUser.id
+        this.$http.delete(`checkout/${id}`).then(response => {
+          window.location.assign('/me/transactions')
+          // btn.classList.remove('is-loading')
+        }).catch( err => {
+          this.onError = true
+          console.log(err.response.data)
+          this.errorMessage = err.response.data.message
+          btn.classList.remove('is-loading')
+        })
+      },
       bayar ($event) {
         const btn = $event.target
         const data = this.transaction
@@ -81,7 +97,7 @@
 
         this.$http.post('api/transaction', data).then(response => {
           console.log(response)
-          btn.classList.remove('is-loading')
+          this.clearSession(btn)
         }).catch(err => {
           this.onError = true
           console.log(err.response.data)

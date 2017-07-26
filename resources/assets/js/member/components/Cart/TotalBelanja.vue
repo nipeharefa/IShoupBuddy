@@ -36,7 +36,9 @@
       height: 4rem;
     }
   }
-  .button-pick__maps {}
+  .button-pick__maps {
+    margin-top: 1rem;
+  }
 
   .cart-total__head {
     display: flex;
@@ -73,7 +75,7 @@
     computed: {
       ...mapGetters(['activeUser']),
       canCheckout () {
-        return this.cartChecked.length > 0
+        return this.cartChecked.length > 0 && !this.invalidAddress
       },
       invalidAddress () {
         return this.shipment.lat === null || this.shipment.lng === null

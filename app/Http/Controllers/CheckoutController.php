@@ -9,6 +9,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request as GR;
 use Carbon\Carbon;
 use Cache;
+use Log;
 
 class CheckoutController extends Controller
 {
@@ -28,6 +29,10 @@ class CheckoutController extends Controller
 
         $key = "user_{$user->id}_cart";
         $value = $request->session()->get($key);
+
+        if (!$value) {
+            return redirect('/');
+        }
 
         $value = unserialize($value);
 
@@ -168,6 +173,8 @@ class CheckoutController extends Controller
         $user = $request->user();
         $key = "user_{$user->id}_cart";
         $request->session()->forget($key);
+        Log::info('Destroy Data on Session');
+        Log::info('Key : ' . $key);
     }
 
     public function getCheckoutSession(Request $request) {

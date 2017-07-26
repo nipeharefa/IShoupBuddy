@@ -25,7 +25,7 @@
           <i class="fa fa-user" aria-hidden="true"></i>
         </a>
         <a href="/cart">
-          <i class="fa fa-shopping-cart fa-6" aria-hidden="true"></i>
+          <i class="fa fa-shopping-cart fa-6 badge" aria-hidden="true" data-badge="8"></i>
         </a>
       </div>
 
