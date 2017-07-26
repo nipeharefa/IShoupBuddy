@@ -7,7 +7,7 @@
         :options="{responsive: true, maintainAspectRatio: false}" v-if="dataCollection" />
       </div>
     </div>
-    <button class="modal-close is-large"></button>
+    <button class="modal-close is-large" @click="hideModals"></button>
   </div>
 </template>
 

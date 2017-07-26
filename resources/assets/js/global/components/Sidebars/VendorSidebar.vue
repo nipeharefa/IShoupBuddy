@@ -13,9 +13,6 @@
       <li>
         <router-link :to="{ name: 'review-index' }" append>Review</router-link>
       </li>
-      <li>
-        <router-link :to="{ name: 'transaction-index' }" append>Transactions</router-link>
-      </li>
     </ul>
     <p class="menu-label">
       Settings

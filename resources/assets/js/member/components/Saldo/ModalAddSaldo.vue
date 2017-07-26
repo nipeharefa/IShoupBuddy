@@ -98,6 +98,7 @@
           console.log(response.data)
           btn.classList.remove('is-loading')
           this.addSaldoTransaction(response.data.transaction)
+          this.hide()
           iziToast.success({
             title: 'Sukses',
             message: 'Permintaan Pemabahan Saldo berhasil',

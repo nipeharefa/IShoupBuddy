@@ -12,7 +12,7 @@
         <i class="fa fa-shopping-cart"></i>
       </span>
     </a>
-    <a class="navbar-item no-hover-change" href="/me/transaction" title="Transaksi">
+    <a class="navbar-item no-hover-change" href="/me/transactions" title="Transaksi">
       <span class="icon" style="color: #fff;">
         <i class="fa fa-exchange"></i>
       </span>

@@ -47,7 +47,7 @@
       <div class="transaksi-control">
         <div class="field">
           <p class="control">
-            <button class="button is-small is-danger">Batalkan</button>
+            <button class="button is-small is-danger" v-if="canCancel">Batalkan</button>
           </p>
         </div>
       </div>
@@ -102,7 +102,14 @@
       ...mapGetters([
         'saldoTransactions',
         'saldoTransactionsDetail',
-      ])
+      ]),
+      canCancel () {
+        const t = this.saldoTransactionsDetail
+        if (t && t.status === 1) {
+          return false
+        }
+        return true
+      }
     },
     methods: {
       ...mapActions(['initSaldoTransactionsDetail', 'updateAttachmentTransactionDetail']),

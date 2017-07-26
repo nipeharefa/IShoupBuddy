@@ -3,7 +3,7 @@
     <div class="saldo_head">
       <div class="saldo-amount">
         <small>Total Saldo</small>
-        <strong>Rp.</strong>
+        <strong>{{ activeUser.saldo_string }}</strong>
       </div>
       <div class="saldo-add">
         <button class="button is-small saldo-add__btn" @click="showSaldoModal">Tambah Saldo</button>
@@ -25,7 +25,7 @@
                   #{{ item.id }}
               </router-link>
             </td>
-            <td>{{ item.updated_at }}</td>
+            <td>{{ item.updated_at_string }}</td>
             <td>{{ item.nominal_string }}</td>
             <td>{{ item.status_string }}</td>
           </tr>
@@ -40,6 +40,10 @@
 <style lang="scss" scoped>
   .saldo_head {
     display: flex;
+    flex-direction: column;
+    .saldo-add {
+      margin: 1rem 0;
+    }
   }
 </style>
 
@@ -58,7 +62,7 @@
       }
     },
     computed: {
-      ...mapGetters(['saldoTransactions'])
+      ...mapGetters(['saldoTransactions', 'activeUser'])
     },
     methods: {
       showSaldoModal () {

@@ -23,6 +23,9 @@ class ReviewTransformer extends AbstractTransformer
             'date'      => $review->created_at->toW3cString(),
         ];
 
+        $arr['summary_text']    =  collect($arr['sentimen'])->sort()->keys()
+                                    ->reverse()->first();
+
         return $arr;
     }
 

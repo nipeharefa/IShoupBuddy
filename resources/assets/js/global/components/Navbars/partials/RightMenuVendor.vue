@@ -2,7 +2,7 @@
   <div class="navbar-end">
 
     <div class="navbar-item has-dropdown is-hoverable">
-      <a class="navbar-link link-no-hover-change" href="/me">
+      <a class="navbar-link link-no-hover-change" href="/vendor">
         <span class="navbar-user-fullname">
           Hi, {{ activeUser.name }}
         </span>
