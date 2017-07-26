@@ -38,6 +38,7 @@
               <span class="product-name">{{ product.name }}</span>
               <ratings :ratings="product.total_rating"></ratings>
               <wishListButton :productId="product.id" />
+              <a :href="`/compare/${product.id}`" class="button is-small">Compare</a>
               <hr>
             </div>
             <div>

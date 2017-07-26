@@ -1,7 +1,7 @@
 <template>
   <div class="navbar-end">
 
-    <a class="navbar-item no-hover-change" href="/me/topup" title="Saldo">
+    <a class="navbar-item no-hover-change" href="/me/saldo" title="Saldo">
       <span class="icon" style="color: #fff;">
         <i class="fa fa-money"></i>
       </span>

@@ -31,6 +31,7 @@
             <div>
               <span class="product-name">{{ product.name }}</span>
               <ratings :ratings="product.total_rating"></ratings>
+              <a :href="`/compare/${product.id}`" class="button is-small">Compare</a>
               <hr>
             </div>
             <div>
@@ -51,11 +52,7 @@
                     <td class="vendor-name">{{ item.vendor.name }}</td>
                     <td>{{ item.vendor.name }}</td>
                     <td>{{ item.price_string }}</td>
-                    <td>
-                      <!-- <span class="to-cart" title="Tambahkan ke keranjang belanja">
-                        <i class="fa fa-shopping-cart"></i>
-                      </span> -->
-                    </td>
+                    <td></td>
                   </tr>
                 </tbody>
               </table>
