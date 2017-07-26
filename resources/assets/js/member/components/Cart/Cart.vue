@@ -21,7 +21,8 @@
                 <input type="checkbox" :value="item.id" v-model="a"> {{ item.vendor.name }}
               </p>
 
-              <panel-detail :cartItem="item.item" :cartIndex="$index"></panel-detail>
+              <panel-detail :cartItem="item.item"
+              :cartIndex="$index" :cart="item" :key="item.id"></panel-detail>
 
             </nav>
 

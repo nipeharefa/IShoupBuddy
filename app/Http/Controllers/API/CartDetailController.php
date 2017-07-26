@@ -120,7 +120,11 @@ class CartDetailController extends Controller
         try {
             DB::beginTransaction();
 
-            $id->delete();
+            if ($cart->Detail->count() <= 1) {
+                $cart->delete();
+            } else {
+                $id->delete();
+            }
 
             DB::commit();
 

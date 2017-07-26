@@ -23,5 +23,8 @@ export default {
   },
   UPDATE_PRODUCT (state, data) {
     state.products[data.index] = data.product
+  },
+  UPDATE_TRANSACTION (state, obj) {
+    state.transactions.splice(obj.index, 1, obj.data)
   }
 }

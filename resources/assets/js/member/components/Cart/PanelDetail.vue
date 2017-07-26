@@ -14,6 +14,10 @@
         <div class="content">
           <div class="product-name">
             <p class="product-name">{{ product.product.name }}</p>
+            <span class="icon" @click="deleteItem(product)">
+              <i class="fa "
+              :class="{'fa-trash': !onDelete, 'fa-circle-o-notch fa-spin fa-3x fa-fw': onDelete}"></i>
+            </span>
           </div>
         </div>
 
@@ -56,6 +60,10 @@
   .subtotal__caption {
     flex: 0.6
   }
+  div.product-name {
+    display: flex;
+    justify-content: space-between;
+  }
 </style>
 
 <script>
@@ -64,6 +72,9 @@
 
   export default {
     props: {
+      cart: {
+        required: true
+      },
       cartItem: {
         required: true
       },
@@ -71,8 +82,13 @@
         required: true
       }
     },
+    data () {
+      return {
+        onDelete: false
+      }
+    },
     computed: {
-      ...mapGetters(['cartChecked'])
+      ...mapGetters(['cartChecked', 'carts'])
     },
     methods: {
       ...mapActions(['updateBaru', 'updateCartChecked']),
@@ -129,6 +145,35 @@
         })
         return
       },
+      deleteCartWhenNullItem() {
+        if (!this.cart.item.length) {
+          const cartIndex  = this.carts.findIndex( x => {
+            return x.id === this.cart.id
+          })
+
+          console.log(cartIndex)
+          this.carts.splice(cartIndex, 1)
+        }
+        return
+      },
+      deleteItem (item) {
+        console.log(item)
+        this.onDelete = true
+        const cId = this.cart.id
+        const iId = item.id
+
+        this.$http.delete(`api/cart/${cId}/detail/${iId}`).then(response => {
+
+          const itemIndex = this.cart.item.findIndex(x => {
+            return x.id === item.id
+          })
+          this.onDelete = false
+
+          this.cart.item.splice(itemIndex, 1)
+          this.deleteCartWhenNullItem()
+
+        }).catch(err => err)
+      }
     }
   }
 </script>

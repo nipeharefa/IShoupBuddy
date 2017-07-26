@@ -29,14 +29,16 @@
 <script>
 
   import iziToast from 'izitoast'
+  import { mapGetters, mapActions } from 'vuex'
   export default {
-    props: {
-      topup: {
-        required: true,
-        type: Array
-      }
+    computed: {
+      ...mapGetters([
+        'transactions',
+        'topup'
+      ]),
     },
     methods: {
+      ...mapActions(['updateTransaction']),
       cancelState (item) {
         if (item.status === 1 || item.status === 4) {
           return true
@@ -48,7 +50,18 @@
           return;
         }
         const btnUpdate = event.target
+        const id = item.id
+
+        const index = this.transactions.findIndex( x => {
+          console.log(x.id == id)
+          return x.id == id
+        })
+
+        console.log(id)
+        console.log(index)
+
         btnUpdate.classList.add('is-loading')
+
         this.$http.post(`api/admin/transaction/${item.id}/approve`).then(response => {
           iziToast.success({
             title: 'Sukses',
@@ -56,7 +69,12 @@
             position: 'bottomRight'
           })
           btnUpdate.classList.remove('is-loading')
-          item.status = 1
+          const obj = {
+            index,
+            data: response.data
+          }
+          this.updateTransaction(obj)
+
         }).catch(err => {
           iziToast.error({
             title: 'Error',

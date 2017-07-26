@@ -19,7 +19,7 @@
         </li>
 
         <li>
-          <router-link :to="{ name: 'productFavorite' }" append>Produk Favorite</router-link>
+          <router-link :to="{ name: 'productFavorite' }" append>Produk Favorit</router-link>
         </li>
 
 		</ul>

@@ -11,6 +11,12 @@
 
         <small v-if="!invalidAddress">Barang akan dikirimkan ke : </small>
         <mapsPengiriman v-if="!invalidAddress" :latitude="shipment.lat" :longitude="shipment.lng" />
+
+        <div class="field">
+          <label for="" v-if="!invalidAddress">Alamat Pengiriman</label>
+          <textarea cols="30" rows="10" v-if="!invalidAddress" class="textarea" placeholder="Textarea"></textarea>
+        </div>
+
         <button class="button is-small is-primary button-pick__maps" @click="showPickMaps">
           {{ pickMapsString }}
         </button>
@@ -94,12 +100,14 @@
     mounted () {
       this.shipment.lat = this.activeUser.latitude
       this.shipment.lng = this.activeUser.longitude
+      this.address = this.activeUser.address
     },
     data () {
       return {
         shipment: {
           lat: null,
-          lng: null
+          lng: null,
+          address: ""
         },
         shipmentAddress: null,
         onModalShow: false
