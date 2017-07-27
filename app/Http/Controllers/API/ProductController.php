@@ -124,7 +124,6 @@ class ProductController extends Controller
             DB::commit();
 
             return ProductTransformer::transform($product, 201);
-
         } catch (QueryException $e) {
             DB::rollback();
 
@@ -294,8 +293,8 @@ class ProductController extends Controller
         $page = $request->page ?? 1;
 
         $product = Product::whereHas('productvendor', function ($pv) {
-                return $pv;
-            })->orderByDesc('created_at');
+            return $pv;
+        })->orderByDesc('created_at');
 
         $pagination = $product->paginate($perPage, ['*'], 'page', $page);
 
@@ -314,7 +313,6 @@ class ProductController extends Controller
 
     public function getProductTrending(Request $request)
     {
-
         $product = Product::withCount('Review')
             ->whereHas('productvendor', function ($pv) {
                 return $pv;

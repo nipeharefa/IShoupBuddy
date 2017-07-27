@@ -183,7 +183,7 @@ class TransactionController extends Controller
 
     public function cancelTopUp(Transaction $transaction)
     {
-         try {
+        try {
             DB::beginTransaction();
             // Update Transaction to Success
             $transaction->update(['status' => 4]);

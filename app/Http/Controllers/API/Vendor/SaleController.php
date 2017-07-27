@@ -32,15 +32,13 @@ class SaleController extends BaseApiController
 
         $labels = array_reverse($labels);
 
-        $stats = $vendor->ProductVendor->map(function($item) use ($range){
-
+        $stats = $vendor->ProductVendor->map(function ($item) use ($range) {
             $data['label'] = $item->Product->name;
             $data['id'] = $item->id;
             $data['backgroundColor'] = RandomColor::one(['format' => 'hex', 'luminosity' => 'random']);
             $c = [];
             $carbon = Carbon::now();
             for ($i = 1; $i <= $range; $i++) {
-
                 $a = $item->TransactionDetail()
                     ->whereDate('created_at', $carbon->toDateString())
                     ->count();
@@ -49,7 +47,6 @@ class SaleController extends BaseApiController
             }
             $data['data'] = array_reverse($c);
             return $data;
-
         });
 
         $response = [
@@ -60,7 +57,6 @@ class SaleController extends BaseApiController
         ];
 
         return response()->json($response);
-
     }
 
     /**
@@ -108,7 +104,6 @@ class SaleController extends BaseApiController
         $c = [];
         $carbon = Carbon::now();
         for ($i = 1; $i <= $range; $i++) {
-
             $a = $item->TransactionDetail()
                 ->whereDate('created_at', $carbon->toDateString())
                 ->count();
@@ -125,7 +120,6 @@ class SaleController extends BaseApiController
         ];
 
         return response()->json($response);
-
     }
 
     /**

@@ -14,7 +14,8 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    protected function getViewCategories() {
+    protected function getViewCategories()
+    {
         $categories = Cache::remember('categories_', 1000, function () {
             return Category::orderBy('name')->get();
         });

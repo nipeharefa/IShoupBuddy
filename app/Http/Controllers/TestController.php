@@ -54,7 +54,6 @@ class TestController extends Controller
         $d = [];
 
         for ($i=0; $i <$target ; $i++) {
-
             if (isset($ids[$i])) {
                 $p = Product::find($ids[$i]);
                 array_push($d, ProductTransformer::transform($p));

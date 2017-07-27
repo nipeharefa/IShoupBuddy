@@ -24,7 +24,6 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-
         $user = $request->user() ?? null;
 
         $js = mix('js/home.js');

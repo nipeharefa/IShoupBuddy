@@ -29,7 +29,6 @@ class RegisterControllerTest extends TestCase
         $response = $this->json('POST', 'auth/register', $data);
 
         $this->assertEquals(201, $response->getStatusCode());
-
     }
 
     public function testAuthUserCantVisitRegister()
@@ -51,7 +50,7 @@ class RegisterControllerTest extends TestCase
             'phone'     => '082275121178',
         ];
 
-        $response = $this->json('POST','auth/vendor/register', $data);
+        $response = $this->json('POST', 'auth/vendor/register', $data);
 
         $response->assertStatus(201);
     }

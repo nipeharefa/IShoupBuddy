@@ -13,7 +13,6 @@ class CategoryController extends Controller
     public function getCategoryProduct($categorySlug, Request $request)
     {
         try {
-
             $category = Category::whereSlug($categorySlug)->firstOrFail();
 
             $user = $request->user() ?? null;
@@ -54,7 +53,6 @@ class CategoryController extends Controller
                     ->with('js', $js)
                     ->with('categories', $this->getViewCategories())
                     ->with('css', $css);
-
         } catch (ModelNotFoundException $e) {
             Log::info($e->getMessage());
 

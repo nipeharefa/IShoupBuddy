@@ -50,8 +50,6 @@ class CheckoutController extends Controller
         $value = $request->session()->get($key);
 
         return $value;
-
-
     }
 
     /**
@@ -98,5 +96,4 @@ class CheckoutController extends Controller
     {
         //
     }
-
 }

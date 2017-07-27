@@ -131,7 +131,6 @@ class TransactionController extends Controller
             DB::commit();
 
             return transform($currenTransactions->load('Detail'));
-
         } catch (Exception $e) {
             DB::rollback();
 

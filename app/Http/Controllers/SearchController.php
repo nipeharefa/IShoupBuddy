@@ -42,7 +42,6 @@ class SearchController extends Controller
                     $css = mix('css/member/search.css');
                     break;
             }
-
         }
 
         return $view->with('keyword', $q)

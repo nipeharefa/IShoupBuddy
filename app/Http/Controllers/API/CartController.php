@@ -131,7 +131,8 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {}
+    {
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -246,7 +247,7 @@ class CartController extends Controller
     public function getSubTotalCart(Request $request)
     {
         $totalBelanja = Cart::find($request->arrayIds)->sum(function ($item) {
-                return $item->Detail()->sum('price');
+            return $item->Detail()->sum('price');
         });
 
         $response = [

@@ -44,7 +44,7 @@ class CheckoutController extends Controller
 
         $carts = unserialize($carts);
 
-         if ($user) {
+        if ($user) {
             switch ($user->role) {
                 case 0:
                     // admin
@@ -112,7 +112,7 @@ class CheckoutController extends Controller
         $uLat = $shipment["lat"];
         $uLng = $shipment["lng"];
 
-        $carts = Cart::find($data['cart'])->map(function($item) use ($shipment) {
+        $carts = Cart::find($data['cart'])->map(function ($item) use ($shipment) {
             return $this->indexCartResponse($item->Vendor, $item, $shipment);
         });
 
@@ -178,8 +178,8 @@ class CheckoutController extends Controller
         Log::info('Key : ' . $key);
     }
 
-    public function getCheckoutSession(Request $request) {
-
+    public function getCheckoutSession(Request $request)
+    {
     }
 
     protected function calculateEstimates($start_lat, $start_lng, $stop_lat, $stop_lng)
@@ -202,20 +202,20 @@ class CheckoutController extends Controller
         $distance = $response1["routes"][0]["legs"][0]['distance']['value'];
         $duration = $response1["routes"][0]["legs"][0]['duration']['value'];
 
-        $client = new \Stevenmaguire\Uber\Client(array(
+        $client = new \Stevenmaguire\Uber\Client([
             'access_token' => 'KA.eyJ2ZXJzaW9uIjoyLCJpZCI6IlZrSHQ2OWJoU2NLNXBwOHhjTGpicWc9PSIsImV4cGlyZXNfYXQiOjE1MDM1MTE5NzUsInBpcGVsaW5lX2tleV9pZCI6Ik1RPT0iLCJwaXBlbGluZV9pZCI6MX0.jb_Hh1k9VBXcm9aT2oYz0NFMxVqRHxgwbR36S_fc9RM',
             'server_token' => 'dMcBeMKnz79K9KF2l4X_KorAj8MfEazd8BlVt1aa',
             'use_sandbox'  => true, // optional, default false
             'version'      => 'v1.2', // optional, default 'v1.2'
             'locale'       => 'en_US', // optional, default 'en_US'
-        ));
+        ]);
 
-        $estimates = $client->getPriceEstimates(array(
+        $estimates = $client->getPriceEstimates([
             'start_latitude' => $start_lat,
             'start_longitude' => $start_lng,
             'end_latitude' => $stop_lat,
             'end_longitude' => $stop_lng
-        ));
+        ]);
 
         return [
             "distance"  =>  $distance,
