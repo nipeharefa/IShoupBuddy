@@ -23,4 +23,13 @@ class MeControllerTest extends TestCase
         $response = $this->get('me/saldo');
         $response->assertStatus(200);
     }
+
+    public function testAccesAPIMe()
+    {
+        $this->seed('UserTableSeeder');
+        $user = User::find(1);
+        $this->actingAs($user, 'api');
+        $response = $this->get('api/me');
+        $response->assertStatus(200);
+    }
 }
