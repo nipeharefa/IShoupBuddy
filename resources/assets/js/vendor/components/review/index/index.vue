@@ -35,6 +35,7 @@
   }
   .reviews-box {
     margin-top: 1rem;
+    flex-wrap: wrap;
   }
   .media {
     border: 1px solid #dbdbdb;

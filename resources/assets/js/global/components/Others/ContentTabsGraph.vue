@@ -1,13 +1,24 @@
 <template>
   <div>
     <div class="columns">
-      <div class="column is-3">
-        <div class="select">
-          <select v-model="vendorSelected" @change="getAll">
-            <option value="">Semua Vendor</option>
-            <option v-for="item in vendors" :value="item.vendor.id">{{ item.vendor.name }}</option>
-          </select>
+      <div class="column is-6">
+        <div class="select-control">
+          <div class="select">
+            <select v-model="vendorSelected" @change="getAll">
+              <option value="">Semua Vendor</option>
+              <option v-for="item in vendors" :value="item.vendor.id">{{ item.vendor.name }}</option>
+            </select>
+
+          </div>
+          <div class="select">
+            <select name="" id="" v-model="range">
+              <option value="7">7 Hari Sebelumnya</option>
+              <option value="30">1 Bulan Sebelumnya</option>
+              <option value="90">3 Bulan Sebelumnya</option>
+            </select>
+          </div>
         </div>
+
       </div>
     </div>
     <div class="columns">
@@ -58,7 +69,8 @@
         vendorSelected: "",
         stats: null,
         vendorNameSelected: "",
-        dataCollection: null
+        dataCollection: null,
+        range: 7
       }
     },
     computed: {

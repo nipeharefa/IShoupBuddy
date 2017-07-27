@@ -18,59 +18,55 @@
       </ul>
     </nav>
 
-    <section class="order_details__section">
-      <div class="columns">
-        <div class="column is-4">
-          Order #{{ transaction.id }}
-        </div>
-        <div class="column is-4">
-          Dipesan pada
-        </div>
-        <div class="column is-4">
-          Total {{ transaction.nominal_string }}
-        </div>
+    <div class="t_detail">
+      <div class="t_head">
+        <h1 class="title is-3">Transaksi : #{{ transaction.id }}</h1>
       </div>
-    </section>
 
-    <section class="order_detais__product" v-for="item in transaction.detail">
-      <div class="order_details__product-body">
-        <div class="order_details__product-details">
-          <img :src="item.product.picture_url.small" alt="" class="order_details-product__image">
-          <p class="order_details-product__name">{{ item.name }}</p>
-        </div>
+      <div class="t_table_order">
+        <table-item v-if="transaction.detail" :transaction="transaction.detail"></table-item>
       </div>
-    </section>
+    </div>
 
-    <section class="order_details__shipping">
+    <!-- <section class="order_details__shipping">
       <div class="columns">
         <div class="column is-half order_details__user">
-          <b>Alamat Penagihan</b>
-          <br>
-          {{ activeUser.name }}
-          <br>
-          {{ activeUser.address }}
-          <br>
-          {{ activeUser.phone }}
+          <b>Pengiriman</b>
+          <table class="table">
+            <tbody>
+              <tr>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div class="column is-half"></div>
       </div>
-    </section>
+    </section> -->
+
   </div>
 </template>
 
+<style lang="scss">
+  @import "~sassPages/admin/transactions/show";
+</style>
 
 <script>
   import { mapGetters, mapActions } from 'vuex'
+  const TableItem = () => import ('./TableDetailTransaction.vue')
 
   export default {
     created () {
       this.getTransaction()
     },
+    components: {
+      TableItem
+    },
     computed: {
       ...mapGetters([
         'activeUser',
         'transactions',
-        'transaction'
+        'transaction',
       ])
     },
     data () {
