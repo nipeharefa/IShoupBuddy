@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategory;
 use App\Models\Category;
 use DB;
+use Cache;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -36,6 +37,11 @@ class CategoryController extends Controller
 
             DB::commit();
 
+            Cache::forget('categories_');
+            Cache::remember('categories_', 1000, function () {
+                return Category::orderBy('name')->get();
+            });
+
             return response()->json($category, 201);
         } catch (Exception $e) {
             DB::rollback();
@@ -53,6 +59,11 @@ class CategoryController extends Controller
         $data = $request->only('name');
 
         $category->update($data);
+
+        Cache::forget('categories_');
+        Cache::remember('categories_', 1000, function () {
+            return Category::orderBy('name')->get();
+        });
 
         return response()->json($category, 200);
     }
@@ -72,6 +83,11 @@ class CategoryController extends Controller
             $category->delete();
 
             DB::commit();
+
+            Cache::forget('categories_');
+            Cache::remember('categories_', 1000, function () {
+                return Category::orderBy('name')->get();
+            });
 
             return response()->json($category, 200);
         } catch (Exception $e) {

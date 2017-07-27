@@ -18,6 +18,7 @@ class ProductController extends Controller
         $user = ActiveUserTransformer::transform($request->user());
 
         return view('pages.vendor.product.index')
+            ->with('categories', $this->getViewCategories())
             ->with('user', json_encode($user));
     }
 

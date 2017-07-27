@@ -60,3 +60,10 @@ div.navbar-wrapper {
     width: 8rem;
   }
 }
+
+.navbar-item.has-dropdown:hover {
+  // background-color: red;
+  a.navbar-link {
+    background: none;
+  }
+}

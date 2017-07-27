@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategory;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Cache;
 
 class CategoryController extends Controller
 {
@@ -87,6 +88,10 @@ class CategoryController extends Controller
             'categories'    => $category,
             'message'       => null,
         ];
+
+        Cache::remember('categories_', 1000, function () {
+            return Category::orderBy('name')->get();
+        });
 
         return response()->json($response, 200);
     }

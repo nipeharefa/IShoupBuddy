@@ -17,6 +17,7 @@ class TransactionController extends Controller
         $user = $request->user() ?? null;
 
         return view('pages.admin.transactions.index')
+            ->with('categories', $this->getViewCategories())
             ->with('user', $user);
     }
 

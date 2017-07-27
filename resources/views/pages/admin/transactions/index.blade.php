@@ -14,7 +14,8 @@
     <script type="text/javascript">
 
         window._sharedData = {
-            user: {!! $user !!}
+            user: {!! $user !!},
+            categories: {!! $categories ?? "{}" !!}
         }
     </script>
     <script src="{{ mix('js/manifest.js') }}" type="text/javascript"></script>
