@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="columns">
-      <div class="column is-6">
+      <div class="column is-3">
         <div class="select-control">
           <div class="select">
             <select v-model="vendorSelected" @change="getAll">
@@ -10,15 +10,18 @@
             </select>
 
           </div>
+        </div>
+
+      </div>
+
+      <div class="column is-3">
           <div class="select">
-            <select name="" id="" v-model="range">
+            <select name="" id="" v-model="range" @change="getAll">
               <option value="7">7 Hari Sebelumnya</option>
               <option value="30">1 Bulan Sebelumnya</option>
               <option value="90">3 Bulan Sebelumnya</option>
             </select>
           </div>
-        </div>
-
       </div>
     </div>
     <div class="columns">
@@ -58,7 +61,7 @@
       },
       getAll () {
         const vendor = this.vendorSelected
-        this.$http.get(`api/statistic/all?&product_id=${this.product.id}&vendor_id=${vendor}`).then(response => {
+        this.$http.get(`api/statistic/all?&product_id=${this.product.id}&vendor_id=${vendor}&range=${this.range}`).then(response => {
           console.log(response.data)
           this.dataCollection = response.data
         }).catch(err => err)
