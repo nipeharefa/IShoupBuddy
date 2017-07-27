@@ -24,6 +24,7 @@ Route::resource('cart', 'CartController');
 Route::resource('checkout', 'CheckoutController');
 Route::resource('compare', 'CompareController');
 Route::get('knn', 'TestController@knn');
+Route::get('api/knn', 'TestController@knn')->middleware('api');
 
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::post('login', 'LoginController@loginViaAjax');
