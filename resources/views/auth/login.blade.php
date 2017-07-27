@@ -14,11 +14,18 @@ Login
 
    <div id="app"></div>
 
-
 @endsection
 
 
 @section('js')
+
+    <script type="text/javascript">
+
+        window._sharedData = {
+            user: {!! $user ?? "{}" !!},
+            categories: {!! $categories !!}
+        }
+    </script>
 
 	<script src="{{ mix('js/manifest.js') }}"></script>
 	<script src="{{ mix('js/vendor.js') }}"></script>

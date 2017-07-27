@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
+use Cache;
 
 class HomeController extends Controller
 {
@@ -22,6 +24,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+
         $user = $request->user() ?? null;
 
         $js = mix('js/home.js');
@@ -51,6 +54,7 @@ class HomeController extends Controller
 
         return $view->with('user', $user)
                     ->with('js', $js)
+                    ->with('categories', $this->getViewCategories())
                     ->with('title', 'Shoubud.xyz:Situs Review Produk Supermarket')
                     ->with('css', $css);
     }

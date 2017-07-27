@@ -18,27 +18,12 @@
   import { mapGetters } from 'vuex'
 
   export default {
-    props: {
-      categories: {
-        required: true
-      }
+    created () {
+      this.categories = window._sharedData.categories
     },
-    computed: {
-      categoriesSorted () {
-        const sortedProduct =  this.categories.sort( (a,b) => {
-          var nameA = a.name.toLowerCase()
-          var nameB = b.name.toLowerCase()
-          if (nameA < nameB) {
-            return -1;
-          }
-          if (nameA > nameB) {
-            return 1;
-          }
-
-          // names must be equal
-          return 0;
-        })
-        return sortedProduct
+    data () {
+      return {
+        categories: null
       }
     }
   }

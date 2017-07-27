@@ -33,6 +33,10 @@
       latitude: Number,
       longitude: Number
     },
+    created () {
+      this.location.latitude = this.latitude || 3.590336
+      this.location.longitude = this.longitude || 98.677481
+    },
     mounted () {},
     updated () {
       this.initMap()

@@ -27,8 +27,8 @@
               <button class="button is-small" @click="subQuantity(product.id, product)">-</button>
             </p>
             <p class="control">
-              <input class="input is-small in-quan"
-              type="text" placeholder="1" v-model="product.quantity">
+              <inputQuantity :rating.sync="product.quantity"
+                v-on:rating-selected="updateQuantity(product.id, product)" />
             </p>
             <p class="control">
               <button class="button is-small" @click="addQuantity(product.id, product)">+</button>
@@ -69,6 +69,9 @@
 <script>
   import accounting from 'accounting-js'
   import { mapGetters, mapActions } from 'vuex'
+  import InputQuantity from "./InputQuantity.vue"
+
+  import debounce from 'lodash.debounce';
 
   export default {
     props: {
@@ -90,8 +93,28 @@
     computed: {
       ...mapGetters(['cartChecked', 'carts'])
     },
+    components: {
+      InputQuantity
+    },
     methods: {
       ...mapActions(['updateBaru', 'updateCartChecked']),
+      syncQuantity: debounce((self, idItem, item) => {
+        const itemIndex = self.cartItem.findIndex(x => {
+          return x.id === idItem
+        })
+        const cartIndex = self.cartIndex
+        const quantity = item.quantity
+        const id = item.id
+        self.$http.patch(`api/cart-detail/${id}`, {quantity}).then(response => {
+          const update = {
+            cartIndex,
+            itemIndex,
+            quantity: response.data.quantity
+          }
+          self.updateBaru(update)
+          self.updateCartChecked(self.cartChecked)
+        })
+      }, 600),
       formattingPrice (price) {
         return accounting.formatMoney(price, {
           symbol: 'Rp ',
@@ -99,6 +122,13 @@
           precision: 0
         })
       },
+      reQuantity: debounce((self, id, quantity, update) => {
+        self.$http.patch(`api/cart-detail/${id}`, {quantity}).then(response => {
+          update.quantity = response.data.quantity
+          self.updateBaru(update)
+          self.updateCartChecked(self.cartChecked)
+        })
+      }, 800),
       addQuantity (idItem, item) {
         const itemIndex = this.cartItem.findIndex(x => {
           return x.id === idItem
@@ -107,43 +137,34 @@
         const quantity = item.quantity + 1
         const id = item.id
         const self = this
-        this.$http.patch(`api/cart-detail/${id}`, {quantity}).then(response => {
-          const update = {
-            cartIndex,
-            itemIndex,
-            quantity: response.data.quantity
-          }
-          this.updateBaru(update)
-          self.updateCartChecked(self.cartChecked)
-        })
-      },
-      subQuantity (idItem, item) {
-
-        const itemIndex = this.cartItem.findIndex(x => {
-          return x.id === idItem
-        })
-        const cartIndex = this.cartIndex
-        const quantity = item.quantity - 1
         const update = {
           cartIndex,
           itemIndex,
           quantity
         }
-        if (quantity === 0) {
-          return
-        }
-        const id = item.id
+        this.reQuantity(self, id, quantity, update)
+        this.updateBaru(update)
+        // self.updateCartChecked(self.cartChecked)
+      },
+      subQuantity (idItem, item) {
 
-        this.$http.patch(`api/cart-detail/${id}`, {quantity}).then(response => {
+        if (item.quantity > 1) {
+          const itemIndex = this.cartItem.findIndex(x => {
+            return x.id === idItem
+          })
+          const cartIndex = this.cartIndex
+
+          const quantity = item.quantity - 1
+          const id = item.id
+          const self = this
           const update = {
             cartIndex,
             itemIndex,
-            quantity: response.data.quantity
+            quantity
           }
+          this.reQuantity(self, id, quantity, update)
           this.updateBaru(update)
-          this.updateCartChecked(this.cartChecked)
-        })
-        return
+        }
       },
       deleteCartWhenNullItem() {
         if (!this.cart.item.length) {
@@ -173,6 +194,10 @@
           this.deleteCartWhenNullItem()
 
         }).catch(err => err)
+      },
+      updateQuantity(product, i) {
+        const self = this
+        this.syncQuantity(self, product, i)
       }
     }
   }

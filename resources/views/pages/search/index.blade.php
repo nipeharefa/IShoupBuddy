@@ -25,13 +25,12 @@
         window.category_id = "{{ $category_id }}"
     </script>
 
-    @if (isset($user))
-        <script type="text/javascript">
-            window._sharedData = {
-                user: {!! $user !!}
-            }
-        </script>
-    @endif
+    <script type="text/javascript">
+        window._sharedData = {
+            user: {!! $user ?? "{}" !!},
+            categories: {!! $categories !!}
+        }
+    </script>
 
     <script src="{{ mix('js/manifest.js') }}"></script>
 

@@ -73,6 +73,7 @@ class CheckoutController extends Controller
         return $view->with('user', $user)
                     ->with('js', $js)
                     ->with('css', $css)
+                    ->with('categories', $this->getViewCategories())
                     ->with('cart_data', json_encode($data));
     }
 

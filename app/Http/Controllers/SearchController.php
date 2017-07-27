@@ -43,12 +43,13 @@ class SearchController extends Controller
                     break;
             }
 
-            $view->with('user', $user);
         }
 
         return $view->with('keyword', $q)
                     ->with('category_id', $category_id)
                     ->with('js', $js)
+                    ->with('user', $user)
+                    ->with('categories', $this->getViewCategories())
                     ->with('css', $css);
     }
 

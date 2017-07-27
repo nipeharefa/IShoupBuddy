@@ -12,6 +12,7 @@ class MeController extends Controller
         $user = ActiveUserTransformer::transform($request->user());
 
         return view('pages.me.index')
+            ->with('categories', json_encode($this->getViewCategories()))
             ->with('user', json_encode($user));
     }
 

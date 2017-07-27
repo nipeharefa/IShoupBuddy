@@ -24,7 +24,8 @@
     <script type="text/javascript">
         window._sharedData = {
             "product_id": {{ $id }},
-            "user": {!! $user !!}
+            "user": {!! $user !!},
+            "categories": {!! $categories !!}
         }
     </script>
 

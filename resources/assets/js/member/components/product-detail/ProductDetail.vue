@@ -49,7 +49,6 @@
                 <thead>
                   <tr>
                     <td>Nama Vendor</td>
-                    <td>Nama Produk</td>
                     <td>Harga</td>
                     <td></td>
                   </tr>
@@ -57,7 +56,6 @@
                 <tbody>
                   <tr v-for="item in product.vendors">
                     <td class="vendor-name">{{ item.vendor.name }}</td>
-                    <td>{{ item.vendor.name }}</td>
                     <td>{{ item.price_string }}</td>
                     <td>
                       <span class="to-cart" title="Tambahkan ke keranjang belanja" @click="showModalToCart(item)">

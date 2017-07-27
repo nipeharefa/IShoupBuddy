@@ -51,6 +51,8 @@ class CategoryController extends Controller
 
             return $view->with('user', $user)
                     ->with('js', $js)
+                    ->with('js', $js)
+                    ->with('categories', $this->getViewCategories())
                     ->with('css', $css);
 
         } catch (ModelNotFoundException $e) {

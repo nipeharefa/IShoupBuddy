@@ -83,4 +83,10 @@ class LoginController extends Controller
 
         return response()->json($data);
     }
+
+    public function showLoginForm()
+    {
+        return view('auth.login')
+            ->with('categories', $this->getViewCategories());
+    }
 }

@@ -15,7 +15,7 @@
         <div id="navbarDesktop" class="navbar-menu">
 
           <div class="navbar-start">
-            <navbarDropdownCategory :categories="sortedCategory" />
+            <navbarDropdownCategory />
             <div class="navbar-item">
               <div class="field has-addons">
                 <p class="control has-icons-left long-searchbox">
@@ -29,7 +29,7 @@
                   <span class="select">
                     <select v-model="category_id">
                       <option value="">Semua Kategori</option>
-                      <option :value="item.id" v-for="item in sortedCategory">{{ item.name }}</option>
+                      <option :value="item.id" v-for="item in categories">{{ item.name }}</option>
                     </select>
                   </span>
                 </p>
@@ -57,30 +57,12 @@
 
   export default {
     created () {
-      this.getCategory()
+      this.categories = window._sharedData.categories
     },
     components: {
       NavbarDropdownCategory
     },
     computed: {
-      sortedCategory () {
-        if (this.categories) {
-          const sorted =  this.categories.sort( (a,b) => {
-            var nameA = a.name.toUpperCase(); // ignore upper and lowercase
-            var nameB = b.name.toUpperCase(); // ignore upper and lowercase
-            if (nameA < nameB) {
-              return -1;
-            }
-            if (nameA > nameB) {
-              return 1;
-            }
-            // names must be equal
-            return 0;
-          })
-          return sorted
-        }
-        return []
-      }
     },
     data () {
       return {
@@ -90,11 +72,6 @@
       }
     },
     methods: {
-      getCategory () {
-        this.$http.get('api/category').then(response => {
-          this.categories = response.data.categories
-        })
-      },
       search () {
         window.location.assign(`/search?q=${this.q}&category_id=${this.category_id}`)
       }

@@ -29,7 +29,8 @@
 
         window._sharedData = {
             user: {!! $user ?? "null" !!},
-            cartData: {!! $cart_data ?? null !!}
+            cartData: {!! $cart_data ?? null !!},
+            categories: {!! $categories ?? "{}" !!}
         }
     </script>
 

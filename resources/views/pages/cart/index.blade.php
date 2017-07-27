@@ -27,7 +27,8 @@
     <script type="text/javascript">
 
         window._sharedData = {
-            user: {!! $user ?? "null" !!}
+            user: {!! $user ?? "null" !!},
+            categories: {!! $categories ?? "[]" !!}
         }
     </script>
 

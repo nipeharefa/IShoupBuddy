@@ -22,7 +22,8 @@ Dashboard Member
 
     <script>
         window._sharedData = {
-            user: {!! $user !!}
+            user: {!! $user !!},
+            categories: {!! $categories ?? "[]" !!}
         }
     </script>
 

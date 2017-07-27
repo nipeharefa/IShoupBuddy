@@ -19,7 +19,7 @@
     </div>
     <nav class="level is-mobile">
       <div class="level-left">
-        <a class="level-item" v-if="activeUser">
+        <a class="level-item" v-if="canReport">
           <span class="icon is-small" @click="report(review)" v-if="!reported">
             <i class="fa" :class="{'fa fa-flag': !onProcess,
             'fa-circle-o-notch fa-spin fa-3x fa-fw': onProcess}"></i>
@@ -76,6 +76,12 @@
         }
         return "Netral";
       },
+      canReport () {
+        if (this.activeUser && this.activeUser.role == 1) {
+          return true
+        }
+        return false
+      }
     },
     methods: {
       timeFromNow (time) {

@@ -42,8 +42,9 @@ class ProductController extends Controller
             $view->with('css', mix('css/guest/product_detail.css'));
         }
 
-        $view->with('title', $product->name);
-        $view->with('id', $product->id);
+        $view->with('title', $product->name)
+            ->with('id', $product->id)
+            ->with('categories', $this->getViewCategories());
         $view->with('user', $user ? $user->toJson() : json_encode([]));
 
         return $view;
