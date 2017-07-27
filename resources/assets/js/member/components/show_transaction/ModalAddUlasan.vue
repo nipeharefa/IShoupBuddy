@@ -2,7 +2,10 @@
     <div class="modal is-active">
         <div class="modal-background" @click="hideAction(null)"></div>
         <div class="modal-content">
-          <div>
+          <div v-if="complete">
+            <p>Review Berhasil di Simpan</p>
+          </div>
+          <div v-if="!complete">
             <div class="fields">
               <label for="">Ratings</label>
               <star-rating v-model="ratings" :star-size="20":showRating="false" />
@@ -67,7 +70,8 @@
     data () {
       return {
         ratings: 0,
-        ulasan: ''
+        ulasan: '',
+        complete: false
       }
     },
     components: {
@@ -92,6 +96,7 @@
         this.$http.post('api/review', data).then(response => {
           console.log(response.data)
           btn.classList.remove('is-loading')
+          this.complete = true
         }).catch(err => {
           btn.classList.remove('is-loading')
         })
