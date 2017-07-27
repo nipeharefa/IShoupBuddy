@@ -69,15 +69,18 @@
 
       <div class="column recommendationProducts">
         <template v-for="product in recommendation">
-          <a :href="`/product/${product.id}`">
-            <productCard :product="product" />
-          </a>
+          <div class="item-recommendation">
+            <a :href="`/product/${product.id}`">
+              <productCard :product="product" />
+            </a>
+          </div>
         </template>
       </div>
 
     </div>
   </detailProduct>
 </template>
+
 
 <script>
 

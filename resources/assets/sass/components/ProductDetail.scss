@@ -105,9 +105,9 @@ canvas#line-chart {
 
 // Untuk daftar ProductCard Rekomendasi
 .recommendationProducts {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  // display: flex;
+  // flex-direction: row;
+  // flex-wrap: wrap;
 
   a {
     margin-bottom: 1rem !important;
@@ -167,4 +167,22 @@ canvas#line-chart {
 }
 .cart-success {
   text-align: center;
+}
+
+
+
+
+.item-recommendation {
+  width: calc(90% / 2) !important;
+  float: left;
+  margin-right: 0.5rem;
+
+  .product-name {
+    h3 {
+      overflow: hidden;
+      line-height: 1.1rem;
+      height: 2rem;
+      text-overflow: ellipsis;
+    }
+  }
 }
