@@ -20,7 +20,11 @@
     <nav class="level is-mobile">
       <div class="level-left">
         <a class="level-item" v-if="activeUser">
-          <span class="icon is-small"><i class="fa fa-flag"></i></span>
+          <span class="icon is-small" @click="report(review)" v-if="!reported">
+            <i class="fa" :class="{'fa fa-flag': !onProcess,
+            'fa-circle-o-notch fa-spin fa-3x fa-fw': onProcess}"></i>
+          </span>
+          <span v-if="reported" class="tag is-info">Laporan sudah dikirim</span>
         </a>
       </div>
     </nav>
@@ -48,6 +52,12 @@
     components: {
       StarRating
     },
+    data () {
+      return {
+        onProcess: false,
+        reported: false
+      }
+    },
     computed: {
       ...mapGetters(['activeUser']),
       ratingString () {
@@ -70,6 +80,19 @@
     methods: {
       timeFromNow (time) {
         return moment(time).fromNow()
+      },
+      report (review) {
+        const data = {
+          review_id: review.id
+        }
+        this.onProcess = true
+        this.$http.post('api/report', data).then(response => {
+          console.log(response.data)
+          this.onProcess = false
+          this.reported = true
+        }).catch(err => {
+          this.onProcess = false
+        })
       }
     }
   }
