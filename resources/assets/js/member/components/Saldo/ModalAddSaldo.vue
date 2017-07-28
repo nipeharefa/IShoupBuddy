@@ -11,7 +11,12 @@
             <div class="field">
               <p class="control">
                 <label for="">Nominal</label>
-                <input class="input" type="text" placeholder="Minimum Rp10.000" v-model="nominal">
+                <input class="input" type="tel"
+                placeholder="Minimum Rp10.000"
+                v-model="nominal"
+                :value="amountValue"
+                @input="processValue(amountValue)"
+                >
               </p>
             </div>
             <div class="topup-payment-method">
@@ -73,6 +78,9 @@
       }
     },
     computed: {
+      amountValue () {
+        return this.formatToNumber(this.nominal)
+      },
       nominalString() {
         const t =  this.nominal
         return accounting.formatMoney(t, {
@@ -84,6 +92,16 @@
     },
     methods: {
       ...mapActions(['addSaldoTransaction']),
+      processValue(value){
+        if (isNaN(value)) {
+          this.nominal = 1
+          return
+        } else if (value === 0) {
+          this.nominal = 1
+        } else {
+          this.nominal = value
+        }
+      },
       hide () {
         this.$emit('update:show', false)
       },

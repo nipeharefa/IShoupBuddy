@@ -22,7 +22,8 @@
 
     <script type="text/javascript">
         window.katakunci = "{{ $keyword }}"
-        window.category_id = "{{ $category_id }}"
+        window.category_id = "{{ $category_id }}",
+        window.category_string = "{{ $category_string }}"
     </script>
 
     <script type="text/javascript">

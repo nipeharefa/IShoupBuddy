@@ -24,15 +24,6 @@ class MeControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testAccesAPIMe()
-    {
-        $this->seed('UserTableSeeder');
-        $user = User::find(1);
-        $this->actingAs($user, 'api');
-        $response = $this->get('api/me');
-        $response->assertStatus(200);
-    }
-
     public function testVendorCantAccessMePage()
     {
         $a = $this->seed('InsertVendorsTableSeeder');

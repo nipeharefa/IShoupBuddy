@@ -15,17 +15,4 @@ class MeController extends Controller
             ->with('categories', json_encode($this->getViewCategories()))
             ->with('user', json_encode($user));
     }
-
-    public function edit(Request $request)
-    {
-        $user = ActiveUserTransformer::transform($request->user());
-
-        return view('pages.me.edit')
-            ->with('user', json_encode($user));
-    }
-
-    public function change_password()
-    {
-        return view('pages.me.change_password');
-    }
 }
