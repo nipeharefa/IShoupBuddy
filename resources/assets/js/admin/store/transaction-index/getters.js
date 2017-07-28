@@ -1,4 +1,15 @@
-export const transactions = state => state.transactions
+export const transactions = state => state.transactions.sort((a, b) => {
+  if (a.id > b.id) {
+    return -1
+  }
+
+  if (a.id < b.id) {
+    return 1
+  }
+
+  return 0
+})
+
 export const products = state => state.products
 export const onError = state => state.onError
 export const product = state => state.product

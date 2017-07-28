@@ -100,7 +100,7 @@ class TransactionController extends Controller
                 $shipmentCart = $shipment[$index];
                 $data = [
                     'nominal'   => $cartItem->Detail->sum('price') + $shipmentCart,
-                    'status'    => 0,
+                    'status'    => 1,
                     'user_id'   => $user->id,
                 ];
 
