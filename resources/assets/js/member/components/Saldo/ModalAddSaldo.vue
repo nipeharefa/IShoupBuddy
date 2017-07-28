@@ -92,6 +92,20 @@
     },
     methods: {
       ...mapActions(['addSaldoTransaction']),
+      formatToNumber (value) {
+        let number = 0
+        if (this.separator === '.') {
+          let cleanValue = value
+          if (typeof value !== 'string') {
+            cleanValue = this.numberToString(value)
+          }
+          number = Number(String(cleanValue).replace(/[^0-9-,]+/g, '').replace(',', '.'))
+        } else {
+          number = Number(String(value).replace(/[^0-9-.]+/g, ''))
+        }
+        if (!this.minus) return Math.abs(number)
+        return number
+      },
       processValue(value){
         if (isNaN(value)) {
           this.nominal = 1
