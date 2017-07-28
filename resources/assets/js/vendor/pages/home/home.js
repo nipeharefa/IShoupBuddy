@@ -7,7 +7,6 @@ Vue.use(VueAxios)
 Vue.use(VueLazyload)
 
 import App from 'vendor/components/home/Home.vue'
-import { mapActions } from 'vuex'
 
 new Vue({
   store,

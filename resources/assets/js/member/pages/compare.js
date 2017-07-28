@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueAxios from 'lib/axios-plugin'
 import VueEcho from 'lib/echo-pusher-plugin'
 import CartCounter from 'lib/CartCounter'
-import GetCategory from 'lib/GetCategory'
 import VueLazyload from 'vue-lazyload'
 import store from 'member/store/home/'
 Vue.use(VueAxios)
