@@ -34,11 +34,22 @@ table {
   .review-user-body__wrapper {
     padding: 0 1rem;
     width: 100%;
-    p.review-user-name {
-      font-size: 0.85rem;
-      span.reviewedFromNow {
-        font-size: 0.7rem;
-        font-style: italic;
+    .review-user__head{
+      display: flex;
+      .user-review__info {
+        font-size: 0.85rem;
+        flex: 0.5;
+        display: flex;
+        flex-direction: column;
+        span.reviewedFromNow {
+          font-size: 0.7rem;
+          font-style: italic;
+        }
+      }
+      .action__block {
+        justify-content: flex-end;
+        display: flex;
+        flex: 0.5;
       }
     }
     span.review-details__caption {
@@ -72,4 +83,15 @@ table {
 }
 .user-reviews {
   margin-top: 2rem;
+}
+
+
+// Review.vue
+.review__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+
+  .review-details__wrapper {
+    margin-bottom: 1rem;
+  }
 }

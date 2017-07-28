@@ -39,14 +39,9 @@
 
 
     <div class="review_search__wrapper columns" v-if="tabs === 1">
-      <div class="field column is-6 has-addons">
+      <div class="field column is-6">
         <p class="control">
-          <input class="input" type="text" placeholder="Find a Review" v-model="keyword">
-        </p>
-        <p class="control">
-          <a class="button is-info">
-            <i class="fa fa-search"></i>
-          </a>
+          <span>Total Review yang dilaporkan : {{ reportReviews.length }}</span>
         </p>
       </div>
     </div>

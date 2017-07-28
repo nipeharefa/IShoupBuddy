@@ -15,19 +15,23 @@
 					v-model="register.email">
 				</p>
         <p class="help is-danger" v-show="errors.has('email')">This email is invalid</p>
+        <p class="help is-danger" v-if="errorMessage.email">{{ errorMessage.email[0] }}</p>
 			</div>
 
 			<div class="field">
 				<p class="control">
-					<input type="text"  v-validate="'required'" :class="{'is-danger': errors.has('phone') }"  class="input" placeholder="Nomor Handphone" v-model="register.phone" name="phone">
+					<input type="text"  v-validate="'required'" :class="{'is-danger': errors.has('phone') }"  class="input" placeholder="Nomor Handphone"
+          v-model="register.phone" data-vv-name="Nomor Handphone">
 				</p>
-        <p class="help is-danger" v-show="errors.has('phone')">{{ errors.first('phone') }}</p>
+        <p class="help is-danger"
+        v-show="errors.has('phone')">{{ errors.first('phone') }}</p>
 			</div>
 
 			<div class="field">
 				<p class="control">
 					<input v-validate="'required|min:6'" type="password" class="input" placeholder="Password"
-					v-model="register.password" :class="{'is-danger': errors.has('name') }" data-vv-name="Password">
+					v-model="register.password"
+          :class="{'is-danger': errors.has('name') }" data-vv-name="Password">
 				</p>
         <p class="help is-danger" v-show="errors.has('Password')">{{ errors.first('Password') }}</p>
 			</div>
@@ -54,7 +58,8 @@ export default {
         password: '',
         phone: ''
       },
-      onError: false
+      onError: false,
+      errorMessage: {}
     }
   },
   methods: {
@@ -77,6 +82,7 @@ export default {
         }).catch(x => {
           self.onError = true
           btn.classList.remove('is-loading')
+          this.errorMessage = x.response.data
         })
     },
     hideErrorNotification () {

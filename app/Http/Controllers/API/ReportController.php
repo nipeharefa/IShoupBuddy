@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Helpers\Transformers\ReviewTransformer;
 use App\Http\Controllers\BaseApiController;
 use App\Models\Report;
+use App\Models\Review;
 use Exception;
 use Illuminate\Http\Request;
 use Validator;
@@ -18,9 +19,10 @@ class ReportController extends BaseApiController
      */
     public function index()
     {
-        $mapReportReview = Report::get()->map(function ($item) {
-            return $item->Review;
-        });
+
+        $mapReportReview = Review::withTrashed()->withCount('Report')
+            ->whereHas('Report')->orderBy('report_count', 'desc')
+            ->get();
         $reports = ReviewTransformer::transform($mapReportReview);
 
         $data = [
@@ -28,16 +30,6 @@ class ReportController extends BaseApiController
         ];
 
         return response()->json($data, 200);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -69,40 +61,5 @@ class ReportController extends BaseApiController
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Report $report
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Report $report)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Report              $report
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Report $report)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Report $report
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Report $report)
-    {
-        //
-    }
 }

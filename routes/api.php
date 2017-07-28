@@ -53,6 +53,7 @@ Route::group(['namespace' => 'API'], function () {
     Route::resource('recommendation', 'RecommendationController',
         ['only' => ['index']]);
 
+    Route::post('review/{review}/restore', 'ReviewController@restore');
     Route::resource('review', 'ReviewController',
         ['only' => ['index', 'show']]);
 

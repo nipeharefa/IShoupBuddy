@@ -68,6 +68,9 @@
       </div>
 
       <div class="column recommendationProducts">
+        <div class="other-product">
+          <b>Produk Lainnya</b>
+        </div>
         <template v-for="product in recommendation">
           <div class="item-recommendation">
             <a :href="`/product/${product.id}`">

@@ -17,11 +17,7 @@ class RegisterVendorController extends Controller
     public function register(Request $request)
     {
 
-        // $validator = $this->validator($request->toArray());
-
-        // if ($validator->fails()) {
-        //     return 1;
-        // }
+        $this->validator($request->toArray())->validate();
 
         $data = $request->toArray();
         $user = $this->create($data);
@@ -38,8 +34,8 @@ class RegisterVendorController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-                'name'      => 'required',
-                'email'     => 'required',
+                'name'      => 'required|max:255',
+                'email'     => 'required|email|max:255|unique:users',
                 'password'  => 'required',
                 'phone'     => 'required',
             ]);

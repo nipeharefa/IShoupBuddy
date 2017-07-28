@@ -15,6 +15,7 @@
           :class="{'is-danger': errors.has('email') }" v-model="register.email">
 				</p>
         <p class="help is-danger" v-show="errors.has('email')">This email is invalid</p>
+        <p class="help is-danger" v-if="errorMessage.email">{{ errorMessage.email[0] }}</p>
 			</div>
 
 			<div class="field">
@@ -59,7 +60,8 @@
           isVendor: true
         },
         onError: false,
-        modal: false
+        modal: false,
+        errorMessage: {}
       }
     },
     methods: {
@@ -70,10 +72,13 @@
       },
       _register () {
         const data = this.register
+        this.errorMessage = {}
         this.$http.post('auth/vendor/register', data)
         .then(response => {
           console.log(response.data)
-        }).catch(x => x)
+        }).catch(x => {
+          this.errorMessage = x.response.data
+        })
       }
     },
     components: {

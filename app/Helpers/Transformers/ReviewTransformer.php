@@ -21,6 +21,8 @@ class ReviewTransformer extends AbstractTransformer
             'product'   => ProductTransformer::transform($review->Product),
             'vendor'    => VendorTransformer::transform($review->Vendor),
             'date'      => $review->created_at->toW3cString(),
+            'total_report'  =>  $review->Report->count(),
+            'trashed'    =>  $review->trashed()
         ];
 
         $arr['summary_text']    =  collect($arr['sentimen'])->sort()->keys()

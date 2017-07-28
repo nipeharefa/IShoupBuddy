@@ -139,16 +139,6 @@ class ReviewController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
@@ -217,30 +207,6 @@ class ReviewController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
@@ -306,9 +272,10 @@ class ReviewController extends Controller
         $user = $request->user();
 
         try {
+
             DB::beginTransaction();
 
-            $user->Review()->findOrFail($id)->delete();
+            Review::findOrFail($id)->delete();
 
             DB::commit();
 
@@ -324,6 +291,7 @@ class ReviewController extends Controller
             $err = [
                 'status'    => 'ERROR',
                 'message'   => 'Something Wrong',
+                'dev'       =>  $e->getMessage()
             ];
 
             return response()->json($err, 400);
@@ -376,6 +344,36 @@ class ReviewController extends Controller
             ];
 
             return response()->json($errResponse, 400);
+        }
+    }
+
+    public function restore($id, Request $request)
+    {
+        try {
+
+            DB::beginTransaction();
+
+            Review::withTrashed()->findOrFail($id)->restore();
+
+            DB::commit();
+
+            $response = [
+                'status'    => 'OK',
+                'message'   => 'Restored',
+            ];
+
+            return response()->json($response, 204);
+
+        } catch (Exception $e) {
+            DB::rollback();
+
+            $err = [
+                'status'    => 'ERROR',
+                'message'   => 'Something Wrong',
+                'dev'       =>  $e->getMessage()
+            ];
+
+            return response()->json($err, 400);
         }
     }
 
