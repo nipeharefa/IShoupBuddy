@@ -52,12 +52,12 @@
 @include desktop() {
   .swiper-button-next {
     position: absolute;
-    top: 15%;
+    top: 50%;
     right: -55px;
   }
   .swiper-button-prev {
     position: absolute;
-    top: 15%;
+    top: 50%;
     left: -55px;
   }
 }

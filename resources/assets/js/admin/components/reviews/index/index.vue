@@ -41,13 +41,12 @@
     <div class="review_search__wrapper columns" v-if="tabs === 1">
       <div class="field column is-6">
         <p class="control">
-          <span>Total Review yang dilaporkan : {{ reportReviews.length }}</span>
         </p>
       </div>
     </div>
 
     <div class="review__wrapper columns" v-if="tabs === 1">
-      <review v-for="item in reportReviews" :review="item" :key="item.id" />
+      <review v-for="item in reportReviews" :review="item" />
     </div>
 
   </div>

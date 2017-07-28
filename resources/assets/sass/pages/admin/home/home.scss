@@ -10,9 +10,11 @@
 }
 
 .column {
+
   &.wrapping {
     display: flex;
     flex-wrap: wrap !important;
     flex-direction: row !important;
+    position: relative;
   }
 }

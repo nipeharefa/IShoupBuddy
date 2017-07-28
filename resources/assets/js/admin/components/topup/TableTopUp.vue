@@ -90,6 +90,13 @@
         }
         const btnUpdate = event.target
         btnUpdate.classList.add('is-loading')
+
+        const id = item.id
+        const index = this.transactions.findIndex( x => {
+          console.log(x.id == id)
+          return x.id == id
+        })
+
         this.$http.post(`api/admin/transaction/${item.id}/cancel`).then(response => {
           iziToast.success({
             title: 'Sukses',
@@ -97,7 +104,12 @@
             position: 'bottomRight'
           })
           btnUpdate.classList.remove('is-loading')
-          item.status = 4
+          const obj = {
+            index,
+            data: response.data
+          }
+          this.updateTransaction(obj)
+
         }).catch(err => {
           iziToast.error({
             title: 'Error',
