@@ -23,4 +23,14 @@ class UserControllerTest extends TestCase
         $response = $this->json('GET', 'api/user');
         $this->assertEquals(200, $response->getStatusCode());
     }
+
+    public function testUserGetSaldo()
+    {
+        $this->seed('UserTableSeeder');
+        $user = User::find(1);
+        $this->actingAs($user, 'api');
+        $id = $user->id;
+        $response = $this->json('GET', 'api/user/' . $id . '/saldo/transactions');
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 }
