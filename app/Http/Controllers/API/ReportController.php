@@ -19,7 +19,6 @@ class ReportController extends BaseApiController
      */
     public function index()
     {
-
         $mapReportReview = Review::withTrashed()->withCount('Report')
             ->whereHas('Report')->orderBy('report_count', 'desc')
             ->get();
@@ -60,6 +59,4 @@ class ReportController extends BaseApiController
             return response()->json($e->getMessage(), 400);
         }
     }
-
-
 }

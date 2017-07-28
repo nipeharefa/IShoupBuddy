@@ -272,7 +272,6 @@ class ReviewController extends Controller
         $user = $request->user();
 
         try {
-
             DB::beginTransaction();
 
             Review::findOrFail($id)->delete();
@@ -350,7 +349,6 @@ class ReviewController extends Controller
     public function restore($id, Request $request)
     {
         try {
-
             DB::beginTransaction();
 
             Review::withTrashed()->findOrFail($id)->restore();
@@ -363,7 +361,6 @@ class ReviewController extends Controller
             ];
 
             return response()->json($response, 204);
-
         } catch (Exception $e) {
             DB::rollback();
 

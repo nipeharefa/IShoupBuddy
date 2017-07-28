@@ -114,6 +114,4 @@ class LoginControllerTest extends TestCase
         $response = $this->delete('auth/logout');
         $this->assertEquals(302, $response->getStatusCode());
     }
-
-
 }

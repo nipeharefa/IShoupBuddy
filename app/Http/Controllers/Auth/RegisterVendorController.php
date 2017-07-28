@@ -16,7 +16,6 @@ class RegisterVendorController extends Controller
 
     public function register(Request $request)
     {
-
         $this->validator($request->toArray())->validate();
 
         $data = $request->toArray();

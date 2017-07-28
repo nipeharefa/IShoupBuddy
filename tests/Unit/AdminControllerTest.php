@@ -18,7 +18,6 @@ class AdminControllerTest extends TestCase
         parent::setUp();
         $this->seed('InsertDefaultAdmin');
         $this->admin = User::whereRole(0)->first();
-
     }
     /**
      * A basic test example.

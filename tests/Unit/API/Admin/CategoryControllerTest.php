@@ -20,7 +20,7 @@ class CategoryControllerTest extends TestCase
         $a = $this->seed('InsertDefaultAdmin');
         $admin = User::whereRole(0)->first();
         $this->actingAs($admin, 'api');
-        $response = $this->json('GET','api/admin/category');
+        $response = $this->json('GET', 'api/admin/category');
         $response->assertStatus(200);
     }
 }
