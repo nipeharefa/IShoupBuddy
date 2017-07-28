@@ -70,6 +70,16 @@ class LoginControllerTest extends TestCase
         $this->assertEquals('/admin/product', $content['redirect_to']);
     }
 
+    public function testAdminRedirectWhenAccessLoginPage()
+    {
+        $a = $this->seed('InsertDefaultAdmin');
+        $admin = User::whereRole(0)->first();
+        $this->actingAs($admin);
+        $response = $this->get('login');
+        $response->assertStatus(302);
+        $response->assertRedirect('/admin/product');
+    }
+
     public function testVendorLogin()
     {
         $this->seed('InsertVendorsTableSeeder');
@@ -86,6 +96,16 @@ class LoginControllerTest extends TestCase
         $this->assertEquals('/vendor/product', $content['redirect_to']);
     }
 
+    public function testVendorRedirectWhenAccessLoginPage()
+    {
+        $a = $this->seed('InsertVendorsTableSeeder');
+        $admin = User::whereRole(2)->first();
+        $this->actingAs($admin);
+        $response = $this->get('login');
+        $response->assertStatus(302);
+        $response->assertRedirect('/vendor/product');
+    }
+
     public function testUserLogout()
     {
         $user = User::find(1);
@@ -94,4 +114,6 @@ class LoginControllerTest extends TestCase
         $response = $this->delete('auth/logout');
         $this->assertEquals(302, $response->getStatusCode());
     }
+
+
 }

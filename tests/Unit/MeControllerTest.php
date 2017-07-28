@@ -32,4 +32,13 @@ class MeControllerTest extends TestCase
         $response = $this->get('api/me');
         $response->assertStatus(200);
     }
+
+    public function testVendorCantAccessMePage()
+    {
+        $a = $this->seed('InsertVendorsTableSeeder');
+        $admin = User::whereRole(2)->first();
+        $this->actingAs($admin);
+        $response = $this->get('me');
+        $response->assertStatus(403);
+    }
 }
