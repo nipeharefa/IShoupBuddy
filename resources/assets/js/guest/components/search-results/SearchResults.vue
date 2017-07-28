@@ -37,7 +37,8 @@
     data () {
       return {
         keyword: window.katakunci,
-        results: []
+        results: [],
+        category_id: window.category_id
       }
     },
     components: {
@@ -48,7 +49,8 @@
     },
     methods: {
       getSearchResult () {
-        this.$http.get(`api/product?keyword=${this.keyword}`).then(response => {
+        this.$http.get(`api/product?keyword=${this.keyword}&category_id=${this.category_id}`)
+        .then(response => {
           this.results = response.data.products
         })
       }
