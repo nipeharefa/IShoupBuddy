@@ -32,4 +32,11 @@ class MeControllerTest extends TestCase
         $response = $this->get('me');
         $response->assertStatus(403);
     }
+
+    public function testGuestCantAccessMePage()
+    {
+        $response = $this->get('me');
+        $response->assertStatus(302);
+        $response->assertRedirect('/login');
+    }
 }

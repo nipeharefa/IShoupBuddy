@@ -23,4 +23,11 @@ class CartControllerTest extends TestCase
         $response = $this->get('cart');
         $response->assertStatus(200);
     }
+
+    public function testGuestCantAccessCart()
+    {
+        $response = $this->get('cart');
+        $response->assertStatus(302);
+        $response->assertRedirect('/login');
+    }
 }
