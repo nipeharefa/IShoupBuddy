@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Product;
 use App\Helpers\NaiveBayes;
 use App\Helpers\Transformers\ProductTransformer;
+use App\Models\Product;
+use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
@@ -45,7 +45,7 @@ class TestController extends Controller
             $comp->category_id,
             $cU['brand'],
             $cU['sifat'],
-            $cU['pemakaian']
+            $cU['pemakaian'],
         ];
 
         // return $compSource;
@@ -53,7 +53,7 @@ class TestController extends Controller
 
         $d = [];
 
-        for ($i=0; $i <$target ; $i++) {
+        for ($i = 0; $i < $target; $i++) {
             if (isset($ids[$i])) {
                 $p = Product::find($ids[$i]);
                 array_push($d, ProductTransformer::transform($p));

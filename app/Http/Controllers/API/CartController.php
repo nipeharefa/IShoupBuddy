@@ -252,7 +252,7 @@ class CartController extends Controller
 
         $response = [
             'total'         => $totalBelanja,
-            'total_string'  => $this->formatRupiah($totalBelanja)
+            'total_string'  => $this->formatRupiah($totalBelanja),
         ];
 
         return response()->json($response);

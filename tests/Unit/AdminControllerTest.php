@@ -2,10 +2,9 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\TestCase;
 
 class AdminControllerTest extends TestCase
 {
@@ -19,6 +18,7 @@ class AdminControllerTest extends TestCase
         $this->seed('InsertDefaultAdmin');
         $this->admin = User::whereRole(0)->first();
     }
+
     /**
      * A basic test example.
      *

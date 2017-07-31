@@ -290,7 +290,7 @@ class ReviewController extends Controller
             $err = [
                 'status'    => 'ERROR',
                 'message'   => 'Something Wrong',
-                'dev'       =>  $e->getMessage()
+                'dev'       => $e->getMessage(),
             ];
 
             return response()->json($err, 400);
@@ -367,7 +367,7 @@ class ReviewController extends Controller
             $err = [
                 'status'    => 'ERROR',
                 'message'   => 'Something Wrong',
-                'dev'       =>  $e->getMessage()
+                'dev'       => $e->getMessage(),
             ];
 
             return response()->json($err, 400);

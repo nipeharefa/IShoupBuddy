@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Vendor;
+use Cache;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request as GR;
-use Carbon\Carbon;
-use Cache;
+use Illuminate\Http\Request;
 use Log;
 
 class CheckoutController extends Controller
@@ -37,8 +37,8 @@ class CheckoutController extends Controller
         $value = unserialize($value);
 
         $shipment = $value['shipment'];
-        $uLat = $shipment["lat"];
-        $uLng = $shipment["lng"];
+        $uLat = $shipment['lat'];
+        $uLng = $shipment['lng'];
 
         $carts = Cache::get($value['cacheKey']);
 
@@ -65,9 +65,9 @@ class CheckoutController extends Controller
         }
 
         $data = [
-            "carts" =>  $carts,
-            "total" => collect($carts)->sum('total'),
-            "shipment"  =>  $shipment
+            'carts'     => $carts,
+            'total'     => collect($carts)->sum('total'),
+            'shipment'  => $shipment,
         ];
 
         return $view->with('user', $user)
@@ -90,7 +90,8 @@ class CheckoutController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -109,8 +110,8 @@ class CheckoutController extends Controller
         session([$key => $serialize]);
 
         $shipment = $data['shipment'];
-        $uLat = $shipment["lat"];
-        $uLng = $shipment["lng"];
+        $uLat = $shipment['lat'];
+        $uLng = $shipment['lng'];
 
         $carts = Cart::find($data['cart'])->map(function ($item) use ($shipment) {
             return $this->indexCartResponse($item->Vendor, $item, $shipment);
@@ -120,11 +121,10 @@ class CheckoutController extends Controller
         Cache::put($cacheKey, serialize($carts), $expiresAt);
 
         $response = [
-            "redirectTo"    =>  url('/checkout'),
-            "cacheKey"      =>  str_random(20),
-            "data"          =>  $request->all()
+            'redirectTo'    => url('/checkout'),
+            'cacheKey'      => str_random(20),
+            'data'          => $request->all(),
         ];
-
 
         return response()->json($response);
     }
@@ -132,7 +132,8 @@ class CheckoutController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -143,7 +144,8 @@ class CheckoutController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -154,8 +156,9 @@ class CheckoutController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -166,7 +169,8 @@ class CheckoutController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id, Request $request)
@@ -175,7 +179,7 @@ class CheckoutController extends Controller
         $key = "user_{$user->id}_cart";
         $request->session()->forget($key);
         Log::info('Destroy Data on Session');
-        Log::info('Key : ' . $key);
+        Log::info('Key : '.$key);
     }
 
     public function getCheckoutSession(Request $request)
@@ -194,13 +198,13 @@ class CheckoutController extends Controller
         $client = new Client();
         $res = $client->request('GET',
             'https://maps.googleapis.com/maps/api/directions/json',
-            [ 'query' => $data]);
+            ['query' => $data]);
 
         // $s = new GR("GET", "https://maps.googleapis.com/maps/api/directions/json", [ 'query' => $data] );
         $response1 = json_decode($res->getBody(), true);
 
-        $distance = $response1["routes"][0]["legs"][0]['distance']['value'];
-        $duration = $response1["routes"][0]["legs"][0]['duration']['value'];
+        $distance = $response1['routes'][0]['legs'][0]['distance']['value'];
+        $duration = $response1['routes'][0]['legs'][0]['duration']['value'];
 
         $client = new \Stevenmaguire\Uber\Client([
             'access_token' => 'KA.eyJ2ZXJzaW9uIjoyLCJpZCI6IlZrSHQ2OWJoU2NLNXBwOHhjTGpicWc9PSIsImV4cGlyZXNfYXQiOjE1MDM1MTE5NzUsInBpcGVsaW5lX2tleV9pZCI6Ik1RPT0iLCJwaXBlbGluZV9pZCI6MX0.jb_Hh1k9VBXcm9aT2oYz0NFMxVqRHxgwbR36S_fc9RM',
@@ -211,23 +215,23 @@ class CheckoutController extends Controller
         ]);
 
         $estimates = $client->getPriceEstimates([
-            'start_latitude' => $start_lat,
+            'start_latitude'  => $start_lat,
             'start_longitude' => $start_lng,
-            'end_latitude' => $stop_lat,
-            'end_longitude' => $stop_lng
+            'end_latitude'    => $stop_lat,
+            'end_longitude'   => $stop_lng,
         ]);
 
         return [
-            "distance"  =>  $distance,
-            "duration"  =>  $duration,
-            "low_rates" =>  $estimates->prices[0]->low_estimate
+            'distance'  => $distance,
+            'duration'  => $duration,
+            'low_rates' => $estimates->prices[0]->low_estimate,
         ];
     }
 
     protected function indexCartResponse(Vendor $vendor, Cart $cart, array $shipment)
     {
-        $stop_lat = $shipment["lat"];
-        $stop_lng = $shipment["lng"];
+        $stop_lat = $shipment['lat'];
+        $stop_lng = $shipment['lng'];
 
         $carts = collect($cart)->except('vendor')->toArray();
         $carts['vendor'] = transform($vendor);
@@ -235,6 +239,7 @@ class CheckoutController extends Controller
         $carts['shipment'] = $this->calculateEstimates($vendor->latitude, $vendor->longitude, $stop_lat, $stop_lng);
         $carts['sub_total'] = $cart->Detail()->sum('price');
         $carts['total'] = $carts['shipment']['low_rates'] + $carts['sub_total'];
+
         return $carts;
     }
 }

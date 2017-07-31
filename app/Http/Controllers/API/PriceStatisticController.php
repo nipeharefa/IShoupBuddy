@@ -88,12 +88,13 @@ class PriceStatisticController extends Controller
                             ->orderByDesc('updated_at')
                             ->take($range)->get()->reverse()->flatten();
             $tmpColor = $this->generateColorGraph();
+
             return [
-                'label' => $item->Vendor->name,
-                'fill'  =>  false,
-                'borderColor' => $tmpColor,
+                'label'           => $item->Vendor->name,
+                'fill'            => false,
+                'borderColor'     => $tmpColor,
                 'backgroundColor' => $tmpColor,
-                'data'  => collect($data)->map(function ($item) {
+                'data'            => collect($data)->map(function ($item) {
                     return $item->harga;
                 }),
             ];

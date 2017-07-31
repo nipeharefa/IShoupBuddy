@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class AddAttributeField extends Migration
 {
@@ -15,9 +15,9 @@ class AddAttributeField extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $defaultSerializer = [
-                "brand" =>  1,
-                "sifat" =>  1,
-                "pemakaian" =>  1
+                'brand'     => 1,
+                'sifat'     => 1,
+                'pemakaian' => 1,
             ];
             $table->string('attributes')->default(serialize($defaultSerializer));
         });

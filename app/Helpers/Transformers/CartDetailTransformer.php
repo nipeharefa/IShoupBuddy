@@ -16,7 +16,7 @@ class CartDetailTransformer extends AbstractTransformer
                                 ->except(['vendors']),
             'quantity'      => $cart->quantity,
             'satuan'        => $cart->ProductVendor->harga,
-            'satuan_string' => $this->formatRupiah($cart->ProductVendor->harga)
+            'satuan_string' => $this->formatRupiah($cart->ProductVendor->harga),
         ];
 
         return $arr;

@@ -30,7 +30,7 @@ class UserControllerTest extends TestCase
         $user = User::find(1);
         $this->actingAs($user, 'api');
         $id = $user->id;
-        $response = $this->json('GET', 'api/user/' . $id . '/saldo/transactions');
+        $response = $this->json('GET', 'api/user/'.$id.'/saldo/transactions');
         $this->assertEquals(200, $response->getStatusCode());
     }
 }
