@@ -84,6 +84,7 @@
             position: 'bottomRight'
           })
           this.$router.push({name: 'product-index'})
+          window.location.assign('/vendor/product/')
         }).catch(err => {
           a.classList.remove('is-loading')
         })

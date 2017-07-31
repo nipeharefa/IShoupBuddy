@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CartController extends TestCase
 {
+    use DatabaseMigrations;
     /**
      * A basic test example.
      *
