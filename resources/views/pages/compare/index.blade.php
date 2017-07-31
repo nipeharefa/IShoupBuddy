@@ -32,6 +32,7 @@
 
         window._sharedData = {
             user: {!! $user ?? "null" !!},
+            categories: {!! $categories !!},
             product: {!! $product ?? "null" !!}
         }
     </script>

@@ -42,6 +42,7 @@ class CompareController extends Controller
         return $view->with('user', $user)
                     ->with('js', $js)
                     ->with('product', $product)
+                    ->with('categories', $this->getViewCategories())
                     ->with('title', 'Shoubud.xyz:Situs Review Produk Supermarket')
                     ->with('css', $css);
     }
