@@ -20,9 +20,12 @@ class CategoryController extends Controller
             $js = mix('js/g-show-category-product.js');
             $css = mix('css/g-show-category-product.css');
 
+            $product = $category->Product()->whereHas('productvendor', function ($pv) {
+                return $pv;
+            })->get();
             $data = [
                 'category'   => $category,
-                'products'   => ProductTransformer::transform($category->Product),
+                'products'   => ProductTransformer::transform($product),
             ];
 
             $view = view('pages.category.show-product', $data);
