@@ -2,9 +2,8 @@
 
 namespace Tests\Unit\API;
 
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
 class ProductControllerTest extends TestCase
 {
@@ -16,6 +15,7 @@ class ProductControllerTest extends TestCase
         $this->seed('InsertDefaultCategory');
         $this->seed('InsertDefaultProducts');
     }
+
     /**
      * A basic test example.
      *
