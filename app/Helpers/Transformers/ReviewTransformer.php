@@ -13,19 +13,19 @@ class ReviewTransformer extends AbstractTransformer
     public function transformModel(Model $review)
     {
         $arr = [
-            'id'        => $review->id,
-            'rating'    => $review->rating,
-            'body'      => $review->body,
-            'sentimen'  => $this->getScore($review->body, $review),
-            'user'      => $this->getCacheUser($review->User),
-            'product'   => ProductTransformer::transform($review->Product),
-            'vendor'    => VendorTransformer::transform($review->Vendor),
-            'date'      => $review->created_at->toW3cString(),
-            'total_report'  =>  $review->Report->count(),
-            'trashed'    =>  $review->trashed()
+            'id'            => $review->id,
+            'rating'        => $review->rating,
+            'body'          => $review->body,
+            'sentimen'      => $this->getScore($review->body, $review),
+            'user'          => $this->getCacheUser($review->User),
+            'product'       => ProductTransformer::transform($review->Product),
+            'vendor'        => VendorTransformer::transform($review->Vendor),
+            'date'          => $review->created_at->toW3cString(),
+            'total_report'  => $review->Report->count(),
+            'trashed'       => $review->trashed(),
         ];
 
-        $arr['summary_text']    =  collect($arr['sentimen'])->sort()->keys()
+        $arr['summary_text'] = collect($arr['sentimen'])->sort()->keys()
                                     ->reverse()->first();
 
         return $arr;

@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\API\Vendor;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\BaseApiController;
-use Carbon\Carbon;
-use App\Models\Vendor;
-use Log;
-use Colors\RandomColor;
 use App\Models\ProductVendor;
+use App\Models\Vendor;
+use Carbon\Carbon;
+use Colors\RandomColor;
+use Illuminate\Http\Request;
 
 class SaleController extends BaseApiController
 {
@@ -46,14 +45,15 @@ class SaleController extends BaseApiController
                 array_push($c, $a);
             }
             $data['data'] = array_reverse($c);
+
             return $data;
         });
 
         $response = [
-            "sales" =>  [
-                "labels"    =>  $labels,
-                "datasets" =>  $stats
-            ]
+            'sales' => [
+                'labels'    => $labels,
+                'datasets'  => $stats,
+            ],
         ];
 
         return response()->json($response);
@@ -72,7 +72,8 @@ class SaleController extends BaseApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -83,7 +84,8 @@ class SaleController extends BaseApiController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -96,7 +98,6 @@ class SaleController extends BaseApiController
             $carbon->subDays(1);
             array_push($labels, $carbon->format('d/m/y'));
         }
-
 
         $data['label'] = $item->Product->name;
         $data['id'] = $item->id;
@@ -113,10 +114,10 @@ class SaleController extends BaseApiController
         $data['data'] = array_reverse($c);
 
         $response = [
-            "sales" =>  [
-                "labels"   =>  $labels,
-                "datasets" =>  [$data]
-            ]
+            'sales' => [
+                'labels'   => $labels,
+                'datasets' => [$data],
+            ],
         ];
 
         return response()->json($response);
@@ -125,7 +126,8 @@ class SaleController extends BaseApiController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -136,8 +138,9 @@ class SaleController extends BaseApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -148,7 +151,8 @@ class SaleController extends BaseApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

@@ -123,6 +123,7 @@ class TransactionController extends Controller
                 ];
                 $trans->TransactionShippment()->create($fillable);
                 $cartItem->delete();
+
                 return $trans;
             });
 

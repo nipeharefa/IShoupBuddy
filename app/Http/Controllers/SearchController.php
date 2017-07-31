@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
@@ -45,7 +45,7 @@ class SearchController extends Controller
             }
         }
 
-        $cName = $category_id ? Category::find($category_id)->name : "Semua Kategori";
+        $cName = $category_id ? Category::find($category_id)->name : 'Semua Kategori';
 
         return $view->with('keyword', $q)
                     ->with('category_id', $category_id)

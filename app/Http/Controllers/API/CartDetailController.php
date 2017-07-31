@@ -154,6 +154,7 @@ class CartDetailController extends Controller
         $id->quantity = $request->quantity;
         $id->price = $request->quantity * $id->ProductVendor->harga;
         $id->save();
+
         return $id;
     }
 }

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Helpers\Traits\RupiahFormated;
+use App\Helpers\Transformers\TransactionTransformer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SaldoStore;
-use App\Helpers\Transformers\TransactionTransformer;
 use App\Models\Saldo;
 use DB;
 use Exception;
@@ -71,10 +71,10 @@ class SaldoController extends Controller
             ]);
 
             $response = [
-                'status'    => 'OK',
-                'message'   => null,
-                'saldo'     => $this->transformUnPaind($hasUnPaid),
-                "transaction"    =>  TransactionTransformer::transform($hasUnPaid)
+                'status'         => 'OK',
+                'message'        => null,
+                'saldo'          => $this->transformUnPaind($hasUnPaid),
+                'transaction'    => TransactionTransformer::transform($hasUnPaid),
             ];
 
             DB::commit();
@@ -128,8 +128,6 @@ class SaldoController extends Controller
             return response()->json($err, 400);
         }
     }
-
-
 
     /**
      * Remove the specified resource from storage.

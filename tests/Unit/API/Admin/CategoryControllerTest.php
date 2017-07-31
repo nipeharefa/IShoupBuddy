@@ -2,14 +2,14 @@
 
 namespace Tests\Unit\API\Admin;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\TestCase;
 
 class CategoryControllerTest extends TestCase
 {
     use DatabaseMigrations;
+
     /**
      * A basic test example.
      *

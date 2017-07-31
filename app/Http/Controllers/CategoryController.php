@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Helpers\Transformers\ProductTransformer;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 use Log;
-use App\Helpers\Transformers\ProductTransformer;
 
 class CategoryController extends Controller
 {
@@ -21,12 +21,11 @@ class CategoryController extends Controller
             $css = mix('css/g-show-category-product.css');
 
             $data = [
-                "category"  =>  $category,
-                "products"   =>  ProductTransformer::transform($category->Product)
+                'category'   => $category,
+                'products'   => ProductTransformer::transform($category->Product),
             ];
 
             $view = view('pages.category.show-product', $data);
-
 
             if ($user) {
                 switch ($user->role) {

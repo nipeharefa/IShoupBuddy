@@ -4,8 +4,8 @@ namespace Tests\Unit;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Tests\TestCase;
 use Illuminate\Support\Facades\Event;
+use Tests\TestCase;
 
 class RegisterControllerTest extends TestCase
 {
@@ -39,7 +39,6 @@ class RegisterControllerTest extends TestCase
         $response = $this->get('register');
         $this->assertEquals(302, $response->getStatusCode());
     }
-
 
     public function testVendorRegister()
     {

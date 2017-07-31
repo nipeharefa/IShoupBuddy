@@ -5,8 +5,8 @@ namespace App\Http\Controllers\API\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategory;
 use App\Models\Category;
-use DB;
 use Cache;
+use DB;
 use Exception;
 use Illuminate\Http\Request;
 
