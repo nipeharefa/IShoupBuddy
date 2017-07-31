@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class CompareController extends Controller
 {
-
     /**
      * Display the specified resource.
      *

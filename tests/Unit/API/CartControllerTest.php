@@ -2,13 +2,13 @@
 
 namespace Tests\Unit\API;
 
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
-class CartController extends TestCase
+class CartControllerTest extends TestCase
 {
     use DatabaseMigrations;
+
     /**
      * A basic test example.
      *
