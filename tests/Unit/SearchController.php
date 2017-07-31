@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Mockery;
 
 class SearchController extends TestCase
 {
@@ -14,9 +15,15 @@ class SearchController extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testCanVisitSearchPage()
     {
+        $nipe = Mockery::mock('nipe');
         $response = $this->get('search');
         $response->assertStatus(200);
+    }
+
+    public function tearDown()
+    {
+        Mockery::close();
     }
 }
