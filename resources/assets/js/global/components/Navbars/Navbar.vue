@@ -3,7 +3,7 @@
     <div class="container">
       <nav class="navbar ">
         <div class="navbar-brand">
-          <div class="navbar-burger">
+          <div class="navbar-burger" :class="{'is-active': burgerActive}" data-target="navMenu" @click="burgerClick">
             <span></span>
             <span></span>
             <span></span>
@@ -45,6 +45,16 @@
           <slot name="navbar-end"></slot>
 
         </div>
+
+        <div class="navbar-menu is-hidden-desktop"
+        id="navMenu" :class="{'is-active': burgerActive}">
+          <!-- navbar-start, navbar-end... -->
+          <div class="navbar-start">
+            <a href="/login" class="navbar-item">Login</a>
+            <a href="/register" class="navbar-item">Register</a>
+          </div>
+        </div>
+
       </nav>
     </div>
   </div>
@@ -62,18 +72,21 @@
     components: {
       NavbarDropdownCategory
     },
-    computed: {
-    },
+    computed: {},
     data () {
       return {
         categories: null,
         q: "",
-        category_id: ""
+        category_id: "",
+        burgerActive: false
       }
     },
     methods: {
       search () {
         window.location.assign(`/search?q=${this.q}&category_id=${this.category_id}`)
+      },
+      burgerClick () {
+        this.burgerActive = !this.burgerActive
       }
     }
   }

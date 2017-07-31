@@ -31,6 +31,13 @@ class AdminControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function testAdminCantGetVisitTransaction()
+    {
+        $this->actingAs($this->admin);
+        $response = $this->get('admin/transactions');
+        $response->assertStatus(200);
+    }
+
     public function testAdminCantAccessMemberDashboard()
     {
         $this->actingAs($this->admin);

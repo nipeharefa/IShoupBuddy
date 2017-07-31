@@ -4,6 +4,8 @@
       Kategori
     </a>
     <div class="navbar-dropdown ">
+      <a href="/c/uncategorized" class="navbar-item">Semua Kategori</a>
+      <hr class="dropdown-divider">
       <a class="navbar-item " :href="`/c/${item.slug}`"
       v-for="item in categories" v-if="categories">
         {{ item.name }}
@@ -19,7 +21,10 @@
 
   export default {
     created () {
-      this.categories = window._sharedData.categories
+      let categories = window._sharedData.categories
+      this.categories = categories.filter(x => {
+        return x.slug !== 'uncategorized'
+      })
     },
     data () {
       return {
