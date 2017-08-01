@@ -76,6 +76,8 @@
         })
 
         markers.push(marker)
+        console.log(latlng)
+        this.getAddress(geocoder, latlng)
 
         google.maps.event.addListener(map, 'click', (e) => {
 
@@ -103,6 +105,18 @@
           markers.push(marker)
           this.location.latitude = e.latLng.lat()
           this.location.longitude = e.latLng.lng()
+        })
+      },
+      getAddress(geocoder, latLng) {
+        const self = this
+        geocoder.geocode({ 'latLng': latLng }, (results, status) => {
+          if (status === google.maps.GeocoderStatus.OK) {
+            const result = results[0]
+            self.location.address = result.formatted_address
+            console.log(result)
+          } else {
+            console.warn(result)
+          }
         })
       },
       hideModals () {
