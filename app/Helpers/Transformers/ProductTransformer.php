@@ -40,7 +40,7 @@ class ProductTransformer extends AbstractTransformer
             'total_review'         => $product->Review()->count(),
             'total_vendor'         => $product->ProductVendor()->count(),
             'total_rating'         => $product->Review()->count(),
-            'avg_rating'           => $product->Review()->avg('rating'),
+            'avg_rating'           => round($product->Review()->avg('rating'), 1),
             'minimum_price'        => $product->ProductVendor()->min('harga'),
             'minimum_price_string' => $this->formatRupiah($product->ProductVendor()->min('harga')),
             'minumumPrice'         => $product->ProductVendor()->min('harga'),

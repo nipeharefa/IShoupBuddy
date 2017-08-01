@@ -41,6 +41,11 @@
           nextButton: '.swiper-button-next',
           prevButton: '.swiper-button-prev',
           slidesPerView: 5,
+          breakpoints: {
+            320: {
+              slidesPerView: 1
+            }
+          }
         })
       }
     }

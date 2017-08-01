@@ -28,6 +28,9 @@
     p {
       font-size: $size-7;
     }
+    @include touch() {
+      margin: 0.5rem 0 !important;
+    }
   }
 
   hr {
@@ -184,5 +187,17 @@ canvas#line-chart {
       height: 2rem;
       text-overflow: ellipsis;
     }
+  }
+}
+
+
+.wrapper-wish {
+  @include touch() {
+    margin: 0.5rem 0;
+  }
+}
+.table-add-tocart-mobile {
+  @include touch() {
+    font-size: 0.85rem;
   }
 }

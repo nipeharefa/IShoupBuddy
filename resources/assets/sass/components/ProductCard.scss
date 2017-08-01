@@ -29,6 +29,14 @@ div.product-description {
       font-size: $size-7;
       font-weight: $weight-semibold;
     }
+    @include touch() {
+      h3 {
+        overflow: hidden !important;
+        line-height: 1rem !important;
+        max-height: 2rem !important;
+        text-overflow: ellipsis !important;
+      }
+    }
   }
   div.harga {
 

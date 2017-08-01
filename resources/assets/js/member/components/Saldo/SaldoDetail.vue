@@ -39,7 +39,9 @@
           <button class="button is-small is-primary" @click="browseFile" v-if="!uploading">Upload</button>
         </div>
 
-        <div class="field"></div>
+        <div class="field">
+          <span>Sedang Mengunggah File..</span>
+        </div>
       </div>
       <div class="request-saldo__noted">
         <small>*Mohon untuk mentransfer sesuai dengan nominal yang tertera, ke Bank yang telah di tentukan</small>
@@ -48,7 +50,7 @@
         <div class="field">
           <p class="control">
             <button class="button is-small is-danger" v-if="canCancel" @click="cancel">Batalkan</button>
-            <span class="label is-danger" v-if="!canCancel">Transaksi ini dibatalkan</span>
+            <span class="label is-danger">{{ statusText }}</span>
           </p>
         </div>
       </div>
@@ -101,6 +103,23 @@
         'saldoTransactions',
         'saldoTransactionsDetail',
       ]),
+      statusText () {
+        const t = this.saldoTransactionsDetail
+        switch(t.status) {
+          case 0:
+            return "Pending"
+            break
+          case 1:
+            return "Topup Sukses"
+            break
+          case 3:
+            return "Attachment Uploaded"
+            break
+          default:
+            return "Topup dibatalkan"
+            break
+        }
+      },
       canCancel () {
         const t = this.saldoTransactionsDetail
         if ((t && t.status === 1) || t.status === 4) {
@@ -159,6 +178,7 @@
           btn.classList.remove('is-loading')
           this.initSaldoTransactionsDetail(response.data)
           this.saldoTransactions[this.indexTransaction] = response.data
+          this.$router.push({name: 'tableSaldo'})
         }).catch( err => {
           btn.classList.remove('is-loading')
           iziToast.error({

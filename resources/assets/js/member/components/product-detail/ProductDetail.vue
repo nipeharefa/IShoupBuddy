@@ -13,14 +13,38 @@
         <div>
           <imageCover></imageCover>
           <div>
-            <b>
-              <p>{{ product.name }}</p>
-            </b>
+            <span class="product-name">{{ product.name }}</span>
           </div>
           <ratings :ratings="product.total_rating"></ratings>
-          <discount-box></discount-box>
+          <div class="wrapper-wish">
+            <wishListButton :productId="product.id" />
+            <a :href="`/compare/${product.id}`" class="button is-small">Compare</a>
+          </div>
         </div>
-        <button-control-touch></button-control-touch>
+          <div>
+            <table class="table table-add-tocart-mobile">
+              <thead>
+                <tr>
+                  <td>Nama Vendor</td>
+                  <td>Harga</td>
+                  <td></td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="item in product.vendors">
+                  <td class="vendor-name">{{ item.vendor.name }}</td>
+                  <td>{{ item.price_string }}</td>
+                  <td>
+                    <button class="button is-danger"
+                    @click="showModalToCart(item)"
+                    title="Tambahkan ke keranjang belanja" >
+                      <i class="fa fa-shopping-cart"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         <tabs></tabs>
       </div>
     </div>
