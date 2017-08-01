@@ -31,11 +31,13 @@
     props: {
       isActive: Boolean,
       latitude: Number,
-      longitude: Number
+      longitude: Number,
+      address: String
     },
     created () {
       this.location.latitude = this.latitude || 3.590336
       this.location.longitude = this.longitude || 98.677481
+      this.location.address = this.address || '-'
     },
     mounted () {},
     updated () {
@@ -45,7 +47,8 @@
       return {
         location: {
           latitude: null,
-          longitude: null
+          longitude: null,
+          address: null
         }
       }
     },
@@ -55,7 +58,8 @@
           lat: this.latitude || 3.590336,
           lng: this.longitude || 98.6774813
         }
-        console.log(latlng)
+        const geocoder = new google.maps.Geocoder()
+
         const map = new google.maps.Map(document.getElementById('mapProfile'), {
           center: latlng,
           zoom: 14,
@@ -74,6 +78,7 @@
         markers.push(marker)
 
         google.maps.event.addListener(map, 'click', (e) => {
+
           if (markers.length > 0) {
             for (var i = 0; i < markers.length; i++) {
               markers[i].setMap(null)
@@ -85,8 +90,21 @@
             map: map
           })
 
+          geocoder.geocode({ 'latLng': e.latLng }, (results, status) => {
+            if (status === google.maps.GeocoderStatus.OK) {
+              const result = results[0]
+              // self.register.location.address_map = result.formatted_address
+              // self.register.location.place_id = result.place_id
+              // self.register.location.lat = e.latLng.lat()
+              // self.register.location.lng = e.latLng.lng()
+              self.location.address = result.formatted_address
+              console.log(result)
+            } else {
+              console.warn(result)
+            }
+          })
+
           markers.push(marker)
-          console.info(e.latLng.lat())
           this.location.latitude = e.latLng.lat()
           this.location.longitude = e.latLng.lng()
         })
@@ -97,6 +115,8 @@
       updateLocation () {
         this.$emit('update:latitude', this.location.latitude)
         this.$emit('update:longitude', this.location.longitude)
+        this.$emit('update:address', this.location.address)
+        console.log('asfdasdf')
         this.hideModals()
       }
     }

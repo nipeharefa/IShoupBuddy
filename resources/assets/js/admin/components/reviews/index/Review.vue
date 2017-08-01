@@ -26,7 +26,7 @@
             :star-size="15" :read-only="true"
             :showRating="false"
             :activeColor="'#f7d120'" />
-      <span class="review-details__caption">mereview produk <a href="">{{ review.product.name }}</a></span>
+      <span class="review-details__caption">mereview produk <a :href="`/product/${review.product.id}`">{{ review.product.name }}</a></span>
       <p class="review-details__text">{{ review.body }}</p>
     </div>
   </div>

@@ -14,7 +14,7 @@
 
         <div class="field">
           <label for="" v-if="!invalidAddress">Alamat Pengiriman</label>
-          <textarea cols="30" rows="10" class="textarea" placeholder="Textarea"></textarea>
+          <textarea cols="30" rows="10" class="textarea" placeholder="Alamat Pengiriman" v-model="shipment.address"></textarea>
         </div>
 
         <button class="button is-small is-primary button-pick__maps" @click="showPickMaps">
@@ -26,7 +26,7 @@
       <button class="button is-primary" @click="checkout" :disabled="!canCheckout">Lanjutkan ke Pembayaran</button>
     </div>
     <modalPickLocation :isActive.sync="onModalShow"
-        :latitude.sync="shipment.lat" :longitude.sync="shipment.lng"/>
+        :latitude.sync="shipment.lat" :longitude.sync="shipment.lng" :address.sync="shipment.address"/>
   </div>
 </template>
 

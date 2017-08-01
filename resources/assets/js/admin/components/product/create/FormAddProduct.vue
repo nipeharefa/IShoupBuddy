@@ -40,7 +40,7 @@
         <div class="field">
           <label class="label">Barcode</label>
           <p class="control">
-              <input type="text" class="input"  placeholder="Barcode" v-model="product.barcode"/>
+              <input type="tel" class="input"  placeholder="Barcode" v-model="product.barcode"/>
             </p>
         </div>
 

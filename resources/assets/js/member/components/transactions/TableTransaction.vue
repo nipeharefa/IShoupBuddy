@@ -29,7 +29,7 @@
                 <img :src="product.product.picture_url.small" alt="">
               </a>
               <div class="order-product-teaser__body">
-                <a href="" class="order-product-teaser__title">{{ product.name }}</a>
+                <a :href="`/product/${product.product.id}`" class="order-product-teaser__title">{{ product.name }}</a>
               </div>
             </div>
           </div>

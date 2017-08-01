@@ -6,7 +6,7 @@
           <figure class="media-left">
             <p class="image is-64x64">
               <label for="uploadCategory">
-                <img :src="generateLinkImage(category.pictureUrl)">
+                <img :src="generateLinkImage(category.picture_url)">
               </label>
               <input type="file" name="" id="uploadCategory"
               @change="_uploadImage" accept="image/*" style="visibility:hidden">

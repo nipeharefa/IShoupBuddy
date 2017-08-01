@@ -25,6 +25,11 @@
     mounted () {
       this.initMap();
     },
+    watch: {
+      latitude(a,b) {
+        this.initMap();
+      }
+    },
     methods: {
       initMap () {
         const latlng = {
