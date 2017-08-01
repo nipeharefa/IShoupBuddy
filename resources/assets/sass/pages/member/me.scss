@@ -146,9 +146,17 @@ div.user-detail-profile {
     width: 100%;
     padding: 1rem 0.5rem;
     display: flex;
-    flex-direction: column;
-    span {
-      font-size: 14px;
+    flex-direction: row;
+    justify-content: space-between;
+    .order-top {
+      display: flex;
+      flex-direction: column;
+      span {
+        font-size: 14px;
+      }
+    }
+    .order-confirmation__header {
+      display: flex;
     }
   }
   .order-teaser__body {

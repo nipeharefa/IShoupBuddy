@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use DB;
 use Exception;
 use Illuminate\Http\Request;
+use App\Helpers\Transformers\TransactionTransformer;
 
 class TransactionShipmentController extends BaseApiController
 {
@@ -99,12 +100,20 @@ class TransactionShipmentController extends BaseApiController
         try {
             DB::beginTransaction();
 
-            // $id->update(['accepted_at'    =>  Carbon::now()]);
             $id->accepted_at = Carbon::now();
             $id->save();
             DB::commit();
 
-            return $id;
+            $trans = $id->Transaction->load('Detail');
+
+            $response = [
+                "status"        =>  "OK",
+                "transaction"   =>  TransactionTransformer::transform($trans),
+                "message"       =>  null
+            ];
+
+            return response()->json($response);
+
         } catch (Exception $e) {
             DB::rollback();
 
