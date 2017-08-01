@@ -14,10 +14,12 @@
           </ul>
         </nav>
       </div>
-      <div class="nusa" v-for="item in wishlists">
-        <a :href="`/product/${item.product.id}`">
-          <product-card :product="item.product"></product-card>
-        </a>
+      <div class="nusa-wrapper">
+        <div class="nusa" v-for="item in wishlists">
+          <a :href="`/product/${item.product.id}`">
+            <product-card :product="item.product"></product-card>
+          </a>
+        </div>
       </div>
     </div>
   </div>

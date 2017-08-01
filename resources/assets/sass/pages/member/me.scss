@@ -214,3 +214,19 @@ div.user-detail-profile {
     font-size: 0.85rem;
   }
 }
+
+
+// Product Favorite
+.nusa-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+  .product-name {
+    h3 {
+      line-height: 1.3rem;
+      max-height: 2.6rem;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+}
