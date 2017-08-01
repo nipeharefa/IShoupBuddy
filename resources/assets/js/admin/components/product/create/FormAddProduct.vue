@@ -40,7 +40,11 @@
         <div class="field">
           <label class="label">Barcode</label>
           <p class="control">
-              <input type="tel" class="input"  placeholder="Barcode" v-model="product.barcode"/>
+              <input type="tel" class="input"  placeholder="Barcode"
+              v-model="product.barcode"
+              :value="amountValue"
+              @input="processValue(amountValue)"
+              />
             </p>
         </div>
 
@@ -159,7 +163,10 @@
       ...mapGetters([
         'onError',
         'categories'
-      ])
+      ]),
+      amountValue () {
+        return this.formatToNumber(this.product.barcode)
+      }
     },
     methods: {
       ...mapActions([
@@ -215,6 +222,30 @@
           a.classList.remove('is-loading')
         })
         console.log('Ready to Post')
+      },
+      processValue(value){
+        if (isNaN(value)) {
+          this.product.barcode = 1
+          return
+        } else if (value === 0) {
+          this.product.barcode = 1
+        } else {
+          this.product.barcode = value
+        }
+      },
+      formatToNumber (value) {
+        let number = 0
+        if (this.separator === '.') {
+          let cleanValue = value
+          if (typeof value !== 'string') {
+            cleanValue = this.numberToString(value)
+          }
+          number = Number(String(cleanValue).replace(/[^0-9-,]+/g, '').replace(',', '.'))
+        } else {
+          number = Number(String(value).replace(/[^0-9-.]+/g, ''))
+        }
+        if (!this.minus) return Math.abs(number)
+        return number
       }
     }
   }
