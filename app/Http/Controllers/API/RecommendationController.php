@@ -15,7 +15,9 @@ class RecommendationController extends Controller
      */
     public function index()
     {
-        $recomendation = Product::inRandomOrder()->take(4)->get();
+        $recomendation = Product::whereHas('productvendor', function ($pv) {
+                return $pv;
+            })->inRandomOrder()->take(4)->get();
 
         $response = [
             'products'  => transform($recomendation),

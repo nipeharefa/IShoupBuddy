@@ -39,7 +39,7 @@
           <button class="button is-small is-primary" @click="browseFile" v-if="!uploading">Upload</button>
         </div>
 
-        <div class="field">
+        <div class="field" v-if="onUpload">
           <span>Sedang Mengunggah File..</span>
         </div>
       </div>
@@ -95,6 +95,7 @@
     data () {
       return {
         uploading: false,
+        onUpload: false,
         indexTransaction: null
       }
     },
@@ -156,10 +157,13 @@
         const formData = new FormData()
         formData.append('image', file)
         const id = this.saldoTransactionsDetail.id
+        this.onUpload = true
         this.$http.post(`api/transaction/${id}/upload`, formData).then(response => {
           console.log(response)
           this.updateAttachmentTransactionDetail(response.data.transaction.attachments)
+          this.onUpload = false
         }).catch(error => {
+          this.onUpload = false
           return error
         })
       },
