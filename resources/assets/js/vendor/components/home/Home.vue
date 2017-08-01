@@ -5,7 +5,9 @@
     </div>
     <section class="section">
       <div class="container">
+        <h3 class="product-list-caption">Produk Terbaru</h3>
         <list-promo></list-promo>
+        <h3 class="product-list-caption">Produk Lainnya</h3>
         <list-product></list-product>
       </div>
     </section>
