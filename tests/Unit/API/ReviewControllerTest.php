@@ -17,6 +17,7 @@ class ReviewControllerTest extends TestCase
      */
     public function testExample()
     {
+        $mock = \Mockery::mock('mix');
         $this->assertTrue(true);
     }
 }

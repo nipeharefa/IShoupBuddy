@@ -28,21 +28,17 @@
       </div>
     </div>
 
-    <!-- <section class="order_details__shipping">
-      <div class="columns">
-        <div class="column is-half order_details__user">
-          <b>Pengiriman</b>
-          <table class="table">
-            <tbody>
-              <tr>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="column is-half"></div>
-      </div>
-    </section> -->
+    <div class="t_shipment" v-if="!transaction.shipment.accepted_at">
+      <small>Konfirmasi Penerimaan Barang</small>
+      <br>
+      <button class="button is-primary" @click="confirm">Konfirmasi Terima Barang</button>
+    </div>
+
+     <div class="t_shipment" v-if="transaction.shipment.accepted_at">
+     <small>Konfirmasi Penerimaan Barang</small>
+      <br>
+      <b>Barang sudah diterima</b>
+    </div>
 
   </div>
 </template>
@@ -52,7 +48,9 @@
 </style>
 
 <script>
+
   import { mapGetters, mapActions } from 'vuex'
+  import iziToast from 'izitoast'
   const TableItem = () => import ('./TableDetailTransaction.vue')
 
   export default {
@@ -78,6 +76,24 @@
       ...mapActions([
         'initTransaction'
       ]),
+      confirm ($event) {
+        const id = this.transaction.shipment.id
+        const data = this.user
+        const btn = event.target
+        btn.classList.add('is-loading')
+        this.$http.post(`api/transaction-shipment/postAcceptShipment/${id}`)
+          .then(response => {
+            iziToast.success({
+              title: 'Sukses',
+              message: 'Konfirmasi berhasil',
+              position: 'bottomRight'
+            });
+            btn.classList.remove('is-loading')
+            this.transaction.shipment.accepted_at = true
+          }).catch(err => {
+            btn.classList.remove('is-loading')
+          })
+      },
       getTransaction() {
         const index = this.transactions.findIndex(x => {
           return x.id == this.id

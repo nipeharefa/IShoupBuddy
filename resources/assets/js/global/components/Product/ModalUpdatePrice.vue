@@ -16,7 +16,11 @@
 
         <div class="field">
           <label for="" class="label">Harga Terbaru</label>
-          <input type="text" class="input" v-model="newPrice">
+          <input type="text" class="input"
+          v-model="newPrice"
+          :value="amountValue"
+          @input="processValue(amountValue)"
+            >
         </div>
 
         <div class="field">
@@ -62,10 +66,39 @@
         hargaPlain: 0
       }
     },
+    computed: {
+      amountValue () {
+        return this.formatToNumber(this.newPrice)
+      }
+    },
     methods: {
       ...mapActions([
         'updateOwnProduct'
       ]),
+      processValue(value){
+        if (isNaN(value)) {
+          this.newPrice = 1
+          return
+        } else if (value === 0) {
+          this.newPrice = 1
+        } else {
+          this.newPrice = value
+        }
+      },
+      formatToNumber (value) {
+        let number = 0
+        if (this.separator === '.') {
+          let cleanValue = value
+          if (typeof value !== 'string') {
+            cleanValue = this.numberToString(value)
+          }
+          number = Number(String(cleanValue).replace(/[^0-9-,]+/g, '').replace(',', '.'))
+        } else {
+          number = Number(String(value).replace(/[^0-9-.]+/g, ''))
+        }
+        if (!this.minus) return Math.abs(number)
+        return number
+      },
       savePrice (event) {
         const btnUpdate = event.target
 

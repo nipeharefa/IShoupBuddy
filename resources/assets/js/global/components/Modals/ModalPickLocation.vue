@@ -93,10 +93,6 @@
           geocoder.geocode({ 'latLng': e.latLng }, (results, status) => {
             if (status === google.maps.GeocoderStatus.OK) {
               const result = results[0]
-              // self.register.location.address_map = result.formatted_address
-              // self.register.location.place_id = result.place_id
-              // self.register.location.lat = e.latLng.lat()
-              // self.register.location.lng = e.latLng.lng()
               self.location.address = result.formatted_address
               console.log(result)
             } else {
@@ -116,7 +112,6 @@
         this.$emit('update:latitude', this.location.latitude)
         this.$emit('update:longitude', this.location.longitude)
         this.$emit('update:address', this.location.address)
-        console.log('asfdasdf')
         this.hideModals()
       }
     }

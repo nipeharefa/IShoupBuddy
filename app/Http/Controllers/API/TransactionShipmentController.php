@@ -95,12 +95,13 @@ class TransactionShipmentController extends BaseApiController
     public function postAcceptShipment(TransactionShippment $id)
     {
         $this->authorize('update', $id);
+
         try {
-            return $this->getUser();
             DB::beginTransaction();
 
-            $id->update(['accepted_at'    =>  Carbon::now()]);
-
+            // $id->update(['accepted_at'    =>  Carbon::now()]);
+            $id->accepted_at = Carbon::now();
+            $id->save();
             DB::commit();
 
             return $id;
