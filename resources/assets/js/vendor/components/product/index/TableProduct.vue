@@ -58,6 +58,9 @@
     },
     methods: {
       showModalAddToMyProduct (item, e) {
+        if (item.used) {
+          return
+        }
         this.activeData = item || {}
         this.modalShow = !this.modalShow
       },
