@@ -5,7 +5,7 @@
     </p>
     <ul class="menu-list">
       <li>
-        <router-link :to="{ name: 'listCategory' }" append>Kategory</router-link>
+        <router-link :to="{ name: 'listCategory' }" append>Kategori</router-link>
       </li>
       <li>
         <router-link :to="{ name: 'listProducts' }" append>Produk</router-link>

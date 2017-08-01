@@ -184,6 +184,7 @@ return [
         Laravel\Passport\PassportServiceProvider::class,
         Themsaid\Transformers\TransformersServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Nasution\ZenzivaSms\NotificationServiceProvider::class,
 
     ],
 

@@ -37,14 +37,19 @@
 								<div class="center">
 									<p class="footer-text-info">Lebih mudah review dan belanja di Aplikasi ShoupBuddy </p>
 								</div>
-								<div class="field">
+
+                <div class="field" v-if="!sent">
 									<p class="control control-input-phone">
-										<input type="text" placeholder="Nomor Handphone" class="input">
+										<input type="text" placeholder="Nomor Handphone" class="input" v-model="phone">
 									</p>
 									<p class="controls">
-										<button class="button is-primary btn-send-link">Kirim Link</button>
+										<button class="button is-primary btn-send-link" @click="sendLink">Kirim Link</button>
 									</p>
 								</div>
+                <div class="field success-sent" v-if="sent">
+                  <small>Berhasil! Silakan cek handphone Anda untuk tautan download</small>
+                </div>
+
 							</div>
 						</div>
 					</div>
@@ -56,6 +61,13 @@
 
 
 <style lang="scss">
+  .success-sent {
+    margin: 1rem 0;
+    small {
+      color: green;
+      font-weight: 400;
+    }
+  }
 	.footer-logo-columns {
 		align-items: center;
 		display: flex;
@@ -92,3 +104,29 @@
 		}
 	}
 </style>
+
+<script>
+  export default {
+    data() {
+      return {
+        phone: '',
+        sent: false
+      }
+    },
+    methods: {
+      sendLink ($event) {
+        const btn = event.target
+        const data = {
+          phone: this.phone
+        }
+        btn.classList.add('is-loading')
+        this.$http.post('sms', data)
+          .then(response => {
+            this.sent = true
+            btn.classList.remove('is-loading')
+          })
+          .catch(err => err)
+      }
+    }
+  }
+</script>

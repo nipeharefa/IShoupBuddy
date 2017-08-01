@@ -14,7 +14,7 @@
         <tr v-for="(item, index) in ownProducts">
           <td>{{ item.name }}</td>
           <td>{{ item.barcode }}</td>
-          <td>{{ item.total_review || 0 }} / {{ item.avg_rating || 0 }}</td>
+          <td>{{ item.total_review || 0 }} Reviewer / {{ item.avg_rating || 0 }} <i class="fa fa-star-o"></i></td>
           <td>{{ item.price_string }}</td>
           <td>
             <a class="button is-small" @click="showModal(item, index)">Update Harga</a>

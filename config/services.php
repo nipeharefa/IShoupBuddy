@@ -34,5 +34,11 @@ return [
         'key'    => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+    'zenziva' => [
+        'userkey' => 'zh51gm',
+        'passkey' => 'badubadu',
+        'subdomain' => '',
+        'masking' => false,
+    ],
 
 ];

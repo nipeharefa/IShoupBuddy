@@ -13,7 +13,7 @@
       <tr v-for="item in products">
         <td>{{ item.name }}</td>
         <td>{{ item.barcode }}</td>
-        <td>{{ item.total_review }} / {{ item.avg_rating || 0 }}</td>
+        <td>{{ item.total_review || 0 }} Reviewer / {{ item.avg_rating || 0 }} <i class="fa fa-star-o"></i></td>
         <td>{{ item.total_vendor }}</td>
         <td>
           <router-link
