@@ -17,6 +17,6 @@ class ReviewControllerTest extends TestCase
      */
     public function testExample()
     {
-        $this->asserTrue(true);
+        $this->assertTrue(true);
     }
 }

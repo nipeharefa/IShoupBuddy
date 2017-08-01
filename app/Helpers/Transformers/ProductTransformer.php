@@ -7,6 +7,7 @@ use Auth;
 use Cache;
 use Illuminate\Database\Eloquent\Model;
 use Log;
+use App\Helpers\Transformers\ReviewTransformer;
 
 class ProductTransformer extends AbstractTransformer
 {
@@ -45,7 +46,7 @@ class ProductTransformer extends AbstractTransformer
             'minimum_price_string' => $this->formatRupiah($product->ProductVendor()->min('harga')),
             'minumumPrice'         => $product->ProductVendor()->min('harga'),
             'liked'                => false,
-            'recentReview'         => [],
+            'recentReview'         => $this->getRecentReview($product),
             'attributes'           => $product->attributes ? unserialize($product->attributes) : $defaultSerializer,
         ];
 
@@ -100,6 +101,14 @@ class ProductTransformer extends AbstractTransformer
         $arr['summary_string'] = collect($summaryAvg)->sort()->reverse()->keys()->first();
 
         return $arr;
+    }
+
+    protected function getRecentReview($product)
+    {
+        $review = $product->Review()
+            ->with('user')
+            ->orderByDesc('id')->inRandomOrder()->take(4)->get();
+        return $review;
     }
 
     private function getScore($sentence, Model $review)

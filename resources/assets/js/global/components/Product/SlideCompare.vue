@@ -1,10 +1,12 @@
 <template>
   <div class="columns">
     <div class="column is-2">
-      <productCard :product="activeProduct" />
+      <a :href="`/product/${activeProduct.id}`">
+        <productCard :product="activeProduct" />
+      </a>
     </div>
     <div class="column is-10 is-slide-compare">
-      <slideProduct :products="promo" />
+       <slideProduct :products="promo" />
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div>
     </div>
@@ -28,8 +30,8 @@
 </style>
 
 <script>
-  const SlideProduct = () => import('global/components/Others/SlideProduct.vue')
-  const ProductCard = () => import('global/components/Others/ProductCard.vue')
+  const SlideProduct = () => import('global/components/Others/SlideProductCompare.vue')
+  const ProductCard = () => import('global/components/Others/ProductCardCompare.vue')
   import { mapActions, mapGetters } from 'vuex'
 
   export default {
