@@ -21,7 +21,11 @@
         <div class="field">
           <label for="">Harga</label>
           <p class="control">
-            <input class="input" type="text" placeholder="Harga"  v-model="newPrice">
+            <input class="input" type="text" placeholder="Harga"
+            v-model="newPrice"
+            :value="amountValue"
+            @input="processValue(amountValue)"
+            >
           </p>
         </div>
 
@@ -57,6 +61,11 @@
       addedProduct: Function,
       modalShow: Boolean
     },
+    computed: {
+      amountValue () {
+        return this.formatToNumber(this.newPrice)
+      }
+    },
     data () {
       return {
         dataForm: this.data,
@@ -64,6 +73,30 @@
       }
     },
     methods: {
+      processValue(value){
+        if (isNaN(value)) {
+          this.newPrice = 1
+          return
+        } else if (value === 0) {
+          this.newPrice = 1
+        } else {
+          this.newPrice = value
+        }
+      },
+      formatToNumber (value) {
+        let number = 0
+        if (this.separator === '.') {
+          let cleanValue = value
+          if (typeof value !== 'string') {
+            cleanValue = this.numberToString(value)
+          }
+          number = Number(String(cleanValue).replace(/[^0-9-,]+/g, '').replace(',', '.'))
+        } else {
+          number = Number(String(value).replace(/[^0-9-.]+/g, ''))
+        }
+        if (!this.minus) return Math.abs(number)
+        return number
+      },
       hideAction () {
         this.$emit('update:modalShow', false)
       },
