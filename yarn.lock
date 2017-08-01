@@ -7420,6 +7420,14 @@ vue-chartjs@^2.7.1:
   dependencies:
     lodash "^4.17.4"
 
+vue-click-outside-directive@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/vue-click-outside-directive/-/vue-click-outside-directive-0.0.1.tgz#a2516816e30ece32899845209b307acfa8c3e94f"
+
+vue-click-outside@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/vue-click-outside/-/vue-click-outside-1.0.6.tgz#bf3e0217210d7778299cc39ddcf89cc036089f22"
+
 vue-hot-reload-api@^2.0.11:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.1.0.tgz#9ca58a6e0df9078554ce1708688b6578754d86de"

@@ -3,6 +3,8 @@ import VueAxios from 'lib/axios-plugin'
 import VueLazyload from 'vue-lazyload'
 Vue.use(VueAxios)
 Vue.use(VueLazyload)
+Vue.directive('click-outside', clickOutside)
+import clickOutside from 'lib/click-outside.js'
 import store from 'guest/store/show-category-product/'
 const App = r => require.ensure([], () => r(require('guest/components/Category/ShowCategoryProduct.vue')), 'show-category-product')
 

@@ -10,6 +10,7 @@ import { mapActions } from 'vuex'
 import VueEcho from 'lib/echo-pusher-plugin'
 import ImageUploader from 'lib/imageuploader'
 import VueLazyload from 'vue-lazyload'
+import clickOutside from 'lib/click-outside.js'
 
 Vue.use(VueProgressBar, { color: 'rgb(26, 146, 47)', failedColor: 'red', height: '3px' })
 Vue.use(VueAxios)
@@ -18,6 +19,7 @@ Vue.use(VueEcho)
 Vue.use(ImageUploader)
 Vue.use(CartCounter)
 Vue.use(VueLazyload)
+Vue.directive('click-outside', clickOutside)
 
 sync(store, router)
 

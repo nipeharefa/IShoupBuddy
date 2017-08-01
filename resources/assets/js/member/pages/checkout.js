@@ -5,10 +5,12 @@ import CartCounter from 'lib/CartCounter'
 // import GetCategory from 'lib/GetCategory'
 import VueLazyload from 'vue-lazyload'
 import store from 'member/store/Checkout/'
+import clickOutside from 'lib/click-outside.js'
 Vue.use(VueAxios)
 Vue.use(VueLazyload)
 Vue.use(VueEcho)
 Vue.use(CartCounter)
+Vue.directive('click-outside', clickOutside)
 
 const App = r => require.ensure([], () => r(require('member/components/Checkout/Checkout.vue')),
   'mem-checkout')

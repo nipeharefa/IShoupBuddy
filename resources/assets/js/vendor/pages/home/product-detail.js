@@ -3,10 +3,12 @@ import VueAxios from 'lib/axios-plugin'
 import VueLazyload from 'vue-lazyload'
 import VueEcho from 'lib/echo-pusher-plugin'
 import CartCounter from 'lib/CartCounter'
+import clickOutside from 'lib/click-outside.js'
 Vue.use(VueEcho)
 Vue.use(VueLazyload)
 Vue.use(VueAxios)
 Vue.use(CartCounter)
+Vue.directive('click-outside', clickOutside)
 
 import App from 'vendor/components/product-detail/ProductDetail.vue'
 import store from 'member/store/product-detail/'

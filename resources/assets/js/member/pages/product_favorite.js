@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueAxios from 'lib/axios-plugin'
+import clickOutside from 'lib/click-outside.js'
+Vue.directive('click-outside', clickOutside)
 
 Vue.use(VueAxios)
 

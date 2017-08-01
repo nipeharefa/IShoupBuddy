@@ -3,10 +3,11 @@ import VueAxios from 'lib/axios-plugin'
 import ImageUploader from 'lib/imageuploader'
 import VeeValidate from 'vee-validate'
 import store from '../store/editprofile'
-
+import clickOutside from 'lib/click-outside.js'
 Vue.use(VueAxios)
 Vue.use(ImageUploader)
 Vue.use(VeeValidate)
+Vue.directive('click-outside', clickOutside)
 
 import { mapActions } from 'vuex'
 

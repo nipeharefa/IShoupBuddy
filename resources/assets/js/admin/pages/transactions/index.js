@@ -4,10 +4,12 @@ import VueProgressBar from 'vue-progressbar'
 import router from 'admin/routers/transaction'
 import store from 'admin/store/transaction-index'
 import { sync } from 'vuex-router-sync'
+import clickOutside from 'lib/click-outside.js'
 
 sync(store, router)
 
 import { mapActions } from 'vuex'
+Vue.directive('click-outside', clickOutside)
 
 const App = r => require.ensure([], () => r(require('adminComponents/transactions/views/Main.vue')), 'group-foo')
 

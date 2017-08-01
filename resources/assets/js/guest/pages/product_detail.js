@@ -3,10 +3,12 @@ import VueAxios from 'lib/axios-plugin'
 import VueLazyload from 'vue-lazyload'
 import App from 'guest/components/product_detail/ProductDetail.vue'
 import store from 'guest/store/product-detail/'
+import clickOutside from 'lib/click-outside.js'
 import { mapActions, mapGetters } from 'vuex'
 
 Vue.use(VueLazyload)
 Vue.use(VueAxios)
+Vue.directive('click-outside', clickOutside)
 
 new Vue({
   store,

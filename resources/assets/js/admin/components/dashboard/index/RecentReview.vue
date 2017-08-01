@@ -4,14 +4,14 @@
       <p>Recent Review</p>
     </div>
     <div class="recent-review__body">
-      <table class="recent-revie__table">
+      <table class="table recent-revie__table">
         <thead>
           <td>Tanggal</td>
           <td>Deskripsi</td>
         </thead>
         <tbody>
           <tr v-for="item in reviews">
-            <td>{{ item.date }}</td>
+            <td>{{ item.date_string }}</td>
             <td>{{ item.user.name }} memberi review ke produk {{ item.product.name }}</td>
           </tr>
         </tbody>

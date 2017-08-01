@@ -1,6 +1,7 @@
 <template>
-  <div class="navbar-item has-dropdown is-hoverable dropdown-category no-hover-change">
-    <a class="navbar-link no-hover-change" href="#">
+  <div class="navbar-item has-dropdown dropdown-category no-hover-change"
+    :class="{'is-active': isActive}">
+    <a class="navbar-link no-hover-change" href="#" v-click-outside="hide" @click="show">
       Kategori
     </a>
     <div class="navbar-dropdown ">
@@ -28,7 +29,16 @@
     },
     data () {
       return {
-        categories: null
+        categories: null,
+        isActive: false
+      }
+    },
+    methods: {
+      show () {
+        this.isActive = !this.isActive
+      },
+      hide () {
+        this.isActive = false
       }
     }
   }

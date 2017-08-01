@@ -21,6 +21,7 @@ class ReviewTransformer extends AbstractTransformer
             'product'       => ProductTransformer::transform($review->Product),
             'vendor'        => VendorTransformer::transform($review->Vendor),
             'date'          => $review->created_at->toW3cString(),
+            'date_string'          => $review->created_at->toDateTimeString(),
             'total_report'  => $review->Report->count(),
             'trashed'       => $review->trashed(),
         ];

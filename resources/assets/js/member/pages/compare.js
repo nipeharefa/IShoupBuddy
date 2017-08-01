@@ -4,10 +4,12 @@ import VueEcho from 'lib/echo-pusher-plugin'
 import CartCounter from 'lib/CartCounter'
 import VueLazyload from 'vue-lazyload'
 import store from 'member/store/home/'
+import clickOutside from 'lib/click-outside.js'
 Vue.use(VueAxios)
 Vue.use(VueLazyload)
 Vue.use(VueEcho)
 Vue.use(CartCounter)
+Vue.directive('click-outside', clickOutside)
 
 const App = r => require.ensure([], () => r(require('member/components/compare/Compare.vue')))
 import { mapActions } from 'vuex'

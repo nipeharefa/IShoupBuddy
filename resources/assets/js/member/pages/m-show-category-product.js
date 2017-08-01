@@ -4,11 +4,13 @@ import VueEcho from 'lib/echo-pusher-plugin'
 import CartCounter from 'lib/CartCounter'
 import VueLazyload from 'vue-lazyload'
 import { mapActions } from 'vuex'
+import store from 'member/store/show-category-product/'
+import clickOutside from 'lib/click-outside.js'
+Vue.directive('click-outside', clickOutside)
 Vue.use(VueAxios)
 Vue.use(VueLazyload)
 Vue.use(VueEcho)
 Vue.use(CartCounter)
-import store from 'member/store/show-category-product/'
 
 const App = r => require.ensure([], () => r(require('member/components/Category/ShowCategoryProduct.vue')), 'show-category-product')
 

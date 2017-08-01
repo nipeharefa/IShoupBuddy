@@ -6,10 +6,12 @@ import VueLazyload from 'vue-lazyload'
 import store from 'member/store/search/'
 import { mapActions } from 'vuex'
 import CartCounter from 'lib/CartCounter'
+import clickOutside from 'lib/click-outside.js'
 
 Vue.use(VueAxios)
 Vue.use(VueEcho)
 Vue.use(VueLazyload)
+Vue.directive('click-outside', clickOutside)
 Vue.use(CartCounter)
 
 new Vue({
