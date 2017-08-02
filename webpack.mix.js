@@ -50,6 +50,7 @@ mix.js('resources/assets/js/member/pages/Cart.js', 'js/m-cart.js')
 mix.js('resources/assets/js/member/pages/m-show-category-product.js', 'js/m-show-category-product.js')
 mix.js('resources/assets/js/member/pages/checkout.js', 'js/m-checkout.js')
 mix.js('resources/assets/js/member/pages/compare.js', 'js/m-compare.js')
+mix.js('resources/assets/js/member/pages/compare-result.js', 'js/m-compare-result.js')
 
 
 // Member SASS
@@ -61,6 +62,7 @@ mix.sass('resources/assets/sass/pages/member/search/index.scss', 'css/member/sea
 mix.sass('resources/assets/sass/pages/member/Cart.scss', 'css/member/cart.css')
 mix.sass('resources/assets/sass/pages/member/checkout.scss', 'css/m-checkout.css')
 mix.sass('resources/assets/sass/pages/member/compare.scss', 'css/m-compare.css')
+mix.sass('resources/assets/sass/pages/member/compare-result.scss', 'css/m-compare-result.css')
 
 // Vendor JS
 mix.js('resources/assets/js/vendor/pages/home/home.js', 'js/vhome.js')

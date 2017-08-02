@@ -61,6 +61,9 @@ div.navbar-wrapper {
   }
 }
 
+.navbar-item.has-dropdown.is-active .navbar-link {
+  background: none !important;
+}
 .navbar-item.has-dropdown:hover {
   // background-color: red;
   a.navbar-link {

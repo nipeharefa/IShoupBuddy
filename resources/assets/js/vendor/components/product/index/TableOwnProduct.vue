@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table class="table">
+    <table class="table is-narrow">
       <thead>
         <tr>
           <th>Nama Produk</th>
