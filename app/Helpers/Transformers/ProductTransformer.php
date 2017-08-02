@@ -107,7 +107,7 @@ class ProductTransformer extends AbstractTransformer
     {
         $review = $product->Review()
             ->with('user')
-            ->orderByDesc('id')->inRandomOrder()->take(4)->get();
+            ->orderByDesc('id')->inRandomOrder()->take(10)->get();
         return $review;
     }
 

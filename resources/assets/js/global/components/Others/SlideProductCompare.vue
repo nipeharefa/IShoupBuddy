@@ -2,7 +2,7 @@
   <div class="swiper-container">
     <div class="swiper-wrapper">
       <div class="nusa swiper-slide" v-for="item in products">
-        <a :href="`/product/${item.id}`" class="alinkto">
+        <a :href="generateCompareLinks(item)" class="alinkto">
           <product-card :product="item"></product-card>
         </a>
       </div>
@@ -36,6 +36,11 @@
       }
     },
     methods: {
+      generateCompareLinks (item) {
+        const sourceId = window._sharedData.product.id;
+        const targetId = item.id
+        return `/compare/result?source=${sourceId}&target=${targetId}`
+      },
       setupSwiper () {
         this.swiper = new Swiper ('.swiper-container', {
           nextButton: '.swiper-button-next',

@@ -25,6 +25,7 @@ mix.sass('resources/assets/sass/pages/guest/register.scss', 'css/guest')
 mix.sass('resources/assets/sass/pages/guest/search_result.scss', 'css/guest')
 mix.sass('resources/assets/sass/pages/guest/show-category-product.scss', 'css/g-show-category-product.css')
 mix.sass('resources/assets/sass/pages/guest/compare.scss', 'css/g-compare.css')
+mix.sass('resources/assets/sass/pages/guest/compare-result.scss', 'css/g-compare-result.css')
 
 // Guest JS
 
@@ -35,6 +36,7 @@ mix.js('resources/assets/js/guest/pages/register.js', 'js/register.js')
 mix.js('resources/assets/js/guest/pages/search_result.js', 'js/search_result.js')
 mix.js('resources/assets/js/guest/pages/g-show-category-product.js', 'js/g-show-category-product.js')
 mix.js('resources/assets/js/guest/pages/compare.js', 'js/g-compare-js.js')
+mix.js('resources/assets/js/guest/pages/g-compare-result.js', 'js/g-compare-result.js')
 
 
 // Member JS

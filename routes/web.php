@@ -22,6 +22,7 @@ Route::resource('product', 'ProductController',
     ['only' => ['show']]);
 Route::resource('cart', 'CartController');
 Route::resource('checkout', 'CheckoutController');
+Route::get('compare/result', 'CompareController@getResult');
 Route::resource('compare', 'CompareController');
 Route::get('knn', 'TestController@knn');
 Route::get('api/knn', 'TestController@knn')->middleware('api');

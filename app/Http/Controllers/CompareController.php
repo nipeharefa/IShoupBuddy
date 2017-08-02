@@ -46,4 +46,41 @@ class CompareController extends Controller
                     ->with('title', 'Shoubud.xyz:Situs Review Produk Supermarket')
                     ->with('css', $css);
     }
+
+    public function getResult(Request $request)
+    {
+        $user = $request->user() ?? null;
+
+        $js = mix('js/g-compare-result.js');
+        $css = mix('css/g-compare-result.css');
+
+        $view = view('pages.compare.result');
+
+        $source = Product::find($request->source);
+        $target = Product::find($request->target);
+
+
+        $source = json_encode(ProductTransformer::transform($source));
+        $target = json_encode(ProductTransformer::transform($target));
+
+        if ($user) {
+            switch ($user->role) {
+                case 1:
+                    // Member
+                    $js = mix('js/m-compare-result.js');
+                    $css = mix('css/m-compare-result.css');
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return $view->with('user', $user)
+                    ->with('js', $js)
+                    ->with('source', $source)
+                    ->with('target', $target)
+                    ->with('categories', $this->getViewCategories())
+                    ->with('title', 'Shoubud.xyz:Situs Review Produk Supermarket')
+                    ->with('css', $css);
+    }
 }

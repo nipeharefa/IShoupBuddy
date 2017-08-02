@@ -26,7 +26,7 @@
 
     <div class="reviews" v-if="haveReview">
       <b>Review</b>
-      <div v-for="item in product.recentReview" class="reviews-wrap">
+      <div v-for="item in product.recentReview.slice(0,9)" class="reviews-wrap">
         <small class="user-name">{{ item.user.name }}</small>
         <star-rating :rating="item.rating"
             :star-size="12" :read-only="true"
