@@ -31,6 +31,8 @@
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
+
     @else
         <link rel="stylesheet" href="{{ asset('local/fontawesome/css/font-awesome.min.css') }}">
     @endif
@@ -40,6 +42,11 @@
 <body>
 
     @yield('content')
+
+    @if (env('APP_ENV') == "production")
+        <script src="https://raw.githack.com/zloirock/core-js/v2.4.1/client/core.min.js" type="text/javascript"></script>
+    @endif
+
     @yield('js')
 </body>
 </html>

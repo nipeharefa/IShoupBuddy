@@ -29,7 +29,11 @@
                     <a class="button is-info">-</a>
                   </p>
                   <p class="control">
-                    <input class="input" type="text" placeholder="1" v-model="quas">
+                    <input class="input" type="text"
+                    placeholder="1"
+                    v-model="quantity"
+                    :value="amountValue"
+                    @input="processValue(amountValue)">
                   </p>
                   <p class="control" @click="add(true)">
                     <a class="button is-info">+</a>
@@ -101,22 +105,36 @@
         }
         this.quas = this.quas - 1
         return
+      },
+      processValue(value){
+        if (isNaN(value)) {
+          this.quantity = 1
+          return
+        } else if (value === 0) {
+          this.quantity = 1
+        } else {
+          this.quantity = value
+        }
+      },
+      formatToNumber (value) {
+        let number = 0
+        if (this.separator === '.') {
+          let cleanValue = value
+          if (typeof value !== 'string') {
+            cleanValue = this.numberToString(value)
+          }
+          number = Number(String(cleanValue).replace(/[^0-9-,]+/g, '').replace(',', '.'))
+        } else {
+          number = Number(String(value).replace(/[^0-9-.]+/g, ''))
+        }
+        if (!this.minus) return Math.abs(number)
+        return number
       }
     },
     computed: {
       ...mapGetters(['activeUser']),
-      quas: {
-        get () {
-          return this.quantity
-        },
-        set (newValue) {
-          if (parseInt(newValue) < 1) {
-            this.quantity = 1
-            return
-          }
-          this.quantity = newValue
-          return
-        }
+      amountValue () {
+        return this.formatToNumber(this.quantity)
       },
       total () {
         const t =  this.quas * this.product_vendor.price
