@@ -11,13 +11,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in products">
+        <tr v-for="(item, index) in products">
           <td>{{ item.name }}</td>
           <td>{{ item.barcode }}</td>
           <td>{{ item.total_review || 0 }} Reviewer / {{ item.avg_rating || 0 }} <i class="fa fa-star-o"></i></td>
           <td>{{ item.vendors.length }}</td>
           <td>
-            <a class="button is-small" title="Add to My Product" :disabled="item.used" @click="showModalAddToMyProduct(item)">
+            <a class="button is-small" title="Add to My Product" :disabled="item.used" @click="showModalAddToMyProduct(item, index)">
               <i class="fa fa-plus"></i>
             </a>
           </td>
@@ -27,6 +27,7 @@
     <modalAddProduct v-if="modalShow"
       :data="activeData"
       :modalShow.sync="modalShow"
+      :indexActive="indexActive"
       :addedProduct="addedProduct"></modalAddProduct>
 
   </div>
@@ -45,7 +46,8 @@
     data () {
       return {
         modalShow: false,
-        activeData: {}
+        activeData: {},
+        indexActive: null
       }
     },
     components: {
@@ -57,18 +59,17 @@
       ])
     },
     methods: {
-      showModalAddToMyProduct (item, e) {
+      showModalAddToMyProduct (item, index, e) {
         if (item.used) {
           return
         }
         this.activeData = item || {}
+        this.indexActive = index
         this.modalShow = !this.modalShow
       },
       addYoMyProduct ( item ) {
       },
-      addedProduct () {
-
-      }
+      addedProduct () {}
     }
   }
 </script>

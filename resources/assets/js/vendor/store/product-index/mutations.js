@@ -23,10 +23,16 @@ export default {
   INIT_OWN_PRODUCTS (state, products) {
     state.ownProducts = products
   },
+  UPDATE_PRODUCT (state, obj) {
+    state.splice(obj.index, 1, obj.data)
+  },
   INIT_OWN_PRODUCT (state, product) {
     state.ownProduct = product
   },
   UPDATE_OWN_PRODUCT (state, data) {
     state.ownProducts[data.index] = data.product
+  },
+  ADD_OWN_PRODUCT (state, data) {
+    state.ownProducts.push(data)
   }
 }

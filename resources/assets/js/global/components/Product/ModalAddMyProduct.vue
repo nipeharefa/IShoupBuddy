@@ -51,6 +51,8 @@
 
 <script>
   import iziToast from 'izitoast'
+  import { mapActions } from 'vuex'
+
   export default {
     props: {
       price: {
@@ -73,6 +75,7 @@
       }
     },
     methods: {
+      ...mapActions(['addOwnProduct']),
       processValue(value){
         if (isNaN(value)) {
           this.newPrice = 1
@@ -109,7 +112,7 @@
         a.classList.add('is-loading')
         this.$http.post('api/product-vendor', data).then(response => {
           a.classList.remove('is-loading')
-          this.addedProduct(response.data.product)
+          this.addOwnProduct(response.data.product)
           this.hideAction()
           iziToast.success({
             title: 'Sukses',
@@ -117,6 +120,7 @@
             position: 'bottomRight'
           })
           this.$router.push({name: 'product-index'})
+          this.data.used = true
         }).catch(err => {
           a.classList.remove('is-loading')
         })
