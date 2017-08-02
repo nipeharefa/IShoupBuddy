@@ -27,7 +27,7 @@
             <div class="order-confirmation__header">
               <button class="button is-primary"
               @click="confirm(item, index)"
-              v-if="!item.shipment.accepted_at">Konfirmasi Terima Barang</button>
+              v-if="canConfirm(item)">Konfirmasi Terima Barang</button>
             </div>
           </div>
           <div class="order-teaser__body columns">
@@ -79,8 +79,14 @@
         this.modalReviewShow = true
         this.activeProductVendor = item
       },
+      canConfirm (item) {
+        if (item.status === 0) {
+          return true
+        }
+        return false
+      },
       checkCanReview (item) {
-        return item.shipment.accepted_at != null
+        return item.status === 1;
       },
       confirm (item, index, $event) {
         const id = item.shipment.id

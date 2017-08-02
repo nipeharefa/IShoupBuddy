@@ -102,6 +102,11 @@ class TransactionShipmentController extends BaseApiController
 
             $id->accepted_at = Carbon::now();
             $id->save();
+
+            $trans = $id->Transaction;
+            $trans->status = 1;
+            $trans->save();
+
             DB::commit();
 
             $trans = $id->Transaction->load('Detail');
