@@ -26,6 +26,7 @@ mix.sass('resources/assets/sass/pages/guest/search_result.scss', 'css/guest')
 mix.sass('resources/assets/sass/pages/guest/show-category-product.scss', 'css/g-show-category-product.css')
 mix.sass('resources/assets/sass/pages/guest/compare.scss', 'css/g-compare.css')
 mix.sass('resources/assets/sass/pages/guest/compare-result.scss', 'css/g-compare-result.css')
+mix.sass('resources/assets/sass/pages/guest/about.scss', 'css/about.css')
 
 // Guest JS
 
@@ -37,6 +38,11 @@ mix.js('resources/assets/js/guest/pages/search_result.js', 'js/search_result.js'
 mix.js('resources/assets/js/guest/pages/g-show-category-product.js', 'js/g-show-category-product.js')
 mix.js('resources/assets/js/guest/pages/compare.js', 'js/g-compare-js.js')
 mix.js('resources/assets/js/guest/pages/g-compare-result.js', 'js/g-compare-result.js')
+
+mix.js('resources/assets/js/guest/pages/about.js', 'js/about.js')
+mix.js('resources/assets/js/guest/pages/pengumuman.js', 'js/pengumuman.js')
+mix.js('resources/assets/js/guest/pages/syarat-ketentuan.js', 'js/syarat-ketentuan.js')
+mix.js('resources/assets/js/guest/pages/Privacy.js', 'js/privacy.js')
 
 
 // Member JS
@@ -51,6 +57,7 @@ mix.js('resources/assets/js/member/pages/m-show-category-product.js', 'js/m-show
 mix.js('resources/assets/js/member/pages/checkout.js', 'js/m-checkout.js')
 mix.js('resources/assets/js/member/pages/compare.js', 'js/m-compare.js')
 mix.js('resources/assets/js/member/pages/compare-result.js', 'js/m-compare-result.js')
+mix.js('resources/assets/js/member/pages/about.js', 'js/m-about.js')
 
 
 // Member SASS

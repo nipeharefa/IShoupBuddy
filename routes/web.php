@@ -28,6 +28,11 @@ Route::get('knn', 'TestController@knn');
 Route::get('api/knn', 'TestController@knn')->middleware('api');
 Route::post('sms', 'SmsController@store');
 
+Route::get('about', 'OtherController@about');
+Route::get('privacy', 'OtherController@privacy');
+Route::get('pengumuman', 'OtherController@pengumuman');
+Route::get('syarat-ketentuan', 'OtherController@sk');
+
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::post('login', 'LoginController@loginViaAjax');
     Route::post('register', 'RegisterController@registerViaAjax');

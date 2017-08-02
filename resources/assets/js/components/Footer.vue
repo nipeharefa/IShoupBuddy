@@ -12,17 +12,17 @@
 				<div class="column">
 					<ul class="menu-footer-2">
 						<li>
-							<a href="">Syarat dan Ketentuan</a>
-						</li>
-						<li>
-							<a href="">Kebijakan Privasi</a>
-						</li>
-						<li>
-							<a href="">Berita dan Pengumuman</a>
-						</li>
-						<li>
-							<a href="">Tentang Kami</a>
-						</li>
+              <a href="/syarat-ketentuan">Syarat dan Ketentuan</a>
+            </li>
+            <li>
+              <a href="/privacy">Kebijakan Privasi</a>
+            </li>
+            <li>
+              <a href="/pengumuman">Berita dan Pengumuman</a>
+            </li>
+            <li>
+              <a href="/about">Tentang Kami</a>
+            </li>
 					</ul>
 				</div>
 				<div class="column">
@@ -125,7 +125,9 @@
             this.sent = true
             btn.classList.remove('is-loading')
           })
-          .catch(err => err)
+          .catch(err => {
+            btn.classList.remove('is-loading')
+          })
       }
     }
   }

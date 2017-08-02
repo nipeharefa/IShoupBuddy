@@ -18,6 +18,9 @@ class ProductVendorTransformer extends AbstractTransformer
             'price_string'      => $this->formatRupiah($productV->harga),
             'barcode'           => $productV->Product->barcode,
             'vendor'            => VendorTransformer::transform($productV->Vendor),
+            'total_review'         => $productV->Reviews()->count(),
+            'total_rating'         => $productV->Reviews()->count(),
+            'avg_rating'           => round($productV->Reviews()->avg('rating'), 1)
         ];
 
         return $arr;

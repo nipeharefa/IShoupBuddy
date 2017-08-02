@@ -12,16 +12,16 @@
 				<div class="column">
 					<ul class="menu-footer-2">
 						<li>
-							<a href="">Syarat dan Ketentuan</a>
+							<a href="/syarat-ketentuan">Syarat dan Ketentuan</a>
 						</li>
 						<li>
-							<a href="">Kebijakan Privasi</a>
+							<a href="/privacy">Kebijakan Privasi</a>
 						</li>
 						<li>
-							<a href="">Berita dan Pengumuman</a>
+							<a href="/pengumuman">Berita dan Pengumuman</a>
 						</li>
 						<li>
-							<a href="">Tentang Kami</a>
+							<a href="/about">Tentang Kami</a>
 						</li>
 					</ul>
 				</div>

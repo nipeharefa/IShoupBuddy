@@ -10,8 +10,8 @@
             <breadCrumb></breadCrumb>
           </div>
         </div>
-        <div class="columns" v-if="!cartsNotNull">
-          <div class="column">Kosong</div>
+        <div class="columns" v-if="!cartsNotNull" style="text-align: center">
+          <div class="column">Keranjang Belanja anda Kosong</div>
         </div>
         <div class="columns" v-if="cartsNotNull">
           <div class="column is-half">

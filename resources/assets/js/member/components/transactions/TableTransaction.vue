@@ -40,7 +40,7 @@
                 <br>
                 <button
                 class="button is-small is-primary"
-                v-if="item.shipment.accepted_at" @click="review(product)">Beri Ulasan</button>
+                v-if="checkCanReview(item)" @click="review(product)">Beri Ulasan</button>
               </div>
             </div>
           </div>
@@ -80,13 +80,13 @@
         this.activeProductVendor = item
       },
       canConfirm (item) {
-        if (item.status === 0) {
+        if (item.status == 0) {
           return true
         }
         return false
       },
       checkCanReview (item) {
-        return item.status === 1;
+        return item.status == 1;
       },
       confirm (item, index, $event) {
         const id = item.shipment.id
