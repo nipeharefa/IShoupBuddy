@@ -43,10 +43,6 @@
 
     @yield('content')
 
-    @if (env('APP_ENV') == "production")
-        <script src="https://raw.githack.com/zloirock/core-js/v2.4.1/client/core.min.js" type="text/javascript"></script>
-    @endif
-
     @yield('js')
 </body>
 </html>
