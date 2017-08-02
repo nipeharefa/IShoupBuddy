@@ -8,7 +8,7 @@
         <router-link :to="{ name: 'dashboard' }" append>Overview</router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'listCategory' }" append>Kategory</router-link>
+        <router-link :to="{ name: 'listCategory' }" append>Kategori</router-link>
       </li>
       <li>
         <router-link :to="{ name: 'listProducts' }" append>Produk</router-link>
