@@ -8,7 +8,7 @@ Vue.directive('click-outside', clickOutside)
 
 import store from 'guest/store/home/'
 
-const App = r => require.ensure([], () => r(require('guest/components/other/SyaratKentuan.vue')), 'g-other')
+const App = r => require.ensure([], () => r(require('guest/components/other/SyaratKetentuan.vue')), 'g-other')
 
 new Vue({
   store,
