@@ -19,9 +19,7 @@
           <td>{{ item.quantity }}</td>
           <td>{{ item.harga_string }}</td>
           <td>{{ item.total_string }}</td>
-          <td>
-            <button class="button is-small is-primary" @click="showModalAction(item)">Beri Ulasan</button>
-          </td>
+          <td></td>
         </tr>
       </tbody>
     </table>

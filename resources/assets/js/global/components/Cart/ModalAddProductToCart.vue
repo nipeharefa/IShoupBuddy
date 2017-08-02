@@ -137,7 +137,7 @@
         return this.formatToNumber(this.quantity)
       },
       total () {
-        const t =  this.quas * this.product_vendor.price
+        const t =  this.quantity * this.product_vendor.price
         return accounting.formatMoney(t, {
           symbol: 'Rp ',
           thousand: '.',

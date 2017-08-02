@@ -40,13 +40,16 @@
                 <br>
                 <button
                 class="button is-small is-primary"
-                v-if="item.shipment.accepted_at">Beri Ulasan</button>
+                v-if="item.shipment.accepted_at" @click="review(product)">Beri Ulasan</button>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <modalCreateUpdateReview
+    :activeProductVendor="activeProductVendor"
+    :modalReviewShow.sync="modalReviewShow" v-if="modalReviewShow"/>
   </div>
 </template>
 
@@ -55,12 +58,27 @@
   import iziToast from 'izitoast'
   import { mapGetters, mapActions } from 'vuex'
 
+  const ModalCreateUpdateReview = () => import('global/components/Modals/CreateProductVendorReview.vue')
+
   export default {
+    components: {
+      ModalCreateUpdateReview
+    },
+    data () {
+      return {
+        modalReviewShow: false,
+        activeProductVendor: null
+      }
+    },
     computed: {
       ...mapGetters(['transactions', 'activeUser'])
     },
     methods: {
       ...mapActions(['updateTransaction']),
+      review (item) {
+        this.modalReviewShow = true
+        this.activeProductVendor = item
+      },
       checkCanReview (item) {
         return item.shipment.accepted_at != null
       },

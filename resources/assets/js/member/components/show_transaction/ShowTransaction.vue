@@ -28,18 +28,6 @@
       </div>
     </div>
 
-    <div class="t_shipment" v-if="!transaction.shipment.accepted_at">
-      <small>Konfirmasi Penerimaan Barang</small>
-      <br>
-      <button class="button is-primary" @click="confirm">Konfirmasi Terima Barang</button>
-    </div>
-
-     <div class="t_shipment" v-if="transaction.shipment.accepted_at">
-     <small>Konfirmasi Penerimaan Barang</small>
-      <br>
-      <b>Barang sudah diterima</b>
-    </div>
-
   </div>
 </template>
 
