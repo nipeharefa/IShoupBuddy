@@ -6,17 +6,27 @@
 		</div>
 		<div class="field">
   			<label class="label">Email</label>
-  			<input  v-validate="'required|email'" type="text" class="input" placeholder="Email Address"
-        v-model="login.email"  name="email" :class="{'is-danger': errors.has('email') }"/>
+  			<input  v-validate="'required|email'"
+        type="text" class="input"
+        placeholder="Alamat Email"
+        v-model="login.email"
+        data-vv-as="Alamat Email"
+        name="email" :class="{'is-danger': errors.has('email') }"/>
 
-        <p class="help is-danger" v-show="errors.has('email')">This email is invalid</p>
+        <p class="help is-danger" v-show="errors.has('email')">{{ errors.first('email') }}</p>
 		</div>
 		<div class="field">
-			<label class="label">Password</label>
+			<label class="label">Kata Sandi</label>
 			<p class="control">
-  				<input  v-validate="'required'" type="password" class="input"  placeholder="Password" v-model="login.password" @keyup.enter="doLogin" name="password" :class="{'is-danger': errors.has('password') }" />
+  				<input  v-validate="'required'"
+          type="password" class="input"
+          placeholder="Kata Sandi"
+          v-model="login.password"
+          @keyup.enter="doLogin" name="password"
+          data-vv-as="Kata Sandi"
+          :class="{'is-danger': errors.has('password') }" />
   		</p>
-      <p class="help is-danger" v-show="errors.has('password')">This password is invalid</p>
+      <p class="help is-danger" v-show="errors.has('password')">{{ errors.first('password') }}</p>
 		</div>
 
 		<div class="field is-grouped">
@@ -51,13 +61,11 @@
         this.onError = false
       },
       doLogin (event) {
-        this.$validator.validateAll().then(result => {
-          if (result) {
-            this._doLogin(event)
-          }
-        }).catch(err => {
-          return err
-        })
+        this.$validator.validateAll()
+        if (this.errors.any()) {
+          return
+        }
+        this._register($event)
       },
       _doLogin (event) {
         const data = this.login

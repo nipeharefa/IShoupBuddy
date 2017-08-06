@@ -1,13 +1,16 @@
 import Vue from 'vue'
 import VueAxios from 'lib/axios-plugin'
 import clickOutside from 'lib/click-outside.js'
-import VeeValidate from 'vee-validate'
+import VeeValidate, { Validator } from 'vee-validate'
+import id from 'vee-validate/dist/locale/id'
 // import VueClickOutSide from 'vue-click-outside-directive'
 import store from 'guest/store/search/'
 
 Vue.use(VueAxios)
-Vue.use(VeeValidate)
-// Vue.directive('click-outside', VueClickOutSide)
+Validator.addLocale(id)
+Vue.use(VeeValidate, {
+  locale: 'id'
+})
 
 Vue.directive('click-outside', clickOutside)
 
