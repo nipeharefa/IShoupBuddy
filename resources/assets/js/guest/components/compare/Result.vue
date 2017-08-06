@@ -15,8 +15,84 @@
         </div>
 
         <div class="columns">
-          <cardResult class="column is-half" :product="source" />
-          <cardResult class="column is-half" :product="target" />
+          <table class="table">
+            <tbody>
+              <tr>
+                <td></td>
+                <td class="image-wrapper">
+                  <img :src="source.picture_url.small" :alt="source.name" class="image">
+                </td>
+                <td></td>
+                <td class="image-wrapper">
+                  <img :src="target.picture_url.small" :alt="target.name" class="image">
+                </td>
+              </tr>
+
+              <tr>
+                <td class="caption">Nama Produk</td>
+                <td>{{ source.name}}</td>
+                <td></td>
+                <td>{{ target.name}}</td>
+              </tr>
+              <tr>
+                <td class="caption">Kategori</td>
+                <td>{{ source.category.name }}</td>
+                <td></td>
+                <td>{{ target.category.name }}</td>
+              </tr>
+              <tr>
+                <td class="caption">Harga Terendah</td>
+                <td>{{ source.minimum_price_string }}</td>
+                <td></td>
+                <td>{{ target.minimum_price_string }}</td>
+              </tr>
+              <tr>
+                <td class="caption">Total Vendor</td>
+                <td>{{ source.total_vendor }}</td>
+                <td></td>
+                <td>{{ target.total_vendor }}</td>
+              </tr>
+
+              <tr>
+                <td class="caption">Rating</td>
+                <td style="display: flex;">
+                  <star-rating :rating="source.avg_rating"
+                  :star-size="13" :read-only="true"
+                  :showRating="false"
+                  :activeColor="'#f7d120'" />
+                  <div>
+                    / {{ source.total_rating }} Ulasan
+                  </div>
+                </td>
+                <td></td>
+                <td style="display: flex;">
+                  <star-rating :rating="target.avg_rating"
+                  :star-size="13" :read-only="true"
+                  :showRating="false"
+                  :activeColor="'#f7d120'" />
+                  <div>
+                    / {{ target.total_rating }} Ulasan
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="caption">Hasil Sentimen</td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+
+              <tr>
+                <td class="caption">Deskripsi</td>
+                <td>{{ source.description }}</td>
+                <td></td>
+                <td>{{ target.description }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- <cardResult class="column is-half" :product="source" />
+          <cardResult class="column is-half" :product="target" /> -->
         </div>
 
       </div>
@@ -31,7 +107,19 @@
 
 <style lang="scss" scoped>
   .table {
-    .caption {}
+    .caption {
+      font-weight: 500;
+    }
+  }
+  .image-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+  .reviews-wrap {
+    margin: 0.5rem 0;
+    .user-name {
+      font-size: 0.85rem;
+    }
   }
 </style>
 
@@ -43,6 +131,7 @@
   const ProductCard = () => import('global/components/Others/ProductCard.vue')
   const SlideProduct = () => import('global/components/Others/SlideProduct.vue')
   const SlideCompare = () => import('global/components/Product/SlideCompare.vue')
+  import StarRating from 'vue-star-rating'
 
   import { mapActions, mapGetters } from 'vuex'
 
@@ -54,7 +143,8 @@
       ProductCard,
       SlideProduct,
       SlideCompare,
-      CardResult
+      CardResult,
+      StarRating
     },
     created () {
       this.source = window._sharedData.source

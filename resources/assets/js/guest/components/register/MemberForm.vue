@@ -3,7 +3,7 @@
 		<div class="form-member">
 			<div class="field">
 				<p class="control">
-					<input v-validate="'required|alpha'" type="text" name="name" id="" class="input" placeholder="Nama Lengkap"
+					<input v-validate="'required'" type="text" name="name" id="" class="input" placeholder="Nama Lengkap"
 					v-model="register.name" :class="{'is-danger': errors.has('name') }" data-vv-as="Nama">
 				</p>
         <p class="help is-danger" v-show="errors.has('name')">{{ errors.first('name') }}</p>

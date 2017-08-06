@@ -9,7 +9,7 @@
           </div>
 
           <div class="vendor-to-home">
-            <a href="/" class="link">Kembali ke halaman awal</a>
+            <a href="/" class="tag is-primary">Kembali ke halaman awal</a>
           </div>
         </div>
       </div>

@@ -57,6 +57,7 @@
   const ModalVendor = () => import('./ModalVendorConfirmation.vue')
 
   export default {
+    mounted() {},
     data () {
       return {
         register: {
@@ -89,6 +90,7 @@
         this.errorMessage = {}
         this.$http.post('auth/vendor/register', data).then(response => {
           console.log(response)
+          this.modal = true
         }).catch(x => {
           this.errorMessage = x.response.data
         })
