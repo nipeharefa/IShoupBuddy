@@ -8,6 +8,7 @@ Vue.use(VueLazyload)
 Vue.directive('click-outside', clickOutside)
 
 const App = r => require.ensure([], () => r(require('adminComponents/home/Home.vue')), 'admin-home')
+Vue.config.devtools = true
 
 console.log(App)
 new Vue({

@@ -31,6 +31,7 @@
             <div>
               <span class="product-name">{{ product.name }}</span>
               <ratings
+              :calculate="calculateSummary"
               :total="product.total_rating"
               :ratings="product.avg_rating"></ratings>
               <a :href="`/compare/${product.id}`" class="button is-small">Compare</a>
@@ -134,23 +135,44 @@
           var neuPercent = this.product.summary.count.neu / totalReview
           var negPercent = this.product.summary.count.neg / totalReview
 
-          var res = ''
+          var res = {
+            class: 'is-netral',
+            text: 'Netral'
+          }
           if (isPos && isNeg && isNeu) {
-            res = "Keseluruhan: Netral";
+            return res;
           } else if (isPos && posPercent >= 0.8) {
-            res = "Keseluruhan: Luar biasa positif";
+            res = {
+              class: 'is-primary',
+              text: 'Positif'
+            }
           } else if (isPos && posPercent >= 0.65) {
-            res = "Keseluruhan: Sangat positif";
+            res = {
+              class: 'is-primary',
+              text: 'Positif'
+            }
           } else if (isPos || isNeu && posPercent >= 0.5) {
-              res = "Keseluruhan: positif";
+            res = {
+              class: 'is-primary',
+              text: 'Positif'
+            }
           } else if (isNeg && isNeu && negPercent >= 0.8) {
-              res = "Keseluruhan: negatif";
+            res = {
+              class: 'is-danger',
+              text: 'Negatif'
+            }
           } else if (isNeg && negPercent >= 0.65) {
-              res = "Keseluruhan: Sangat Negatif";
+            res = {
+              class: 'is-danger',
+              text: 'Negatif'
+            }
           } else if (isNeg || negPercent >= 0.5) {
-              res = "Keseluruhan: Luar biasa negatif";
+            res = {
+              class: 'is-danger',
+              text: 'Negatif'
+            }
           } else {
-              res = "Keseluruhan: Netral";
+              return res
           }
           return res
       }

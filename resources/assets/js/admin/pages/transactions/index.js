@@ -16,6 +16,8 @@ const App = r => require.ensure([], () => r(require('adminComponents/transaction
 Vue.use(VueProgressBar, { color: 'rgb(26, 146, 47)', failedColor: 'red', height: '3px' })
 Vue.use(VueAxios)
 
+Vue.config.devtools = true
+
 const app = new Vue({
   render: h => h(App),
   router,

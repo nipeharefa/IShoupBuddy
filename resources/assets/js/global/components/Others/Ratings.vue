@@ -4,8 +4,8 @@
     :star-size="20" :increment="0.01"
     :read-only="true" :showRating="false"></star-rating>
 		<p class="total_reviewers">({{ total }} Ulasan)</p>
-    <span class="tag is-small" :class="classRating" title="Hasil Sentimen">
-      {{ ratingString }}
+    <span class="tag is-small" :class="calculate.class" title="Hasil Sentimen">
+      {{ calculate.text }}
     </span>
 	</div>
 </template>
@@ -27,6 +27,12 @@ export default {
     },
     total: {
       default: 0
+    },
+    calculate: {
+      type: Object,
+      default: function () {
+        return { class: 'is-netral', text: 'Netral' }
+      }
     }
   },
   computed: {
