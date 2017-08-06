@@ -6,6 +6,7 @@ use App\Helpers\NaiveBayes;
 use App\Helpers\Transformers\ProductTransformer;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class TestController extends Controller
 {
@@ -55,8 +56,14 @@ class TestController extends Controller
 
         for ($i = 0; $i < $target; $i++) {
             if (isset($ids[$i])) {
-                $p = Product::find($ids[$i]);
-                array_push($d, ProductTransformer::transform($p));
+                try {
+                    $p = Product::findOrFail($ids[$i]);
+                    if ($p->ProductVendor()->count()) {
+                        array_push($d, ProductTransformer::transform($p));
+                    }
+                } catch (ModelNotFoundException $e) {
+
+                }
             }
         }
 

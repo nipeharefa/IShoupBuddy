@@ -61,6 +61,7 @@
             <div>
               <span class="product-name">{{ product.name }}</span>
               <ratings
+              :calculate="calculateSummary"
               :total="product.total_rating"
               :ratings="product.avg_rating"></ratings>
               <wishListButton :productId="product.id" />
@@ -156,7 +157,69 @@
       ...mapGetters([
         'product',
         'recommendation'
-      ])
+      ]),
+      calculateSummary () {
+        if (this.product.summary) {
+          var maxMean = Math.max(this.product.summary.mean.pos,
+            this.product.summary.mean.neg,
+            this.product.summary.mean.neu)
+
+          if (maxMean == 0) {
+            return "Netral"
+          }
+
+          var isPos = maxMean == this.product.summary.mean.pos
+          var isNeu = maxMean == this.product.summary.mean.neu
+          var isNeg = maxMean == this.product.summary.mean.neg
+
+          var totalReview = this.product.total_review
+
+          var posPercent = this.product.summary.count.pos / totalReview
+          var neuPercent = this.product.summary.count.neu / totalReview
+          var negPercent = this.product.summary.count.neg / totalReview
+
+          var res = {
+            class: 'is-netral',
+            text: 'Netral'
+          }
+          if (isPos && isNeg && isNeu) {
+            return res;
+          } else if (isPos && posPercent >= 0.8) {
+            res = {
+              class: 'is-primary',
+              text: 'Positif'
+            }
+          } else if (isPos && posPercent >= 0.65) {
+            res = {
+              class: 'is-primary',
+              text: 'Positif'
+            }
+          } else if (isPos || isNeu && posPercent >= 0.5) {
+            res = {
+              class: 'is-primary',
+              text: 'Positif'
+            }
+          } else if (isNeg && isNeu && negPercent >= 0.8) {
+            res = {
+              class: 'is-danger',
+              text: 'Negatif'
+            }
+          } else if (isNeg && negPercent >= 0.65) {
+            res = {
+              class: 'is-danger',
+              text: 'Negatif'
+            }
+          } else if (isNeg || negPercent >= 0.5) {
+            res = {
+              class: 'is-danger',
+              text: 'Negatif'
+            }
+          } else {
+              return res
+          }
+          return res
+        }
+      }
     },
     data ()  {
       return {

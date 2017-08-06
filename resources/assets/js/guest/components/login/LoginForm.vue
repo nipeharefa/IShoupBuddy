@@ -25,9 +25,6 @@
 		    <button class="button is-primary" @click="doLogin($event)">Login</button>
 		  </p>
 
-		  <p class="control control-button-forgot-password">
-		    <button class="button is-link button-forgot-password">Lupa Password ?</button>
-		  </p>
 		</div>
 
 		<div class="to-register">
