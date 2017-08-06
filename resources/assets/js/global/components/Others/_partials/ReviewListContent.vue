@@ -10,7 +10,7 @@
         <div class="rating-info">
           <star-rating :rating="review.rating" :star-size="12"
           :read-only="true" :showRating="false"></star-rating>
-          <span class="tag is-small" title="Hasil Sentimen">
+          <span class="tag is-small" title="Hasil Sentimen" :class="ratingColor">
             {{ ratingString }}
           </span>
         </div>
@@ -60,6 +60,22 @@
     },
     computed: {
       ...mapGetters(['activeUser']),
+      ratingColor () {
+        if (this.review) {
+          switch(this.review.summary_text) {
+            case 'pos':
+              return "is-primary"
+              break
+            case 'neg':
+              return "is-danger"
+              break
+            default:
+              return "is-info"
+              break
+          }
+        }
+        return "is-info";
+      },
       ratingString () {
         if (this.review) {
           switch(this.review.summary_text) {
