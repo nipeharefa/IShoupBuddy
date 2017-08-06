@@ -9,6 +9,7 @@ import { mapActions, mapGetters } from 'vuex'
 Vue.use(VueLazyload)
 Vue.use(VueAxios)
 Vue.directive('click-outside', clickOutside)
+Vue.config.devtools = true
 
 new Vue({
   store,

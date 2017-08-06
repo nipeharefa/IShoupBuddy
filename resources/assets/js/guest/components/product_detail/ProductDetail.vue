@@ -113,7 +113,48 @@
       ...mapGetters([
         'product',
         'recommendation'
-      ])
+      ]),
+      calculateSummary () {
+        if (this.product.summary) {
+          var maxMean = Math.max(this.product.summary.mean.pos,
+            this.product.summary.mean.neg,
+            this.product.summary.mean.neu)
+
+          if (maxMean == 0) {
+            return "Netral"
+          }
+
+          var isPos = maxMean == this.product.summary.mean.pos
+          var isNeu = maxMean == this.product.summary.mean.neu
+          var isNeg = maxMean == this.product.summary.mean.neg
+
+          var totalReview = this.product.total_review
+
+          var posPercent = this.product.summary.count.pos / totalReview
+          var neuPercent = this.product.summary.count.neu / totalReview
+          var negPercent = this.product.summary.count.neg / totalReview
+
+          var res = ''
+          if (isPos && isNeg && isNeu) {
+            res = "Keseluruhan: Netral";
+          } else if (isPos && posPercent >= 0.8) {
+            res = "Keseluruhan: Luar biasa positif";
+          } else if (isPos && posPercent >= 0.65) {
+            res = "Keseluruhan: Sangat positif";
+          } else if (isPos || isNeu && posPercent >= 0.5) {
+              res = "Keseluruhan: positif";
+          } else if (isNeg && isNeu && negPercent >= 0.8) {
+              res = "Keseluruhan: negatif";
+          } else if (isNeg && negPercent >= 0.65) {
+              res = "Keseluruhan: Sangat Negatif";
+          } else if (isNeg || negPercent >= 0.5) {
+              res = "Keseluruhan: Luar biasa negatif";
+          } else {
+              res = "Keseluruhan: Netral";
+          }
+          return res
+      }
     }
   }
+}
 </script>

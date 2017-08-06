@@ -45,7 +45,7 @@
         <tr>
           <td class="caption">Hasil Sentimen</td>
           <td>
-            <span class="tag is-info">{{ ratingString }}</span>
+            <span class="tag" :class="ratingColor">{{ ratingString }}</span>
           </td>
         </tr>
         <tr>
@@ -118,6 +118,22 @@
           }
         }
         return "Netral"
+      },
+      ratingColor () {
+        if (this.product) {
+          switch(this.product.summary_string) {
+            case 'pos':
+              return "is-primary"
+              break
+            case 'neg':
+              return "is-danger"
+              break
+            default:
+              return "is-info"
+              break
+          }
+        }
+        return "is-info"
       },
       sifat () {
         const self = this
