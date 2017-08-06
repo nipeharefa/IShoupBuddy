@@ -52,7 +52,7 @@ class RegisterVendorController extends Controller
             'email'     => $data['email'],
             'password'  => bcrypt($data['password']),
             'phone'     => $data['phone'],
-            'confirmed' => false,
+            'confirmed' => 0,
             'role'      => 2,
         ]);
     }
