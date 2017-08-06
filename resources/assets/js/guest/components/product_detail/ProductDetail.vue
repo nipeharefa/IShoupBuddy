@@ -30,7 +30,9 @@
           <div class="column">
             <div>
               <span class="product-name">{{ product.name }}</span>
-              <ratings :ratings="product.total_rating"></ratings>
+              <ratings
+              :total="product.total_rating"
+              :ratings="product.avg_rating"></ratings>
               <a :href="`/compare/${product.id}`" class="button is-small">Compare</a>
               <hr>
             </div>
@@ -42,7 +44,6 @@
                 <thead>
                   <tr>
                     <td>Nama Vendor</td>
-                    <td>Nama Produk</td>
                     <td>Harga</td>
                     <td></td>
                   </tr>
@@ -50,7 +51,6 @@
                 <tbody>
                   <tr v-for="item in product.vendors">
                     <td class="vendor-name">{{ item.vendor.name }}</td>
-                    <td>{{ item.vendor.name }}</td>
                     <td>{{ item.price_string }}</td>
                     <td></td>
                   </tr>

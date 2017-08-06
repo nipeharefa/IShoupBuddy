@@ -14,7 +14,10 @@
         Rp. 10.000
       </div>
       <div>
-          <star-rating :rating="4" :star-size="15" :read-only="true" :showRating="false" :activeColor="'#f7d120'"></star-rating>
+          <star-rating :increment="0.01" :rating="4"
+           :star-size="15"
+           :read-only="true"
+           :showRating="false" :activeColor="'#f7d120'"></star-rating>
       </div>
 	  </div>
 	</div>

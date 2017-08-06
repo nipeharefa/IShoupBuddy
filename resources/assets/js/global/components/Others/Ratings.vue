@@ -1,7 +1,9 @@
 <template>
 	<div class="rating">
-		<star-rating :rating="ratings" :star-size="20" :read-only="true" :showRating="false"></star-rating>
-		<p class="total_reviewers">({{ ratings }} Ulasan)</p>
+		<star-rating :rating="ratings"
+    :star-size="20" :increment="0.01"
+    :read-only="true" :showRating="false"></star-rating>
+		<p class="total_reviewers">({{ total }} Ulasan)</p>
     <span class="tag is-small" :class="classRating" title="Hasil Sentimen">
       {{ ratingString }}
     </span>
@@ -21,6 +23,9 @@ import { mapGetters } from 'vuex'
 export default {
   props: {
     ratings: {
+      default: 0
+    },
+    total: {
       default: 0
     }
   },

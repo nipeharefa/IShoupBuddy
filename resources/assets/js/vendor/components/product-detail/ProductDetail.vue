@@ -36,7 +36,9 @@
           <div class="column">
             <div>
               <span class="product-name">{{ product.name }}</span>
-              <ratings :ratings="product.total_rating"></ratings>
+              <ratings
+              :total="product.total_rating"
+              :ratings="product.avg_rating"></ratings>
               <hr>
             </div>
             <div>

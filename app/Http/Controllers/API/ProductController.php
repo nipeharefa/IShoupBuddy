@@ -37,7 +37,7 @@ class ProductController extends Controller
 
         if (!$request->query('without_filter')) {
             $product->whereHas('productvendor', function ($pv) {
-                return $pv;
+                return $pv->where('status', 1);
             });
         }
 

@@ -16,6 +16,7 @@
           <star-rating :rating="product.avg_rating"
             :star-size="15" :read-only="true"
             :showRating="false"
+            :increment="0.01"
             :activeColor="'#f7d120'" />
       </div>
     </div>
