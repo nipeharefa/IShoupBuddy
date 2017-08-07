@@ -65,7 +65,7 @@
         if (this.errors.any()) {
           return
         }
-        this._register($event)
+        this._doLogin(event)
       },
       _doLogin (event) {
         const data = this.login
