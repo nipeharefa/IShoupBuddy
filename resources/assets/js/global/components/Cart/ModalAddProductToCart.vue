@@ -100,10 +100,13 @@
       },
       add (param1) {
         if (param1) {
-          this.quas = this.quas + 1
+          this.quantity = this.quantity + 1
           return
         }
-        this.quas = this.quas - 1
+
+        if (this.quantity > 1) {
+          this.quantity = this.quantity - 1
+        }
         return
       },
       processValue(value){

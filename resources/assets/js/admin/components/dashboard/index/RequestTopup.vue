@@ -11,7 +11,7 @@
           <td>Nominal</td>
         </thead>
         <tbody>
-          <tr v-for="(item, $index) in topup">
+          <tr v-for="(item, $index) in topup.slice(0, 5)">
             <td>{{ $index + 1 }}</td>
             <td>{{ item.user.name }}</td>
             <td>{{ item.nominal_string }}</td>

@@ -67,7 +67,7 @@
           </p>
         </div>
 
-        <div class="field">
+        <div class="field" style="display: none">
           <label for="" class="label">Brand</label>
           <p class="control">
             <span class="select">

@@ -10,7 +10,7 @@
           <td>Deskripsi</td>
         </thead>
         <tbody>
-          <tr v-for="item in reviews">
+          <tr v-for="item in reviews.slice(0,10)">
             <td>{{ item.date_string }}</td>
             <td>{{ item.user.name }} memberi review ke produk {{ item.product.name }}</td>
           </tr>
