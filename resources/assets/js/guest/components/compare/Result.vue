@@ -202,13 +202,17 @@
     },
     methods: {
       calculateSummary (product) {
+        var res = {
+          class: 'is-info',
+          text: 'Keseluruhan: Netral'
+        }
         if (product.summary) {
           var maxMean = Math.max(product.summary.mean.pos,
             product.summary.mean.neg,
             product.summary.mean.neu)
 
           if (maxMean == 0) {
-            return "Netral"
+            return res
           }
 
           var isPos = maxMean == product.summary.mean.pos
@@ -221,42 +225,38 @@
           var neuPercent = product.summary.count.neu / totalReview
           var negPercent = product.summary.count.neg / totalReview
 
-          var res = {
-            class: 'is-info',
-            text: 'Netral'
-          }
 
           if (isPos && isNeg && isNeu) {
             return res;
           } else if (isPos && posPercent >= 0.8) {
             res = {
               class: 'is-primary',
-              text: 'Positif'
+              text: 'Keseluruhan: Luar biasa positif'
             }
           } else if (isPos && posPercent >= 0.65) {
             res = {
               class: 'is-primary',
-              text: 'Positif'
+              text: 'Keseluruhan: Sangat positif'
             }
           } else if (isPos || isNeu && posPercent >= 0.5) {
             res = {
               class: 'is-primary',
-              text: 'Positif'
+              text: 'Keseluruhan: positif'
             }
           } else if (isNeg && isNeu && negPercent >= 0.8) {
             res = {
               class: 'is-danger',
-              text: 'Negatif'
+              text: 'Keseluruhan: negatif'
             }
           } else if (isNeg && negPercent >= 0.65) {
             res = {
               class: 'is-danger',
-              text: 'Negatif'
+              text: 'Keseluruhan: Sangat Negatif'
             }
           } else if (isNeg || negPercent >= 0.5) {
             res = {
               class: 'is-danger',
-              text: 'Negatif'
+              text: 'Keseluruhan: Luar biasa negatif'
             }
           } else {
               return res

@@ -11,6 +11,14 @@ sync(store, router)
 import { mapActions } from 'vuex'
 Vue.directive('click-outside', clickOutside)
 
+import Raven from 'raven-js'
+import RavenVue from 'raven-js/plugins/vue'
+
+Raven
+  .config('https://6d1ae4151da84747afc17265d8ca9d2b@sentry.io/180639')
+  .addPlugin(RavenVue, Vue)
+  .install()
+
 const App = r => require.ensure([], () => r(require('adminComponents/transactions/views/Main.vue')), 'group-foo')
 
 Vue.use(VueProgressBar, { color: 'rgb(26, 146, 47)', failedColor: 'red', height: '3px' })

@@ -36,18 +36,8 @@
   export default {
     computed: {
       ...mapGetters([
-        'transactions'
-      ]),
-      topup () {
-        if (this.transactions) {
-          const transSaldo =  this.transactions.filter(x => {
-            return x.type === "Saldo"
-          })
-
-          return transSaldo.slice(1,5)
-        }
-        return null;
-      }
+        'topup'
+      ])
     }
   }
 </script>
