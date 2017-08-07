@@ -16,8 +16,8 @@
         <td>{{ item.name }}</td>
         <td>{{ item.email }}</td>
         <td>{{ item.phone }}</td>
-        <td></td>
-        <td>{{ item.total_product }}</td>
+        <td>{{ item.address }}</td>
+        <td>{{ item.product_vendor_count }}</td>
         <td>{{ item.confirmed ? "Aktif" : "Belum Aktif" }}</td>
         <td>
           <a class="is-link"

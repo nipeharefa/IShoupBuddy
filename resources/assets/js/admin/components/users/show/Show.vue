@@ -1,28 +1,32 @@
 <template>
   <div>
-    <breadcrumb />
-    <div class="user-informations">
-      <div class="user-informations__head">
-        <h3 class="title is-4">Informasi User - #{{ user.id }}</h3>
-      </div>
-      <div class="user-informations__body">
-        <div class="user-profie__image">
-          <img :src="user.picture_urls.small" alt="">
+    <div class="columns">
+      <div class="column">
+
+        <div class="user-informations">
+          <h3 class="title is-4">Informasi User - #{{ user.id }}</h3>
         </div>
-        <div class="user_informations__right">
-          <p class="user__fullname">{{ user.name }}</p>
-          <p class="user__email">{{ user.email }}</p>
-          <p class="user__address">{{ user.address || '-' }}</p>
-          <p class="user__address">{{ totalReview }} Review</p>
+
+        <div class="user-informations__body">
+          <div class="user-profie__image">
+            <img :src="user.picture_urls.small" alt="">
+          </div>
+          <div class="user_informations__right">
+            <p class="user__fullname">{{ user.name }}</p>
+            <p class="user__email">{{ user.email }}</p>
+            <p class="user__address">{{ user.address || '-' }}</p>
+            <p class="user__address">{{ totalReview }} Review</p>
+          </div>
         </div>
-      </div>
-      <div class="user-reviews">
-        <div class="user-review__head">
-          <h4 class="is-title is-4">Reviews</h4>
+        <div class="user-reviews">
+          <div class="user-review__head">
+            <h4 class="is-title is-4">Reviews</h4>
+          </div>
+          <div class="user-review__body">
+            <tableUserReview :reviews="reviews"/>
+          </div>
         </div>
-        <div class="user-review__body">
-          <tableUserReview :reviews="reviews"/>
-        </div>
+
       </div>
     </div>
   </div>
@@ -38,6 +42,7 @@
     created () {
       this.getUsers()
       this.getUserReview()
+      console.log('asfsdlfjkf')
     },
     mounted ()
     {},
@@ -70,7 +75,8 @@
         const id = this.$route.params.id
         console.log(`Show User ${id}`)
         const indexUser = this.users.findIndex( x => id == x.id)
-        console.info(`Index ke ${$indexUser}`)
+        console.info(`Index ke ${indexUser}`)
+        console.log(this.users[indexUser])
         this.initUser(this.users[indexUser])
       },
       getUserReview ()
