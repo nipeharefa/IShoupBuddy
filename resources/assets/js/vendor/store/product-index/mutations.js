@@ -30,7 +30,7 @@ export default {
     state.ownProduct = product
   },
   UPDATE_OWN_PRODUCT (state, data) {
-    state.ownProducts[data.index] = data.product
+    state.ownProducts.splice(data.index, 1, data.product)
   },
   ADD_OWN_PRODUCT (state, data) {
     state.ownProducts.push(data)

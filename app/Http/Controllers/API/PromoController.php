@@ -20,7 +20,7 @@ class PromoController extends Controller
 
         if (!$request->query('without_filter')) {
             $product->whereHas('productvendor', function ($pv) {
-                return $pv;
+                return $pv->whereStatus(1);
             });
         }
 

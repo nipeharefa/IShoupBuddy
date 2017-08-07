@@ -19,8 +19,22 @@
           </td>
           <td>{{ item.price_string }}</td>
           <td>
-            <a class="button is-small" @click="showModal(item, index)">Update Harga</a>
-            <a class="button is-small" @click="showModalTransaction(item, index)">Statistic</a>
+            <a class="button is-small" @click="showModal(item, index)">
+              <span class="icon is-small">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              </span>
+            </a>
+            <a class="button is-small" @click="showModalTransaction(item, index)">
+              <span class="icon is-small">
+                <i class="fa fa-bar-chart" aria-hidden="true"></i>
+              </span>
+            </a>
+            <a class="button is-small" @click="showHide(item, index)">
+              <span class="icon is-small">
+                <i class="fa"
+                :class="{'fa-eye': item.status === 1, 'fa-eye-slash': item.status === 0}"></i>
+              </span>
+            </a>
           </td>
         </tr>
       </tbody>
@@ -38,7 +52,7 @@
 
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapActions } from 'vuex'
   import ModalUpdatePrice from 'global/components/Product/ModalUpdatePrice.vue'
   const ModalTransaction = () => import('./ModalTransaction.vue')
   export default {
@@ -61,6 +75,21 @@
       ModalTransaction
     },
     methods: {
+      ...mapActions(['updateOwnProduct']),
+      showHide (item, index) {
+        const data = {
+          status: +(!item.status)
+        }
+        this.$http.patch(`api/vendor/product/${item.id}`, data).then(response => {
+          const updatedData = {
+            index,
+            product: response.data.product
+          }
+          this.updateOwnProduct(updatedData)
+        }).catch(err => {
+          console.log(err.response)
+        })
+      },
       showModal (item, index) {
         this.activeProduct = item
         this.index = index

@@ -6,6 +6,7 @@ use App\Helpers\Transformers\ProductVendorTransformer;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Vendor;
+use App\Models\ProductVendor;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -53,15 +54,6 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -107,9 +99,17 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, ProductVendor $product)
     {
-        //
+        $product->update($request->all());
+
+        $response = [
+            "message"   =>  null,
+            "status"    =>  "OK",
+            "product"   =>  ProductVendorTransformer::transform($product)
+        ];
+
+        return $response;
     }
 
     /**
@@ -122,6 +122,11 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function patch($product, Request $request) {
+
+        return 'asdfasf';
     }
 
     protected function transformOwnProduct($pv)
