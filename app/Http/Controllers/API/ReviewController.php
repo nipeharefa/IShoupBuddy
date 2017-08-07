@@ -224,6 +224,7 @@ class ReviewController extends Controller
             $review = $user->Review()->findOrFail($id);
 
             $product_vendor = ProductVendor::whereVendorId($request->vendor_id)
+                ->whereProductId($request->product_id)
                 ->firstOrFail();
 
             $product_vendor_id = $product_vendor->id;

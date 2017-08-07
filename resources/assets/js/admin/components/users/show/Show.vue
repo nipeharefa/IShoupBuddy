@@ -68,9 +68,9 @@
       ]),
       getUsers () {
         const id = this.$route.params.id
-
+        console.log(`Show User ${id}`)
         const indexUser = this.users.findIndex( x => id == x.id)
-
+        console.info(`Index ke ${$indexUser}`)
         this.initUser(this.users[indexUser])
       },
       getUserReview ()

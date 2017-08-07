@@ -89,7 +89,7 @@
 
               <tr>
                 <td class="caption">Deskripsi</td>
-                <td>{{ source.description }}</td>
+                <td style="min-width: 28rem;">{{ source.description }}</td>
                 <td></td>
                 <td>{{ target.description }}</td>
               </tr>
