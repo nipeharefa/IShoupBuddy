@@ -44,9 +44,15 @@
 
 <script>
   import { mapActions, mapGetters } from 'vuex'
+  import iziToast from 'izitoast'
   export default {
     created() {
       this.getCategory()
+    },
+    data () {
+      return {
+        indexC: null
+      }
     },
     computed: {
       ...mapGetters([
@@ -92,12 +98,24 @@
         const id = this.$route.params.id
         const indexCategory = this.categories.findIndex( x => id == x.id)
         this.initCategory(this.categories[indexCategory])
+        this.indexC = indexCategory
       },
-      saveCategory () {
+      saveCategory (event) {
         const data = this.category
+        const a = event.target
+        a.classList.add('is-loading')
         this.$http.put(`/api/category/${data.id}`, data).then(response => {
           console.log(response.data)
-        }).catch(err => err)
+          this.$router.push({name: 'listCategory'})
+          a.classList.remove('is-loading')
+          iziToast.success({
+              title: 'Sukses',
+              message: `Kategori Berhasil diperbaharui`,
+              position: 'bottomRight'
+          })
+        }).catch(err => {
+          a.classList.remove('is-loading')
+        })
       }
     }
   }

@@ -78,7 +78,7 @@
         if (status) {
           return "Berhasil, barang telah diterima"
         }
-        return "Peding"
+        return "Pending"
       }
     },
     data () {

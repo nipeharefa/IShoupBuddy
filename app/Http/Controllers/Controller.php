@@ -15,10 +15,7 @@ class Controller extends BaseController
 
     protected function getViewCategories()
     {
-        $categories = Cache::remember('categories_', 1000, function () {
-            return Category::orderBy('name')->get();
-        });
-
+        return Category::orderBy('name')->get();
         return $categories;
     }
 }

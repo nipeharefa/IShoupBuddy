@@ -44,6 +44,7 @@
 
 <script>
   import { mapActions } from 'vuex'
+  import iziToast from 'izitoast'
 
   export default {
     data () {
@@ -99,6 +100,11 @@
           this.addCategory(data)
           this.$router.push({name: 'listCategory'})
           a.classList.remove('is-loading')
+          iziToast.success({
+              title: 'Sukses',
+              message: `Kategori Berhasil ditambahkan`,
+              position: 'bottomRight'
+          })
         }).catch(err => {
           a.classList.remove('is-loading')
         })

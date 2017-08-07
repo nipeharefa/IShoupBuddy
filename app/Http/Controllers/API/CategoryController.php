@@ -89,10 +89,6 @@ class CategoryController extends Controller
             'message'       => null,
         ];
 
-        Cache::remember('categories_', 1000, function () {
-            return Category::orderBy('name')->get();
-        });
-
         return response()->json($response, 200);
     }
 

@@ -159,7 +159,7 @@
 
 <script>
   const FooterApps = () => import('otherComponents/Footer.vue')
-  const NavbarApps = () => import('global/components/Navbars/GuestNavbar')
+  const NavbarApps = () => import('global/components/Navbars/MemberNavbar.vue')
   const BreadCrumb = () => import('./Breadcrumb-Compare.vue')
   const CardResult = () => import('./CardResult.vue')
   const ProductCard = () => import('global/components/Others/ProductCard.vue')
