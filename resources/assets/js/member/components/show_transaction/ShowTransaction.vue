@@ -21,10 +21,19 @@
     <div class="t_detail">
       <div class="t_head">
         <h1 class="title is-3">Transaksi : #{{ transaction.id }}</h1>
+        <span class="tag" :class="colorStatus">{{ statusText }}</span>
       </div>
 
       <div class="t_table_order">
         <table-item v-if="transaction.detail" :transaction="transaction.detail"></table-item>
+      </div>
+
+      <div class="columns">
+        <div class="column is-half">
+          <h1>Informasi Pengiriman</h1>
+          <mapsPengiriman  :latitude="transaction.shipment.lat" :longitude="transaction.shipment.lng" />
+          <span>{{ address }}</span>
+        </div>
       </div>
     </div>
 
@@ -40,30 +49,67 @@
   import { mapGetters, mapActions } from 'vuex'
   import iziToast from 'izitoast'
   const TableItem = () => import ('./TableDetailTransaction.vue')
+  const MapsPengiriman = () => import('./MapsPengiriman.vue')
 
   export default {
     created () {
       this.getTransaction()
+      this.getAddress()
     },
     components: {
-      TableItem
+      TableItem,
+      MapsPengiriman
     },
     computed: {
       ...mapGetters([
         'activeUser',
         'transactions',
         'transaction',
-      ])
+      ]),
+      colorStatus() {
+        const status = this.transaction.status
+        if (status) {
+          return "is-primary"
+        }
+        return "is-info"
+      },
+      statusText() {
+        const status = this.transaction.status
+        if (status) {
+          return "Berhasil, barang telah diterima"
+        }
+        return "Peding"
+      }
     },
     data () {
       return {
         id: this.$store.state.route.params.id,
+        address: null
       }
     },
     methods: {
       ...mapActions([
         'initTransaction'
       ]),
+      getAddress() {
+        const self = this
+        const latLng = {
+          lat: this.transaction.shipment.lat || 3.590336,
+          lng: this.transaction.shipment.lng || 98.6774813
+        }
+
+        const geocoder = new google.maps.Geocoder()
+
+        geocoder.geocode({ 'latLng': latLng }, (results, status) => {
+          if (status === google.maps.GeocoderStatus.OK) {
+            const result = results[0]
+            self.address = result.formatted_address
+            console.log(result)
+          } else {
+            console.warn(result)
+          }
+        })
+      },
       confirm ($event) {
         const id = this.transaction.shipment.id
         const data = this.user
