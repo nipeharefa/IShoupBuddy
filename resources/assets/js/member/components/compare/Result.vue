@@ -78,9 +78,13 @@
 
               <tr>
                 <td class="caption">Hasil Sentimen</td>
+                <td>
+                  <span class="tag" :class="sourceSentimen['class']">{{ sourceSentimen['text'] }}</span>
+                </td>
                 <td></td>
-                <td></td>
-                <td></td>
+                <td>
+                  <span class="tag" :class="targetSentimen.class">{{ targetSentimen.text }}</span>
+                </td>
               </tr>
 
               <tr>
@@ -89,6 +93,36 @@
                 <td></td>
                 <td>{{ target.description }}</td>
               </tr>
+
+              <tr>
+                <td>Review Terakhir</td>
+                <td>
+                  <div v-for="item in source.recentReview" class="reviews-wrap">
+                    <small class="user-name">{{ item.user.name }}</small>
+                    <star-rating :rating="item.rating"
+                        :star-size="12" :read-only="true"
+                        :showRating="false"
+                        :activeColor="'#f7d120'" />
+                    <small>
+                      <i>{{ item.body }}</i>
+                    </small>
+                  </div>
+                </td>
+                <td></td>
+                <td>
+                  <div v-for="item in target.recentReview" class="reviews-wrap">
+                    <small class="user-name">{{ item.user.name }}</small>
+                    <star-rating :rating="item.rating"
+                        :star-size="12" :read-only="true"
+                        :showRating="false"
+                        :activeColor="'#f7d120'" />
+                    <small>
+                      <i>{{ item.body }}</i>
+                    </small>
+                  </div>
+                </td>
+              </tr>
+
             </tbody>
           </table>
           <!-- <cardResult class="column is-half" :product="source" />
@@ -158,7 +192,78 @@
       }
     },
     computed: {
-      ...mapGetters(['promo'])
+      ...mapGetters(['promo']),
+      sourceSentimen() {
+        return this.calculateSummary(this.source)
+      },
+      targetSentimen() {
+        return this.calculateSummary(this.target)
+      }
+    },
+    methods: {
+      calculateSummary (product) {
+        if (product.summary) {
+          var maxMean = Math.max(product.summary.mean.pos,
+            product.summary.mean.neg,
+            product.summary.mean.neu)
+
+          if (maxMean == 0) {
+            return "Netral"
+          }
+
+          var isPos = maxMean == product.summary.mean.pos
+          var isNeu = maxMean == product.summary.mean.neu
+          var isNeg = maxMean == product.summary.mean.neg
+
+          var totalReview = product.total_review
+
+          var posPercent = product.summary.count.pos / totalReview
+          var neuPercent = product.summary.count.neu / totalReview
+          var negPercent = product.summary.count.neg / totalReview
+
+          var res = {
+            class: 'is-info',
+            text: 'Netral'
+          }
+
+          if (isPos && isNeg && isNeu) {
+            return res;
+          } else if (isPos && posPercent >= 0.8) {
+            res = {
+              class: 'is-primary',
+              text: 'Positif'
+            }
+          } else if (isPos && posPercent >= 0.65) {
+            res = {
+              class: 'is-primary',
+              text: 'Positif'
+            }
+          } else if (isPos || isNeu && posPercent >= 0.5) {
+            res = {
+              class: 'is-primary',
+              text: 'Positif'
+            }
+          } else if (isNeg && isNeu && negPercent >= 0.8) {
+            res = {
+              class: 'is-danger',
+              text: 'Negatif'
+            }
+          } else if (isNeg && negPercent >= 0.65) {
+            res = {
+              class: 'is-danger',
+              text: 'Negatif'
+            }
+          } else if (isNeg || negPercent >= 0.5) {
+            res = {
+              class: 'is-danger',
+              text: 'Negatif'
+            }
+          } else {
+              return res
+          }
+          return res
+        }
+      }
     }
   }
 </script>
