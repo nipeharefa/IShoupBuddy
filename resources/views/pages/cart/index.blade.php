@@ -21,7 +21,7 @@
 
 @section('js')
 
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_KEY') }}"
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&key={{ env('GOOGLE_KEY') }}"
     async defer></script>
 
     <script type="text/javascript">
