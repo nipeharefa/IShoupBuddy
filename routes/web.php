@@ -10,7 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('test', function(){
+    $product = \App\Models\Product::find(17);
+    $reviews = $product->Review;
 
+    $collective = new \App\Helpers\Traits\Collectif($reviews);
+
+    return $collective;
+
+});
 Route::get('/', 'HomeController@index');
 Route::get('c/{slug}', 'CategoryController@getCategoryProduct');
 Route::get('home', 'HomeController@index');

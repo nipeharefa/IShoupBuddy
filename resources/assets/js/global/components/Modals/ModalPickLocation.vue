@@ -40,12 +40,15 @@
       this.location.longitude = this.longitude || 98.677481
       this.location.address = this.address || '-'
     },
-    mounted () {},
+    mounted () {
+      this.mapToData()
+    },
     updated () {
       this.initMap()
     },
     data () {
       return {
+        maps: null,
         location: {
           latitude: null,
           longitude: null,
@@ -54,6 +57,18 @@
       }
     },
     methods: {
+      mapToData() {
+         const latlng = {
+          lat: this.latitude || 3.590336,
+          lng: this.longitude || 98.6774813
+        }
+        const map = new google.maps.Map(document.getElementById('mapProfile'), {
+          center: latlng,
+          zoom: 14,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+        this.map = map
+      },
       initMap () {
         const latlng = {
           lat: this.latitude || 3.590336,
@@ -61,11 +76,7 @@
         }
         const geocoder = new google.maps.Geocoder()
 
-        const map = new google.maps.Map(document.getElementById('mapProfile'), {
-          center: latlng,
-          zoom: 14,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        });
+        const map = this.map
 
         var input = document.getElementById('pac-input');
         var searchBox = new google.maps.places.SearchBox(input);
